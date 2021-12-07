@@ -1,0 +1,24 @@
+name: Init
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: ${{ contains(github.event.head_commit.message, 'Initial commit') }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get Labelsync from generator repository
+        run: wget https://static.smoothbear.me/labelsync
+      
+      - name: Allow permissions for execute
+        run: chmod 755 labelsync
+        
+      - name: Initialize issue labels
+        run: ./labelsync
+        env:
+          GITHUB_REPOSITORY: ${{ github.event.repository.name }}
