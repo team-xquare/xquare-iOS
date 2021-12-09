@@ -27,6 +27,7 @@ extension Project {
                     ),
                     sources: ["Sources/**"],
                     resources: ["Resources/**"],
+                    scripts: [swiftLintScripts],
                     dependencies: dependencies
                 ),
                 Target(
@@ -36,6 +37,7 @@ extension Project {
                     bundleId: "\(xquareOrganizationName).\(name)Test",
                     infoPlist: .default,
                     sources: ["Tests/**"],
+                    scripts: [swiftLintScripts],
                     dependencies: [
                         .target(name: name)
                     ]
