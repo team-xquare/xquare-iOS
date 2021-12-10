@@ -18,6 +18,7 @@ extension Project {
                     bundleId: "\(xquareOrganizationName).\(name)",
                     infoPlist: infoPlist,
                     sources: ["Sources/**"],
+                    scripts: [swiftLintScripts],
                     dependencies: dependencies
                 ),
                 Target(
@@ -25,13 +26,11 @@ extension Project {
                     platform: platform,
                     product: .unitTests,
                     bundleId: "\(xquareOrganizationName).\(name)Test",
+                    scripts: [swiftLintScripts],
                     dependencies: [
                         .target(name: name)
                     ]
                 )
-            ],
-            schemes: [
-                
             ]
         )
     }
