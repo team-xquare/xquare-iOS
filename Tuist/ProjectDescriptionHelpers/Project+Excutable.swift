@@ -6,7 +6,6 @@ extension Project {
         name: String,
         platform: Platform,
         product: Product = .app,
-        infoPlist: InfoPlist = .default,
         dependencies: [TargetDependency]
     ) -> Project {
         
@@ -19,7 +18,7 @@ extension Project {
                     platform: platform,
                     product: product,
                     bundleId: "\(xquareOrganizationName).\(name)",
-                    infoPlist: infoPlist,
+                    infoPlist: .file(path: Path("Info.plist")),
                     sources: ["Sources/**"],
                     resources: ["Resources/**"],
                     scripts: [swiftLintScripts],
