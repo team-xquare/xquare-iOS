@@ -23,18 +23,6 @@ extension Project {
                     resources: ["Resources/**"],
                     scripts: [swiftLintScripts],
                     dependencies: dependencies
-                ),
-                Target(
-                    name: "\(name)Tests",
-                    platform: platform,
-                    product: .unitTests,
-                    bundleId: "\(xquareOrganizationName).\(name)Test",
-                    infoPlist: .default,
-                    sources: ["Tests/**"],
-                    scripts: [swiftLintScripts],
-                    dependencies: [
-                        .target(name: name)
-                    ]
                 )
             ],
             additionalFiles: [
