@@ -5,7 +5,6 @@ extension Project {
     public static func excutable(
         name: String,
         platform: Platform,
-        infoPlist: InfoPlist = .default,
         dependencies: [TargetDependency]
     ) -> Project {
         
@@ -18,7 +17,7 @@ extension Project {
                     platform: platform,
                     product: .app,
                     bundleId: "\(xquareOrganizationName).\(name)",
-                    infoPlist: infoPlist,
+                    infoPlist: .file(path: Path("Info.plist")),
                     sources: ["Sources/**"],
                     resources: ["Resources/**"],
                     scripts: [swiftLintScripts],
