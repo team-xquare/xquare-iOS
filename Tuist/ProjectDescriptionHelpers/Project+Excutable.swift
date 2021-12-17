@@ -36,6 +36,9 @@ extension Project {
                         .target(name: name)
                     ]
                 )
+            ],
+            additionalFiles: [
+                "SupportingFiles/**",
             ]
         )
     }
