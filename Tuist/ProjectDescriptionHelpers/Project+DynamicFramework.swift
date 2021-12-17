@@ -5,7 +5,7 @@ extension Project {
     public static func dynamicFramework(
         name: String,
         platform: Platform,
-        infoPlist: InfoPlist,
+        infoPlist: InfoPlist = .default,
         dependencies: [TargetDependency]
     ) -> Project {
         return Project(
