@@ -5,6 +5,7 @@ extension Project {
     public static func excutable(
         name: String,
         platform: Platform,
+        infoPlist: InfoPlist = .default,
         dependencies: [TargetDependency]
     ) -> Project {
         
@@ -17,14 +18,7 @@ extension Project {
                     platform: platform,
                     product: .app,
                     bundleId: "\(xquareOrganizationName).\(name)",
-                    infoPlist: .extendingDefault(
-                        with: [
-                            "CFBundleShortVersionString": "1.0",
-                            "CFBundleVersion": "1",
-                            "UIMainStoryboardFile": "",
-                            "UILaunchStoryboardName": "LaunchScreen"
-                        ]
-                    ),
+                    infoPlist: infoPlist,
                     sources: ["Sources/**"],
                     resources: ["Resources/**"],
                     scripts: [swiftLintScripts],
