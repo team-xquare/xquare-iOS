@@ -5,6 +5,7 @@ extension Project {
     public static func excutable(
         name: String,
         platform: Platform,
+        product: Product = .app,
         infoPlist: InfoPlist = .default,
         dependencies: [TargetDependency]
     ) -> Project {
@@ -16,7 +17,7 @@ extension Project {
                 Target(
                     name: name,
                     platform: platform,
-                    product: .app,
+                    product: product,
                     bundleId: "\(xquareOrganizationName).\(name)",
                     infoPlist: infoPlist,
                     sources: ["Sources/**"],
