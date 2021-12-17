@@ -10,7 +10,7 @@ extension Project {
         
         return Project(
             name: name,
-            organizationName: "com.dodi",
+            organizationName: xquareOrganizationName,
             targets: [
                 Target(
                     name: name,
