@@ -2,11 +2,12 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let workspace = Workspace(
-  name: "XQUARE",
-  projects: [
-    "Application",
-    "Service"
-  ],
-  fileHeaderTemplate: nil,
-  additionalFiles: []
+    name: "XQUARE-Workspace",
+    projects: [
+        "Application",
+        "Services/**",
+        "Modules/**"
+    ],
+    fileHeaderTemplate: nil,
+    additionalFiles: []
 )

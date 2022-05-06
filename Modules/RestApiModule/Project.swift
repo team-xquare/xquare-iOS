@@ -1,11 +1,12 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-let project = Project.excutable(
-    name: "XQUARE-iOS",
+let project = Project.dynamicFramework(
+    name: "RestApiModule",
     platform: .iOS,
     dependencies: [
         .Service.AuthService,
-        .Service.MealDataService,
+        .Module.KeychainModule,
+        .SPM.Moya
     ]
 )
