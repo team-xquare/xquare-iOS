@@ -30,6 +30,8 @@ extension Project {
                     scripts: [.swiftLintScript],
                     dependencies: [
                         .target(name: name),
+                        .SPM.Quick,
+                        .SPM.Nimble,
                         .SPM.RxTest
                     ]
                 )

@@ -8,6 +8,10 @@ extension TargetDependency {
 
         public static let Moya = TargetDependency.external(name: "Moya")
 
+        public static let Nimble = TargetDependency.external(name: "Nimble")
+
+        public static let Quick = TargetDependency.external(name: "Quick")
+
         public static let Realm = TargetDependency.external(name: "RealmSwift")
         public static let RxSwift = TargetDependency.external(name: "RxSwift")
         public static let RxTest = TargetDependency.external(name: "RxTest")
