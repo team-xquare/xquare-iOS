@@ -27,7 +27,7 @@ extension Project {
                     infoPlist: .file(path: Path("SupportingFiles/Info.plist")),
                     sources: ["Sources/**"],
                     resources: ["Resources/**"],
-                    scripts: [.swiftLintScripts],
+                    scripts: [.swiftLintScript],
                     dependencies: dependencies + TargetDependency.universalDependencies
                 )
             ]
