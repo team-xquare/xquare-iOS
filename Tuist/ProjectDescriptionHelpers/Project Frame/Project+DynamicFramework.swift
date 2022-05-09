@@ -19,7 +19,7 @@ extension Project {
                     bundleId: "\(xquareOrganizationName).\(name)",
                     infoPlist: infoPlist,
                     sources: ["Sources/**"],
-                    scripts: [.swiftLintScripts],
+                    scripts: [.swiftLintScript],
                     dependencies: dependencies + TargetDependency.universalDependencies
                 ),
                 Target(
@@ -27,7 +27,7 @@ extension Project {
                     platform: platform,
                     product: .unitTests,
                     bundleId: "\(xquareOrganizationName).\(name)Test",
-                    scripts: [.swiftLintScripts],
+                    scripts: [.swiftLintScript],
                     dependencies: [
                         .target(name: name),
                         .SPM.RxTest
