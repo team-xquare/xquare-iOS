@@ -3,3 +3,4 @@ disabled_rules:
 
 #제외할 디렉터리/파일
 excluded:
+  - Tuist
