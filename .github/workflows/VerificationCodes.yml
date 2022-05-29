@@ -1,27 +1,23 @@
-name: VerificationPR
+name: VerificationCodes
 
 on:
   pull_request:
     branches: [ main ]
 
 jobs:
-  build:
-    runs-on: macOS-latest
+  verification_codes:
+        runs-on: macOS-latest
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: ⚡️ build swift codes
-        run: swift build
-
-      - name: 🧪 run test codes
-        run: swift test
       
-      - name: ✨ lint
-        run: swiftlint
-        
+      - name: install needs
+      
       - name: ☑️ check make
         run: make --dry-run > /dev/null
     
       - name: ☑️ check tuist
         run: make tuist-build
+
+      - name: ⚡️ build swift codes
+        run: swift build

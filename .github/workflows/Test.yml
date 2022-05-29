@@ -1,0 +1,15 @@
+name: VerificationCodes
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: macOS-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: 🧪 run test codes
+        run: swift test
