@@ -1,0 +1,23 @@
+name: VerificationCodes
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  verification_codes:
+        runs-on: macOS-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: install needs
+      
+      - name: ☑️ check make
+        run: make --dry-run > /dev/null
+    
+      - name: ☑️ check tuist
+        run: make tuist-build
+
+      - name: ⚡️ build swift codes
+        run: swift build
