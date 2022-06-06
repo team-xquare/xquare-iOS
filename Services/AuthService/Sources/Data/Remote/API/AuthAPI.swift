@@ -12,7 +12,7 @@ extension AuthAPI {
     var baseURL: URL {
         return URL(string: "https://staging-api.xquare.app")!
     }
-    
+
     var path: String {
         switch self {
         case .signin, .refreshToken:
