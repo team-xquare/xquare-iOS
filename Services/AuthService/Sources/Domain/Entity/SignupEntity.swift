@@ -6,7 +6,7 @@ public struct SignupEntity {
     let profileImageUrl: URL?
     let password: String
 }
-
+    
 extension SignupEntity {
     func toSignupRequest() -> SignupRequest{
         return .init(
