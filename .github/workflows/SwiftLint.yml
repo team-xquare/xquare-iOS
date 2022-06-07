@@ -2,17 +2,16 @@ name: SwiftLint
 
 on:
   pull_request:
-    branches: [ develop ]
     paths:
-      - '.github/workflows/swiftlint.yml'
+      - '.github/workflows/SwiftLint.yml'
       - '.swiftlint.yml'
       - '**/*.swift'
 
 jobs:
-  lint:
-    runs-on: macOS-latest
-
+  SwiftLint:
+    runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
       - name: GitHub Action for SwiftLint
         uses: norio-nomura/action-swiftlint@3.2.1
       - name: GitHub Action for SwiftLint with --strict
@@ -25,5 +24,3 @@ jobs:
           DIFF_BASE: ${{ github.base_ref }}
       - name: GitHub Action for SwiftLint (Different working directory)
         uses: norio-nomura/action-swiftlint@3.2.1
-        env:
-          WORKING_DIRECTORY: Source
