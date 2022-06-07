@@ -21,7 +21,7 @@ extension AuthAPI {
             return ""
         }
     }
-    
+
     var method: Moya.Method {
         switch self {
         case .signin, .signup:
@@ -30,7 +30,7 @@ extension AuthAPI {
             return .put
         }
     }
-    
+
     var task: Task {
         switch self {
         case .signin(let request):
