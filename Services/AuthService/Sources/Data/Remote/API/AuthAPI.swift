@@ -21,7 +21,7 @@ extension AuthAPI {
             return ""
         }
     }
-
+    
     var method: Moya.Method {
         switch self {
         case .signin, .signup:
