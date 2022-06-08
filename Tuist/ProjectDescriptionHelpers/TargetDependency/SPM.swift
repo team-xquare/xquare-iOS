@@ -13,6 +13,7 @@ extension TargetDependency {
         public static let Quick = TargetDependency.external(name: "Quick")
 
         public static let Realm = TargetDependency.external(name: "RealmSwift")
+        public static let RxMoya = TargetDependency.external(name: "RxMoya")
         public static let RxSwift = TargetDependency.external(name: "RxSwift")
         public static let RxTest = TargetDependency.external(name: "RxTest")
 
