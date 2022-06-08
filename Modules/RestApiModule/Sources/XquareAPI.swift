@@ -11,7 +11,7 @@ protocol XquareAPI: TargetType, JWTTokenAuthorizable {
 
 extension XquareAPI {
 
-    var baseURL: URL { URL(string: "https://staging-api.xquare.app")! }
+    var baseURL: URL { URL(string: "https://api.xquare.app")! }
 
     var path: String {
         return domain+urlPath
