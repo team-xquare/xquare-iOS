@@ -17,6 +17,10 @@ extension Project {
                     platform: .iOS,
                     product: .framework,
                     bundleId: "\(xquareOrganizationName).\(name)",
+                    deploymentTarget: .iOS(
+                        targetVersion: "15.0",
+                        devices: [.iphone, .ipad]
+                    ),
                     infoPlist: infoPlist,
                     sources: ["Sources/**"],
                     scripts: [.swiftLintScript],
@@ -27,6 +31,10 @@ extension Project {
                     platform: platform,
                     product: .unitTests,
                     bundleId: "\(xquareOrganizationName).\(name)Test",
+                    deploymentTarget: .iOS(
+                        targetVersion: "15.0",
+                        devices: [.iphone, .ipad]
+                    ),
                     scripts: [.swiftLintScript],
                     dependencies: [
                         .target(name: name),
