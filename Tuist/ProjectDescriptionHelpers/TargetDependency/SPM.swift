@@ -16,11 +16,14 @@ extension TargetDependency {
         public static let RxMoya = TargetDependency.external(name: "RxMoya")
         public static let RxSwift = TargetDependency.external(name: "RxSwift")
         public static let RxTest = TargetDependency.external(name: "RxTest")
+
+        public static let Swinject = TargetDependency.external(name: "Swinject")
     }
 
     /// 모든 패키지가 공통적으로 사용하는 외부 라이브러리 들.
     public static let universalDependencies: [TargetDependency]  = [
-        .SPM.RxSwift
+        .SPM.RxSwift,
+        .SPM.Swinject
     ]
 
 }
