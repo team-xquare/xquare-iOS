@@ -3,7 +3,7 @@ import Foundation
 import Moya
 import AuthService
 
-protocol XquareAPI: TargetType, JWTTokenAuthorizable {
+public protocol XquareAPI: TargetType, JWTTokenAuthorizable {
     var domain: String { get }
     var urlPath: String { get }
     var errorMapper: [Int: Error]? { get }
