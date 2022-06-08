@@ -6,6 +6,7 @@ let project = Project.dynamicFramework(
     platform: .iOS,
     dependencies: [
         .Module.KeychainModule,
-        .SPM.Moya
+        .SPM.Moya,
+        .SPM.RxMoya
     ]
 )
