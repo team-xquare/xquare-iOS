@@ -40,6 +40,7 @@ extension Project {
                         .target(name: name),
                         .SPM.Quick,
                         .SPM.Nimble,
+                        .SPM.RxBlocking,
                         .SPM.RxTest
                     ]
                 )
