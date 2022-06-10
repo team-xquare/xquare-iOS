@@ -35,13 +35,14 @@ extension Project {
                         targetVersion: "15.0",
                         devices: [.iphone, .ipad]
                     ),
+                    sources: ["Tests/**"],
                     scripts: [.swiftLintScript],
                     dependencies: [
                         .target(name: name),
                         .SPM.Quick,
                         .SPM.Nimble,
                         .SPM.RxBlocking,
-                        .SPM.RxTest
+                        .SPM.RxNimble
                     ]
                 )
             ]
