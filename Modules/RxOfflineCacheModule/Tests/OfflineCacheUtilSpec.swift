@@ -44,6 +44,9 @@ class OfflineCacheUtilSpec: QuickSpec {
                 }
             }
         }
+        it("CI Test") {
+            expect(true) != true
+        }
     }
 
 }
