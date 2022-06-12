@@ -7,17 +7,17 @@ jobs:
     name: Prepare CI
     runs-on: ubuntu-latest
     outputs:
-        TYPE: ${{ steps.get_type.outputs.TYPE }}
-        NAME: ${{ steps.get_name.outputs.NAME }}
+      TYPE: ${{ steps.get_type.outputs.TYPE }}
+      NAME: ${{ steps.get_name.outputs.NAME }}
     steps:
     - uses: actions/checkout@v1
     - name: Get Type
-        run: echo ::set-output name=TYPE::$(echo $GITHUB_REF | cut -d / -f 3)
-        id: get_type
+      run: echo ::set-output name=TYPE::$(echo $GITHUB_REF | cut -d / -f 3)
+      id: get_type
 
     - name: Get Name
-        run: echo ::set-output name=NAME::$(echo $GITHUB_REF | cut -d / -f 4)
-        id: get_name
+      run: echo ::set-output name=NAME::$(echo $GITHUB_REF | cut -d / -f 4)
+      id: get_name
 
   check-skip:
     name: Check to skip CI
@@ -34,18 +34,18 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: install needs
-        run: |
-            bash <(curl -Ls https://install.tuist.io)
+      run: |
+        bash <(curl -Ls https://install.tuist.io)
 
     - name: cd target directory
-        run: |
-            cd ${{ needs.needs.prepare-ci.output.TYPE }}
-            if [ "${{ needs.needs.prepare-ci.output.TYPE }}" != "Application" ]; then
-                cd ${{ needs.needs.prepare-ci.output.NAME }}
+      run: |
+        cd ${{ needs.needs.prepare-ci.output.TYPE }}
+        if [ "${{ needs.needs.prepare-ci.output.TYPE }}" != "Application" ]; then
+          cd ${{ needs.needs.prepare-ci.output.NAME }}
 
     - name: ⚡️ build codes
-        run: make tuist-build
+      run: make tuist-build
 
     - name: 🧪 test codes
-        if: ${{needs.needs.prepare-ci.output.TYPE}} != 'Application'
-        run: tuist test
+      if: ${{needs.needs.prepare-ci.output.TYPE}} != 'Application'
+      run: tuist test
