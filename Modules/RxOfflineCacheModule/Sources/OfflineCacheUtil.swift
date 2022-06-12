@@ -6,7 +6,6 @@ public class OfflineCacheUtil<T: Equatable> {
 
     private var fetchLocalData: (() -> Single<T>)!
     private var fetchRemoteData: (() -> Single<T>)!
-    private var isNeedRefresh: (_ localData: T, _ remoteData: T) -> Bool = { $0 != $1 }
     private var refreshLocalData: ((_ remoteData: T) -> Void)!
 
     public func localData(fetchLocalData: @escaping () -> Single<T>) -> Self {
@@ -16,11 +15,6 @@ public class OfflineCacheUtil<T: Equatable> {
 
     public func remoteData(fetchRemoteData: @escaping () -> Single<T>) -> Self {
         self.fetchRemoteData = fetchRemoteData
-        return self
-    }
-
-    public func compareData(isNeedRefresh: @escaping (_ localData: T, _ remoteData: T) -> Bool) -> Self {
-        self.isNeedRefresh = isNeedRefresh
         return self
     }
 
@@ -42,7 +36,7 @@ public class OfflineCacheUtil<T: Equatable> {
             .enumerated()
             .scan((index: -1, element: nil)) { lastState, newValue in
                 guard lastState.index != -1 else { return newValue }
-                if lastState.element == nil || self.isNeedRefresh(lastState.element!, newValue.element!) {
+                if lastState.element == nil || lastState.element! != newValue.element! {
                     self.refreshLocalData(newValue.element!)
                     return newValue
                 } else {
