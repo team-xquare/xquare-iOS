@@ -1,6 +1,11 @@
 name: SwiftLint
 
 on:
+  push:
+    paths:
+      - '.github/workflows/SwiftLint.yml'
+      - '.swiftlint.yml'
+      - '**/*.swift'
   pull_request:
     paths:
       - '.github/workflows/SwiftLint.yml'
