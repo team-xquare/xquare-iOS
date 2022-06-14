@@ -19,6 +19,8 @@ extension TargetDependency {
         public static let RxSwift = TargetDependency.external(name: "RxSwift")
 
         public static let Swinject = TargetDependency.external(name: "Swinject")
+
+        public static let SQLite = TargetDependency.external(name: "SQLite")
     }
 
     /// 모든 패키지가 공통적으로 사용하는 외부 라이브러리 들.
