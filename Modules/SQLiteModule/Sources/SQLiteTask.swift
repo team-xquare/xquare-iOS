@@ -6,9 +6,9 @@ public class SQLiteTask {
     public static let shared = SQLiteTask()
 
     var dbPath = String()
-    // swiftlint:disable force_try
     var dataBase: Connection
 
+    // swiftlint:disable force_try
     init() {
         let fileManager = FileManager()
         let docPathURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
