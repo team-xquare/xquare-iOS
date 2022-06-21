@@ -38,7 +38,7 @@ public class SQLiteTask {
                 }
             })
         } catch {
-            print(error.localizedDescription)
+            print(SQLiteError.createTableError.errorMessage!)
         }
     }
 
@@ -47,7 +47,7 @@ public class SQLiteTask {
         do {
             try dataBase.run(insert)
         } catch {
-            print(error.localizedDescription)
+            print(SQLiteError.insertDataError.errorMessage!)
         }
     }
 
@@ -59,7 +59,7 @@ public class SQLiteTask {
             }
             return items
         } catch {
-            print(error.localizedDescription)
+            print(SQLiteError.fetchDataError.errorMessage!)
             return items
         }
     }
@@ -73,7 +73,7 @@ public class SQLiteTask {
         do {
             try dataBase.run(alice.update(query))
         } catch {
-            print(error.localizedDescription)
+            print(SQLiteError.updateDataError.errorMessage!)
         }
     }
 
@@ -85,7 +85,7 @@ public class SQLiteTask {
         do {
             try dataBase.run(alice.delete())
         } catch {
-            print(error.localizedDescription)
+            print(SQLiteError.deleteDataError.errorMessage!)
         }
     }
 }
