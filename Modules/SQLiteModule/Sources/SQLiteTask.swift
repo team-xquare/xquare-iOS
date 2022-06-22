@@ -26,7 +26,7 @@ public class SQLiteTask {
         _ primaryKey: Expression<T>,
         _ foreignKey: Expression<T>?,
         _ expression: Expression<T>...
-    ) {
+    ) throws {
         do {
             try dataBase.run(table.create {
                 if foreignKey != nil {
@@ -38,20 +38,20 @@ public class SQLiteTask {
                 }
             })
         } catch {
-            print(SQLiteError.createTableError.errorMessage!)
+            throw SQLiteError.failCreateTable
         }
     }
 
-    func insertData(_ table: Table, _ values: Setter...) {
+    func insertData(_ table: Table, _ values: Setter...) throws {
         let insert = table.insert(values)
         do {
             try dataBase.run(insert)
         } catch {
-            print(SQLiteError.insertDataError.errorMessage!)
+            throw SQLiteError.failInsert
         }
     }
 
-    func fetchData(_ query: QueryType) -> [Row] {
+    func fetchData(_ query: QueryType) throws -> [Row] {
         var items = [Row]()
         do {
             for row in try dataBase.prepare(query) {
@@ -59,8 +59,7 @@ public class SQLiteTask {
             }
             return items
         } catch {
-            print(SQLiteError.fetchDataError.errorMessage!)
-            return items
+            throw SQLiteError.failFetch
         }
     }
 
@@ -68,24 +67,24 @@ public class SQLiteTask {
         _ table: Table,
         _ id: Int64,
         _ query: Setter...
-    ) {
+    ) throws {
         let alice = table.filter(id == rowid)
         do {
             try dataBase.run(alice.update(query))
         } catch {
-            print(SQLiteError.updateDataError.errorMessage!)
+            throw SQLiteError.failUpdate
         }
     }
 
     func deleteData(
         _ table: Table,
         _ id: Int64
-    ) {
+    ) throws {
         let alice = table.filter(id == rowid)
         do {
             try dataBase.run(alice.delete())
         } catch {
-            print(SQLiteError.deleteDataError.errorMessage!)
+            throw SQLiteError.failDelete
         }
     }
 }
