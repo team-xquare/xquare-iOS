@@ -1,25 +1,25 @@
 import Foundation
 
 public enum SQLiteError: Error {
-    case createTableError
-    case insertDataError
-    case fetchDataError
-    case updateDataError
-    case deleteDataError
+    case failCreateTable
+    case failInsert
+    case failFetch
+    case failUpdate
+    case failDelete
 }
 
-extension SQLiteError {
+extension SQLiteError: LocalizedError {
     public var errorMessage: String? {
         switch self {
-        case .createTableError:
+        case .failCreateTable:
             return "테이블 생성이 실패하였습니다."
-        case .insertDataError:
+        case .failInsert:
             return "데이터 추가에 실패하였습니다."
-        case .fetchDataError:
+        case .failFetch:
             return "데이터를 받아오는데 실패하였습니다."
-        case .updateDataError:
+        case .failUpdate:
             return "데이터를 갱신하는데 실패하였습니다."
-        case .deleteDataError:
+        case .failDelete:
             return "데이터를 삭제하는데 실패하였습니다."
         }
     }
