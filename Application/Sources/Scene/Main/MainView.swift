@@ -1,29 +1,35 @@
 import SwiftUI
 
-struct MainScene: View {
+struct MainView: View {
+    let homeView: HomeView
+    let scheduleView: ScheduleView
+    let feedView: FeedView
+    let applicationView: ApplicationView
+    let entireView: EntireView
+
     var body: some View {
         TabView {
-            HomeScene()
+            homeView
                 .tabItem {
                     Image(systemName: "clock.fill")
                     Text("홈")
                 }
-            ScheduleScene()
+            scheduleView
                 .tabItem {
                     Image(systemName: "clock.fill")
                     Text("일정")
                 }
-            FeedScene()
+            feedView
                 .tabItem {
                     Image(systemName: "clock.fill")
                     Text("피드")
                 }
-            ApplicationScene()
+            applicationView
                 .tabItem {
                     Image(systemName: "clock.fill")
                     Text("신청")
                 }
-            EntireScene()
+            entireView
                 .tabItem {
                     Image(systemName: "clock.fill")
                     Text("전체")
@@ -32,8 +38,8 @@ struct MainScene: View {
     }
 }
 
-struct MainScene_Previews: PreviewProvider {
+struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainScene()
+        AppDependency.resolve().mainView
     }
 }
