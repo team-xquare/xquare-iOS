@@ -6,6 +6,7 @@ let project = Project.excutable(
     platform: .iOS,
     dependencies: [
         .Service.AuthService,
-        .Service.MealDataService
+        .Service.MealDataService,
+        .SPM.SemicolonDesign
     ]
 )

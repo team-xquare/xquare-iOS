@@ -22,7 +22,10 @@ let dependencies = Dependencies(
                 requirement: .upToNextMajor(from: "2.8.0")),
         // SQLite
         .remote(url: "https://github.com/stephencelis/SQLite.swift.git",
-                requirement: .upToNextMajor(from: "0.13.3"))
+                requirement: .upToNextMajor(from: "0.13.3")),
+        // SemicolonDesign
+        .remote(url: "https://github.com/semicolonDSM/SemicolonDesign_iOS.git",
+                requirement: .upToNextMajor(from: "1.1.0"))
     ]),
     platforms: [.iOS]
 )
