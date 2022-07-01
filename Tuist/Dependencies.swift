@@ -11,9 +11,6 @@ let dependencies = Dependencies(
         // Quick
         .remote(url: "https://github.com/Quick/Quick",
                 requirement: .upToNextMajor(from: "5.0.0")),
-        // RealmSwift
-        .remote(url: "https://github.com/realm/realm-swift",
-                requirement: .upToNextMajor(from: "10.25.0")),
         // RxNimble
         .remote(url: "https://github.com/RxSwiftCommunity/RxNimble",
                 requirement: .upToNextMajor(from: "5.1.0")),
