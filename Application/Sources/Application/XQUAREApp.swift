@@ -6,14 +6,15 @@ import AuthService
 
 @main
 struct XQUAREApp: App {
+    let dependency: AppDependency
 
-    let assembler: Assembler = .init([
-        AuthServiceAssembly()
-    ])
+    init() {
+        self.dependency = AppDependency.resolve()
+    }
 
     var body: some Scene {
         WindowGroup {
-            EmptyView()
+            dependency.mainView
         }
     }
 
