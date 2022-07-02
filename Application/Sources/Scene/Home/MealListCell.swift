@@ -27,10 +27,8 @@ struct MealListCell: View {
             .background(Color.GrayScale.gray50)
             .cornerRadius(8)
     }
-}
 
-extension MealListCell {
-    func getMealTime() -> String {
+    private func getMealTime() -> String {
         switch mealTime {
         case 0:
             return "아침"
@@ -43,6 +41,7 @@ extension MealListCell {
         }
     }
 }
+
 struct MealListCell_Previews: PreviewProvider {
     static var previews: some View {
         MealListCell(mealTime: 0, menu: ["치킨텐더/머스타드", "훈제황금린", "수리취찰떡", "시리얼/우유", "배동동식혜"])
