@@ -1,5 +1,7 @@
 import SwiftUI
 
+import SemicolonDesign
+
 struct MainView: View {
     let homeView: HomeView
     let scheduleView: ScheduleView
@@ -12,27 +14,27 @@ struct MainView: View {
             homeView
                 .tabItem {
                     Image(systemName: "clock.fill")
-                    Text("홈")
+                    SDText("홈", type: .body3)
                 }
             scheduleView
                 .tabItem {
                     Image(systemName: "clock.fill")
-                    Text("일정")
+                    SDText("일정", type: .body3)
                 }
             feedView
                 .tabItem {
                     Image(systemName: "clock.fill")
-                    Text("피드")
+                    SDText("피드", type: .body3)
                 }
             applicationView
                 .tabItem {
                     Image(systemName: "clock.fill")
-                    Text("신청")
+                    SDText("신청", type: .body3)
                 }
             entireView
                 .tabItem {
                     Image(systemName: "clock.fill")
-                    Text("전체")
+                    SDText("전체", type: .body3)
                 }
         }
     }
