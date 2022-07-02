@@ -6,6 +6,8 @@ struct HomeView: View {
         ZStack {
             Color.GrayScale.gray50.ignoresSafeArea()
             VStack(spacing: 16) {
+                Spacer()
+                    .frame(height: 61)
                 HStack {
                     Spacer()
                         .frame(width: 16)
@@ -61,6 +63,7 @@ struct HomeView: View {
                     Spacer()
                         .frame(width: 16)
                 }
+                Spacer()
             }
         }
     }
