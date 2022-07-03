@@ -18,10 +18,9 @@ struct PointsView: View {
                         .resizable()
                         .scaledToFit()
                 } placeholder: {
-                    Image(systemName: "clock")
-                        .resizable()
-                        .scaledToFit()
-                        .background(Color.GrayScale.gray200)
+                    Color.GrayScale.gray200
+                        .frame(width: 44, height: 44)
+                        .cornerRadius(22)
                 }.frame(width: 44, height: 44)
                     .cornerRadius(22)
                 VStack(alignment: .leading, spacing: 0) {

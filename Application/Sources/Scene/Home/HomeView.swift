@@ -4,8 +4,6 @@ import SemicolonDesign
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
     var body: some View {
-        ZStack {
-            Color.GrayScale.gray50.ignoresSafeArea()
             VStack(spacing: 16) {
                 Spacer()
                     .frame(height: 61)
@@ -16,8 +14,7 @@ struct HomeView: View {
                 )
                 MealMenuView(menu: viewModel.menu)
                 Spacer()
-            }
-        }
+            }.background(Color.GrayScale.gray50)
     }
 }
 
