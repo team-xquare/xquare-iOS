@@ -6,7 +6,13 @@ struct AppDependency {
 
 extension AppDependency {
     static func resolve() -> AppDependency {
-        let homeView = HomeView()
+        // MARK: - ViewModels
+        let homeViewModel = HomeViewModel()
+
+        // MARK: - Views
+        let homeView = HomeView(
+            viewModel: homeViewModel
+        )
         let scheduleView = ScheduleView()
         let feedView = FeedView()
         let applicationView = ApplicationView()
