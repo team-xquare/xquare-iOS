@@ -12,11 +12,11 @@ struct MealListCell: View {
                 Spacer()
                     .frame(width: 16)
                 VStack(alignment: .leading, spacing: 3) {
-                    SDText(getMealTime(), type: .body1, textColor: .GrayScale.gray900)
+                    SDText(getMealTime(), type: .body1)
                     Spacer()
                         .frame(height: 8)
                     ForEach(menu, id: \.self) { menu in
-                        SDText(menu, type: .body2, textColor: .GrayScale.gray900)
+                        SDText(menu, type: .body2)
                     }
                 }
                 Spacer()
