@@ -19,8 +19,6 @@ struct PointsView: View {
                         .scaledToFit()
                 } placeholder: {
                     Color.GrayScale.gray200
-                        .frame(width: 44, height: 44)
-                        .cornerRadius(22)
                 }.frame(width: 44, height: 44)
                     .cornerRadius(22)
                 VStack(alignment: .leading, spacing: 0) {
