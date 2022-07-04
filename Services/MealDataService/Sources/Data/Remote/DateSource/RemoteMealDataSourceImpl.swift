@@ -18,7 +18,7 @@ class RemoteMealDataSourceImpl: RemoteDataSource {
     func fetchMonthToMealMenu(
         year: String,
         month: String
-    ) -> Observable<[MonthToMoealMenuEntity]> {
+    ) -> Observable<[MonthToMealMenuEntity]> {
         return provider.rx.request(.fetchMonthToMealMenu(
             year: year,
             month: month

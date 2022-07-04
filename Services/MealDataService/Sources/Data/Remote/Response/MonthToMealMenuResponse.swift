@@ -16,7 +16,7 @@ struct MonthToMealMenuResponse: Decodable {
 }
 
 extension MonthToMealMenuResponse {
-    func toDomain() -> MonthToMoealMenuEntity {
+    func toDomain() -> MonthToMealMenuEntity {
         return .init(
             date: date,
             breakfast: breakfast,

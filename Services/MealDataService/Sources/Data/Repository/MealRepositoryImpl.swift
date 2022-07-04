@@ -26,7 +26,7 @@ class MealRepositoryImpl: MealRepository {
     func fetchMonthtoMealMenu(
         year: String,
         month: String
-    ) -> Observable<[MonthToMoealMenuEntity]> {
+    ) -> Observable<[MonthToMealMenuEntity]> {
         return remoteDataSource.fetchMonthToMealMenu(
             year: year,
             month: month
