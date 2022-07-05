@@ -5,9 +5,9 @@ import RxSwift
 
 class MealRepositoryImpl: MealRepository {
 
-    let remoteDataSource: RemoteDataSource
+    let remoteDataSource: RemoteMealDataSource
 
-    init(remoteDataSource: RemoteDataSource) {
+    init(remoteDataSource: RemoteMealDataSource) {
         self.remoteDataSource = remoteDataSource
     }
 

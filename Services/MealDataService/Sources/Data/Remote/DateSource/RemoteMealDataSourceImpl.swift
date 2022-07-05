@@ -4,7 +4,7 @@ import Moya
 import RxSwift
 import RxMoya
 
-class RemoteMealDataSourceImpl: RemoteDataSource {
+class RemoteMealDataSourceImpl: RemoteMealDataSource {
 
     private let provider = MoyaProvider<MealAPI>()
 
