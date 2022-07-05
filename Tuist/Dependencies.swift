@@ -17,9 +17,6 @@ let dependencies = Dependencies(
         // RxSwift
         .remote(url: "https://github.com/ReactiveX/RxSwift",
                 requirement: .upToNextMajor(from: "6.5.0")),
-        // Swinject
-        .remote(url: "https://github.com/Swinject/Swinject",
-                requirement: .upToNextMajor(from: "2.8.0")),
         // SQLite
         .remote(url: "https://github.com/stephencelis/SQLite.swift.git",
                 requirement: .upToNextMajor(from: "0.13.3")),

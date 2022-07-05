@@ -17,8 +17,6 @@ extension TargetDependency {
         public static let RxNimble = TargetDependency.external(name: "RxNimble")
         public static let RxSwift = TargetDependency.external(name: "RxSwift")
 
-        public static let Swinject = TargetDependency.external(name: "Swinject")
-
         public static let SQLite = TargetDependency.external(name: "SQLite")
 
         public static let SemicolonDesign = TargetDependency.external(name: "SemicolonDesign")
@@ -26,8 +24,7 @@ extension TargetDependency {
 
     /// 모든 패키지가 공통적으로 사용하는 외부 라이브러리 들.
     public static let universalDependencies: [TargetDependency]  = [
-        .SPM.RxSwift,
-        .SPM.Swinject
+        .SPM.RxSwift
     ]
 
 }
