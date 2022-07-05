@@ -21,7 +21,7 @@ public class SQLiteTask {
         self.dataBase = try! Connection(dbPath)
     }
 
-    func createTable<T: Value>(
+    public func createTable<T: Value>(
         _ table: Table,
         _ primaryKey: Expression<T>,
         _ foreignKey: Expression<T>?,
@@ -42,7 +42,7 @@ public class SQLiteTask {
         }
     }
 
-    func insertData(_ table: Table, _ values: Setter...) throws {
+    public func insertData(_ table: Table, _ values: Setter...) throws {
         let insert = table.insert(values)
         do {
             try dataBase.run(insert)
@@ -51,7 +51,7 @@ public class SQLiteTask {
         }
     }
 
-    func fetchData(_ query: QueryType) throws -> [Row] {
+    public func fetchData(_ query: QueryType) throws -> [Row] {
         var items = [Row]()
         do {
             for row in try dataBase.prepare(query) {
@@ -63,7 +63,7 @@ public class SQLiteTask {
         }
     }
 
-    func updateData(
+    public func updateData(
         _ table: Table,
         _ id: Int64,
         _ query: Setter...
@@ -76,7 +76,7 @@ public class SQLiteTask {
         }
     }
 
-    func deleteData(
+    public func deleteData(
         _ table: Table,
         _ id: Int64
     ) throws {
