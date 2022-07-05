@@ -1,7 +1,5 @@
 import SwiftUI
 
-import Swinject
-
 import AuthService
 
 @main
