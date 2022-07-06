@@ -2,12 +2,6 @@ import Foundation
 
 struct DayToMealMenuResponse: Decodable {
 
-    private enum Codingkeys: String, CodingKey {
-        case breakfast
-        case lunch
-        case dinner
-    }
-
     let breakfast: [String]
     let lunch: [String]
     let dinner: [String]

@@ -2,10 +2,6 @@ import Foundation
 
 struct MonthToMealMenuListResponse: Decodable {
 
-    private enum CodingKeys: String, CodingKey {
-        case meals
-    }
-
     let meals: [MonthToMealMenuResponse]
 }
 
