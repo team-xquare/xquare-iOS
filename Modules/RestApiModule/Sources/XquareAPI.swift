@@ -9,7 +9,7 @@ public protocol XquareAPI: TargetType, JWTTokenAuthorizable {
     var errorMapper: [Int: Error]? { get }
 }
 
-extension XquareAPI {
+public extension XquareAPI {
 
     var baseURL: URL { URL(string: "https://api.xquare.app")! }
 
