@@ -9,21 +9,21 @@ public protocol XquareAPI: TargetType, JWTTokenAuthorizable {
     var errorMapper: [Int: Error]? { get }
 }
 
-extension XquareAPI {
+public extension XquareAPI {
 
-    public var baseURL: URL { URL(string: "https://api.xquare.app")! }
+    var baseURL: URL { URL(string: "https://api.xquare.app")! }
 
-    public var path: String {
+    var path: String {
         return domain+urlPath
     }
 
-    public var task: Task { .requestPlain }
+    var task: Task { .requestPlain }
 
-    public var validationType: ValidationType {
+    var validationType: ValidationType {
         return .successCodes
     }
 
-    public var headers: [String: String]? {
+    var headers: [String: String]? {
         switch self {
         default:
             return ["Content-Type": "application/json"]
