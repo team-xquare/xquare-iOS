@@ -19,6 +19,7 @@ public extension AuthServiceDependency {
             loaclTokenDataSource: loaclTokenDataSource
         )
 
+        // MARK: - UseCases
         let checkIsTokenValidUseCase = CheckIsTokenValidUseCase(
             authRepository: authRepository
         )
