@@ -5,7 +5,7 @@ import RxMoya
 import RxSwift
 import AuthService
 
-public class RestApiRemoteDataSource<API: XquareAPI> {
+open class RestApiRemoteDataSource<API: XquareAPI> {
 
     private let checkIsTokenValidUseCase: CheckIsTokenValidUseCase
     private let refreshTokenUseCase: RefreshTokenUseCase
