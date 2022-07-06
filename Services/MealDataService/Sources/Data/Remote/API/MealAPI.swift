@@ -1,18 +1,20 @@
 import Foundation
 
 import Moya
+import RestApiModule
+import AuthService
 
-enum MealAPI: TargetType {
+enum MealAPI {
     case fetchDayToMealMenu(date: String)
     case fetchMonthToMealMenu(year: String, month: String)
 }
 
-extension MealAPI {
-    var baseURL: URL {
-        return URL(string: "https://api.xquare.app")!
+extension MealAPI: XquareAPI {
+    var domain: String {
+        return "/meals"
     }
 
-    var path: String {
+    var urlPath: String {
         switch self {
         case .fetchDayToMealMenu(let date):
             return "/\(date)"
@@ -30,8 +32,8 @@ extension MealAPI {
         case .fetchMonthToMealMenu(let year, let month):
             return .requestParameters(
                 parameters: [
-                    "year": year,
-                    "month": month
+                "yaer": year,
+                "month": month
                 ], encoding: URLEncoding.queryString
             )
         default:
@@ -39,7 +41,15 @@ extension MealAPI {
         }
     }
 
-    var headers: [String: String]? {
-        return nil
+    var errorMapper: [Int: Error]? {
+        return [
+            408: MealServiceError.timeOut,
+            429: MealServiceError.tooManyRequests
+        ]
     }
+
+    var jwtTokenType: JWTTokenType {
+        return .none
+    }
+
 }
