@@ -3,13 +3,12 @@ import Foundation
 import Moya
 import RxSwift
 import RxMoya
+import RestApiModule
 
-class RemoteMealDataSourceImpl: RemoteMealDataSource {
-
-    private let provider = MoyaProvider<MealAPI>()
+class RemoteMealDataSourceImpl: RestApiRemoteDataSource<MealAPI> {
 
     func fetchDayToMealMenu(date: String) -> Observable<DayToMealMenuEntity> {
-        return provider.rx.request(.fetchDayToMealMenu(date: date))
+        return request(.fetchDayToMealMenu(date: date))
             .map(DayToMealMenuResponse.self)
             .map { $0.toDomain() }
             .asObservable()
@@ -19,7 +18,7 @@ class RemoteMealDataSourceImpl: RemoteMealDataSource {
         year: String,
         month: String
     ) -> Observable<[MonthToMealMenuEntity]> {
-        return provider.rx.request(.fetchMonthToMealMenu(
+        return request(.fetchMonthToMealMenu(
             year: year,
             month: month
         )).map(MonthToMealMenuListResponse.self)
