@@ -13,7 +13,7 @@ open class RestApiRemoteDataSource<API: XquareAPI> {
 
     private lazy var provider = MoyaProvider<API>(plugins: [self.jwtPlugin])
 
-    init(checkIsTokenValidUseCase: CheckIsTokenValidUseCase,
+    public init(checkIsTokenValidUseCase: CheckIsTokenValidUseCase,
          refreshTokenUseCase: RefreshTokenUseCase,
          jwtPlugin: JWTPlugin) {
         self.checkIsTokenValidUseCase = checkIsTokenValidUseCase
