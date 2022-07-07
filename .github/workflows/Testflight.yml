@@ -2,7 +2,8 @@ name: Testflight
 
 on:
   push:
-    branches: [ develop ]
+    tags:
+        - '*'
 
 jobs:
   deploy:
