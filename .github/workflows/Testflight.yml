@@ -40,6 +40,9 @@ jobs:
           security default-keychain -s "$KEYCHAIN"
           security unlock-keychain -p "" "$KEYCHAIN"
           security set-keychain-settings
+      - name: Generate project
+        run: |
+          make generate
       - name : Configure Code Signing
         run: |
           gpg -d -o "$DECRYPTED_CERT_FILE_PATH" --pinentry-mode=loopback --passphrase "$CERTIFICATION_PASSWORD" "$ENCRYPTED_CERT_FILE_PATH"
@@ -55,9 +58,6 @@ jobs:
               UUID=`/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i ./$PROVISION)`
             cp "./$PROVISION" "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
           done
-      - name: Generate project
-        run: |
-          make generate
       - name: Archive app
         run: |
           xcodebuild clean archive -workspace $XC_WORKSPACE -scheme $XC_SCHEME -configuration release -archivePath $XC_ARCHIVE
