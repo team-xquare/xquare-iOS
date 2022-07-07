@@ -23,7 +23,10 @@ extension Project {
                     ),
                     infoPlist: infoPlist,
                     sources: ["Sources/**"],
-                    scripts: [.swiftLintScript],
+                    scripts: [
+                        .swiftLintScript,
+                        .removeStaticFrameworksScripts
+                    ],
                     dependencies: dependencies + TargetDependency.universalDependencies
                 ),
                 Target(
