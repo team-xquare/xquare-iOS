@@ -5,7 +5,7 @@ import RxMoya
 import RxSwift
 import AuthService
 
-public class RestApiRemoteDataSource<API: XquareAPI> {
+open class RestApiRemoteDataSource<API: XquareAPI> {
 
     private let checkIsTokenValidUseCase: CheckIsTokenValidUseCase
     private let refreshTokenUseCase: RefreshTokenUseCase
@@ -13,9 +13,11 @@ public class RestApiRemoteDataSource<API: XquareAPI> {
 
     private lazy var provider = MoyaProvider<API>(plugins: [self.jwtPlugin])
 
-    init(checkIsTokenValidUseCase: CheckIsTokenValidUseCase,
-         refreshTokenUseCase: RefreshTokenUseCase,
-         jwtPlugin: JWTPlugin) {
+    public init(
+        checkIsTokenValidUseCase: CheckIsTokenValidUseCase,
+        refreshTokenUseCase: RefreshTokenUseCase,
+        jwtPlugin: JWTPlugin
+    ) {
         self.checkIsTokenValidUseCase = checkIsTokenValidUseCase
         self.refreshTokenUseCase = refreshTokenUseCase
         self.jwtPlugin = jwtPlugin

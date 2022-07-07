@@ -5,6 +5,7 @@ public struct AuthServiceDependency {
     public let refreshTokenUseCase: RefreshTokenUseCase
     public let signinUseCase: SigninUseCase
     public let signupUseCase: SignupUseCase
+    public let jwtPlugin: JWTPlugin
 }
 
 public extension AuthServiceDependency {
@@ -19,6 +20,7 @@ public extension AuthServiceDependency {
             loaclTokenDataSource: loaclTokenDataSource
         )
 
+        // MARK: - UseCases
         let checkIsTokenValidUseCase = CheckIsTokenValidUseCase(
             authRepository: authRepository
         )
@@ -32,11 +34,17 @@ public extension AuthServiceDependency {
             authRepository: authRepository
         )
 
+        // MARK: - Plugin
+        let jwtPlugin = JWTPlugin(
+            loaclTokenDataSource: loaclTokenDataSource
+        )
+
         return AuthServiceDependency(
             checkIsTokenValidUseCase: checkIsTokenValidUseCase,
             refreshTokenUseCase: refreshTokenUseCase,
             signinUseCase: signinUseCase,
-            signupUseCase: signupUseCase
+            signupUseCase: signupUseCase,
+            jwtPlugin: jwtPlugin
         )
     }
 }
