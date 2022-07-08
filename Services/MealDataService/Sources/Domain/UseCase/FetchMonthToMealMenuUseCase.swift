@@ -13,7 +13,7 @@ public class FetchMonthToMealMenuUseCase {
     func excute(
         year: String,
         month: String
-    ) -> Observable<[MonthToMealMenuEntity]> {
+    ) -> Single<[MonthToMealMenuEntity]> {
         return mealRepository.fetchMonthtoMealMenu(
             year: year,
             month: month
