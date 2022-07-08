@@ -3,7 +3,7 @@ import Foundation
 import AuthService
 
 public struct RestApiModuleDependency<T: XquareAPI> {
-    let restRemoteDataSource: RestApiRemoteDataSource<T>
+    public let restRemoteDataSource: RestApiRemoteDataSource<T>
 }
 
 public extension RestApiModuleDependency {
