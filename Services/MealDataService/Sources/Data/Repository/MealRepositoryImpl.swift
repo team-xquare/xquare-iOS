@@ -24,12 +24,9 @@ class MealRepositoryImpl: MealRepository {
     }
 
     func fetchMonthtoMealMenu(
-        year: String,
-        month: String
+        request: MonthToMealMenuRequestEntity
     ) -> Single<[MonthToMealMenuEntity]> {
-        return remoteDataSource.fetchMonthToMealMenu(
-            year: year,
-            month: month
+        return remoteDataSource.fetchMonthToMealMenu(mealRequest: request.toMonthToMealMenuRequest()
             ).catch { [weak self] error in
                 guard let errorCode = self?.errorToStatusCode(error) else { return .error(error) }
                 switch errorCode {

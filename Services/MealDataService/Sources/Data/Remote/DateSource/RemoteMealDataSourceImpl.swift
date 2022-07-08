@@ -14,12 +14,10 @@ class RemoteMealDataSourceImpl: RestApiRemoteDataSource<MealAPI>, RemoteMealData
     }
 
     func fetchMonthToMealMenu(
-        year: String,
-        month: String
+        mealRequest: MonthToMealMenuRequest
     ) -> Single<[MonthToMealMenuEntity]> {
         return request(.fetchMonthToMealMenu(
-            year: year,
-            month: month
+            request: mealRequest
         )).map(MonthToMealMenuListResponse.self)
             .map { $0.toDomain() }
     }

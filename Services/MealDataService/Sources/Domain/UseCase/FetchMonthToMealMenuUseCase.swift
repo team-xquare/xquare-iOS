@@ -11,12 +11,10 @@ public class FetchMonthToMealMenuUseCase {
     }
 
     func excute(
-        year: String,
-        month: String
+        request: MonthToMealMenuRequestEntity
     ) -> Single<[MonthToMealMenuEntity]> {
         return mealRepository.fetchMonthtoMealMenu(
-            year: year,
-            month: month
+            request: request
         )
     }
 }

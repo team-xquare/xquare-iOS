@@ -6,7 +6,7 @@ import AuthService
 
 enum MealAPI {
     case fetchDayToMealMenu(date: String)
-    case fetchMonthToMealMenu(year: String, month: String)
+    case fetchMonthToMealMenu(request: MonthToMealMenuRequest)
 }
 
 extension MealAPI: XquareAPI {
@@ -29,11 +29,11 @@ extension MealAPI: XquareAPI {
 
     var task: Task {
         switch self {
-        case .fetchMonthToMealMenu(let year, let month):
+        case .fetchMonthToMealMenu(let request):
             return .requestParameters(
                 parameters: [
-                "yaer": year,
-                "month": month
+                    "yaer": request.year,
+                    "month": request.month
                 ], encoding: URLEncoding.queryString
             )
         default:
