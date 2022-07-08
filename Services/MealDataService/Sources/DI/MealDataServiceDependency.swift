@@ -1,5 +1,7 @@
 import Foundation
 
+import AuthService
+
 public struct MealDataServiceDependency {
     public let fetchDayToMealMenuUseCase: FetchDayToMealMenuUseCase
     public let fetchMonthToMealMenuUseCase: FetchMonthToMealMenuUseCase
@@ -7,7 +9,14 @@ public struct MealDataServiceDependency {
 
 public extension MealDataServiceDependency {
     static func resolve() -> MealDataServiceDependency {
-        let remoteDataSource: RemoteMealDataSource = RemoteMealDataSourceImpl()
+
+        let authServiceDpendency = AuthServiceDependency.resolve()
+
+        let remoteDataSource: RemoteMealDataSource = RemoteMealDataSourceImpl(
+            checkIsTokenValidUseCase: authServiceDpendency.checkIsTokenValidUseCase,
+            refreshTokenUseCase: authServiceDpendency.refreshTokenUseCase,
+            jwtPlugin: authServiceDpendency.jwtPlugin
+        )
 
         let mealRepository: MealRepository = MealRepositoryImpl(
             remoteDataSource: remoteDataSource
