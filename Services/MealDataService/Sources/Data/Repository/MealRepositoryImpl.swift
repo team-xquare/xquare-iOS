@@ -11,7 +11,7 @@ class MealRepositoryImpl: MealRepository {
         self.remoteDataSource = remoteDataSource
     }
 
-    func fetchDayToMealMenu(date: String) -> Observable<DayToMealMenuEntity> {
+    func fetchDayToMealMenu(date: String) -> Single<DayToMealMenuEntity> {
         return remoteDataSource.fetchDayToMealMenu(date: date)
             .catch { [weak self] error in
                 guard let errorCode = self?.errorToStatusCode(error) else { return .error(error) }
@@ -26,7 +26,7 @@ class MealRepositoryImpl: MealRepository {
     func fetchMonthtoMealMenu(
         year: String,
         month: String
-    ) -> Observable<[MonthToMealMenuEntity]> {
+    ) -> Single<[MonthToMealMenuEntity]> {
         return remoteDataSource.fetchMonthToMealMenu(
             year: year,
             month: month
