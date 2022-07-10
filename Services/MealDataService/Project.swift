@@ -6,6 +6,7 @@ let project = Project.dynamicFramework(
     platform: .iOS,
     dependencies: [
         .Module.RestApiMoudle,
-        .Module.RxOfflineCacheModule
+        .Module.RxOfflineCacheModule,
+        .Service.AuthService
     ]
 )
