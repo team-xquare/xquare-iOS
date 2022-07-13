@@ -1,11 +1,10 @@
 import Foundation
 
 import SQLite3
-import MealDataService
 
 class MealDataServiceSQLiteTask {
 
-    let shared = MealDataServiceSQLiteTask()
+    static let shared = MealDataServiceSQLiteTask()
 
     var dataBase: OpaquePointer?
 
@@ -95,7 +94,7 @@ dinner VARCHAR(100) NOT NULL
         }
     }
 
-    func readData(day: Date) -> (Date, DayToMealMenuEntity) {
+    func readData(day: Date) -> DayToMealMenuEntity {
         let query = "SELECT * FROM MealMenu WHERE day = \(day.toString())"
 
         var statement: OpaquePointer? = nil
@@ -103,14 +102,40 @@ dinner VARCHAR(100) NOT NULL
         if sqlite3_prepare(self.dataBase, query, -1, &statement, nil) != SQLITE_OK {
             let errorMessage = String(cString: sqlite3_errmsg(dataBase)!)
             print("error while prepare: \(errorMessage)")
-            return (Date(), DayToMealMenuEntity(breakfast: [], lunch: [], dinner: []))
+            return DayToMealMenuEntity(breakfast: [], lunch: [], dinner: [])
         }
 
-        let day = String(cString: sqlite3_column_text(statement, 1))
         let breakfast = String(cString: sqlite3_column_text(statement, 2)).components(separatedBy: " ")
         let lunch = String(cString: sqlite3_column_text(statement, 3)).components(separatedBy: " ")
         let dinner = String(cString: sqlite3_column_text(statement, 4)).components(separatedBy: " ")
 
-        return (day.toDate(), DayToMealMenuEntity(breakfast: breakfast, lunch: lunch, dinner: dinner))
+        return DayToMealMenuEntity(breakfast: breakfast, lunch: lunch, dinner: dinner)
+    }
+
+    func readMonthToMealMenu(day: Date) -> [MonthToMealMenuEntity] {
+        let query = "SELECT * FROM MealMenu WHERE day LIKE '\(day.toYearMonthString())%'"
+
+        var statement: OpaquePointer? = nil
+        var result: [MonthToMealMenuEntity] = []
+
+        if sqlite3_prepare(self.dataBase, query, -1, &statement, nil) != SQLITE_OK {
+            let errorMessage = String(cString: sqlite3_errmsg(dataBase)!)
+            print("error while prepare: \(errorMessage)")
+            return result
+        }
+
+        while sqlite3_step(statement) == SQLITE_ROW {
+            let breakfast = String(cString: sqlite3_column_text(statement, 2)).components(separatedBy: " ")
+            let lunch = String(cString: sqlite3_column_text(statement, 3)).components(separatedBy: " ")
+            let dinner = String(cString: sqlite3_column_text(statement, 4)).components(separatedBy: " ")
+            result.append(MonthToMealMenuEntity(
+                date: day.toString(),
+                breakfast: breakfast,
+                lunch: lunch,
+                dinner: dinner
+            ))
+        }
+
+        return result
     }
 }
