@@ -6,6 +6,11 @@ extension Date {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: self)
     }
+    func toYearMonthString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM"
+        return formatter.string(from: self)
+    }
     func toYearString() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy"
