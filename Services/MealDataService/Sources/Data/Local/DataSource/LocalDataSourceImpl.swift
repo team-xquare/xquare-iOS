@@ -1,6 +1,6 @@
 import Foundation
 
-class LocalDataSourceImplt: LocalDataSource {
+class LocalDataSourceImpl: LocalDataSource {
 
     let mealDataSQLiteTask = MealDataServiceSQLiteTask.shared
 
