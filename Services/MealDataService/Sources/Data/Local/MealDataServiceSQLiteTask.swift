@@ -48,22 +48,19 @@ dinner VARCHAR(100) NOT NULL
 """
         var statement: OpaquePointer? = nil
 
-        // swiftlint:disable statement_position
         if sqlite3_prepare_v2(self.dataBase, query, -1, &statement, nil) == SQLITE_OK {
             if sqlite3_step(statement) == SQLITE_DONE {
                 print("Creating table has been succesfully done. db: \(String(describing: self.dataBase))")
-            }
-            else {
+            } else {
                 let errorMessage = String(cString: sqlite3_errmsg(dataBase))
                 print("\nsqlte3_step failure while creating table: \(errorMessage)")
             }
-        }
-        else {
+        } else {
             let errorMessage = String(cString: sqlite3_errmsg(self.dataBase))
             print("\nsqlite3_prepare failure while creating table: \(errorMessage)")
         }
 
-               sqlite3_finalize(statement)
+        sqlite3_finalize(statement)
     }
 
     func insertData(
@@ -81,15 +78,13 @@ dinner VARCHAR(100) NOT NULL
             sqlite3_bind_text(statement, 3, breakfast, -1, nil)
             sqlite3_bind_text(statement, 4, lunch, -1, nil)
             sqlite3_bind_text(statement, 5, dinner, -1, nil)
-        }
-        else {
+        } else {
             print("sqlite binding fail")
         }
 
         if sqlite3_step(statement) == SQLITE_DONE {
             print("sqlite insertion success")
-        }
-        else {
+        } else {
             print("sqlite step failure")
         }
     }
