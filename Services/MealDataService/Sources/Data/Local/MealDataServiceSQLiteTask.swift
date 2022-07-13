@@ -77,11 +77,11 @@ dinner VARCHAR(100) NOT NULL
 
         var statement: OpaquePointer? = nil
 
-        if sqlite3_prepare_v2(self.dataBaseName, insertQuery, -1, &statement, nil) == SQLITE_OK {
-            sqlite3_bind_text(statement, 2, date.toString())
-            sqlite3_bind_text(statement, 3, breakfast)
-            sqlite3_bind_text(statement, 4, lunch)
-            sqlite3_bind_text(statement, 5, dinner)
+        if sqlite3_prepare_v2(self.dataBase, query, -1, &statement, nil) == SQLITE_OK {
+            sqlite3_bind_text(statement, 2, date.toString(), -1, nil)
+            sqlite3_bind_text(statement, 3, breakfast, -1, nil)
+            sqlite3_bind_text(statement, 4, lunch, -1, nil)
+            sqlite3_bind_text(statement, 5, dinner, -1, nil)
         }
         else {
             print("sqlite binding fail")
@@ -95,17 +95,22 @@ dinner VARCHAR(100) NOT NULL
         }
     }
 
-    func readData(day: Date) -> DayToMealMenuEntity {
+    func readData(day: Date) -> (Date, DayToMealMenuEntity) {
         let query = "SELECT * FROM MealMenu WHERE day = \(day.toString())"
 
         var statement: OpaquePointer? = nil
 
-        var result = DayToMealMenuEntity
-
         if sqlite3_prepare(self.dataBase, query, -1, &statement, nil) != SQLITE_OK {
             let errorMessage = String(cString: sqlite3_errmsg(dataBase)!)
             print("error while prepare: \(errorMessage)")
-            return result
+            return (Date(), DayToMealMenuEntity(breakfast: [], lunch: [], dinner: []))
         }
+
+        let day = String(cString: sqlite3_column_text(statement, 1))
+        let breakfast = String(cString: sqlite3_column_text(statement, 2)).components(separatedBy: " ")
+        let lunch = String(cString: sqlite3_column_text(statement, 3)).components(separatedBy: " ")
+        let dinner = String(cString: sqlite3_column_text(statement, 4)).components(separatedBy: " ")
+
+        return (day.toDate(), DayToMealMenuEntity(breakfast: breakfast, lunch: lunch, dinner: dinner))
     }
 }
