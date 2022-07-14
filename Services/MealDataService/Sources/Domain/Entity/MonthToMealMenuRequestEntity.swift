@@ -8,8 +8,8 @@ public struct MonthToMealMenuRequestEntity {
 extension MonthToMealMenuRequestEntity {
     func toMonthToMealMenuRequest() -> MonthToMealMenuRequest {
         return .init(
-            year: self.year.toYearString(),
-            month: self.month.toMonthString()
+            year: self.year.toString(format: .year),
+            month: self.month.toString(format: .mounth)
         )
     }
 }

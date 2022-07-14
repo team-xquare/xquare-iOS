@@ -1,5 +1,6 @@
 import Foundation
 
+import DateUtilModule
 import SQLite3
 
 class MealDataServiceSQLiteTask {
@@ -69,7 +70,7 @@ dinner VARCHAR(100) NOT NULL
         var statement: OpaquePointer? = nil
 
         if sqlite3_prepare_v2(self.dataBase, query, -1, &statement, nil) == SQLITE_OK {
-            sqlite3_bind_text(statement, 2, mealMenu.day.toString(), -1, nil)
+            sqlite3_bind_text(statement, 2, mealMenu.day.toString(format: .fullDate), -1, nil)
             sqlite3_bind_text(statement, 3, mealMenu.breakfast, -1, nil)
             sqlite3_bind_text(statement, 4, mealMenu.lunch, -1, nil)
             sqlite3_bind_text(statement, 5, mealMenu.dinner, -1, nil)
@@ -85,7 +86,7 @@ dinner VARCHAR(100) NOT NULL
     }
 
     func findMealByDay(day: Date) -> DayToMealMenuEntity {
-        let query = "SELECT * FROM MealMenu WHERE day = \(day.toString())"
+        let query = "SELECT * FROM MealMenu WHERE day = \(day.toString(format: .fullDate))"
 
         var statement: OpaquePointer? = nil
 
@@ -103,7 +104,10 @@ dinner VARCHAR(100) NOT NULL
     }
 
     func findMealByMonth(day: Date) -> [MonthToMealMenuEntity] {
-        let query = "SELECT * FROM MealMenu WHERE day LIKE '\(day.toYearMonthString())%'"
+        let query = """
+SELECT * FROM MealMenu
+WHERE day LIKE '\(day.toString(format: .year) + day.toString(format: .mounth))%'
+"""
 
         var statement: OpaquePointer? = nil
         var result: [MonthToMealMenuEntity] = []
@@ -119,7 +123,7 @@ dinner VARCHAR(100) NOT NULL
             let lunch = String(cString: sqlite3_column_text(statement, 3)).components(separatedBy: " ")
             let dinner = String(cString: sqlite3_column_text(statement, 4)).components(separatedBy: " ")
             result.append(MonthToMealMenuEntity(
-                date: day.toString(),
+                date: day.toString(format: .fullDate),
                 breakfast: breakfast,
                 lunch: lunch,
                 dinner: dinner
