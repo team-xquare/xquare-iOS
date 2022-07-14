@@ -63,21 +63,16 @@ dinner VARCHAR(100) NOT NULL
         sqlite3_finalize(statement)
     }
 
-    func insertData(
-        date: Date,
-        breakfast: String,
-        lunch: String,
-        dinner: String
-    ) {
+    func save(mealMenu: MealMenu) {
         let query = "INSERT INTO MealMenu(id, date, breakfast, lunch, dinner) VALUES(?, ?, ?, ?, ?)"
 
         var statement: OpaquePointer? = nil
 
         if sqlite3_prepare_v2(self.dataBase, query, -1, &statement, nil) == SQLITE_OK {
-            sqlite3_bind_text(statement, 2, date.toString(), -1, nil)
-            sqlite3_bind_text(statement, 3, breakfast, -1, nil)
-            sqlite3_bind_text(statement, 4, lunch, -1, nil)
-            sqlite3_bind_text(statement, 5, dinner, -1, nil)
+            sqlite3_bind_text(statement, 2, mealMenu.day.toString(), -1, nil)
+            sqlite3_bind_text(statement, 3, mealMenu.breakfast, -1, nil)
+            sqlite3_bind_text(statement, 4, mealMenu.lunch, -1, nil)
+            sqlite3_bind_text(statement, 5, mealMenu.dinner, -1, nil)
         } else {
             print("sqlite binding fail")
         }
@@ -89,7 +84,7 @@ dinner VARCHAR(100) NOT NULL
         }
     }
 
-    func readData(day: Date) -> DayToMealMenuEntity {
+    func findMealByDay(day: Date) -> DayToMealMenuEntity {
         let query = "SELECT * FROM MealMenu WHERE day = \(day.toString())"
 
         var statement: OpaquePointer? = nil
@@ -107,7 +102,7 @@ dinner VARCHAR(100) NOT NULL
         return DayToMealMenuEntity(breakfast: breakfast, lunch: lunch, dinner: dinner)
     }
 
-    func readMonthToMealMenu(day: Date) -> [MonthToMealMenuEntity] {
+    func findMealByMonth(day: Date) -> [MonthToMealMenuEntity] {
         let query = "SELECT * FROM MealMenu WHERE day LIKE '\(day.toYearMonthString())%'"
 
         var statement: OpaquePointer? = nil
