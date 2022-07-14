@@ -1,5 +1,6 @@
 import Foundation
 
+import DateUtilModule
 import KeychainModule
 
 class LoaclTokenDataSourceImpl: LoaclTokenDataSource {
@@ -27,6 +28,7 @@ class LoaclTokenDataSourceImpl: LoaclTokenDataSource {
     }
 
     func fetchExpiredDate() -> Date? {
-        self.keychain.get(.expiredAt)?.toDateWithTime()
+        self.keychain.get(.expiredAt)?.toDate(format: .fullDateWithTime)
     }
+
 }
