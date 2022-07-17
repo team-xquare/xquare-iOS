@@ -1,19 +1,43 @@
 import Foundation
 
+import RxOfflineCacheModule
 import Moya
 import RxSwift
 
 class MealRepositoryImpl: MealRepository {
 
     let remoteDataSource: RemoteMealDataSource
+    let localDataSource: LocalDataSource
 
-    init(remoteDataSource: RemoteMealDataSource) {
+    init(
+        remoteDataSource: RemoteMealDataSource,
+        localDataSource: LocalDataSource
+    ) {
         self.remoteDataSource = remoteDataSource
+        self.localDataSource = localDataSource
     }
 
     func fetchDayToMealMenu(date: String) -> Single<DayToMealMenuEntity> {
         return remoteDataSource.fetchDayToMealMenu(date: date)
-            .catch { [weak self] error in
+            .do(onSuccess: { data in
+                OfflineCacheUtil<DayToMealMenuEntity>()
+                    .localData {
+                        self.localDataSource.fetchMealMenuPerDay(
+                            day: date.toDate(format: .fullDate)
+                        )
+                    }
+                    .remoteData {
+                        self.remoteDataSource.fetchDayToMealMenu(date: date)
+                    }
+                    .doOnNeedRefresh { _ in
+                        self.localDataSource.registerDayToMealMenu(
+                            day: date.toDate(format: .fullDate),
+                            breakfast: data.breakfast,
+                            lunch: data.lunch,
+                            dinner: data.dinner
+                        )
+                    }
+            }).catch { [weak self] error in
                 guard let errorCode = self?.errorToStatusCode(error) else { return .error(error) }
                 switch errorCode {
                 case 408: return .error(MealServiceError.timeOut)
