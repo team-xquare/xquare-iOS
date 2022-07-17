@@ -49,7 +49,11 @@ class MealRepositoryImpl: MealRepository {
                 self.remoteDataSource.fetchMonthToMealMenu(
                     mealRequest: request.toMonthToMealMenuRequest()
                 )
-            }.createObservable()
+            }
+            .doOnNeedRefresh(refreshLocalData: { remoteData in
+                self.localDataSource.registerMonthToMealMenu(menu: remoteData)
+            })
+            .createObservable()
             .asSingle()
     }
 }
