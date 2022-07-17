@@ -1,15 +1,14 @@
 import Foundation
 
 public struct MonthToMealMenuRequestEntity {
-    let year: Date
-    let month: Date
+    let day: Date
 }
 
 extension MonthToMealMenuRequestEntity {
     func toMonthToMealMenuRequest() -> MonthToMealMenuRequest {
         return .init(
-            year: self.year.toString(format: .year),
-            month: self.month.toString(format: .mounth)
+            year: self.day.toString(format: .year),
+            month: self.day.toString(format: .mounth)
         )
     }
 }
