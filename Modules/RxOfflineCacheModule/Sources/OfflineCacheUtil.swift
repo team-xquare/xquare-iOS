@@ -8,6 +8,8 @@ public class OfflineCacheUtil<T: Equatable> {
     private var fetchRemoteData: (() -> Single<T>)!
     private var refreshLocalData: ((_ remoteData: T) -> Void)!
 
+    public init() { }
+
     public func localData(fetchLocalData: @escaping () -> Single<T>) -> Self {
         self.fetchLocalData = fetchLocalData
         return self
