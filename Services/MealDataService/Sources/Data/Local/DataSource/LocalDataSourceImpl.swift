@@ -1,5 +1,7 @@
 import Foundation
 
+import RxSwift
+
 class LocalDataSourceImpl: LocalDataSource {
 
     let mealDataSQLiteTask = MealDataServiceSQLiteTask.shared
@@ -13,11 +15,11 @@ class LocalDataSourceImpl: LocalDataSource {
         ))
     }
 
-    func fetchMealMenuPerDay(day: Date) -> DayToMealMenuEntity {
+    func fetchMealMenuPerDay(day: Date) -> Single<DayToMealMenuEntity> {
         return mealDataSQLiteTask.findMealByDay(day: day)
     }
 
-    func fetchMealMenuPerMonth(day: Date) -> [MonthToMealMenuEntity] {
+    func fetchMealMenuPerMonth(day: Date) -> Single<[MonthToMealMenuEntity]> {
         return mealDataSQLiteTask.findMealByMonth(day: day)
     }
 }
