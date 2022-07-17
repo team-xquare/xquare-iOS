@@ -11,6 +11,7 @@ public extension MealDataServiceDependency {
     static func resolve() -> MealDataServiceDependency {
 
         let authServiceDpendency = AuthServiceDependency.resolve()
+        let localDataSource = LocalDataSourceImpl()
 
         let remoteDataSource: RemoteMealDataSource = RemoteMealDataSourceImpl(
             checkIsTokenValidUseCase: authServiceDpendency.checkIsTokenValidUseCase,
@@ -19,7 +20,8 @@ public extension MealDataServiceDependency {
         )
 
         let mealRepository: MealRepository = MealRepositoryImpl(
-            remoteDataSource: remoteDataSource
+            remoteDataSource: remoteDataSource,
+            localDataSource: localDataSource
         )
 
         let fetchDayToMealMenuUseCase = FetchDayToMealMenuUseCase(
