@@ -16,10 +16,18 @@ class LocalDataSourceImpl: LocalDataSource {
     }
 
     func fetchMealMenuPerDay(day: Date) -> Single<DayToMealMenuEntity> {
-        return mealDataSQLiteTask.findMealByDay(day: day)
+        return Single.create { single -> Disposable in
+            single(.success(self.mealDataSQLiteTask.findMealByDay(day: day)))
+
+            return Disposables.create()
+        }
     }
 
     func fetchMealMenuPerMonth(day: Date) -> Single<[MonthToMealMenuEntity]> {
-        return mealDataSQLiteTask.findMealByMonth(day: day)
+        return Single.create { single -> Disposable in
+            single(.success(self.mealDataSQLiteTask.findMealByMonth(day: day)))
+
+            return Disposables.create()
+        }
     }
 }
