@@ -30,4 +30,15 @@ class LocalDataSourceImpl: LocalDataSource {
             return Disposables.create()
         }
     }
+
+    func registerMonthToMealMenu(menu: [MonthToMealMenuEntity]) {
+        menu.forEach {
+            mealDataSQLiteTask.save(mealMenu: MealMenu(
+                day: $0.date.toDate(format: .fullDate),
+                breakfast: $0.breakfast.joined(separator: " "),
+                lunch: $0.lunch.joined(separator: " "),
+                dinner: $0.dinner.joined(separator: " ")
+            ))
+        }
+    }
 }
