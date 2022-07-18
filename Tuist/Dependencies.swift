@@ -22,7 +22,7 @@ let dependencies = Dependencies(
                 requirement: .upToNextMajor(from: "0.13.3")),
         // SemicolonDesign
         .remote(url: "https://github.com/semicolonDSM/SemicolonDesign_iOS.git",
-                requirement: .upToNextMajor(from: "1.2.0"))
+                requirement: .upToNextMajor(from: "1.2.1"))
     ]),
     platforms: [.iOS]
 )
