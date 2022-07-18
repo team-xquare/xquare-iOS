@@ -34,7 +34,7 @@ struct ProfileView: View {
 
 }
 
-struct PointsView_Previews: PreviewProvider {
+struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(imageUrl: "", name: "수준호", merit: 1, demerit: 2)
             .previewLayout(.sizeThatFits)
