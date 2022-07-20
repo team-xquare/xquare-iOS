@@ -38,6 +38,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: install needs
       run: |
         bash <(curl -Ls https://install.tuist.io)
@@ -60,6 +61,6 @@ jobs:
       run: tuist build
 
     - name: 🧪 test codes
-      if: ${{needs.needs.prepare-ci.output.TYPE}} != 'Application'
+      if: ${{ needs.prepare-ci.outputs.TYPE != 'Application' }}
       working-directory: ${{ steps.working-directory.outputs.PATH }}
       run: tuist test
