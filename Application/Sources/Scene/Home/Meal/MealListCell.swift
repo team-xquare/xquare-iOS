@@ -2,30 +2,24 @@ import SwiftUI
 import SemicolonDesign
 
 struct MealListCell: View {
+
     var mealTime: Int
     @State var menu: [String]
+
     var body: some View {
-        VStack {
-            Spacer()
-                .frame(height: 13)
-            HStack {
-                Spacer()
-                    .frame(width: 16)
-                VStack(alignment: .leading, spacing: 3) {
-                    SDText(getMealTime(), type: .body1)
-                    Spacer()
-                        .frame(height: 8)
-                    ForEach(menu, id: \.self) { menu in
-                        SDText(menu, type: .body2)
-                    }
-                }
-                Spacer()
-                    .frame(width: 16)
+        VStack(alignment: .leading) {
+            SDText(getMealTime(), type: .body1)
+            Spacer().frame(height: 8)
+            ForEach(menu, id: \.self) { menu in
+                SDText(menu, type: .body2)
+                Spacer().frame(height: 3)
             }
             Spacer()
-        }.frame(width: 148, height: 198)
-            .background(Color.GrayScale.gray50)
-            .cornerRadius(8)
+        }
+        .padding(EdgeInsets(top: 12, leading: 16, bottom: 0, trailing: 16))
+        .frame(width: 148, height: 198, alignment: .leading)
+        .background(Color.GrayScale.gray50)
+        .cornerRadius(8)
     }
 
     private func getMealTime() -> String {
