@@ -7,10 +7,11 @@ struct AppDependency {
 
 extension AppDependency {
     static func resolve() -> AppDependency {
-        let mealRepository = MealRepository.resolve()
+        let mealDataServiceDependency = MealDataServiceDependency.resolve()
         // MARK: - ViewModels
         let homeViewModel = HomeViewModel(
-            mealRepository: mealRepository
+            fetchDayToMealMenuUseCase: mealDataServiceDependency.fetchDayToMealMenuUseCase,
+            fetchMonthToMealMenuUseCase: mealDataServiceDependency.fetchMonthToMealMenuUseCase
         )
 
         // MARK: - Views
