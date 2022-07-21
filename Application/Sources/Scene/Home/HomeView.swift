@@ -1,5 +1,6 @@
 import SwiftUI
 import SemicolonDesign
+import MealDataService
 
 struct HomeView: View {
 
@@ -48,7 +49,11 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        let homeViewModel = HomeViewModel()
+        let mealDependency = MealDataServiceDependency.resolve()
+        let homeViewModel = HomeViewModel(
+            fetchDayToMealMenuUseCase: mealDependency.fetchDayToMealMenuUseCase,
+            fetchMonthToMealMenuUseCase: mealDependency.fetchMonthToMealMenuUseCase
+        )
         HomeView(viewModel: homeViewModel)
     }
 }
