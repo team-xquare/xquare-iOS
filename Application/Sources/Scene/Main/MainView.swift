@@ -37,6 +37,7 @@ struct MainView: View {
                     SDText("전체", type: .body3)
                 }
         }
+        .accentColor(.GrayScale.gray800)
     }
 }
 
