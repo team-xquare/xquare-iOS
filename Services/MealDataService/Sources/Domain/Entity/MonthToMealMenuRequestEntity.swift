@@ -2,6 +2,10 @@ import Foundation
 
 public struct MonthToMealMenuRequestEntity {
     public let day: Date
+
+    public init(day: Date) {
+        self.day = day
+    }
 }
 
 extension MonthToMealMenuRequestEntity {
