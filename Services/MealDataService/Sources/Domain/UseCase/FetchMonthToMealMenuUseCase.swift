@@ -10,7 +10,7 @@ public class FetchMonthToMealMenuUseCase {
         self.mealRepository = mealRepository
     }
 
-    func excute(
+    public func excute(
         request: MonthToMealMenuRequestEntity
     ) -> Single<[MonthToMealMenuEntity]> {
         return mealRepository.fetchMonthtoMealMenu(

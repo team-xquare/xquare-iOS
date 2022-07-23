@@ -8,11 +8,11 @@ struct MealListCell: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            SDText(getMealTime(), type: .body1)
+            Text(getMealTime()).sdText(type: .body2)
             Spacer().frame(height: 8)
             ForEach(menu, id: \.self) { menu in
-                SDText(menu, type: .body2)
-                Spacer().frame(height: 3)
+                Text(menu).sdText(type: .body4)
+                Spacer().frame(height: 0)
             }
             Spacer()
         }
