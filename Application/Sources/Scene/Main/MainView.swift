@@ -37,6 +37,7 @@ struct MainView: View {
                     Text("전체").sdText(type: .caption)
                 }
         }
+        .accentColor(.GrayScale.gray800)
     }
 }
 
