@@ -14,27 +14,27 @@ struct MainView: View {
             homeView
                 .tabItem {
                     Image(systemName: "square.fill")
-                    SDText("홈", type: .body3)
+                    Text("홈").sdText(type: .caption)
                 }
             scheduleView
                 .tabItem {
                     Image(systemName: "square.fill")
-                    SDText("일정", type: .body3)
+                    Text("일정").sdText(type: .caption)
                 }
             feedView
                 .tabItem {
                     Image(systemName: "square.fill")
-                    SDText("피드", type: .body3)
+                    Text("피드").sdText(type: .caption)
                 }
             applicationView
                 .tabItem {
                     Image(systemName: "square.fill")
-                    SDText("신청", type: .body3)
+                    Text("신청").sdText(type: .caption)
                 }
             entireView
                 .tabItem {
                     Image(systemName: "square.fill")
-                    SDText("전체", type: .body3)
+                    Text("전체").sdText(type: .caption)
                 }
         }
     }
