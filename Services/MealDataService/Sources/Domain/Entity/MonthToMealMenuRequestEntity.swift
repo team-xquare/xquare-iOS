@@ -1,7 +1,7 @@
 import Foundation
 
 public struct MonthToMealMenuRequestEntity {
-    let day: Date
+    public let day: Date
 }
 
 extension MonthToMealMenuRequestEntity {
