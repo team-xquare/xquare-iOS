@@ -1,7 +1,7 @@
 import Foundation
 
 public struct DayToMealMenuEntity: Equatable {
-    let breakfast: [String]
-    let lunch: [String]
-    let dinner: [String]
+    public let breakfast: [String]
+    public let lunch: [String]
+    public let dinner: [String]
 }

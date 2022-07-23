@@ -13,30 +13,31 @@ struct MainView: View {
         TabView {
             homeView
                 .tabItem {
-                    Image(systemName: "clock.fill")
-                    SDText("홈", type: .body3)
+                    Image(systemName: "square.fill")
+                    Text("홈").sdText(type: .caption)
                 }
             scheduleView
                 .tabItem {
-                    Image(systemName: "clock.fill")
-                    SDText("일정", type: .body3)
+                    Image(systemName: "square.fill")
+                    Text("일정").sdText(type: .caption)
                 }
             feedView
                 .tabItem {
-                    Image(systemName: "clock.fill")
-                    SDText("피드", type: .body3)
+                    Image(systemName: "square.fill")
+                    Text("피드").sdText(type: .caption)
                 }
             applicationView
                 .tabItem {
-                    Image(systemName: "clock.fill")
-                    SDText("신청", type: .body3)
+                    Image(systemName: "square.fill")
+                    Text("신청").sdText(type: .caption)
                 }
             entireView
                 .tabItem {
-                    Image(systemName: "clock.fill")
-                    SDText("전체", type: .body3)
+                    Image(systemName: "square.fill")
+                    Text("전체").sdText(type: .caption)
                 }
         }
+        .accentColor(.GrayScale.gray800)
     }
 }
 

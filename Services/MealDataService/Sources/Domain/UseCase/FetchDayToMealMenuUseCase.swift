@@ -10,7 +10,7 @@ public class FetchDayToMealMenuUseCase {
         self.mealRepository = mealRepository
     }
 
-    func excute(date: Date) -> Single<DayToMealMenuEntity> {
+    public func excute(date: Date) -> Single<DayToMealMenuEntity> {
         return mealRepository.fetchDayToMealMenu(date: date.toString(format: .fullDate))
     }
 }
