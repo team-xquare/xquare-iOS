@@ -11,7 +11,7 @@ struct MealMenuView: View {
             Spacer().frame(height: 16)
             HStack {
                 Spacer().frame(width: 12)
-                SDText("오늘의 메뉴", type: .body1)
+                Text("오늘의 메뉴").sdText(type: .body1)
                 Spacer()
                 Button(action: {
                     print("")

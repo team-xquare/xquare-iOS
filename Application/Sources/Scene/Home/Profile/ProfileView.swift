@@ -22,8 +22,10 @@ struct ProfileView: View {
                 .frame(width: 44, height: 44)
                 .cornerRadius(22)
                 VStack(alignment: .leading, spacing: 0) {
-                    SDText(name, type: .body1)
-                    SDText("상점 \(merit)점 벌점 \(demerit)점", type: .body2)
+                    Text(name)
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.GrayScale.gray900)
+                    Text("상점 \(merit)점 벌점 \(demerit)점").sdText(type: .body4)
                 }
                 Spacer()
             }
