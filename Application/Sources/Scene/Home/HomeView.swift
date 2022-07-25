@@ -1,6 +1,8 @@
 import SwiftUI
 import SemicolonDesign
 
+import MealDataService
+
 struct HomeView: View {
 
     @StateObject var viewModel: HomeViewModel
@@ -17,7 +19,11 @@ struct HomeView: View {
                         demerit: viewModel.demerit
                     )
                     Spacer().frame(height: 16)
-                    MealMenuView(menu: viewModel.menu)
+                    MealMenuView(
+                        breakfast: viewModel.breakfast,
+                        lunch: viewModel.lunch,
+                        dinner: viewModel.dinner
+                    )
                 }
                 .padding([.leading, .trailing], 16)
             }
@@ -48,7 +54,11 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        let homeViewModel = HomeViewModel()
+        let dependency = MealDataServiceDependency.resolve()
+        // MARK: - ViewModels
+        let homeViewModel = HomeViewModel(
+            fetchDayToMealMenuUseCase: dependency.fetchDayToMealMenuUseCase
+        )
         HomeView(viewModel: homeViewModel)
     }
 }
