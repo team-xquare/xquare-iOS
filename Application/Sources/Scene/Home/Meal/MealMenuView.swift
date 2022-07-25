@@ -4,7 +4,9 @@ import SemicolonDesign
 
 struct MealMenuView: View {
 
-    @State var menu: [String]
+    @State var breakfast: [String]
+    @State var lunch: [String]
+    @State var dinner: [String]
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -26,9 +28,9 @@ struct MealMenuView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     Spacer().frame(width: 8)
-                    ForEach(0..<3) { num in
-                        MealListCell(mealTime: num, menu: menu)
-                    }
+                    MealListCell(mealTime: 0, menu: breakfast)
+                    MealListCell(mealTime: 1, menu: lunch)
+                    MealListCell(mealTime: 2, menu: dinner)
                     Spacer().frame(width: 8)
                 }
             }
@@ -43,7 +45,11 @@ struct MealMenuView: View {
 struct MealMenuView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MealMenuView(menu: ["치킨텐더"])
+            MealMenuView(
+                breakfast: ["치킨텐더"],
+                lunch: ["치킨텐더"],
+                dinner: ["치킨텐더"]
+            )
                 .previewLayout(.sizeThatFits)
         }
     }
