@@ -4,6 +4,6 @@ import RestApiModule
 import RxSwift
 
 protocol RemoteMealDataSource: RestApiRemoteDataSource<MealAPI> {
-    func fetchDayToMealMenu(date: String) -> Single<DayToMealMenuEntity>
-    func fetchMonthToMealMenu(mealRequest: MonthToMealMenuRequest) -> Single<[MonthToMealMenuEntity]>
+    func fetchDayToMealMenu(date: String) -> Single<MealMenuPerDayEntity>
+    func fetchMonthToMealMenu(request: MonthToMealMenuRequest) -> Single<[[MealMenuEntity]]>
 }
