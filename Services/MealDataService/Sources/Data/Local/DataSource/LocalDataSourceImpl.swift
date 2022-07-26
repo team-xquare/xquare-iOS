@@ -6,14 +6,8 @@ class LocalDataSourceImpl: LocalDataSource {
 
     let mealDataSQLiteTask = MealDataServiceSQLiteTask.shared
 
-    func registerMealMenuPerDay(day: Date, breakfast: [String], lunch: [String], dinner: [String]) {
-        mealDataSQLiteTask.save(entity: .init(
-            mealMenu: [
-                .init(date: day.toString(format: .fullDate), menu: breakfast, time: .breakfast),
-                .init(date: day.toString(format: .fullDate), menu: lunch, time: .lunch),
-                .init(date: day.toString(format: .fullDate), menu: dinner, time: .dinner)
-            ]
-        ))
+    func registerMealMenuPerDay(menu: [MealMenuEntity]) {
+        mealDataSQLiteTask.save(entity: .init(mealMenu: menu))
     }
 
     func fetchMealMenuPerDay(day: Date) -> Single<MealMenuPerDayEntity> {
