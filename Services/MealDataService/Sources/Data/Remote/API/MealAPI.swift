@@ -5,8 +5,8 @@ import RestApiModule
 import AuthService
 
 enum MealAPI {
-    case fetchDayToMealMenu(date: String)
-    case fetchMonthToMealMenu(request: MonthToMealMenuRequest)
+    case fetchMealMenuPerDay(date: String)
+    case fetchMealMenuPerMonth(request: MonthToMealMenuRequest)
 }
 
 extension MealAPI: XquareAPI {
@@ -16,9 +16,9 @@ extension MealAPI: XquareAPI {
 
     var urlPath: String {
         switch self {
-        case .fetchDayToMealMenu(let date):
+        case .fetchMealMenuPerDay(let date):
             return "/\(date)"
-        case .fetchMonthToMealMenu:
+        case .fetchMealMenuPerMonth:
             return ""
         }
     }
@@ -29,7 +29,7 @@ extension MealAPI: XquareAPI {
 
     var task: Task {
         switch self {
-        case .fetchMonthToMealMenu(let request):
+        case .fetchMealMenuPerMonth(let request):
             return .requestParameters(
                 parameters: [
                     "yaer": request.year,
