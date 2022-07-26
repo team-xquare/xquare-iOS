@@ -20,11 +20,11 @@ class HomeViewModel: ObservableObject {
         self.fetchDayToMealMenuUseCase = fetchDayToMealMenuUseCase
     }
 
-    private var day = Date()
+    private var date = Date()
     private var disposeBag = DisposeBag()
 
     func fetchDayToMealMenu() {
-        self.fetchDayToMealMenuUseCase.excute(date: day)
+        self.fetchDayToMealMenuUseCase.excute(date: date)
             .asObservable()
             .subscribe(onNext: {
                 self.breakfast = $0.breakfast
