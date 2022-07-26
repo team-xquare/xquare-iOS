@@ -7,6 +7,7 @@ extension TargetDependency {
         public static let KeychainModule = module(name: "KeychainModule")
         public static let RestApiMoudle = module(name: "RestApiModule")
         public static let RxOfflineCacheModule = module(name: "RxOfflineCacheModule")
+        public static let XWebKit = module(name: "XWebKit")
     }
 
     private static func module(name: String) -> TargetDependency {
