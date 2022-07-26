@@ -3,8 +3,8 @@ import Foundation
 import AuthService
 
 public struct MealDataServiceDependency {
-    public let fetchDayToMealMenuUseCase: FetchDayToMealMenuUseCase
-    public let fetchMonthToMealMenuUseCase: FetchMonthToMealMenuUseCase
+    public let fetchDayToMealMenuUseCase: FetchMealMenuPerDayUseCase
+    public let fetchMonthToMealMenuUseCase: FetchMealMenuPerMonth
 }
 
 public extension MealDataServiceDependency {
@@ -24,10 +24,10 @@ public extension MealDataServiceDependency {
             localDataSource: localDataSource
         )
 
-        let fetchDayToMealMenuUseCase = FetchDayToMealMenuUseCase(
+        let fetchDayToMealMenuUseCase = FetchMealMenuPerDayUseCase(
             mealRepository: mealRepository
         )
-        let fetchMonthToMealMenuUseCase = FetchMonthToMealMenuUseCase(
+        let fetchMonthToMealMenuUseCase = FetchMealMenuPerMonth(
             mealRepository: mealRepository
         )
 
