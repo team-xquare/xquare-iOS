@@ -6,16 +6,17 @@ class LocalDataSourceImpl: LocalDataSource {
 
     let mealDataSQLiteTask = MealDataServiceSQLiteTask.shared
 
-    func registerDayToMealMenu(day: Date, breakfast: [String], lunch: [String], dinner: [String]) {
-        mealDataSQLiteTask.save(mealMenu: MealMenu(
-            day: day,
-            breakfast: breakfast.joined(separator: " "),
-            lunch: lunch.joined(separator: " "),
-            dinner: dinner.joined(separator: " ")
+    func registerMealMenuPerDay(day: Date, breakfast: [String], lunch: [String], dinner: [String]) {
+        mealDataSQLiteTask.save(entity: .init(
+            mealMenu: [
+                .init(date: day.toString(format: .fullDate), menu: breakfast, time: .breakfast),
+                .init(date: day.toString(format: .fullDate), menu: lunch, time: .lunch),
+                .init(date: day.toString(format: .fullDate), menu: dinner, time: .dinner)
+            ]
         ))
     }
 
-    func fetchMealMenuPerDay(day: Date) -> Single<DayToMealMenuEntity> {
+    func fetchMealMenuPerDay(day: Date) -> Single<MealMenuPerDayEntity> {
         return Single.create { single -> Disposable in
             single(.success(self.mealDataSQLiteTask.findMealByDay(day: day)))
 
@@ -23,7 +24,7 @@ class LocalDataSourceImpl: LocalDataSource {
         }
     }
 
-    func fetchMealMenuPerMonth(day: Date) -> Single<[MonthToMealMenuEntity]> {
+    func fetchMealMenuPerMonth(day: Date) -> Single<[[MealMenuEntity]]> {
         return Single.create { single -> Disposable in
             single(.success(self.mealDataSQLiteTask.findMealByMonth(day: day)))
 
@@ -31,14 +32,11 @@ class LocalDataSourceImpl: LocalDataSource {
         }
     }
 
-    func registerMonthToMealMenu(menu: [MonthToMealMenuEntity]) {
+    func registerMealMenuPerMonth(menu: [[MealMenuEntity]]) {
         menu.forEach {
-            mealDataSQLiteTask.save(mealMenu: MealMenu(
-                day: $0.date.toDate(format: .fullDate),
-                breakfast: $0.breakfast.joined(separator: " "),
-                lunch: $0.lunch.joined(separator: " "),
-                dinner: $0.dinner.joined(separator: " ")
-            ))
+            mealDataSQLiteTask.save(
+                entity: .init(mealMenu: $0)
+            )
         }
     }
 }
