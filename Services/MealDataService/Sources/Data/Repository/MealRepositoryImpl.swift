@@ -17,41 +17,38 @@ class MealRepositoryImpl: MealRepository {
         self.localDataSource = localDataSource
     }
 
-    func fetchDayToMealMenu(date: String) -> Single<DayToMealMenuEntity> {
-        OfflineCacheUtil<DayToMealMenuEntity>()
+    func fetchMealMenuPerDay(date: String) -> Single<MealMenuPerDayEntity> {
+        OfflineCacheUtil<MealMenuPerDayEntity>()
             .localData {
                 self.localDataSource.fetchMealMenuPerDay(
                     day: date.toDate(format: .fullDate)
                 )
             }
             .remoteData {
-                self.remoteDataSource.fetchDayToMealMenu(date: date)
+                self.remoteDataSource.fetchMealMenuPerDay(date: date)
             }
             .doOnNeedRefresh { remoteData in
-                self.localDataSource.registerDayToMealMenu(
-                    day: date.toDate(format: .fullDate),
-                    breakfast: remoteData.breakfast,
-                    lunch: remoteData.lunch,
-                    dinner: remoteData.dinner
-                )
             }.createObservable()
             .asSingle()
     }
 
-    func fetchMonthtoMealMenu(
-        request: MonthToMealMenuRequestEntity
-    ) -> Single<[MonthToMealMenuEntity]> {
-        OfflineCacheUtil<[MonthToMealMenuEntity]>()
+    func fetchMealMenuPerMonth(
+        date: Date
+    ) -> Single<[[MealMenuEntity]]> {
+        OfflineCacheUtil<[[MealMenuEntity]]>()
             .localData {
-                self.localDataSource.fetchMealMenuPerMonth(day: request.day)
+                self.localDataSource.fetchMealMenuPerMonth(day: date)
             }
             .remoteData {
-                self.remoteDataSource.fetchMonthToMealMenu(
-                    mealRequest: request.toMonthToMealMenuRequest()
+                self.remoteDataSource.fetchMealMenuPerMonth(
+                    request: .init(
+                        year: date.toString(format: .year),
+                        month: date.toString(format: .mounth)
+                    )
                 )
             }
             .doOnNeedRefresh(refreshLocalData: { remoteData in
-                self.localDataSource.registerMonthToMealMenu(menu: remoteData)
+                self.localDataSource.registerMealMenuPerMonth(menu: remoteData)
             })
             .createObservable()
             .asSingle()
