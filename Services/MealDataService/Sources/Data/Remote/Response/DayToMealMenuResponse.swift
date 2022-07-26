@@ -1,6 +1,6 @@
 import Foundation
 
-struct DayToMealMenuResponse: Decodable {
+struct MealMenuPerDayResponse: Decodable {
 
     let breakfast: [String]
     let lunch: [String]
@@ -8,12 +8,15 @@ struct DayToMealMenuResponse: Decodable {
 
 }
 
-extension DayToMealMenuResponse {
-    func toDomain() -> DayToMealMenuEntity {
+extension MealMenuPerDayResponse {
+    func toDomain() -> MealMenuPerDayEntity {
+        let date = Date()
         return .init(
-            breakfast: breakfast,
-            lunch: lunch,
-            dinner: dinner
+            mealMenu: [
+                .init(date: date.toString(format: .fullDate), menu: breakfast, time: .breakfast),
+                .init(date: date.toString(format: .fullDate), menu: lunch, time: .lunch),
+                .init(date: date.toString(format: .fullDate), menu: dinner, time: .dinner)
+            ]
         )
     }
 }
