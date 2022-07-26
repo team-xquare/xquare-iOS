@@ -7,18 +7,18 @@ import RestApiModule
 
 class RemoteMealDataSourceImpl: RestApiRemoteDataSource<MealAPI>, RemoteMealDataSource {
 
-    func fetchDayToMealMenu(date: String) -> Single<DayToMealMenuEntity> {
+    func fetchDayToMealMenu(date: String) -> Single<MealMenuPerDayEntity> {
         return request(.fetchDayToMealMenu(date: date))
-            .map(DayToMealMenuResponse.self)
+            .map(MealMenuPerDayResponse.self)
             .map { $0.toDomain() }
     }
 
     func fetchMonthToMealMenu(
-        mealRequest: MonthToMealMenuRequest
-    ) -> Single<[MonthToMealMenuEntity]> {
+        request mealRequest: MonthToMealMenuRequest
+    ) -> Single<[[MealMenuEntity]]> {
         return request(.fetchMonthToMealMenu(
             request: mealRequest
-        )).map(MonthToMealMenuListResponse.self)
+        )).map(MealMenuListPerMonthResponse.self)
             .map { $0.toDomain() }
     }
 
