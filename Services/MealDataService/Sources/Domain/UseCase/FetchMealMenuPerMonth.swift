@@ -2,7 +2,7 @@ import Foundation
 
 import RxSwift
 
-public class FetchMonthToMealMenuUseCase {
+public class FetchMealMenuPerMonth {
 
     private let mealRepository: MealRepository
 
@@ -11,10 +11,10 @@ public class FetchMonthToMealMenuUseCase {
     }
 
     public func excute(
-        request: MonthToMealMenuRequestEntity
-    ) -> Single<[MonthToMealMenuEntity]> {
-        return mealRepository.fetchMonthtoMealMenu(
-            request: request
+        date: Date
+    ) -> Single<[[MealMenuEntity]]> {
+        return mealRepository.fetchMealMenuPerMonth(
+            date: date
         )
     }
 }
