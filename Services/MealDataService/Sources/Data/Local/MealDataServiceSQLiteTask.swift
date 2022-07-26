@@ -149,6 +149,11 @@ WHERE day LIKE '\(day.toString(format: .year) + day.toString(format: .mounth))%'
             let breakfast = String(cString: sqlite3_column_text(statement, 2)).components(separatedBy: " ")
             let lunch = String(cString: sqlite3_column_text(statement, 3)).components(separatedBy: " ")
             let dinner = String(cString: sqlite3_column_text(statement, 4)).components(separatedBy: " ")
+            result.append([
+                MealMenuEntity(date: day.toString(format: .fullDate), menu: breakfast, time: .breakfast),
+                MealMenuEntity(date: day.toString(format: .fullDate), menu: lunch, time: .lunch),
+                MealMenuEntity(date: day.toString(format: .fullDate), menu: dinner, time: .dinner)
+            ])
         }
         return result
     }
