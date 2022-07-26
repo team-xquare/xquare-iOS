@@ -4,5 +4,7 @@ import ProjectDescriptionHelpers
 let project = Project.dynamicFramework(
     name: "XWebKit",
     platform: .iOS,
-    dependencies: []
+    dependencies: [
+        .SPM.RxWebKit
+    ]
 )
