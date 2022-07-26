@@ -16,6 +16,7 @@ extension TargetDependency {
         public static let RxMoya = TargetDependency.external(name: "RxMoya")
         public static let RxNimble = TargetDependency.external(name: "RxNimble")
         public static let RxSwift = TargetDependency.external(name: "RxSwift")
+        public static let RxWebKit = TargetDependency.external(name: "RxWebKit")
 
         public static let SQLite = TargetDependency.external(name: "SQLite")
 
