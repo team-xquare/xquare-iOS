@@ -28,6 +28,7 @@ class MealRepositoryImpl: MealRepository {
                 self.remoteDataSource.fetchMealMenuPerDay(date: date)
             }
             .doOnNeedRefresh { remoteData in
+                self.localDataSource.registerMealMenuPerDay(menu: remoteData.mealMenu)
             }.createObservable()
             .asSingle()
     }
