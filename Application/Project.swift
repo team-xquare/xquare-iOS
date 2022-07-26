@@ -5,7 +5,7 @@ let project = Project.excutable(
     name: "XQUARE-iOS",
     platform: .iOS,
     dependencies: [
-        .Module.XWebKit
+        .Module.XWebKit,
         .Service.AuthService,
         .Service.MealDataService,
         .SPM.SemicolonDesign
