@@ -64,16 +64,31 @@ dinner VARCHAR(100) NOT NULL
         sqlite3_finalize(statement)
     }
 
-    func save(mealMenu: MealMenu) {
+    func save(entity: MealMenuPerDayEntity) {
         let query = "INSERT INTO MealMenu(id, date, breakfast, lunch, dinner) VALUES(?, ?, ?, ?, ?)"
 
         var statement: OpaquePointer? = nil
 
+        var day = String()
+        var breakfast = [String]()
+        var lunch = [String]()
+        var dinner = [String]()
+        entity.mealMenu.forEach {
+            switch $0.time {
+            case .breakfast:
+                breakfast = $0.menu
+                day = $0.date
+            case .lunch:
+                lunch = $0.menu
+            case .dinner:
+                dinner = $0.menu
+            }
+        }
         if sqlite3_prepare_v2(self.dataBase, query, -1, &statement, nil) == SQLITE_OK {
-            sqlite3_bind_text(statement, 2, mealMenu.day.toString(format: .fullDate), -1, nil)
-            sqlite3_bind_text(statement, 3, mealMenu.breakfast, -1, nil)
-            sqlite3_bind_text(statement, 4, mealMenu.lunch, -1, nil)
-            sqlite3_bind_text(statement, 5, mealMenu.dinner, -1, nil)
+            sqlite3_bind_text(statement, 2, day, -1, nil)
+            sqlite3_bind_text(statement, 3, breakfast.joined(separator: " "), -1, nil)
+            sqlite3_bind_text(statement, 4, lunch.joined(separator: " "), -1, nil)
+            sqlite3_bind_text(statement, 5, dinner.joined(separator: " "), -1, nil)
         } else {
             print("sqlite binding fail")
         }
@@ -85,32 +100,44 @@ dinner VARCHAR(100) NOT NULL
         }
     }
 
-    func findMealByDay(day: Date) -> DayToMealMenuEntity {
+    func findMealByDay(day: Date) -> MealMenuPerDayEntity {
         let query = "SELECT * FROM MealMenu WHERE day = \(day.toString(format: .fullDate))"
 
         var statement: OpaquePointer? = nil
 
         if sqlite3_prepare(self.dataBase, query, -1, &statement, nil) != SQLITE_OK {
             let errorMessage = String(cString: sqlite3_errmsg(dataBase)!)
+            let date = Date()
             print("error while prepare: \(errorMessage)")
-            return DayToMealMenuEntity(breakfast: [], lunch: [], dinner: [])
+            return .init(mealMenu: [
+                .init(date: date.toString(format: .fullDate), menu: [], time: .breakfast),
+                .init(date: date.toString(format: .fullDate), menu: [], time: .lunch),
+                .init(date: date.toString(format: .fullDate), menu: [], time: .dinner)
+            ])
         }
 
+        let date = String(cString: sqlite3_column_text(statement, 1))
         let breakfast = String(cString: sqlite3_column_text(statement, 2)).components(separatedBy: " ")
         let lunch = String(cString: sqlite3_column_text(statement, 3)).components(separatedBy: " ")
         let dinner = String(cString: sqlite3_column_text(statement, 4)).components(separatedBy: " ")
 
-        return DayToMealMenuEntity(breakfast: breakfast, lunch: lunch, dinner: dinner)
+        return MealMenuPerDayEntity(
+            mealMenu: [
+                .init(date: date, menu: breakfast, time: .breakfast),
+                .init(date: date, menu: lunch, time: .lunch),
+                .init(date: date, menu: dinner, time: .dinner)
+        ])
     }
 
-    func findMealByMonth(day: Date) -> [MonthToMealMenuEntity] {
+    func findMealByMonth(day: Date) -> [[MealMenuEntity]] {
         let query = """
 SELECT * FROM MealMenu
 WHERE day LIKE '\(day.toString(format: .year) + day.toString(format: .mounth))%'
 """
 
+        // MARK: Save Login
         var statement: OpaquePointer? = nil
-        var result: [MonthToMealMenuEntity] = []
+        var result: [[MealMenuEntity]] = []
 
         if sqlite3_prepare(self.dataBase, query, -1, &statement, nil) != SQLITE_OK {
             let errorMessage = String(cString: sqlite3_errmsg(dataBase)!)
@@ -122,14 +149,7 @@ WHERE day LIKE '\(day.toString(format: .year) + day.toString(format: .mounth))%'
             let breakfast = String(cString: sqlite3_column_text(statement, 2)).components(separatedBy: " ")
             let lunch = String(cString: sqlite3_column_text(statement, 3)).components(separatedBy: " ")
             let dinner = String(cString: sqlite3_column_text(statement, 4)).components(separatedBy: " ")
-            result.append(MonthToMealMenuEntity(
-                date: day.toString(format: .fullDate),
-                breakfast: breakfast,
-                lunch: lunch,
-                dinner: dinner
-            ))
         }
-
         return result
     }
 }
