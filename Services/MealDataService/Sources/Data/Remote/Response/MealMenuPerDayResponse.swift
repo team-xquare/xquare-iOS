@@ -9,11 +9,14 @@ struct MealMenuPerMonthResponse: Decodable {
 }
 
 extension MealMenuPerMonthResponse {
-    func toDomain() -> [MealMenuEntity] {
-        return [
-            MealMenuEntity(date: date, menu: breakfast, time: .breakfast),
-            MealMenuEntity(date: date, menu: lunch, time: .lunch),
-            MealMenuEntity(date: date, menu: dinner, time: .dinner)
-        ]
+    func toDomain() -> MealMenuEntity {
+        return .init(
+            date: date,
+            menu: [
+                .breakfast: breakfast,
+                .lunch: lunch,
+                .dinner: dinner
+            ]
+        )
     }
 }

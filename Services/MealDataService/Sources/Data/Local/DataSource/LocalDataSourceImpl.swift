@@ -6,11 +6,11 @@ class LocalDataSourceImpl: LocalDataSource {
 
     let mealDataSQLiteTask = MealDataServiceSQLiteTask.shared
 
-    func registerMealMenuPerDay(menu: [MealMenuEntity]) {
-        mealDataSQLiteTask.save(entity: .init(mealMenu: menu))
+    func registerMealMenuPerDay(menu: MealMenuEntity) {
+        mealDataSQLiteTask.save(entity: menu)
     }
 
-    func fetchMealMenuPerDay(day: Date) -> Single<MealMenuPerDayEntity> {
+    func fetchMealMenuPerDay(day: Date) -> Single<MealMenuEntity> {
         return Single.create { single -> Disposable in
             single(.success(self.mealDataSQLiteTask.findMealByDay(day: day)))
 
@@ -18,7 +18,7 @@ class LocalDataSourceImpl: LocalDataSource {
         }
     }
 
-    func fetchMealMenuPerMonth(day: Date) -> Single<[[MealMenuEntity]]> {
+    func fetchMealMenuPerMonth(day: Date) -> Single<[MealMenuEntity]> {
         return Single.create { single -> Disposable in
             single(.success(self.mealDataSQLiteTask.findMealByMonth(day: day)))
 
@@ -26,10 +26,10 @@ class LocalDataSourceImpl: LocalDataSource {
         }
     }
 
-    func registerMealMenuPerMonth(menu: [[MealMenuEntity]]) {
+    func registerMealMenuPerMonth(menu: [MealMenuEntity]) {
         menu.forEach {
             mealDataSQLiteTask.save(
-                entity: .init(mealMenu: $0)
+                entity: $0
             )
         }
     }

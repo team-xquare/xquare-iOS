@@ -12,7 +12,7 @@ public class FetchMealMenuPerMonth {
 
     public func excute(
         date: Date
-    ) -> Single<[[MealMenuEntity]]> {
+    ) -> Single<[MealMenuEntity]> {
         return mealRepository.fetchMealMenuPerMonth(
             date: date
         )
