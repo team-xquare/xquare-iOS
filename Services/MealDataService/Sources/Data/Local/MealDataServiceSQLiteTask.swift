@@ -84,7 +84,7 @@ dinner VARCHAR(100) NOT NULL
             }
         }
         if sqlite3_prepare_v2(self.dataBase, query, -1, &statement, nil) == SQLITE_OK {
-            sqlite3_bind_text(statement, 2, entity.date, -1, nil)
+            sqlite3_bind_text(statement, 2, entity.date.toString(format: .fullDate), -1, nil)
             sqlite3_bind_text(statement, 3, breakfast.joined(separator: " "), -1, nil)
             sqlite3_bind_text(statement, 4, lunch.joined(separator: " "), -1, nil)
             sqlite3_bind_text(statement, 5, dinner.joined(separator: " "), -1, nil)
@@ -109,7 +109,7 @@ dinner VARCHAR(100) NOT NULL
             let date = Date()
             print("error while prepare: \(errorMessage)")
             return .init(
-                date: date.toString(format: .fullDate),
+                date: date,
                 menu: [:]
             )
         }
@@ -120,7 +120,7 @@ dinner VARCHAR(100) NOT NULL
         let dinner = String(cString: sqlite3_column_text(statement, 4)).components(separatedBy: " ")
 
         return .init(
-            date: date,
+            date: date.toDate(format: .fullDate),
             menu: [
                 .breakfast: breakfast,
                 .lunch: lunch,
@@ -150,7 +150,7 @@ WHERE day LIKE '\(day.toString(format: .year) + day.toString(format: .mounth))%'
             let lunch = String(cString: sqlite3_column_text(statement, 3)).components(separatedBy: " ")
             let dinner = String(cString: sqlite3_column_text(statement, 4)).components(separatedBy: " ")
             result.append(
-                .init(date: day.toString(format: .fullDate),
+                .init(date: day,
                       menu: [
                         .breakfast: breakfast,
                         .lunch: lunch,

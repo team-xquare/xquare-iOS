@@ -13,12 +13,9 @@ class RemoteMealDataSourceImpl: RestApiRemoteDataSource<MealAPI>, RemoteMealData
             .map { $0.toDomain() }
     }
 
-    func fetchMealMenuPerMonth(
-        request mealRequest: MonthToMealMenuRequest
-    ) -> Single<[MealMenuEntity]> {
-        return request(.fetchMealMenuPerMonth(
-            request: mealRequest
-        )).map(MealMenuListPerMonthResponse.self)
+    func fetchMealMenuPerMonth(request mealRequest: MonthToMealMenuRequest) -> Single<[MealMenuEntity]> {
+        return request(.fetchMealMenuPerMonth(request: mealRequest))
+            .map(MealMenuListPerMonthResponse.self)
             .map { $0.toDomain() }
     }
 

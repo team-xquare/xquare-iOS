@@ -4,7 +4,7 @@ import AuthService
 
 public struct MealDataServiceDependency {
     public let fetchDayToMealMenuUseCase: FetchMealMenuPerDayUseCase
-    public let fetchMonthToMealMenuUseCase: FetchMealMenuPerMonth
+    public let fetchMonthToMealMenuUseCase: FetchMealMenuPerMonthUseCase
 }
 
 public extension MealDataServiceDependency {
@@ -27,7 +27,7 @@ public extension MealDataServiceDependency {
         let fetchDayToMealMenuUseCase = FetchMealMenuPerDayUseCase(
             mealRepository: mealRepository
         )
-        let fetchMonthToMealMenuUseCase = FetchMealMenuPerMonth(
+        let fetchMonthToMealMenuUseCase = FetchMealMenuPerMonthUseCase(
             mealRepository: mealRepository
         )
 

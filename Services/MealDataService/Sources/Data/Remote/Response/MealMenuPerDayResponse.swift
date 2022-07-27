@@ -1,7 +1,6 @@
 import Foundation
 
 struct MealMenuPerMonthResponse: Decodable {
-
     let date: String
     let breakfast: [String]
     let lunch: [String]
@@ -11,7 +10,7 @@ struct MealMenuPerMonthResponse: Decodable {
 extension MealMenuPerMonthResponse {
     func toDomain() -> MealMenuEntity {
         return .init(
-            date: date,
+            date: date.toDate(format: .fullDate),
             menu: [
                 .breakfast: breakfast,
                 .lunch: lunch,
