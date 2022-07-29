@@ -8,28 +8,24 @@ class HomeViewModel: ObservableObject {
     @Published var name: String = "수준호"
     @Published var merit: Int = 1
     @Published var demerit: Int = 2
-    @Published var breakfast: [String] = ["치킨텐더/머스타드", "훈제황금린", "수리취찰떡", "시리얼/우유", "배동동식혜"]
-    @Published var lunch: [String] = ["치킨텐더/머스타드", "훈제황금린", "수리취찰떡", "시리얼/우유", "배동동식혜"]
-    @Published var dinner: [String] = ["치킨텐더/머스타드", "훈제황금린", "수리취찰떡", "시리얼/우유", "배동동식혜"]
+    @Published var menu: [MealTime: [String]] = [.breakfast: ["치킨텐더"], .lunch: ["치킨텐더"], .dinner: ["치킨텐더"]]
 
-    private let fetchDayToMealMenuUseCase: FetchDayToMealMenuUseCase
+    private let fetchMealMenuPerDayUseCase: FetchMealMenuPerDayUseCase
 
     init(
-        fetchDayToMealMenuUseCase: FetchDayToMealMenuUseCase
+        fetchMealMenuPerDayUseCase: FetchMealMenuPerDayUseCase
     ) {
-        self.fetchDayToMealMenuUseCase = fetchDayToMealMenuUseCase
+        self.fetchMealMenuPerDayUseCase = fetchMealMenuPerDayUseCase
     }
 
     private var date = Date()
     private var disposeBag = DisposeBag()
 
     func fetchDayToMealMenu() {
-        self.fetchDayToMealMenuUseCase.excute(date: date)
+        self.fetchMealMenuPerDayUseCase.excute(date: date)
             .asObservable()
             .subscribe(onNext: {
-                self.breakfast = $0.breakfast
-                self.lunch = $0.lunch
-                self.dinner = $0.dinner
+                self.menu = $0.menu
             }).disposed(by: disposeBag)
     }
 }
