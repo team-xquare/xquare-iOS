@@ -28,7 +28,9 @@ struct MealMenuView: View {
                 HStack(spacing: 8) {
                     Spacer().frame(width: 8)
                     ForEach(
-                        Array(menu),
+                        Array(menu).sorted {
+                            return $0.key.mealTimeOrder < $1.key.mealTimeOrder
+                        },
                         id: \.key
                     ) { menu in
                         MealListCell(
