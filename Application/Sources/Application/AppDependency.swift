@@ -10,7 +10,7 @@ extension AppDependency {
         let dependency = MealDataServiceDependency.resolve()
         // MARK: - ViewModels
         let homeViewModel = HomeViewModel(
-            fetchDayToMealMenuUseCase: dependency.fetchDayToMealMenuUseCase
+            fetchMealMenuPerDayUseCase: dependency.fetchDayToMealMenuUseCase
         )
 
         // MARK: - Views
