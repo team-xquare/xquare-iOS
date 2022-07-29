@@ -19,11 +19,7 @@ struct HomeView: View {
                         demerit: viewModel.demerit
                     )
                     Spacer().frame(height: 16)
-                    MealMenuView(
-                        breakfast: viewModel.breakfast,
-                        lunch: viewModel.lunch,
-                        dinner: viewModel.dinner
-                    )
+                    MealMenuView(menu: viewModel.menu)
                 }
                 .padding([.leading, .trailing], 16)
             }
@@ -57,7 +53,7 @@ struct HomeView_Previews: PreviewProvider {
         let dependency = MealDataServiceDependency.resolve()
         // MARK: - ViewModels
         let homeViewModel = HomeViewModel(
-            fetchDayToMealMenuUseCase: dependency.fetchDayToMealMenuUseCase
+            fetchMealMenuPerDayUseCase: dependency.fetchDayToMealMenuUseCase
         )
         HomeView(viewModel: homeViewModel)
     }
