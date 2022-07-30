@@ -17,8 +17,8 @@ class MealRepositoryImpl: MealRepository {
         self.localDataSource = localDataSource
     }
 
-    func fetchMealMenuPerDay(date: Date) -> Observable<MealMenuEntity> {
-        OfflineCacheUtil<MealMenuEntity>()
+    func fetchMealMenuPerDay(date: Date) -> Observable<MealMenuPerDayEntity> {
+        OfflineCacheUtil<MealMenuPerDayEntity>()
             .localData {
                 self.localDataSource.fetchMealMenuPerDay(
                     day: date
@@ -32,8 +32,8 @@ class MealRepositoryImpl: MealRepository {
             }.createObservable()
     }
 
-    func fetchMealMenuPerMonth(date: Date) -> Observable<[MealMenuEntity]> {
-        OfflineCacheUtil<[MealMenuEntity]>()
+    func fetchMealMenuPerMonth(date: Date) -> Observable<[MealMenuPerDayEntity]> {
+        OfflineCacheUtil<[MealMenuPerDayEntity]>()
             .localData {
                 self.localDataSource.fetchMealMenuPerMonth(day: date)
             }

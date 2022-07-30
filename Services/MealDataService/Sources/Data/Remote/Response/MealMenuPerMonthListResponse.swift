@@ -6,7 +6,7 @@ struct MealMenuListPerMonthResponse: Decodable {
 }
 
 extension MealMenuListPerMonthResponse {
-    func toDomain() -> [MealMenuEntity] {
+    func toDomain() -> [MealMenuPerDayEntity] {
         return meals.map { $0.toDomain() }
     }
 }
