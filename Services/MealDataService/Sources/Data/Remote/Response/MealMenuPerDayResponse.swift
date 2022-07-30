@@ -7,14 +7,14 @@ struct MealMenuPerDayResponse: Decodable {
 }
 
 extension MealMenuPerDayResponse {
-    func toDomain() -> MealMenuEntity {
+    func toDomain() -> MealMenuPerDayEntity {
         let date = Date()
         return .init(
             date: date,
             menu: [
-                .breakfast: breakfast,
-                .lunch: lunch,
-                .dinner: dinner
+                .init(mealTime: .breakfast, menu: breakfast),
+                .init(mealTime: .lunch, menu: lunch),
+                .init(mealTime: .dinner, menu: dinner)
             ]
         )
     }

@@ -64,7 +64,7 @@ dinner VARCHAR(100) NOT NULL
         sqlite3_finalize(statement)
     }
 
-    func save(entity: MealMenuEntity) {
+    func save(entity: MealMenuPerDayEntity) {
         let query = "INSERT INTO MealMenu(id, date, breakfast, lunch, dinner) VALUES(?, ?, ?, ?, ?)"
 
         var statement: OpaquePointer? = nil
@@ -74,13 +74,13 @@ dinner VARCHAR(100) NOT NULL
         var dinner: [String] = []
 
         for key in entity.menu {
-            switch key.key {
+            switch key.mealTime {
             case .breakfast:
-                breakfast = key.value
+                breakfast = key.menu
             case .lunch:
-                lunch = key.value
+                lunch = key.menu
             case .dinner:
-                dinner = key.value
+                dinner = key.menu
             }
         }
         if sqlite3_prepare_v2(self.dataBase, query, -1, &statement, nil) == SQLITE_OK {
@@ -99,7 +99,7 @@ dinner VARCHAR(100) NOT NULL
         }
     }
 
-    func findMealByDay(day: Date) -> MealMenuEntity {
+    func findMealByDay(day: Date) -> MealMenuPerDayEntity {
         let query = "SELECT * FROM MealMenu WHERE day = \(day.toString(format: .fullDate))"
 
         var statement: OpaquePointer? = nil
@@ -110,7 +110,7 @@ dinner VARCHAR(100) NOT NULL
             print("error while prepare: \(errorMessage)")
             return .init(
                 date: date,
-                menu: [:]
+                menu: []
             )
         }
 
@@ -122,14 +122,14 @@ dinner VARCHAR(100) NOT NULL
         return .init(
             date: date.toDate(format: .fullDate),
             menu: [
-                .breakfast: breakfast,
-                .lunch: lunch,
-                .dinner: dinner
+                .init(mealTime: .breakfast, menu: breakfast),
+                .init(mealTime: .lunch, menu: lunch),
+                .init(mealTime: .dinner, menu: dinner)
             ]
         )
     }
 
-    func findMealByMonth(day: Date) -> [MealMenuEntity] {
+    func findMealByMonth(day: Date) -> [MealMenuPerDayEntity] {
         let query = """
 SELECT * FROM MealMenu
 WHERE day LIKE '\(day.toString(format: .year) + day.toString(format: .mounth))%'
@@ -137,7 +137,7 @@ WHERE day LIKE '\(day.toString(format: .year) + day.toString(format: .mounth))%'
 
         // MARK: Save Login
         var statement: OpaquePointer? = nil
-        var result: [MealMenuEntity] = []
+        var result: [MealMenuPerDayEntity] = []
 
         if sqlite3_prepare(self.dataBase, query, -1, &statement, nil) != SQLITE_OK {
             let errorMessage = String(cString: sqlite3_errmsg(dataBase)!)
@@ -152,9 +152,9 @@ WHERE day LIKE '\(day.toString(format: .year) + day.toString(format: .mounth))%'
             result.append(
                 .init(date: day,
                       menu: [
-                        .breakfast: breakfast,
-                        .lunch: lunch,
-                        .dinner: dinner
+                        .init(mealTime: .breakfast, menu: breakfast),
+                        .init(mealTime: .lunch, menu: lunch),
+                        .init(mealTime: .dinner, menu: dinner)
                       ]))
         }
         return result
