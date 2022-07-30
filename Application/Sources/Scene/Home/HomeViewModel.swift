@@ -8,8 +8,9 @@ class HomeViewModel: ObservableObject {
     @Published var name: String = "수준호"
     @Published var merit: Int = 1
     @Published var demerit: Int = 2
-    @Published var menu: [MealTime: [String]] = [.breakfast: ["치킨텐더"], .lunch: ["치킨텐더"], .dinner: ["치킨텐더"]]
-
+    @Published var menu: [MealMenuEntity] = [.init(mealTime: .breakfast, menu: ["치킨텐더"]),
+                                             .init(mealTime: .lunch, menu: ["치킨텐더"]),
+                                             .init(mealTime: .dinner, menu: ["치킨텐더"])]
     private let fetchMealMenuPerDayUseCase: FetchMealMenuPerDayUseCase
 
     init(

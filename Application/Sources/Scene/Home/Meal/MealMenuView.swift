@@ -5,7 +5,7 @@ import MealDataService
 
 struct MealMenuView: View {
 
-    @State var menu: [MealTime: [String]]
+    @State var menu: [MealMenuEntity]
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -27,15 +27,10 @@ struct MealMenuView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     Spacer().frame(width: 8)
-                    ForEach(
-                        Array(menu).sorted {
-                            return $0.key.mealTimeOrder < $1.key.mealTimeOrder
-                        },
-                        id: \.key
-                    ) { menu in
+                    ForEach(menu, id: \.mealTime) {
                         MealListCell(
-                            mealTime: menu.key.rawValue,
-                            menu: menu.value
+                            mealTime: $0.mealTime.rawValue,
+                            menu: $0.menu
                         )
                     }
                     Spacer().frame(width: 8)
@@ -53,9 +48,9 @@ struct MealMenuView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             MealMenuView(menu: [
-                .breakfast: ["치킨텐더"],
-                .lunch: ["치킨텐더"],
-                .dinner: ["치킨텐더"]
+                .init(mealTime: .breakfast, menu: ["치킨텐더"]),
+                .init(mealTime: .lunch, menu: ["치킨텐더"]),
+                .init(mealTime: .dinner, menu: ["치킨텐더"])
             ])
                 .previewLayout(.sizeThatFits)
         }
