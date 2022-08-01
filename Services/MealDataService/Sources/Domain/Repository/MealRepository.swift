@@ -3,6 +3,6 @@ import Foundation
 import RxSwift
 
 public protocol MealRepository {
-    func fetchDayToMealMenu(date: String) -> Single<DayToMealMenuEntity>
-    func fetchMonthtoMealMenu(request: MonthToMealMenuRequestEntity) -> Single<[MonthToMealMenuEntity]>
+    func fetchMealMenuPerDay(date: Date) -> Observable<MealMenuPerDayEntity>
+    func fetchMealMenuPerMonth(date: Date) -> Observable<[MealMenuPerDayEntity]>
 }

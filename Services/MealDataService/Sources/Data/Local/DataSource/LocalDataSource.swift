@@ -3,8 +3,8 @@ import Foundation
 import RxSwift
 
 protocol LocalDataSource {
-    func registerDayToMealMenu(day: Date, breakfast: [String], lunch: [String], dinner: [String])
-    func registerMonthToMealMenu(menu: [MonthToMealMenuEntity])
-    func fetchMealMenuPerDay(day: Date) -> Single<DayToMealMenuEntity>
-    func fetchMealMenuPerMonth(day: Date) -> Single<[MonthToMealMenuEntity]>
+    func registerMealMenuPerDay(menu: MealMenuPerDayEntity)
+    func registerMealMenuPerMonth(menu: [MealMenuPerDayEntity])
+    func fetchMealMenuPerDay(day: Date) -> Single<MealMenuPerDayEntity>
+    func fetchMealMenuPerMonth(day: Date) -> Single<[MealMenuPerDayEntity]>
 }
