@@ -1,4 +1,5 @@
 import SwiftUI
+
 import SemicolonDesign
 
 struct XWebKitProgressViewStyle: ProgressViewStyle {
