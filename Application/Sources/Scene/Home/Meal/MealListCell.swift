@@ -3,12 +3,12 @@ import SemicolonDesign
 
 struct MealListCell: View {
 
-    var mealTime: Int
+    var mealTime: String
     @State var menu: [String]
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(getMealTime()).sdText(type: .body2)
+            Text(mealTime).sdText(type: .body2)
             Spacer().frame(height: 8)
             ForEach(menu, id: \.self) { menu in
                 Text(menu).sdText(type: .body4)
@@ -21,23 +21,10 @@ struct MealListCell: View {
         .background(Color.GrayScale.gray50)
         .cornerRadius(8)
     }
-
-    private func getMealTime() -> String {
-        switch mealTime {
-        case 0:
-            return "아침"
-        case 1:
-            return "점심"
-        case 2:
-            return "저녁"
-        default:
-            return ""
-        }
-    }
 }
 
 struct MealListCell_Previews: PreviewProvider {
     static var previews: some View {
-        MealListCell(mealTime: 0, menu: ["치킨텐더/머스타드", "훈제황금린", "수리취찰떡", "시리얼/우유", "배동동식혜"])
+        MealListCell(mealTime: "아침", menu: ["치킨텐더/머스타드", "훈제황금린", "수리취찰떡", "시리얼/우유", "배동동식혜"])
     }
 }

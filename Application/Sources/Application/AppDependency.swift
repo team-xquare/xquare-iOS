@@ -1,4 +1,5 @@
 import Foundation
+import MealDataService
 
 struct AppDependency {
     let mainView: MainView
@@ -6,8 +7,11 @@ struct AppDependency {
 
 extension AppDependency {
     static func resolve() -> AppDependency {
+        let dependency = MealDataServiceDependency.resolve()
         // MARK: - ViewModels
-        let homeViewModel = HomeViewModel()
+        let homeViewModel = HomeViewModel(
+            fetchMealMenuPerDayUseCase: dependency.fetchDayToMealMenuUseCase
+        )
 
         // MARK: - Views
         let homeView = HomeView(

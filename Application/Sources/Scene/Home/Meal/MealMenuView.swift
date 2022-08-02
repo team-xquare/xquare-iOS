@@ -1,10 +1,11 @@
 import SwiftUI
 
 import SemicolonDesign
+import MealDataService
 
 struct MealMenuView: View {
 
-    @State var menu: [String]
+    @State var menu: [MealMenuEntity]
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -26,8 +27,11 @@ struct MealMenuView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     Spacer().frame(width: 8)
-                    ForEach(0..<3) { num in
-                        MealListCell(mealTime: num, menu: menu)
+                    ForEach(menu, id: \.mealTime) {
+                        MealListCell(
+                            mealTime: $0.mealTime.rawValue,
+                            menu: $0.menu
+                        )
                     }
                     Spacer().frame(width: 8)
                 }
@@ -43,7 +47,11 @@ struct MealMenuView: View {
 struct MealMenuView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MealMenuView(menu: ["치킨텐더"])
+            MealMenuView(menu: [
+                .init(mealTime: .breakfast, menu: ["치킨텐더"]),
+                .init(mealTime: .lunch, menu: ["치킨텐더"]),
+                .init(mealTime: .dinner, menu: ["치킨텐더"])
+            ])
                 .previewLayout(.sizeThatFits)
         }
     }
