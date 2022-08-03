@@ -2,7 +2,7 @@ import UIKit
 
 import WebKit
 
-class WebViewCoordinator: NSObject, WKNavigationDelegate, WKScriptMessageHandler {
+class WebViewCoordinator: NSObject, WKNavigationDelegate, WKScriptMessageHandler, UIScrollViewDelegate {
 
     var parent: ComposedWebView
 
@@ -26,6 +26,10 @@ class WebViewCoordinator: NSObject, WKNavigationDelegate, WKScriptMessageHandler
         case "confirm": self.processConfirmBridge(message.body)
         default: break
         }
+    }
+
+    public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        scrollView.pinchGestureRecognizer?.isEnabled = false
     }
 
 }
