@@ -13,7 +13,6 @@ class WebViewCoordinator: NSObject, WKNavigationDelegate, WKScriptMessageHandler
     func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-
         return decisionHandler(.allow)
     }
 
@@ -37,29 +36,29 @@ class WebViewCoordinator: NSObject, WKNavigationDelegate, WKScriptMessageHandler
 extension WebViewCoordinator {
 
     private func processNavigateBridge(_ messageBody: Any) {
-        guard let str = messageBody as? String else { return }
-        self.parent.state.naviagteLink = "https://service.xquare.app"+str
-        self.parent.state.isNavigated = true
+        guard let messageBodyAsString = messageBody as? String else { return }
+        self.parent.state.naviagteLink = parent.state.urlString+messageBodyAsString
+        self.parent.state.needsToNavigate = true
     }
 
     private func preocessImageDetailBridge(_ messageBody: Any) {
-        guard let str = messageBody as? String else { return }
-        self.parent.state.images = str
+        guard let messageBodyAsString = messageBody as? String else { return }
+        self.parent.state.images = messageBodyAsString
             .convertToArray()
             .map { URL(string: $0)! }
         self.parent.state.isImageViewerPresented = true
     }
 
     private func processBackBridge() {
-        self.parent.state.isNavigated = false
+        self.parent.state.isPresentated.wrappedValue = false
     }
 
     private func processConfirmBridge(_ messageBody: Any) {
-        guard let str = messageBody as? String else { return }
-        let data = str.convertToDictionary()
-        self.parent.state.alertMessage = data["message"] ?? ""
-        self.parent.state.alertConfirmText = data["confirmText"] ?? ""
-        self.parent.state.alertCancelText = data["cancelText"] ?? ""
+        guard let messageBodyAsString = messageBody as? String else { return }
+        let messageBodyAsDictionary = messageBodyAsString.convertToDictionary()
+        self.parent.state.alertMessage = messageBodyAsDictionary["message"] ?? ""
+        self.parent.state.alertConfirmText = messageBodyAsDictionary["confirmText"] ?? ""
+        self.parent.state.alertCancelText = messageBodyAsDictionary["cancelText"] ?? ""
         self.parent.state.isAlertPresented = true
     }
 
