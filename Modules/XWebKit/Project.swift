@@ -5,6 +5,7 @@ let project = Project.dynamicFramework(
     name: "XWebKit",
     platform: .iOS,
     dependencies: [
-        .SPM.RxWebKit
+        .SPM.RxWebKit,
+        .SPM.SemicolonDesign
     ]
 )
