@@ -1,6 +1,8 @@
 import SwiftUI
 import SemicolonDesign
 
+import MealDataService
+
 struct HomeView: View {
 
     @StateObject var viewModel: HomeViewModel
@@ -41,14 +43,18 @@ struct HomeView: View {
                     })
                 }
             }
-        }
+        }.onAppear(perform: viewModel.fetchDayToMealMenu)
     }
 
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        let homeViewModel = HomeViewModel()
+        let dependency = MealDataServiceDependency.resolve()
+        // MARK: - ViewModels
+        let homeViewModel = HomeViewModel(
+            fetchMealMenuPerDayUseCase: dependency.fetchDayToMealMenuUseCase
+        )
         HomeView(viewModel: homeViewModel)
     }
 }
