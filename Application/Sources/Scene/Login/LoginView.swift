@@ -7,15 +7,22 @@ struct LoginView: View {
         NavigationView {
             VStack {
                 Spacer()
-                    .frame(height: 30)
-                TextFieldView(
-                    id: $viewModel.id,
-                    password: $viewModel.password)
+                    .frame(height: 16)
+                SDTextField(
+                    placeholder: "아이디",
+                    text: $viewModel.id
+                ).padding(.horizontal, 16)
+                SDTextField(
+                    placeholder: "비밀번호",
+                    text: $viewModel.password
+                )
+                .padding(.horizontal, 16)
                 FillButton(
                     text: "로그인",
                     action: {
                         print("로그인")
-                    }, type: .rounded
+                    },
+                    type: .rounded
                 )
                 FindButtonView {
                     print("아이디 찾기")
