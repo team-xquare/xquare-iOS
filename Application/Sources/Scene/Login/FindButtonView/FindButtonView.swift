@@ -3,8 +3,6 @@ import SwiftUI
 import SemicolonDesign
 
 struct FindButtonView: View {
-    var findId: () -> Void
-    var findPassword: () -> Void
     var body: some View {
         VStack {
             HStack(spacing: 5) {
@@ -29,9 +27,6 @@ struct FindButtonView: View {
 
 struct FindButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        FindButtonView(
-            findId: { print("아이디 찾기") },
-            findPassword: { print("비밀번호 찾기") }
-        )
+        FindButtonView()
     }
 }

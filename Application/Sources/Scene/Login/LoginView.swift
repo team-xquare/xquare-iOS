@@ -24,11 +24,7 @@ struct LoginView: View {
                     },
                     type: .rounded
                 )
-                FindButtonView {
-                    print("아이디 찾기")
-                } findPassword: {
-                    print("비밀번호 찾기")
-                }
+                FindButtonView()
                 Spacer()
             }
             .navigationTitle("로그인")
