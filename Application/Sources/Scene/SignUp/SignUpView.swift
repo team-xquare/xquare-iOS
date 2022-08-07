@@ -33,6 +33,9 @@ struct SignUpView: View {
                         ).padding(.horizontal, 16)
                         Spacer()
                     }
+                }
+                VStack {
+                    Spacer()
                     FillButton(
                         text: "입력 완료",
                         action: {
