@@ -2,6 +2,9 @@ import ProjectDescription
 
 let dependencies = Dependencies(
     swiftPackageManager: SwiftPackageManagerDependencies([
+        // Introspect
+        .remote(url: "https://github.com/siteline/SwiftUI-Introspect",
+                requirement: .upToNextMajor(from: "0.1.4")),
         // KeychainSwift
         .remote(url: "https://github.com/evgenyneu/keychain-swift",
                 requirement: .upToNextMajor(from: "20.0.0")),
