@@ -10,15 +10,19 @@ public struct XNavigationLinkWithoutTabBar<Label, Destination>: View where Label
     var destination: () -> Destination
     var label: () -> Label
 
-    public init(@ViewBuilder destination: @escaping () -> Destination,
-                @ViewBuilder label: @escaping () -> Label) {
+    public init(
+        @ViewBuilder destination: @escaping () -> Destination,
+        @ViewBuilder label: @escaping () -> Label
+    ) {
         self.destination = destination
         self.label = label
     }
 
-    public init(isActive: Binding<Bool>,
-                @ViewBuilder destination: @escaping () -> Destination,
-                @ViewBuilder label: @escaping () -> Label) {
+    public init(
+        isActive: Binding<Bool>,
+        @ViewBuilder destination: @escaping () -> Destination,
+        @ViewBuilder label: @escaping () -> Label
+    ) {
         self.isActive = isActive
         self.destination = destination
         self.label = label
