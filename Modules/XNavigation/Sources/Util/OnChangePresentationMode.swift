@@ -1,11 +1,5 @@
 import SwiftUI
 
-extension View {
-    func onChangePresentationMode(_ perform: @escaping (_ isPresented: Bool) -> Void) -> some View {
-        self.modifier(ChangePresentationModeModifier(callback: perform))
-    }
-}
-
 struct ChangePresentationModeModifier: ViewModifier {
 
     @Environment(\.presentationMode) var presentationMode
@@ -16,5 +10,11 @@ struct ChangePresentationModeModifier: ViewModifier {
             .onChange(of: presentationMode.wrappedValue.isPresented) {
                 callback($0)
             }
+    }
+}
+
+extension View {
+    func onChangePresentationMode(_ perform: @escaping (_ isPresented: Bool) -> Void) -> some View {
+        self.modifier(ChangePresentationModeModifier(callback: perform))
     }
 }

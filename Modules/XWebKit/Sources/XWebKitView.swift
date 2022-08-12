@@ -2,7 +2,7 @@ import SwiftUI
 
 import RxSwift
 import SemicolonDesign
-import XNavigationLink
+import XNavigation
 
 public struct XWebKitView: View {
 
@@ -38,7 +38,7 @@ public struct XWebKitView: View {
                     Spacer()
                 }
             }
-            XNavigationLinkWithoutTabBar(
+            XNavigationLink(
                 isRootNow: state.title != "",
                 isActive: $state.needsToNavigate,
                 destination: {
