@@ -38,7 +38,7 @@ public struct XWebKitView: View {
                     Spacer()
                 }
             }
-            XNavigationLinkWithoutTabBar(
+            XNavigationLink(
                 isRootNow: state.title != "",
                 isActive: $state.needsToNavigate,
                 destination: {
