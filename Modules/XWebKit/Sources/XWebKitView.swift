@@ -2,7 +2,7 @@ import SwiftUI
 
 import RxSwift
 import SemicolonDesign
-import XNavigationLink
+import XNavigation
 
 public struct XWebKitView: View {
 
