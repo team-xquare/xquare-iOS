@@ -4,6 +4,7 @@ import Introspect
 
 struct HideTabBarWhenNavigateModifier: ViewModifier {
 
+    @Environment(\.presentationMode) var presentationMode
     @State var uiTabBarController: UITabBarController?
     var isRootNow: Bool
 
@@ -12,10 +13,12 @@ struct HideTabBarWhenNavigateModifier: ViewModifier {
             .introspectTabBarController { (UITabBarController) in
                 uiTabBarController = UITabBarController
                 uiTabBarController?.tabBar.isHidden = true
-            }.onChangePresentationMode { isPresented in
-                guard isRootNow && !isPresented else { return }
+            }
+            .onDisappear {
+                guard isRootNow && !presentationMode.wrappedValue.isPresented else { return }
                 uiTabBarController?.tabBar.isHidden = false
             }
+            .padding(.bottom, -49)
     }
 
 }
