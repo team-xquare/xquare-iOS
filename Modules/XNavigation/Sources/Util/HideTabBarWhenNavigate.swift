@@ -18,7 +18,7 @@ struct HideTabBarWhenNavigateModifier: ViewModifier {
                 guard isRootNow && !presentationMode.wrappedValue.isPresented else { return }
                 uiTabBarController?.tabBar.isHidden = false
             }
-            .padding(.bottom, -49)
+            .padding(.bottom, -(uiTabBarController?.tabBar.frame.height ?? 0))
     }
 
 }
