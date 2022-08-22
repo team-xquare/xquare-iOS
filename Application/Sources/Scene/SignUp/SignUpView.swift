@@ -29,20 +29,26 @@ struct SignUpView: View {
                         SDTextField(
                             title: "비밀번호 재입력",
                             placeholder: "재입력",
-                            text: $viewModel.reEnterPassword
+                            text: $viewModel.reEnterPassword,
+                            isDisableed: .constant(viewModel.password != viewModel.reEnterPassword)
                         ).padding(.horizontal, 16)
                         Spacer()
                     }
                 }
                 VStack {
                     Spacer()
-                    FillButton(
-                        text: "입력 완료",
-                        action: {
-                            print("회원가입")
-                        },
-                        type: .rounded
-                    )
+                    NavigationLink(
+                        isActive: $viewModel.isSuccess) {
+                            AppDependency.resolve().loginView
+                        } label: {
+                            FillButton(
+                                text: "입력 완료",
+                                action: {
+                                    viewModel.signUp()
+                                },
+                                type: .rounded
+                            )
+                        }
                 }
             }.navigationTitle("회원가입")
         }
@@ -51,9 +57,6 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = SignUpViewModel()
-        SignUpView(
-            viewModel: viewModel
-        )
+        AppDependency.resolve().signupView
     }
 }
