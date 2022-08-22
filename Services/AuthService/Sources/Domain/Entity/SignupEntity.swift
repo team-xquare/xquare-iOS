@@ -5,6 +5,18 @@ public struct SignupEntity {
     let id: String
     let profileImageUrl: URL?
     let password: String
+
+    public init(
+        authCode: String,
+        id: String,
+        profileImageUrl: URL?,
+        password: String
+    ) {
+        self.authCode = authCode
+        self.id = id
+        self.profileImageUrl = profileImageUrl
+        self.password = password
+    }
 }
 
 extension SignupEntity {
