@@ -16,9 +16,9 @@ extension AuthAPI {
     var path: String {
         switch self {
         case .signin, .refreshToken:
-            return "/login"
+            return "/users/login"
         case .signup:
-            return ""
+            return "/users"
         }
     }
 
