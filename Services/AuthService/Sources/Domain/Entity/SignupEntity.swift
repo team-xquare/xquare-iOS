@@ -22,7 +22,7 @@ public struct SignupEntity {
 extension SignupEntity {
     func toSignupRequest() -> SignupRequest {
         return .init(
-            authCode: self.authCode,
+            verificationCode: self.authCode,
             id: self.id,
             profileImageUrlAsString: self.profileImageUrl?.absoluteString,
             password: self.password
