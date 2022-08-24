@@ -19,4 +19,12 @@ public struct TabInformation {
         self.tabItemImage = tabItemImage
     }
 
+    func getNavigationTitle() -> String {
+        navigationTitle ?? title
+    }
+
+    func getTabItemText() -> String {
+        tabItemText ?? title
+    }
+
 }
