@@ -15,6 +15,6 @@ public extension EnvironmentValues {
 
 public extension RootPresentationMode {
     mutating func dismiss() {
-        self.toggle()
+        self = false
     }
 }
