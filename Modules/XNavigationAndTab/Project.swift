@@ -2,7 +2,7 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.dynamicFramework(
-    name: "XNavigation",
+    name: "XNavigationAndTab",
     platform: .iOS,
     dependencies: [
         .SPM.Introspect
