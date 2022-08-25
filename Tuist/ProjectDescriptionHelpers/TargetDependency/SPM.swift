@@ -23,7 +23,7 @@ extension TargetDependency {
         public static let SQLite = TargetDependency.external(name: "SQLite")
         public static let SemicolonDesign = TargetDependency.external(name: "SemicolonDesign")
 
-        static let FCM = TargetDependency.external(name: "FirebaseMessaging")
+        public static let FCM = TargetDependency.external(name: "FirebaseMessaging")
 
     }
 
