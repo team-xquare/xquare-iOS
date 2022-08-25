@@ -4,8 +4,6 @@ extension TargetDependency {
 
     // ABCDEFGHIJKLMNOPQRSTUVWXYZ
     public struct SPM {
-        public static let Introspect = TargetDependency.external(name: "Introspect")
-
         public static let KeychainSwift = TargetDependency.external(name: "KeychainSwift")
 
         public static let Moya = TargetDependency.external(name: "Moya")
