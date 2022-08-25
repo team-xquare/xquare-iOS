@@ -4,10 +4,10 @@ import SemicolonDesign
 
 struct ProfileView: View {
 
-    @State var imageUrl: String
-    @State var name: String
-    @State var merit: Int
-    @State var demerit: Int
+    var imageUrl: String
+    var name: String
+    var merit: Int
+    var demerit: Int
 
     var body: some View {
             HStack(spacing: 12) {
