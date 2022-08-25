@@ -8,6 +8,7 @@ let project = Project.excutable(
         .Module.XWebKit,
         .Service.AuthService,
         .Service.MealDataService,
-        .SPM.SemicolonDesign
+        .SPM.SemicolonDesign,
+        .SPM.FCM
     ]
 )
