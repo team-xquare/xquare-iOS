@@ -28,7 +28,10 @@ let dependencies = Dependencies(
                 requirement: .upToNextMajor(from: "0.13.3")),
         // SemicolonDesign
         .remote(url: "https://github.com/semicolonDSM/SemicolonDesign_iOS.git",
-                requirement: .upToNextMajor(from: "1.7.1"))
+                requirement: .upToNextMajor(from: "1.7.1")),
+        // Firebase-iOS-SDK
+        .remote(url: "https://github.com/firebase/firebase-ios-sdk",
+                requirement: .upToNextMajor(from: "9.5.0"))
     ]),
     platforms: [.iOS]
 )

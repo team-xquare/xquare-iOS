@@ -21,8 +21,10 @@ extension TargetDependency {
         public static let RxWebKit = TargetDependency.external(name: "RxWebKit")
 
         public static let SQLite = TargetDependency.external(name: "SQLite")
-
         public static let SemicolonDesign = TargetDependency.external(name: "SemicolonDesign")
+
+        static let FCM = TargetDependency.external(name: "FirebaseMessaging")
+
     }
 
     /// 모든 패키지가 공통적으로 사용하는 외부 라이브러리 들.
