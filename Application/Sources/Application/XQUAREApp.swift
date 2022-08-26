@@ -4,6 +4,9 @@ import AuthService
 
 @main
 struct XQUAREApp: App {
+
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+
     let dependency: AppDependency
 
     init() {
