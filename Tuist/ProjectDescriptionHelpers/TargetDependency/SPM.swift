@@ -4,6 +4,9 @@ extension TargetDependency {
 
     // ABCDEFGHIJKLMNOPQRSTUVWXYZ
     public struct SPM {
+
+        public static let FirebaseMessaging = TargetDependency.external(name: "FirebaseMessaging")
+
         public static let Introspect = TargetDependency.external(name: "Introspect")
 
         public static let KeychainSwift = TargetDependency.external(name: "KeychainSwift")
@@ -22,8 +25,6 @@ extension TargetDependency {
 
         public static let SQLite = TargetDependency.external(name: "SQLite")
         public static let SemicolonDesign = TargetDependency.external(name: "SemicolonDesign")
-
-        public static let FCM = TargetDependency.external(name: "FirebaseMessaging")
 
     }
 
