@@ -29,7 +29,10 @@ extension Project {
                     resources: ["Resources/**"],
                     entitlements: Path("SupportingFiles/\(name).entitlements"),
                     scripts: [.swiftLintScript],
-                    dependencies: dependencies + TargetDependency.universalDependencies
+                    dependencies: dependencies + TargetDependency.universalDependencies,
+                    settings: .settings(base: [
+                        "OTHER_LDFLAGS": "-ObjC"
+                    ])
                 )
             ]
         )
