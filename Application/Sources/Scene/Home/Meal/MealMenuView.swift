@@ -5,7 +5,7 @@ import MealDataService
 
 struct MealMenuView: View {
 
-    @State var menu: [MealMenuEntity]
+    var menu: [MealMenuEntity]
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -52,7 +52,7 @@ struct MealMenuView_Previews: PreviewProvider {
                 .init(mealTime: .lunch, menu: ["치킨텐더"]),
                 .init(mealTime: .dinner, menu: ["치킨텐더"])
             ])
-                .previewLayout(.sizeThatFits)
+            .previewLayout(.sizeThatFits)
         }
     }
 }

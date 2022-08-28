@@ -4,7 +4,7 @@ import SemicolonDesign
 struct MealListCell: View {
 
     var mealTime: String
-    @State var menu: [String]
+    var menu: [String]
 
     var body: some View {
         VStack(alignment: .leading) {

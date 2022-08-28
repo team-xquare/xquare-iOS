@@ -4,29 +4,27 @@ import MealDataService
 import RxSwift
 
 class HomeViewModel: ObservableObject {
+
+    private var disposeBag = DisposeBag()
+
     @Published var imageUrl: String = ""
-    @Published var name: String = "수준호"
-    @Published var merit: Int = 1
-    @Published var demerit: Int = 2
-    @Published var menu: [MealMenuEntity] = [.init(mealTime: .breakfast, menu: ["치킨텐더"]),
-                                             .init(mealTime: .lunch, menu: ["치킨텐더"]),
-                                             .init(mealTime: .dinner, menu: ["치킨텐더"])]
+    @Published var name: String = ""
+    @Published var merit: Int = 0
+    @Published var demerit: Int = 0
+    @Published var menu: [MealMenuEntity] = []
+
     private let fetchMealMenuPerDayUseCase: FetchMealMenuPerDayUseCase
 
-    init(
-        fetchMealMenuPerDayUseCase: FetchMealMenuPerDayUseCase
-    ) {
+    init(fetchMealMenuPerDayUseCase: FetchMealMenuPerDayUseCase) {
         self.fetchMealMenuPerDayUseCase = fetchMealMenuPerDayUseCase
     }
 
-    private var date = Date()
-    private var disposeBag = DisposeBag()
-
-    func fetchDayToMealMenu() {
-        self.fetchMealMenuPerDayUseCase.excute(date: date)
-            .asObservable()
+    func fetchTodaysMeal() {
+        self.fetchMealMenuPerDayUseCase.excute(date: Date())
             .subscribe(onNext: {
                 self.menu = $0.menu
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
+
 }

@@ -43,7 +43,7 @@ struct HomeView: View {
                     })
                 }
             }
-        }.onAppear(perform: viewModel.fetchDayToMealMenu)
+        }.onAppear(perform: viewModel.fetchTodaysMeal)
     }
 
 }
