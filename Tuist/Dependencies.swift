@@ -2,6 +2,9 @@ import ProjectDescription
 
 let dependencies = Dependencies(
     swiftPackageManager: SwiftPackageManagerDependencies([
+        // Firebase-iOS-SDK
+        .remote(url: "https://github.com/firebase/firebase-ios-sdk",
+                requirement: .upToNextMajor(from: "9.5.0")),
         // Introspect
         .remote(url: "https://github.com/siteline/SwiftUI-Introspect",
                 requirement: .upToNextMajor(from: "0.1.4")),

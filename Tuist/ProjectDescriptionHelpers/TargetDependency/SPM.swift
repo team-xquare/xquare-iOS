@@ -4,6 +4,9 @@ extension TargetDependency {
 
     // ABCDEFGHIJKLMNOPQRSTUVWXYZ
     public struct SPM {
+
+        public static let FirebaseMessaging = TargetDependency.external(name: "FirebaseMessaging")
+
         public static let Introspect = TargetDependency.external(name: "Introspect")
 
         public static let KeychainSwift = TargetDependency.external(name: "KeychainSwift")
@@ -21,8 +24,8 @@ extension TargetDependency {
         public static let RxWebKit = TargetDependency.external(name: "RxWebKit")
 
         public static let SQLite = TargetDependency.external(name: "SQLite")
-
         public static let SemicolonDesign = TargetDependency.external(name: "SemicolonDesign")
+
     }
 
     /// 모든 패키지가 공통적으로 사용하는 외부 라이브러리 들.
