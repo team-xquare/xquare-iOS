@@ -24,7 +24,7 @@ struct SignUpView: View {
                             title: "아이디",
                             placeholder: "영문, 숫자 6~20자",
                             text: $viewModel.id,
-                            errorMessage: $viewModel.idErrorMessage
+                            errorMessage: viewModel.idErrorMessage
                         )
                         .padding(.horizontal, 16)
                         .onChange(of: viewModel.id) { _ in
@@ -44,7 +44,7 @@ struct SignUpView: View {
                             title: "비밀번호 재입력",
                             placeholder: "재입력",
                             text: $viewModel.reEnterPassword,
-                            errorMessage: $viewModel.passwordErrorMessage
+                            errorMessage: viewModel.passwordErrorMessage
                         )
                         .padding(.horizontal, 16)
                         .onChange(of: viewModel.reEnterPassword) { _ in
