@@ -16,9 +16,7 @@ extension AppDependency {
         )
 
         // MARK: - Views
-        let homeView = HomeView(
-            viewModel: homeViewModel
-        )
+        let homeView = HomeView(viewModel: homeViewModel)
         let scheduleView = ScheduleView()
         let feedView = FeedView()
         let applicationView = ApplicationView()

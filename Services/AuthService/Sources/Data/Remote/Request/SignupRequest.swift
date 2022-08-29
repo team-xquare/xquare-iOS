@@ -4,8 +4,8 @@ struct SignupRequest: Encodable {
 
     private enum CodingKeys: String, CodingKey {
         case verificationCode = "verification_code"
-        case id       = "account_id"
-        case profileImageUrlAsString = "profile_file_name"
+        case id = "account_id"
+        case profileImageUrlAsString = "profile_image_url"
         case password = "password"
     }
 
