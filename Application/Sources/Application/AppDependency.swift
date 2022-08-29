@@ -1,4 +1,6 @@
 import Foundation
+
+import AuthService
 import MealDataService
 
 struct AppDependency {
@@ -14,9 +16,7 @@ extension AppDependency {
         )
 
         // MARK: - Views
-        let homeView = HomeView(
-            viewModel: homeViewModel
-        )
+        let homeView = HomeView(viewModel: homeViewModel)
         let scheduleView = ScheduleView()
         let feedView = FeedView()
         let applicationView = ApplicationView()
@@ -30,6 +30,8 @@ extension AppDependency {
             entireView: entireView
         )
 
-        return AppDependency(mainView: mainView)
+        return AppDependency(
+            mainView: mainView
+        )
     }
 }

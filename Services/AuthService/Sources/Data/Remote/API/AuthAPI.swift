@@ -16,9 +16,9 @@ extension AuthAPI {
     var path: String {
         switch self {
         case .signin, .refreshToken:
-            return "/login"
+            return "/users/login"
         case .signup:
-            return ""
+            return "/users"
         }
     }
 
@@ -40,6 +40,10 @@ extension AuthAPI {
         default:
             return .requestPlain
         }
+    }
+
+    var validationType: ValidationType {
+        return .successCodes
     }
 
     var headers: [String: String]? {

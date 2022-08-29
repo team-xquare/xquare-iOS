@@ -6,3 +6,9 @@ public enum AuthServiceError: Error {
     case failToSignin
     case duplicateId
 }
+
+public extension Error {
+    var asAuthServiceError: AuthServiceError? {
+        self as? AuthServiceError
+    }
+}
