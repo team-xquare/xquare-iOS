@@ -25,11 +25,11 @@ class SignUpViewModel: ObservableObject {
         self.signupuseCase.excute(data: .init(
             authCode: authCode,
             id: id,
-            profileImageUrl: nil,
+            profileImageUrl: URL(string: "http://")!,
             password: password
         ))
         .subscribe(onCompleted: { [weak self] in
-            self?.isSuccess = false
+            self?.isSuccess = true
         }, onError: { [weak self] in
             if $0.asAuthServiceError == .duplicateId {
                 self?.idErrorMessage = "아이디가 중복되었습니다."
@@ -73,8 +73,3 @@ class SignUpViewModel: ObservableObject {
         return self.password == self.reEnterPassword
     }
 }
-
-/*
- * 409일때 아이디 오류
-    - 아이디가 중복되었습니다.
- */
