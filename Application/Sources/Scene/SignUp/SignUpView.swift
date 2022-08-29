@@ -1,9 +1,11 @@
 import SwiftUI
 
 import SemicolonDesign
+import AuthService
 
 struct SignUpView: View {
     @StateObject var viewModel: SignUpViewModel
+    let loginView = LoginView(viewModel: LoginViewModel())
     var body: some View {
         NavigationView {
             ZStack {
@@ -65,7 +67,7 @@ struct SignUpView: View {
                         type: .rounded
                     )
                     .fullScreenCover(isPresented: $viewModel.isSuccess) {
-                        AppDependency.resolve().loginView
+                        loginView
                     }
                 }
             }.navigationTitle("회원가입")
@@ -75,6 +77,8 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        AppDependency.resolve().signupView
+        let signupUseCase = AuthServiceDependency.resolve().signupUseCase
+        let viewModel = SignUpViewModel(signupUseCase: signupUseCase)
+        SignUpView(viewModel: viewModel)
     }
 }
