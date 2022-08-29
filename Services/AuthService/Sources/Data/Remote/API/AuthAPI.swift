@@ -42,6 +42,10 @@ extension AuthAPI {
         }
     }
 
+    var validationType: ValidationType {
+        return .successCodes
+    }
+
     var headers: [String: String]? {
         switch self {
         case .refreshToken(let refreshToken):
