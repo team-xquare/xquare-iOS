@@ -1,6 +1,7 @@
 import SwiftUI
 
 import SemicolonDesign
+import XNavigationAndTab
 
 struct MainView: View {
     let homeView: HomeView
@@ -10,33 +11,13 @@ struct MainView: View {
     let entireView: EntireView
 
     var body: some View {
-        TabView {
-            homeView
-                .tabItem {
-                    Image(systemName: "square.fill")
-                    Text("홈").sdText(type: .caption)
-                }
-            scheduleView
-                .tabItem {
-                    Image(systemName: "square.fill")
-                    Text("일정").sdText(type: .caption)
-                }
-            feedView
-                .tabItem {
-                    Image(systemName: "square.fill")
-                    Text("피드").sdText(type: .caption)
-                }
-            applicationView
-                .tabItem {
-                    Image(systemName: "square.fill")
-                    Text("신청").sdText(type: .caption)
-                }
+        XNavigationAndTabView {(
+            homeView,
+            scheduleView,
+            feedView,
+            applicationView,
             entireView
-                .tabItem {
-                    Image(systemName: "square.fill")
-                    Text("전체").sdText(type: .caption)
-                }
-        }
+        )}
         .accentColor(.GrayScale.gray800)
     }
 }
