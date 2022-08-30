@@ -6,6 +6,10 @@ class LocalDataSourceImpl: LocalDataSource {
 
     let mealDataSQLiteTask = MealDataServiceSQLiteTask.shared
 
+    init() {
+        mealDataSQLiteTask.createTable()
+    }
+
     func registerMealMenuPerDay(menu: MealMenuPerDayEntity) {
         mealDataSQLiteTask.save(entity: menu)
     }
