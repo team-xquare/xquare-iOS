@@ -28,7 +28,6 @@ class MealDataServiceSQLiteTask {
                     create: false).appendingPathComponent(dataBaseName).path
 
                     if sqlite3_open(dbPath, &dataBase) == SQLITE_OK {
-                        print("Successfully created DB. Path: \(dbPath)")
                         return dataBase
                     }
                 } catch {
@@ -39,20 +38,18 @@ class MealDataServiceSQLiteTask {
 
     func createTable() {
         let query = """
-CREATE TABLE MealMenu(
-id INTEGER PRIMARY KEY AUTOINCREMENT
-day VARCHAR(100) NOT NULL,
-breakfast VARCHAR(100) NOT NULL,
-lunch VARCHAR(100) NOT NULL,
-dinner VARCHAR(100) NOT NULL
-);
-"""
+        CREATE TABLE MealMenu(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        day TEXT NOT NULL,
+        breakfast TEXT NOT NULL,
+        lunch TEXT NOT NULL,
+        dinner TEXT NOT NULL
+        );
+        """
         var statement: OpaquePointer? = nil
 
         if sqlite3_prepare_v2(self.dataBase, query, -1, &statement, nil) == SQLITE_OK {
-            if sqlite3_step(statement) == SQLITE_DONE {
-                print("Creating table has been succesfully done. db: \(String(describing: self.dataBase))")
-            } else {
+            if sqlite3_step(statement) != SQLITE_DONE {
                 let errorMessage = String(cString: sqlite3_errmsg(dataBase))
                 print("\nsqlte3_step failure while creating table: \(errorMessage)")
             }
@@ -65,7 +62,7 @@ dinner VARCHAR(100) NOT NULL
     }
 
     func save(entity: MealMenuPerDayEntity) {
-        let query = "INSERT INTO MealMenu(id, date, breakfast, lunch, dinner) VALUES(?, ?, ?, ?, ?)"
+        let query = "INSERT INTO MealMenu(id, day, breakfast, lunch, dinner) VALUES(?, ?, ?, ?, ?)"
 
         var statement: OpaquePointer? = nil
 
@@ -101,6 +98,7 @@ dinner VARCHAR(100) NOT NULL
 
     func findMealByDay(day: Date) -> MealMenuPerDayEntity {
         let query = "SELECT * FROM MealMenu WHERE day = \(day.toString(format: .fullDate))"
+        print(query)
 
         var statement: OpaquePointer? = nil
 
@@ -114,13 +112,23 @@ dinner VARCHAR(100) NOT NULL
             )
         }
 
-        let date = String(cString: sqlite3_column_text(statement, 1))
-        let breakfast = String(cString: sqlite3_column_text(statement, 2)).components(separatedBy: " ")
-        let lunch = String(cString: sqlite3_column_text(statement, 3)).components(separatedBy: " ")
-        let dinner = String(cString: sqlite3_column_text(statement, 4)).components(separatedBy: " ")
+        var day: Date = Date()
+        var breakfast: [String] = []
+        var lunch: [String] = []
+        var dinner: [String] = []
+
+        while sqlite3_step(statement) == SQLITE_ROW {
+            _ = sqlite3_column_int(statement, 0)
+            day = String(cString: sqlite3_column_text(statement, 1)).toDate(format: .fullDate)
+            breakfast = String(cString: sqlite3_column_text(statement, 2)).components(separatedBy: " ")
+            lunch = String(cString: sqlite3_column_text(statement, 3)).components(separatedBy: " ")
+            dinner = String(cString: sqlite3_column_text(statement, 4)).components(separatedBy: " ")
+        }
+
+        sqlite3_finalize(statement)
 
         return .init(
-            date: date.toDate(format: .fullDate),
+            date: day,
             menu: [
                 .init(mealTime: .breakfast, menu: breakfast),
                 .init(mealTime: .lunch, menu: lunch),
@@ -131,9 +139,10 @@ dinner VARCHAR(100) NOT NULL
 
     func findMealByMonth(day: Date) -> [MealMenuPerDayEntity] {
         let query = """
-SELECT * FROM MealMenu
-WHERE day LIKE '\(day.toString(format: .year) + day.toString(format: .mounth))%'
-"""
+        SELECT * FROM MealMenu
+        WHERE day LIKE '\(day.toString(format: .year) + day.toString(format: .mounth))%'
+        """
+        print(query)
 
         // MARK: Save Login
         var statement: OpaquePointer? = nil
