@@ -9,27 +9,31 @@ struct HomeView: View, XNavigationAndTabContent {
 
     @StateObject var viewModel: HomeViewModel
 
-    var tabInformation: TabInformation { .init(
-        title: "홈",
-        navigationTitle: "",
-        tabItemImage: Image(systemName: "square.fill")
-    )}
-    var toolBar: Toolbar { .init(contents: [
-        Button(action: {
-            print("")
-        }, label: {
-            Image(systemName: "square.fill")
-                .font(.system(size: 24))
-                .tint(.GrayScale.gray200)
-        }).toAnyView(),
-        Button(action: {
-            print("")
-        }, label: {
-            Image(systemName: "square.fill")
-                .font(.system(size: 24))
-                .tint(.GrayScale.gray200)
-        }).toAnyView()
-    ])}
+    var tabInformation: TabInformation {
+        TabInformation(
+            title: "홈",
+            navigationTitle: "",
+            tabItemImage: Image(systemName: "square.fill")
+        )
+    }
+    var toolBar: Toolbar {
+        Toolbar(contents: [
+            Button(action: {
+            }, label: {
+                Image(systemName: "square.fill")
+                    .font(.system(size: 24))
+                    .tint(.GrayScale.gray200)
+            })
+            .toAnyView(),
+            Button(action: {
+            }, label: {
+                Image(systemName: "square.fill")
+                    .font(.system(size: 24))
+                    .tint(.GrayScale.gray200)
+            })
+            .toAnyView()
+        ])
+    }
 
     var body: some View {
         ScrollView {
