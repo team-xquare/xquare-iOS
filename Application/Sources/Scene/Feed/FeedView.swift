@@ -1,6 +1,16 @@
 import SwiftUI
 
-struct FeedView: View {
+import XNavigationAndTab
+
+struct FeedView: View, XNavigationAndTabContent {
+
+    var tabInformation: TabInformation {
+        TabInformation(
+            title: "피드",
+            tabItemImage: Image(systemName: "square.fill")
+        )
+    }
+
     var body: some View {
         Text("피드 화면")
     }

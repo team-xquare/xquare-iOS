@@ -5,6 +5,6 @@ public protocol XNavigationAndTabContent {
     var toolBar: Toolbar { get }
 }
 
-internal extension XNavigationAndTabContent {
+public extension XNavigationAndTabContent {
     var toolBar: Toolbar { Toolbar() }
 }

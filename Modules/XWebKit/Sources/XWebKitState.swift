@@ -5,7 +5,6 @@ import RxCocoa
 
 class XWebKitState: ObservableObject {
 
-    @Published var title: String = ""
     @Published var urlString: String = ""
 
     @Published var loadingProgress: Double = 0.0
@@ -29,7 +28,6 @@ class XWebKitState: ObservableObject {
         urlString: String,
         isPresentated: Binding<Bool>
     ) {
-        self.title = title
         self.urlString = urlString
         self.isPresentated = isPresentated
     }

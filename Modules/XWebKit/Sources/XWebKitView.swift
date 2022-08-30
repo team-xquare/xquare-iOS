@@ -2,7 +2,7 @@ import SwiftUI
 
 import RxSwift
 import SemicolonDesign
-import XNavigation
+import XNavigationAndTab
 
 public struct XWebKitView: View {
 
@@ -38,8 +38,7 @@ public struct XWebKitView: View {
                     Spacer()
                 }
             }
-            XNavigationLink(
-                isRootNow: state.title != "",
+            NavigationLink(
                 isActive: $state.needsToNavigate,
                 destination: {
                     XWebKitView(urlString: state.naviagteLink, isPresentated: $state.needsToNavigate)
@@ -47,7 +46,6 @@ public struct XWebKitView: View {
                 label: { EmptyView() }
             )
         }
-        .navigationTitle(state.title)
         .sdAlert(isPresented: self.$state.isAlertPresented) {
             SDAlert(
                 title: self.state.alertMessage,
