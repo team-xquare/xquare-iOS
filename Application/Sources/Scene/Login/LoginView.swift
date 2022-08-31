@@ -4,7 +4,7 @@ import AuthService
 
 struct LoginView: View {
     @StateObject var viewModel: LoginViewModel
-    @State var isDisabled: Bool = true
+    @State var isLoginButtonDisabled: Bool = true
     var mainView: MainView
 
     var body: some View {
@@ -19,7 +19,7 @@ struct LoginView: View {
                 .onChange(
                     of: viewModel.id,
                     perform: { _ in
-                        isDisabled = viewModel.textFieldIsEmpty()
+                        isLoginButtonDisabled = viewModel.textFieldIsEmpty()
                     })
                 .padding(.horizontal, 16)
                 SDTextField(
@@ -30,11 +30,11 @@ struct LoginView: View {
                 .onChange(
                     of: viewModel.password,
                     perform: { _ in
-                        isDisabled = viewModel.textFieldIsEmpty()
+                        isLoginButtonDisabled = viewModel.textFieldIsEmpty()
                     })
                 .padding(.horizontal, 16)
                 FillButton(
-                    isDisabled: $isDisabled,
+                    isDisabled: $isLoginButtonDisabled,
                     text: "로그인",
                     action: {
                         viewModel.login()
@@ -46,7 +46,7 @@ struct LoginView: View {
             }
             .navigationTitle("로그인")
         }
-        .fullScreenCover(isPresented: $viewModel.isSuccess) {
+        .fullScreenCover(isPresented: $viewModel.isLoginSuccess) {
             mainView
         }
     }

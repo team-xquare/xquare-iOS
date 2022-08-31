@@ -7,7 +7,7 @@ class LoginViewModel: ObservableObject {
     @Published var id: String = ""
     @Published var password: String = ""
     @Published var errorMessage: String = ""
-    @Published var isSuccess: Bool = false
+    @Published var isLoginSuccess: Bool = false
 
     private let signInUseCase: SigninUseCase
 
@@ -29,12 +29,12 @@ class LoginViewModel: ObservableObject {
                 deviceToken: "dsfisdofds"
             ))
         .subscribe(onCompleted: { [weak self] in
-            self?.isSuccess = true
+            self?.isLoginSuccess = true
         }, onError: { [weak self] in
             if $0.asAuthServiceError == .failToSignin {
                 self?.errorMessage = "아이디나 비밀번호가 일치하지 않습니다."
             }
-            self?.isSuccess = false
+            self?.isLoginSuccess = false
         }).disposed(by: disposeBag)
     }
 }
