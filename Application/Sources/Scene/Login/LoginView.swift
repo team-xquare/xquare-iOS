@@ -5,7 +5,7 @@ import AuthService
 struct LoginView: View {
     @StateObject var viewModel: LoginViewModel
     @State var isDisabled: Bool = true
-    var mainView: MainView!
+    var mainView: MainView
 
     var body: some View {
         NavigationView {
@@ -41,19 +41,13 @@ struct LoginView: View {
                     },
                     type: .rounded
                 )
-                .fullScreenCover(isPresented: $viewModel.isSuccess) {
-                    mainView
-                }
                 FindButtonView()
                 Spacer()
             }
             .navigationTitle("로그인")
         }
-    }
-}
-
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView(viewModel: LoginViewModel(signInUseCase: AuthServiceDependency.resolve().signinUseCase))
+        .fullScreenCover(isPresented: $viewModel.isSuccess) {
+            mainView
+        }
     }
 }
