@@ -5,7 +5,7 @@ import AuthService
 
 struct SignUpView: View {
     @StateObject var viewModel: SignUpViewModel
-    var loginView: LoginView!
+    var loginView: LoginView
     var body: some View {
         NavigationView {
             ZStack {
@@ -72,12 +72,5 @@ struct SignUpView: View {
                 }
             }.navigationTitle("회원가입")
         }
-    }
-}
-
-struct SignUpView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = SignUpViewModel(signupUseCase: AuthServiceDependency.resolve().signupUseCase)
-        SignUpView(viewModel: viewModel)
     }
 }
