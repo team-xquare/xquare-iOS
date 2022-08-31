@@ -1,8 +1,12 @@
 import SwiftUI
 import SemicolonDesign
+import AuthService
 
 struct LoginView: View {
     @StateObject var viewModel: LoginViewModel
+    @State var isLoginButtonDisabled: Bool = true
+    var mainView: MainView
+
     var body: some View {
         NavigationView {
             VStack {
@@ -11,16 +15,29 @@ struct LoginView: View {
                 SDTextField(
                     placeholder: "아이디",
                     text: $viewModel.id
-                ).padding(.horizontal, 16)
+                )
+                .onChange(
+                    of: viewModel.id,
+                    perform: { _ in
+                        isLoginButtonDisabled = viewModel.textFieldIsEmpty()
+                    })
+                .padding(.horizontal, 16)
                 SDTextField(
                     placeholder: "비밀번호",
-                    text: $viewModel.password
+                    text: $viewModel.password,
+                    errorMessage: viewModel.errorMessage
                 )
+                .onChange(
+                    of: viewModel.password,
+                    perform: { _ in
+                        isLoginButtonDisabled = viewModel.textFieldIsEmpty()
+                    })
                 .padding(.horizontal, 16)
                 FillButton(
+                    isDisabled: $isLoginButtonDisabled,
                     text: "로그인",
                     action: {
-                        print("로그인")
+                        viewModel.login()
                     },
                     type: .rounded
                 )
@@ -29,12 +46,8 @@ struct LoginView: View {
             }
             .navigationTitle("로그인")
         }
-    }
-}
-
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = LoginViewModel()
-        LoginView(viewModel: viewModel)
+        .fullScreenCover(isPresented: $viewModel.isLoginSuccess) {
+            mainView
+        }
     }
 }
