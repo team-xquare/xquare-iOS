@@ -9,17 +9,17 @@ struct AppDependency {
 
 extension AppDependency {
     static func resolve() -> AppDependency {
-        let dependency = MealDataServiceDependency.resolve()
-        let authDependency = AuthServiceDependency.resolve()
+        let mealDataServiceDependency = MealDataServiceDependency.resolve()
+        let authServiceDependency = AuthServiceDependency.resolve()
         // MARK: - ViewModels
         let homeViewModel = HomeViewModel(
-            fetchMealMenuPerDayUseCase: dependency.fetchDayToMealMenuUseCase
+            fetchMealMenuPerDayUseCase: mealDataServiceDependency.fetchDayToMealMenuUseCase
         )
         let loginViewModel = LoginViewModel(
-            signInUseCase: authDependency.signinUseCase
+            signInUseCase: authServiceDependency.signinUseCase
         )
         let signUpViewModel = SignUpViewModel(
-            signupUseCase: authDependency.signupUseCase
+            signupUseCase: authServiceDependency.signupUseCase
         )
 
         // MARK: - Views
