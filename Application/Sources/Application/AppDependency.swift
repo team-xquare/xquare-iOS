@@ -44,8 +44,10 @@ extension AppDependency {
             viewModel: signUpViewModel,
             loginView: loginView
         )
+
         return AppDependency(
             mainView: mainView
         )
+
     }
 }
