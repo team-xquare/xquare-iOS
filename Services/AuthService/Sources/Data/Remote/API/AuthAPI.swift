@@ -10,7 +10,7 @@ enum AuthAPI: TargetType {
 
 extension AuthAPI {
     var baseURL: URL {
-        return URL(string: "https://api.xquare.app")!
+        return URL(string: "https://stag-api.xquare.app")!
     }
 
     var path: String {

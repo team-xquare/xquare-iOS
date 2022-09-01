@@ -11,7 +11,7 @@ public protocol XquareAPI: TargetType, JWTTokenAuthorizable {
 
 public extension XquareAPI {
 
-    var baseURL: URL { URL(string: "https://api.xquare.app")! }
+    var baseURL: URL { URL(string: "https://stag-api.xquare.app")! }
 
     var path: String {
         return domain+urlPath
