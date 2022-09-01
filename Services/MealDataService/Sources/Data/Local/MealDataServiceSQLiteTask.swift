@@ -62,7 +62,7 @@ class MealDataServiceSQLiteTask {
     }
 
     func save(entity: MealMenuPerDayEntity) {
-        let query = "INSERT INTO MealMenu(id, day, breakfast, lunch, dinner) VALUES(?, ?, ?, ?, ?)"
+        let query = "INSERT INTO MealMenu(id, day, breakfast, lunch, dinner) VALUES(?, ?, ?, ?, ?);"
 
         var statement: OpaquePointer? = nil
 
@@ -97,8 +97,7 @@ class MealDataServiceSQLiteTask {
     }
 
     func findMealByDay(day: Date) -> MealMenuPerDayEntity {
-        let query = "SELECT * FROM MealMenu WHERE day = \(day.toString(format: .fullDate))"
-        print(query)
+        let query = "SELECT * FROM MealMenu WHERE day = '\(day.toString(format: .fullDate))';"
 
         var statement: OpaquePointer? = nil
 
@@ -140,7 +139,7 @@ class MealDataServiceSQLiteTask {
     func findMealByMonth(day: Date) -> [MealMenuPerDayEntity] {
         let query = """
         SELECT * FROM MealMenu
-        WHERE day LIKE '\(day.toString(format: .year) + day.toString(format: .mounth))%'
+        WHERE day LIKE '\(day.toString(format: .year) + day.toString(format: .mounth))%';
         """
         print(query)
 
