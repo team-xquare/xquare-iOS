@@ -4,8 +4,12 @@ import SemicolonDesign
 import AuthService
 
 struct SignUpView: View {
+
+    @Environment(\.presentationMode) var presentationMode
+
     @StateObject var viewModel: SignUpViewModel
     var loginView: LoginView
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -70,7 +74,19 @@ struct SignUpView: View {
                         loginView
                     }
                 }
-            }.navigationTitle("회원가입")
+            }
+            .navigationTitle("회원가입")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image(systemName: "square.fill")
+                            .font(.system(size: 24))
+                            .tint(.GrayScale.gray200)
+                    })
+                }
+            }
         }
     }
 }
