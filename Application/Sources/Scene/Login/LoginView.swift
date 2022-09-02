@@ -3,6 +3,9 @@ import SemicolonDesign
 import AuthService
 
 struct LoginView: View {
+
+    @Environment(\.presentationMode) var presentationMode
+
     @StateObject var viewModel: LoginViewModel
     @State var isLoginButtonDisabled: Bool = true
     var mainView: MainView
@@ -25,7 +28,8 @@ struct LoginView: View {
                 SDTextField(
                     placeholder: "비밀번호",
                     text: $viewModel.password,
-                    errorMessage: viewModel.errorMessage
+                    errorMessage: viewModel.errorMessage,
+                    isSecure: true
                 )
                 .onChange(
                     of: viewModel.password,
@@ -45,6 +49,17 @@ struct LoginView: View {
                 Spacer()
             }
             .navigationTitle("로그인")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image(systemName: "square.fill")
+                            .font(.system(size: 24))
+                            .tint(.GrayScale.gray200)
+                    })
+                }
+            }
         }
         .fullScreenCover(isPresented: $viewModel.isLoginSuccess) {
             mainView
