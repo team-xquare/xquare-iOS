@@ -21,9 +21,3 @@ struct MainView: View {
         .accentColor(.GrayScale.gray800)
     }
 }
-
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        AppDependency.resolve().mainView
-    }
-}
