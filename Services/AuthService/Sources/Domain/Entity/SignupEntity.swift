@@ -24,7 +24,7 @@ extension SignupEntity {
         return .init(
             verificationCode: self.authCode,
             id: self.id,
-            profileImageUrlAsString: self.profileImageUrl?.absoluteString,
+            profileFileName: self.profileImageUrl?.absoluteString,
             password: self.password
         )
     }

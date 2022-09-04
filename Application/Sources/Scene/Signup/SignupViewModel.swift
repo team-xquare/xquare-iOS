@@ -25,7 +25,7 @@ class SignupViewModel: ObservableObject {
         self.signupuseCase.excute(data: .init(
             authCode: authCode,
             id: id,
-            profileImageUrl: URL(string: "http://")!,
+            profileImageUrl: nil,
             password: password
         ))
         .subscribe(onCompleted: { [weak self] in
