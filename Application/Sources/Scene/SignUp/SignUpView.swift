@@ -57,7 +57,8 @@ struct SignUpView: View {
                             viewModel.equalPasswordError()
                             viewModel.checkSignup()
                         }
-                        Spacer()
+                        TermsCaptionView()
+                        Spacer().frame(height: 64)
                     }
                 }
                 VStack {
@@ -88,5 +89,6 @@ struct SignUpView: View {
                 }
             }
         }
+        .accentColor(.GrayScale.gray800)
     }
 }
