@@ -39,7 +39,8 @@ struct SignUpView: View {
                         SDTextField(
                             title: "비밀번호",
                             placeholder: "숫자, 영문, 특수문자 조합 최소 6자",
-                            text: $viewModel.password
+                            text: $viewModel.password,
+                            isSecure: true
                         )
                         .padding(.horizontal, 16)
                         .onChange(of: viewModel.password) { _ in
@@ -50,7 +51,8 @@ struct SignUpView: View {
                             title: "비밀번호 재입력",
                             placeholder: "재입력",
                             text: $viewModel.reEnterPassword,
-                            errorMessage: viewModel.passwordErrorMessage
+                            errorMessage: viewModel.passwordErrorMessage,
+                            isSecure: true
                         )
                         .padding(.horizontal, 16)
                         .onChange(of: viewModel.reEnterPassword) { _ in
