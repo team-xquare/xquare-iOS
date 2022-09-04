@@ -21,7 +21,7 @@ extension AppDependency {
         let loginViewModel = LoginViewModel(
             signInUseCase: authServiceDependency.signinUseCase
         )
-        let signUpViewModel = SignUpViewModel(
+        let signupViewModel = SignupViewModel(
             signupUseCase: authServiceDependency.signupUseCase
         )
         let launchScreenViewModel = LaunchScreenViewModel(
@@ -45,8 +45,8 @@ extension AppDependency {
             viewModel: loginViewModel,
             mainView: mainView
         )
-        let signupView = SignUpView(
-            viewModel: signUpViewModel,
+        let signupView = SignupView(
+            viewModel: signupViewModel,
             loginView: loginView
         )
         let onboardingView = OnboardingView(
