@@ -8,7 +8,7 @@ struct OnboardingView: View {
     @State var isSignupViewPresented: Bool = false
     @State var isLoginViewPresented: Bool = false
 
-    var signupView: SignUpView
+    var signupView: SignupView
     var loginView: LoginView
 
     var body: some View {

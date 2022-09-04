@@ -3,7 +3,7 @@ import Foundation
 import AuthService
 import RxSwift
 
-class SignUpViewModel: ObservableObject {
+class SignupViewModel: ObservableObject {
     @Published var authCode: String = ""
     @Published var id: String = ""
     @Published var password: String = ""
@@ -21,7 +21,7 @@ class SignUpViewModel: ObservableObject {
         self.signupuseCase = signupUseCase
     }
 
-    func signUp() {
+    func signup() {
         self.signupuseCase.excute(data: .init(
             authCode: authCode,
             id: id,
