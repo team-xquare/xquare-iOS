@@ -2,6 +2,7 @@ import SwiftUI
 
 import AuthService
 import RxSwift
+import FirebaseMessaging
 
 class LoginViewModel: ObservableObject {
     @Published var id: String = ""
@@ -26,7 +27,7 @@ class LoginViewModel: ObservableObject {
             data: .init(
                 id: id,
                 password: password,
-                deviceToken: "dsfisdofds"
+                deviceToken: Messaging.messaging().fcmToken ?? ""
             ))
         .subscribe(onCompleted: { [weak self] in
             self?.isLoginSuccess = true
