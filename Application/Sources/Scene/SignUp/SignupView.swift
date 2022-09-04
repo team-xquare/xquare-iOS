@@ -3,11 +3,11 @@ import SwiftUI
 import SemicolonDesign
 import AuthService
 
-struct SignUpView: View {
+struct SignupView: View {
 
     @Environment(\.presentationMode) var presentationMode
 
-    @StateObject var viewModel: SignUpViewModel
+    @StateObject var viewModel: SignupViewModel
     var loginView: LoginView
 
     var body: some View {
@@ -69,7 +69,7 @@ struct SignUpView: View {
                         isDisabled: $viewModel.isDisabled,
                         text: "입력 완료",
                         action: {
-                            viewModel.signUp()
+                            viewModel.signup()
                         },
                         type: .rounded
                     )
