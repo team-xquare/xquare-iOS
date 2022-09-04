@@ -7,7 +7,8 @@ struct XWebKitProgressViewStyle: ProgressViewStyle {
         ZStack(alignment: .leading) {
             Rectangle()
                 .foregroundColor(.clear)
-                .frame(width: .infinity, height: 1)
+                .frame(height: 1)
+                .frame(maxWidth: .infinity)
             RoundedRectangle(cornerRadius: 14)
                 .frame(
                     width: CGFloat(configuration.fractionCompleted ?? 0) * UIScreen.main.bounds.size.width,
