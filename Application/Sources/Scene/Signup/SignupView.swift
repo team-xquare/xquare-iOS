@@ -3,9 +3,13 @@ import SwiftUI
 import SemicolonDesign
 import AuthService
 
-struct SignUpView: View {
-    @StateObject var viewModel: SignUpViewModel
+struct SignupView: View {
+
+    @Environment(\.presentationMode) var presentationMode
+
+    @StateObject var viewModel: SignupViewModel
     var loginView: LoginView
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -35,7 +39,8 @@ struct SignUpView: View {
                         SDTextField(
                             title: "비밀번호",
                             placeholder: "숫자, 영문, 특수문자 조합 최소 6자",
-                            text: $viewModel.password
+                            text: $viewModel.password,
+                            isSecure: true
                         )
                         .padding(.horizontal, 16)
                         .onChange(of: viewModel.password) { _ in
@@ -46,14 +51,16 @@ struct SignUpView: View {
                             title: "비밀번호 재입력",
                             placeholder: "재입력",
                             text: $viewModel.reEnterPassword,
-                            errorMessage: viewModel.passwordErrorMessage
+                            errorMessage: viewModel.passwordErrorMessage,
+                            isSecure: true
                         )
                         .padding(.horizontal, 16)
                         .onChange(of: viewModel.reEnterPassword) { _ in
                             viewModel.equalPasswordError()
                             viewModel.checkSignup()
                         }
-                        Spacer()
+                        TermsCaptionView()
+                        Spacer().frame(height: 64)
                     }
                 }
                 VStack {
@@ -62,7 +69,7 @@ struct SignUpView: View {
                         isDisabled: $viewModel.isDisabled,
                         text: "입력 완료",
                         action: {
-                            viewModel.signUp()
+                            viewModel.signup()
                         },
                         type: .rounded
                     )
@@ -70,7 +77,20 @@ struct SignUpView: View {
                         loginView
                     }
                 }
-            }.navigationTitle("회원가입")
+            }
+            .navigationTitle("회원가입")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image(systemName: "square.fill")
+                            .font(.system(size: 24))
+                            .tint(.GrayScale.gray200)
+                    })
+                }
+            }
         }
+        .accentColor(.GrayScale.gray800)
     }
 }

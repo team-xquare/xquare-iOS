@@ -15,7 +15,7 @@ struct XQUAREApp: App {
 
     var body: some Scene {
         WindowGroup {
-            dependency.mainView
+            dependency.launchScreenView
         }
     }
 

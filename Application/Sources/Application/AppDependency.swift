@@ -4,13 +4,16 @@ import AuthService
 import MealDataService
 
 struct AppDependency {
-    let mainView: MainView
+    let launchScreenView: LaunchScreenView
 }
 
 extension AppDependency {
     static func resolve() -> AppDependency {
-        let mealDataServiceDependency = MealDataServiceDependency.resolve()
+
+        // MARK: - ServiceDependency
         let authServiceDependency = AuthServiceDependency.resolve()
+        let mealDataServiceDependency = MealDataServiceDependency.resolve()
+
         // MARK: - ViewModels
         let homeViewModel = HomeViewModel(
             fetchMealMenuPerDayUseCase: mealDataServiceDependency.fetchDayToMealMenuUseCase
@@ -18,8 +21,11 @@ extension AppDependency {
         let loginViewModel = LoginViewModel(
             signInUseCase: authServiceDependency.signinUseCase
         )
-        let signUpViewModel = SignUpViewModel(
+        let signupViewModel = SignupViewModel(
             signupUseCase: authServiceDependency.signupUseCase
+        )
+        let launchScreenViewModel = LaunchScreenViewModel(
+            refreshTokenUseCase: authServiceDependency.refreshTokenUseCase
         )
 
         // MARK: - Views
@@ -28,7 +34,6 @@ extension AppDependency {
         let feedView = FeedView()
         let applicationView = ApplicationView()
         let entireView = EntireView()
-
         let mainView = MainView(
             homeView: homeView,
             scheduleView: scheduleView,
@@ -40,13 +45,22 @@ extension AppDependency {
             viewModel: loginViewModel,
             mainView: mainView
         )
-        _ = SignUpView(
-            viewModel: signUpViewModel,
+        let signupView = SignupView(
+            viewModel: signupViewModel,
             loginView: loginView
+        )
+        let onboardingView = OnboardingView(
+            signupView: signupView,
+            loginView: loginView
+        )
+        let launchScreenView = LaunchScreenView(
+            viewModel: launchScreenViewModel,
+            onboardingView: onboardingView,
+            mainView: mainView
         )
 
         return AppDependency(
-            mainView: mainView
+            launchScreenView: launchScreenView
         )
 
     }
