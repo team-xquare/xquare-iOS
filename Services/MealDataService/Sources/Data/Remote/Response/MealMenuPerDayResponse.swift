@@ -3,7 +3,7 @@ import Foundation
 struct MealMenuPerDayResponse: Decodable {
     let breakfast: [String]
     let lunch: [String]
-    let dinner: [String]
+    let dinner: [String]?
 }
 
 extension MealMenuPerDayResponse {
@@ -14,7 +14,7 @@ extension MealMenuPerDayResponse {
             menu: [
                 .init(mealTime: .breakfast, menu: breakfast),
                 .init(mealTime: .lunch, menu: lunch),
-                .init(mealTime: .dinner, menu: dinner)
+                .init(mealTime: .dinner, menu: dinner ?? [])
             ]
         )
     }
