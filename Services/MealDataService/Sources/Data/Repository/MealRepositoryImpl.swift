@@ -20,15 +20,14 @@ class MealRepositoryImpl: MealRepository {
     func fetchMealMenuPerDay(date: Date) -> Observable<MealMenuPerDayEntity> {
         OfflineCacheUtil<MealMenuPerDayEntity>()
             .localData {
-                self.localDataSource.fetchMealMenuPerDay(
-                    day: date
-                )
+                self.localDataSource.fetchMealMenuPerDay(day: date)
+                    .map { $0.toDomain() }
             }
             .remoteData {
                 self.remoteDataSource.fetchMealMenuPerDay(date: date.toString(format: .fullDate))
             }
             .doOnNeedRefresh { remoteData in
-                self.localDataSource.registerMealMenuPerDay(menu: remoteData)
+                self.localDataSource.registerMealMenuPerDay(menu: self.toMealMenu(remoteData))
             }.createObservable()
     }
 
@@ -36,6 +35,7 @@ class MealRepositoryImpl: MealRepository {
         OfflineCacheUtil<[MealMenuPerDayEntity]>()
             .localData {
                 self.localDataSource.fetchMealMenuPerMonth(day: date)
+                    .map { $0.map { $0.toDomain() } }
             }
             .remoteData {
                 self.remoteDataSource.fetchMealMenuPerMonth(
@@ -46,7 +46,7 @@ class MealRepositoryImpl: MealRepository {
                 )
             }
             .doOnNeedRefresh(refreshLocalData: { remoteData in
-                self.localDataSource.registerMealMenuPerMonth(menu: remoteData)
+                self.localDataSource.registerMealMenuPerMonth(menu: remoteData.map { self.toMealMenu($0) })
             })
             .createObservable()
     }
@@ -61,4 +61,25 @@ extension MealRepositoryImpl {
         return statusCode
     }
 
+    private func toMealMenu(_ menu: MealMenuPerDayEntity) -> MealMenu {
+        var breakfast: String = ""
+        var lunch: String = ""
+        var dinner: String = ""
+        for menu in menu.menu {
+            switch menu.mealTime {
+            case .breakfast:
+                breakfast = menu.menu.joined(separator: " ")
+            case .lunch:
+                lunch = menu.menu.joined(separator: " ")
+            case .dinner:
+                dinner = menu.menu.joined(separator: " ")
+            }
+        }
+        return MealMenu(
+            day: menu.date,
+            breakfast: breakfast,
+            lunch: lunch,
+            dinner: dinner
+        )
+    }
 }
