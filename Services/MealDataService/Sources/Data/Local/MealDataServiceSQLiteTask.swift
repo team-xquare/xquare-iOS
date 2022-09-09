@@ -99,15 +99,21 @@ class MealDataServiceSQLiteTask {
         }
 
         var menu: String = ""
+        var breakfast: String = ""
+        var lunch: String = ""
+        var dinner: String = ""
 
         while sqlite3_step(statement) == SQLITE_ROW {
             menu = String(cString: sqlite3_column_text(statement, 1))
         }
 
         let menuList = Array(menu.components(separatedBy: "/"))
-        let breakfast = String(menuList[0])
-        let lunch = String(menuList[1])
-        let dinner = String(menuList[2])
+
+        if menuList.count == 3 {
+            breakfast = menuList[0]
+            lunch = menuList[1]
+            dinner = menuList[2]
+        }
 
         sqlite3_finalize(statement)
 
@@ -138,16 +144,18 @@ class MealDataServiceSQLiteTask {
         while sqlite3_step(statement) == SQLITE_ROW {
             let date = String(cString: sqlite3_column_text(statement, 0))
             let menu = Array(String(cString: sqlite3_column_text(statement, 1)).components(separatedBy: " "))
-            let breakfast = String(menu[0])
-            let lunch = String(menu[1])
-            let dinner = String(menu[2])
-            result.append(
-                MealMenu(
-                    day: date.toDate(format: .fullDate),
-                    breakfast: breakfast,
-                    lunch: lunch,
-                    dinner: dinner
-                ))
+            if menu.count == 3 {
+                let breakfast = String(menu[0])
+                let lunch = String(menu[1])
+                let dinner = String(menu[2])
+                result.append(
+                    MealMenu(
+                        day: date.toDate(format: .fullDate),
+                        breakfast: breakfast,
+                        lunch: lunch,
+                        dinner: dinner
+                    ))
+            }
         }
 
         return result
