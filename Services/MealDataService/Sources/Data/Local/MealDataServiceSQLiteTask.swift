@@ -39,9 +39,7 @@ class MealDataServiceSQLiteTask {
         let query = """
         CREATE TABLE MealMenu(
         day TEXT PRIMARY KEY NOT NULL ,
-        breakfast TEXT NOT NULL,
-        lunch TEXT NOT NULL,
-        dinner TEXT NOT NULL
+        menu TEXT NOT NULL
         );
         """
         var statement: OpaquePointer?
@@ -63,17 +61,15 @@ class MealDataServiceSQLiteTask {
         let query = """
         INSERT OR REPLACE
         INTO
-        MealMenu(day, breakfast, lunch, dinner)
-        VALUES(?, ?, ?, ?);
+        MealMenu(day, menu)
+        VALUES(?, ?);
         """
 
         var statement: OpaquePointer?
 
         if sqlite3_prepare_v2(self.dataBase, query, -1, &statement, nil) == SQLITE_OK {
             sqlite3_bind_text(statement, 1, entity.day.toString(format: .fullDate), -1, nil)
-            sqlite3_bind_text(statement, 2, entity.breakfast, -1, nil)
-            sqlite3_bind_text(statement, 3, entity.lunch, -1, nil)
-            sqlite3_bind_text(statement, 4, entity.dinner, -1, nil)
+            sqlite3_bind_text(statement, 2, "\(entity.breakfast)/\(entity.lunch)/\(entity.dinner)", -1, nil)
         } else {
             print("sqlite binding fail")
         }
@@ -86,7 +82,7 @@ class MealDataServiceSQLiteTask {
     func findMealByDay(day: Date) -> MealMenu {
         let query = """
         SELECT * FROM MealMenu
-        WHERE day Like '\(day.toString(format: .fullDate))%';
+        WHERE day='\(day.toString(format: .fullDate))';
         """
 
         var statement: OpaquePointer?
@@ -102,16 +98,16 @@ class MealDataServiceSQLiteTask {
             )
         }
 
-        var breakfast: String = ""
-        var lunch: String = ""
-        var dinner: String = ""
+        var menu: String = ""
 
         while sqlite3_step(statement) == SQLITE_ROW {
-            _ = String(cString: sqlite3_column_text(statement, 0))
-            breakfast = String(cString: sqlite3_column_text(statement, 1))
-            lunch = String(cString: sqlite3_column_text(statement, 2))
-            dinner = String(cString: sqlite3_column_text(statement, 3))
+            menu = String(cString: sqlite3_column_text(statement, 1))
         }
+
+        let menuList = Array(menu.components(separatedBy: "/"))
+        let breakfast = String(menuList[0])
+        let lunch = String(menuList[1])
+        let dinner = String(menuList[2])
 
         sqlite3_finalize(statement)
 
@@ -140,18 +136,20 @@ class MealDataServiceSQLiteTask {
         }
 
         while sqlite3_step(statement) == SQLITE_ROW {
-            let breakfast = String(cString: sqlite3_column_text(statement, 1))
-            let lunch = String(cString: sqlite3_column_text(statement, 2))
-            let dinner = String(cString: sqlite3_column_text(statement, 3))
+            let date = String(cString: sqlite3_column_text(statement, 0))
+            let menu = Array(String(cString: sqlite3_column_text(statement, 1)).components(separatedBy: " "))
+            let breakfast = String(menu[0])
+            let lunch = String(menu[1])
+            let dinner = String(menu[2])
             result.append(
                 MealMenu(
-                    day: day,
+                    day: date.toDate(format: .fullDate),
                     breakfast: breakfast,
                     lunch: lunch,
                     dinner: dinner
-                )
-            )
+                ))
         }
+
         return result
     }
 
