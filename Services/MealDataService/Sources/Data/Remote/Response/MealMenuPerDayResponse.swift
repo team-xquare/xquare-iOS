@@ -12,9 +12,9 @@ extension MealMenuPerDayResponse {
         return .init(
             date: date,
             menu: [
-                .init(mealTime: .breakfast, menu: breakfast ?? [""]),
-                .init(mealTime: .lunch, menu: lunch ?? [""]),
-                .init(mealTime: .dinner, menu: dinner ?? [""])
+                .init(mealTime: .breakfast, menu: breakfast ?? ["등록된 급식 정보가 없어요."]),
+                .init(mealTime: .lunch, menu: lunch ?? ["등록된 급식 정보가 없어요."]),
+                .init(mealTime: .dinner, menu: dinner ?? ["등록된 급식 정보가 없어요."])
             ]
         )
     }
