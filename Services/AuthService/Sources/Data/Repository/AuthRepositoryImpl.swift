@@ -54,6 +54,13 @@ class AuthRepositoryImpl: AuthRepository {
             }.asCompletable()
     }
 
+    func fetchAccessToken() throws -> String {
+        guard let accessToken = self.loaclTokenDataSource.fetchAccessToken() else {
+            throw AuthServiceError.noToken
+        }
+        return accessToken
+    }
+
     func fetchTokenExpiredDate() throws -> Date {
         guard let expiredDate = self.loaclTokenDataSource.fetchExpiredDate() else {
             throw AuthServiceError.noToken
