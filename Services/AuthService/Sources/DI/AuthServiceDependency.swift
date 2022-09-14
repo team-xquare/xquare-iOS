@@ -2,6 +2,7 @@ import Foundation
 
 public struct AuthServiceDependency {
     public let checkIsTokenValidUseCase: CheckIsTokenValidUseCase
+    public let fetchAccessTokenUseCase: FetchAccessTokenUseCase
     public let refreshTokenUseCase: RefreshTokenUseCase
     public let signinUseCase: SigninUseCase
     public let signupUseCase: SignupUseCase
@@ -24,6 +25,9 @@ public extension AuthServiceDependency {
         let checkIsTokenValidUseCase = CheckIsTokenValidUseCase(
             authRepository: authRepository
         )
+        let fetchAccessTokenUseCase = FetchAccessTokenUseCase(
+            authRepository: authRepository
+        )
         let refreshTokenUseCase = RefreshTokenUseCase(
             authRepository: authRepository
         )
@@ -41,6 +45,7 @@ public extension AuthServiceDependency {
 
         return AuthServiceDependency(
             checkIsTokenValidUseCase: checkIsTokenValidUseCase,
+            fetchAccessTokenUseCase: fetchAccessTokenUseCase,
             refreshTokenUseCase: refreshTokenUseCase,
             signinUseCase: signinUseCase,
             signupUseCase: signupUseCase,
