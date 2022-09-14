@@ -5,6 +5,8 @@ import XWebKit
 
 struct ApplicationView: View, XNavigationAndTabContent {
 
+    @StateObject var viewModel: ApplicationViewModel
+
     var tabInformation: TabInformation {
         TabInformation(
             title: "신청",
@@ -13,12 +15,9 @@ struct ApplicationView: View, XNavigationAndTabContent {
     }
 
     var body: some View {
-        Text("신청 화면")
-    }
-}
-
-struct ApplicationView_Previews: PreviewProvider {
-    static var previews: some View {
-        ApplicationView()
+        XWebKitView(
+            urlString: self.viewModel.getWebviewURLString(),
+            accessToken: self.viewModel.getAccessToken()
+        )
     }
 }
