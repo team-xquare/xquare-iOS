@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    tags:
+        - '*'
+
+jobs:
+  deploy:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
+
+      - name: install needs
+        run: |
+          bash <(curl -Ls https://install.tuist.io)
+
+      - name: setup git
+        run: |
+          git config --global user.name 'xquare-admin'
+          git config --global user.email 'teamxquare@gmail.com'
+          git config pull.rebase false
+          git checkout -t origin/release
+          git pull origin release
+          git merge develop
+
+      - name: generate project
+        run: make generate
+
+      - name: git commit & push
+        run: |
+          git add -A
+          git commit -m "🚀 :: release last version"
+          git push
