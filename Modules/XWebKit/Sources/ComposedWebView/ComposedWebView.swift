@@ -30,8 +30,10 @@ struct ComposedWebView: UIViewRepresentable {
         self.setLoadingProgress(webView: webView)
         self.setEvaluateJavaScript(webView: webView)
 
-        if let url = URL(string: state.urlString) {
-            webView.load(URLRequest(url: url))
+        if let url = URL(string: self.state.urlString) {
+            var urlRequest = URLRequest(url: url)
+            urlRequest.addValue(self.state.accessToken, forHTTPHeaderField: "Authorization")
+            webView.load(urlRequest)
         }
 
         return webView
