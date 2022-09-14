@@ -18,6 +18,9 @@ extension AppDependency {
         let homeViewModel = HomeViewModel(
             fetchMealMenuPerDayUseCase: mealDataServiceDependency.fetchDayToMealMenuUseCase
         )
+        let applicationViewModel = ApplicationViewModel(
+            fetchAccessTokenUseCase: authServiceDependency.fetchAccessTokenUseCase
+        )
         let loginViewModel = LoginViewModel(
             signInUseCase: authServiceDependency.signinUseCase
         )
@@ -32,7 +35,7 @@ extension AppDependency {
         let homeView = HomeView(viewModel: homeViewModel)
         let scheduleView = ScheduleView()
         let feedView = FeedView()
-        let applicationView = ApplicationView()
+        let applicationView = ApplicationView(viewModel: applicationViewModel)
         let entireView = EntireView()
         let mainView = MainView(
             homeView: homeView,
