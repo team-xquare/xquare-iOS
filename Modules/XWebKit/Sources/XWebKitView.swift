@@ -8,22 +8,18 @@ public struct XWebKitView: View {
 
     @ObservedObject var state: XWebKitState
 
-    public init(title: String = "", urlString: String) {
+    public init(urlString: String, accessToken: String = "") {
         self.state = .init(
-            title: title,
             urlString: urlString,
+            accessToken: accessToken,
             isPresentated: .constant(true)
         )
     }
 
-    init(
-        title: String = "",
-        urlString: String,
-        isPresentated: Binding<Bool>
-    ) {
+    init(urlString: String, accessToken: String, isPresentated: Binding<Bool>) {
         self.state = .init(
-            title: title,
             urlString: urlString,
+            accessToken: accessToken,
             isPresentated: isPresentated
         )
     }
@@ -41,7 +37,12 @@ public struct XWebKitView: View {
             NavigationLink(
                 isActive: $state.needsToNavigate,
                 destination: {
-                    XWebKitView(urlString: state.naviagteLink, isPresentated: $state.needsToNavigate)
+                    XWebKitView(
+                        urlString: state.naviagteLink,
+                        accessToken: state.accessToken,
+                        isPresentated: $state.needsToNavigate
+                    )
+                    .navigationBarTitleDisplayMode(.inline)
                 },
                 label: { EmptyView() }
             )
@@ -62,16 +63,5 @@ public struct XWebKitView: View {
             isPresented: self.$state.isImageViewerPresented,
             images: self.state.images
         )
-    }
-}
-
-struct XWebKitViewPreview: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            XWebKitView(
-                title: "xbridge-test",
-                urlString: "https://service.xquare.app/xbridge-test"
-            )
-        }.accentColor(.black)
     }
 }

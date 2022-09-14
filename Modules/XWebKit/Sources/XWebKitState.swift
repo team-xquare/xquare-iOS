@@ -5,7 +5,8 @@ import RxCocoa
 
 class XWebKitState: ObservableObject {
 
-    @Published var urlString: String = ""
+    var urlString: String = ""
+    var accessToken: String = ""
 
     @Published var loadingProgress: Double = 0.0
 
@@ -23,12 +24,9 @@ class XWebKitState: ObservableObject {
     @Published var alertCancelText: String = ""
     var alertResponse = PublishSubject<Bool>()
 
-    init(
-        title: String,
-        urlString: String,
-        isPresentated: Binding<Bool>
-    ) {
+    init(urlString: String, accessToken: String = "", isPresentated: Binding<Bool>) {
         self.urlString = urlString
+        self.accessToken = accessToken
         self.isPresentated = isPresentated
     }
 
