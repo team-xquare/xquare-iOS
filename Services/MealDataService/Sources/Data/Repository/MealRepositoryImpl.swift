@@ -41,7 +41,7 @@ class MealRepositoryImpl: MealRepository {
                 self.remoteDataSource.fetchMealMenuPerMonth(
                     request: .init(
                         year: date.toString(format: .year),
-                        month: date.toString(format: .mounth)
+                        month: date.toString(format: .month)
                     )
                 )
             }

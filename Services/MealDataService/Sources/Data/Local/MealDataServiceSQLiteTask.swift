@@ -128,7 +128,7 @@ class MealDataServiceSQLiteTask {
     func findMealByMonth(day: Date) -> [MealMenu] {
         let query = """
         SELECT * FROM MealMenu
-        WHERE day LIKE '\(day.toString(format: .year) + day.toString(format: .mounth))%';
+        WHERE day LIKE '\(day.toString(format: .year) + day.toString(format: .month))%';
         """
 
         // MARK: Save Login
