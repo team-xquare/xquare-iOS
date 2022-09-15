@@ -8,7 +8,7 @@ public enum DateFormat: String {
     /// yyyy
     case year = "yyyy"
     /// MM
-    case mounth = "MM"
+    case month = "MM"
     /// dd
     case day = "dd"
 }
