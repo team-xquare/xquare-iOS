@@ -32,7 +32,8 @@ extension Project {
                     dependencies: dependencies + TargetDependency.universalDependencies,
                     settings: .settings(base: [
                         "OTHER_LDFLAGS": "-ObjC"
-                    ])
+                    ]),
+                    environment: ["OS_ACTIVITY_MODE": "disable"]
                 )
             ]
         )
