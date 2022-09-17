@@ -16,7 +16,7 @@ struct MealDetailCell: View {
                     .sdText(type: .body1)
                     .padding(.leading, 16)
                 ForEach(entity.menu, id: \.mealTime) {
-                    MealMenuPerTimeView(
+                    MealMenuPerMealTimeView(
                         mealTime: $0.mealTime,
                         kcal: 10.0,
                         menu: $0.menu ?? []
