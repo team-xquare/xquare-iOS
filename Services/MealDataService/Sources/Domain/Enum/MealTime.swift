@@ -7,14 +7,14 @@ public enum MealTime: String {
 }
 
 public extension MealTime {
-    var mealTimeOrder: Int {
+    func toString() -> String {
         switch self {
         case .breakfast:
-            return 0
+            return "아침"
         case .lunch:
-            return 1
+            return "점심"
         case .dinner:
-            return 2
+            return "저녁"
         }
     }
 }

@@ -5,6 +5,7 @@ import MealDataService
 
 struct MealMenuView: View {
 
+    var mealDetailView: MealDetailView
     var menu: [MealMenuEntity]
 
     var body: some View {
@@ -14,13 +15,13 @@ struct MealMenuView: View {
                 Spacer().frame(width: 12)
                 Text("오늘의 메뉴").sdText(type: .body1)
                 Spacer()
-                Button(action: {
-                    print("")
-                }, label: {
+                NavigationLink {
+                    mealDetailView
+                } label: {
                     Image(systemName: "square.fill")
                         .font(.system(size: 24))
                         .tint(.GrayScale.gray200)
-                })
+                }
                 Spacer().frame(width: 16)
             }
             Spacer().frame(height: 14)
@@ -42,17 +43,4 @@ struct MealMenuView: View {
         .cornerRadius(16)
     }
 
-}
-
-struct MealMenuView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            MealMenuView(menu: [
-                .init(mealTime: .breakfast, menu: ["치킨텐더"]),
-                .init(mealTime: .lunch, menu: ["치킨텐더"]),
-                .init(mealTime: .dinner, menu: ["치킨텐더"])
-            ])
-            .previewLayout(.sizeThatFits)
-        }
-    }
 }
