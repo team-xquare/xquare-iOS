@@ -7,6 +7,7 @@ struct AppDependency {
     let launchScreenView: LaunchScreenView
 }
 
+// swiftlint:disable function_body_length
 extension AppDependency {
     static func resolve() -> AppDependency {
 
@@ -30,9 +31,14 @@ extension AppDependency {
         let launchScreenViewModel = LaunchScreenViewModel(
             refreshTokenUseCase: authServiceDependency.refreshTokenUseCase
         )
+        let mealDetailViewModel = MealDetailViewModel()
 
         // MARK: - Views
-        let homeView = HomeView(viewModel: homeViewModel)
+        let mealDetailView = MealDetailView(viewModel: mealDetailViewModel)
+        let homeView = HomeView(
+            viewModel: homeViewModel,
+            mealDetailView: mealDetailView
+        )
         let scheduleView = ScheduleView()
         let feedView = FeedView()
         let applicationView = ApplicationView(viewModel: applicationViewModel)
