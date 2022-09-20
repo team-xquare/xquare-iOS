@@ -22,6 +22,7 @@ extension TargetScript {
                 fi
 
                 """,
-        name: "SwiftLint"
+        name: "SwiftLint",
+        basedOnDependencyAnalysis: false
     )
 }
