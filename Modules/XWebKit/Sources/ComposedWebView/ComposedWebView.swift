@@ -4,7 +4,6 @@ import SwiftUI
 import WebKit
 import RxCocoa
 import RxSwift
-import RxWebKit
 
 struct ComposedWebView: UIViewRepresentable {
 
