@@ -6,7 +6,7 @@ let project = Project.dynamicFramework(
     platform: .iOS,
     dependencies: [
         .Module.XNavigationAndTab,
-        .SPM.RxWebKit,
+        .SPM.RxCocoa,
         .SPM.SemicolonDesign
     ]
 )

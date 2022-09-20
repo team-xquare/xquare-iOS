@@ -16,10 +16,10 @@ extension TargetDependency {
         public static let Quick = TargetDependency.external(name: "Quick")
 
         public static let RxBlocking = TargetDependency.external(name: "RxBlocking")
+        public static let RxCocoa = TargetDependency.external(name: "RxCocoa")
         public static let RxMoya = TargetDependency.external(name: "RxMoya")
         public static let RxNimble = TargetDependency.external(name: "RxNimble")
         public static let RxSwift = TargetDependency.external(name: "RxSwift")
-        public static let RxWebKit = TargetDependency.external(name: "RxWebKit")
 
         public static let SQLite = TargetDependency.external(name: "SQLite")
         public static let SemicolonDesign = TargetDependency.external(name: "SemicolonDesign")
