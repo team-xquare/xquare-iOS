@@ -7,6 +7,7 @@ let project = Project.dynamicFramework(
     dependencies: [
         .Service.AuthService,
         .Module.KeychainModule,
+        .Module.XEnvironment,
         .SPM.Moya
     ]
 )

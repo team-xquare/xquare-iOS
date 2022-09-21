@@ -1,6 +1,7 @@
 import Foundation
 
 import Moya
+import XEnvironment
 
 enum AuthAPI: TargetType {
     case signin(request: SigninRequest)
@@ -9,8 +10,9 @@ enum AuthAPI: TargetType {
 }
 
 extension AuthAPI {
+
     var baseURL: URL {
-        return URL(string: "https://stag-api.xquare.app")!
+        return URL(string: XEnvironment.getValue(key: .apiBaseUrl)!)!
     }
 
     var path: String {

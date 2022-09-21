@@ -2,6 +2,7 @@ import Foundation
 
 import Moya
 import AuthService
+import XEnvironment
 
 public protocol XquareAPI: TargetType, JWTTokenAuthorizable {
     var domain: String { get }
@@ -11,7 +12,9 @@ public protocol XquareAPI: TargetType, JWTTokenAuthorizable {
 
 public extension XquareAPI {
 
-    var baseURL: URL { URL(string: "https://stag-api.xquare.app")! }
+    var baseURL: URL {
+        return URL(string: XEnvironment.getValue(key: .apiBaseUrl)!)!
+    }
 
     var path: String {
         return domain+urlPath
