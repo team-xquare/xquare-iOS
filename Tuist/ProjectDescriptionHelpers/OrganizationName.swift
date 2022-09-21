@@ -1,3 +1,3 @@
 import ProjectDescription
 
-let xquareOrganizationName: String = "com.xquare"
+public let xquareOrganizationName: String = "com.xquare"
