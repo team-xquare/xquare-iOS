@@ -1,0 +1,4 @@
+BUNDLE_DISPLAY_NAME = XQUARE
+APP_BUNDLE_ID = com.xquare.XQUARE-iOS
+
+API_BASE_URL = https:/$()/api.xquare.app
