@@ -6,7 +6,7 @@ extension Project {
         name: String,
         platform: Platform,
         infoPlist: InfoPlist = .default,
-        configurations: [Configuration] = [],
+        configurations: [Configuration] = [.debug(name: "DEV"), .release(name: "STAGE"), .release(name: "PROD")],
         dependencies: [TargetDependency]
     ) -> Project {
         return Project(
