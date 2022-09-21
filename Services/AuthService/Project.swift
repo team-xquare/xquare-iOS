@@ -7,6 +7,7 @@ let project = Project.dynamicFramework(
     dependencies: [
         .Module.DateUtilModule,
         .Module.KeychainModule,
+        .Module.XEnvironment,
         .SPM.Moya,
         .SPM.RxMoya
     ]
