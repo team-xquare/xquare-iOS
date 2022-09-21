@@ -6,15 +6,16 @@ extension Project {
         name: String,
         platform: Platform,
         infoPlist: InfoPlist = .default,
+        configurations: [Configuration] = [.debug(name: "DEV"), .release(name: "STAGE"), .release(name: "PROD")],
         dependencies: [TargetDependency]
     ) -> Project {
         return Project(
             name: name,
-            settings: .settings(base: .codeSign),
+            settings: .settings(base: .codeSign, configurations: configurations),
             targets: [
                 Target(
                     name: name,
-                    platform: .iOS,
+                    platform: platform,
                     product: .framework,
                     bundleId: "\(xquareOrganizationName).\(name)",
                     deploymentTarget: .iOS(

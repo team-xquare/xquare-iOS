@@ -13,14 +13,13 @@ extension TargetScript {
                     export PATH
 
                     if which swiftlint >/dev/null; then
-                    swiftlint
+                        swiftlint
                     else
-                    echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+                        echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
                     fi
                 else
                     echo "No lintable files to check, skipping Swiftlint"
                 fi
-
                 """,
         name: "SwiftLint",
         basedOnDependencyAnalysis: false
