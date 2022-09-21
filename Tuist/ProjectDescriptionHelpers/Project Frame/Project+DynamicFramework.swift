@@ -6,19 +6,16 @@ extension Project {
         name: String,
         platform: Platform,
         infoPlist: InfoPlist = .default,
+        configurations: [Configuration] = [],
         dependencies: [TargetDependency]
     ) -> Project {
         return Project(
             name: name,
-            settings: .settings(base: .codeSign, configurations: [
-                .debug(name: "DEV", xcconfig: .relativeToRoot("Configurations/develop.xcconfig")),
-                .release(name: "STAGE", xcconfig: .relativeToRoot("Configurations/stage.xcconfig")),
-                .release(name: "PROD", xcconfig: .relativeToRoot("Configurations/product.xcconfig"))
-            ]),
+            settings: .settings(base: .codeSign, configurations: configurations),
             targets: [
                 Target(
                     name: name,
-                    platform: .iOS,
+                    platform: platform,
                     product: .framework,
                     bundleId: "\(xquareOrganizationName).\(name)",
                     deploymentTarget: .iOS(
