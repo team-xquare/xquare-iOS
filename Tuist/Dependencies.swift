@@ -26,6 +26,13 @@ let dependencies = Dependencies(
         // SemicolonDesign
         .remote(url: "https://github.com/semicolonDSM/SemicolonDesign_iOS.git",
                 requirement: .upToNextMajor(from: "1.7.3"))
-    ]),
+    ],
+    baseSettings: Settings.settings(
+        configurations: [
+            .debug(name: "DEV"),
+            .release(name: "STAGE"),
+            .release(name: "PROD"),
+        ]
+    )),
     platforms: [.iOS]
 )

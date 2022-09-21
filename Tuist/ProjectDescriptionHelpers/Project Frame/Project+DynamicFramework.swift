@@ -10,7 +10,11 @@ extension Project {
     ) -> Project {
         return Project(
             name: name,
-            settings: .settings(base: .codeSign),
+            settings: .settings(base: .codeSign, configurations: [
+                .debug(name: "DEV", xcconfig: .relativeToRoot("Configurations/develop.xcconfig")),
+                .release(name: "STAGE", xcconfig: .relativeToRoot("Configurations/stage.xcconfig")),
+                .release(name: "PROD", xcconfig: .relativeToRoot("Configurations/product.xcconfig"))
+            ]),
             targets: [
                 Target(
                     name: name,
