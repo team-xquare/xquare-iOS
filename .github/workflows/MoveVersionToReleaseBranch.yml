@@ -1,4 +1,4 @@
-name: Testflight
+name: Move version to release branch
 
 on:
   push:
@@ -20,8 +20,9 @@ jobs:
           git config --global user.email 'teamxquare@gmail.com'
           git config pull.rebase false
           git checkout -t origin/release
-          git merge --squash origin/develop -X theirs
+          echo $(git merge --squash -Xtheirs origin/develop)
           /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${{  github.ref_name }}" Application/SupportingFiles/Info.plist
+          /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${{  github.ref_name }}" Application/Widget/SupportingFiles/Info.plist
           git add -A
           git commit -m "🚀 :: Deploy version ${{  github.ref_name }} to testflight"
           git push
