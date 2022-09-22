@@ -41,12 +41,7 @@ let project = Project(
             platform: .iOS,
             product: .appExtension,
             bundleId: "$(APP_BUNDLE_ID).WidgetExtension",
-            infoPlist: .extendingDefault(with: [
-                "CFBundleDisplayName": "$(PRODUCT_NAME)",
-                "NSExtension": [
-                    "NSExtensionPointIdentifier": "com.apple.widgetkit-extension"
-                ]
-            ]),
+            infoPlist: .file(path: Path("Widget/SupportingFiles/Info.plist")),
             sources: "Widget/Sources/**",
             resources: "Widget/Resources/**",
             dependencies: [
