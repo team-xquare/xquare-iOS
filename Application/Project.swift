@@ -44,12 +44,14 @@ let project = Project(
             infoPlist: .extendingDefault(with: [
                 "CFBundleDisplayName": "$(PRODUCT_NAME)",
                 "NSExtension": [
-                    "NSExtensionPointIdentifier": "com.apple.widgetkit-extension",
-                ],
+                    "NSExtensionPointIdentifier": "com.apple.widgetkit-extension"
+                ]
             ]),
             sources: "Widget/Sources/**",
             resources: "Widget/Resources/**",
-            dependencies: []
+            dependencies: [
+                .SPM.SemicolonDesign
+            ]
         )
     ],
     schemes: [
@@ -79,6 +81,6 @@ let project = Project(
             archiveAction: .archiveAction(configuration: "PROD"),
             profileAction: .profileAction(configuration: "PROD"),
             analyzeAction: .analyzeAction(configuration: "PROD")
-        ),
+        )
     ]
 )

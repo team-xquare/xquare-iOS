@@ -1,6 +1,8 @@
 import WidgetKit
 import SwiftUI
 
+import SemicolonDesign
+
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date())
@@ -27,14 +29,19 @@ struct Provider: TimelineProvider {
 }
 
 struct SimpleEntry: TimelineEntry {
-    let date: Date
+    var date: Date
 }
 
 struct XquareWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date, style: .time)
+        Image("Logo")
+            .resizable()
+            .frame(width: 180, height: 180)
+            .cornerRadius(5)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.Primary.purple400)
     }
 }
 
@@ -46,8 +53,9 @@ struct XquareWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             XquareWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Widget")
+        .description("🛠 개발중입니다...")
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }
 
