@@ -143,7 +143,7 @@ class MealDataServiceSQLiteTask {
 
         while sqlite3_step(statement) == SQLITE_ROW {
             let date = String(cString: sqlite3_column_text(statement, 0))
-            let menu = Array(String(cString: sqlite3_column_text(statement, 1)).components(separatedBy: " "))
+            let menu = Array(String(cString: sqlite3_column_text(statement, 1)).components(separatedBy: ", "))
             if menu.count == 3 {
                 let breakfast = String(menu[0])
                 let lunch = String(menu[1])

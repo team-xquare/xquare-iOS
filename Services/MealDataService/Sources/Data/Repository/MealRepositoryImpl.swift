@@ -68,11 +68,11 @@ extension MealRepositoryImpl {
         for menu in menu.menu {
             switch menu.mealTime {
             case .breakfast:
-                breakfast = menu.menu?.joined(separator: " ") ?? ""
+                breakfast = menu.menu?.joined(separator: ", ") ?? ""
             case .lunch:
-                lunch = menu.menu?.joined(separator: " ") ?? ""
+                lunch = menu.menu?.joined(separator: ", ") ?? ""
             case .dinner:
-                dinner = menu.menu?.joined(separator: " ") ?? ""
+                dinner = menu.menu?.joined(separator: ", ") ?? ""
             }
         }
         return MealMenu(
