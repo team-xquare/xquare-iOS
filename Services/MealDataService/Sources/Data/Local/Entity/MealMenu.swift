@@ -12,9 +12,9 @@ extension MealMenu {
         return .init(
             date: day,
             menu: [
-                .init(mealTime: .breakfast, menu: breakfast.components(separatedBy: " ")),
-                .init(mealTime: .lunch, menu: lunch.components(separatedBy: " ")),
-                .init(mealTime: .dinner, menu: dinner.components(separatedBy: " "))
+                .init(mealTime: .breakfast, menu: breakfast.components(separatedBy: ", ")),
+                .init(mealTime: .lunch, menu: lunch.components(separatedBy: ", ")),
+                .init(mealTime: .dinner, menu: dinner.components(separatedBy: ", "))
             ]
         )
     }
