@@ -5,8 +5,8 @@ let project = Project.dynamicFramework(
     name: "AuthService",
     platform: .iOS,
     dependencies: [
-        .Module.DateUtilModule,
         .Module.KeychainModule,
+        .Module.XDateUtil,
         .Module.XEnvironment,
         .SPM.Moya,
         .SPM.RxMoya

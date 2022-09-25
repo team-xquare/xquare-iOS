@@ -2,7 +2,7 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.dynamicFramework(
-    name: "DateUtilModule",
+    name: "XDateUtil",
     platform: .iOS,
     dependencies: []
 )

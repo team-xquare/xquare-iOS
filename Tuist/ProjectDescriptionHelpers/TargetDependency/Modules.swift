@@ -3,10 +3,10 @@ import ProjectDescription
 extension TargetDependency {
     
     public struct Module {
-        public static let DateUtilModule = module(name: "DateUtilModule")
         public static let KeychainModule = module(name: "KeychainModule")
         public static let RestApiMoudle = module(name: "RestApiModule")
         public static let RxOfflineCacheModule = module(name: "RxOfflineCacheModule")
+        public static let XDateUtil = module(name: "XDateUtil")
         public static let XEnvironment = module(name: "XEnvironment")
         public static let XNavigationAndTab = module(name: "XNavigationAndTab")
         public static let XWebKit = module(name: "XWebKit")
