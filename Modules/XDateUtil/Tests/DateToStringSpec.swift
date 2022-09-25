@@ -2,7 +2,7 @@ import Foundation
 import Quick
 import Nimble
 
-@testable import DateUtilModule
+import XDateUtil
 
 class DateToStringSpec: QuickSpec {
 
