@@ -9,7 +9,7 @@ struct ApplicationView: View, XNavigationAndTabContent {
 
     var tabInformation: TabInformation {
         TabInformation(
-            title: "신청",
+            tabItemText: "신청",
             tabItemImage: Image(systemName: "square.fill")
         )
     }
@@ -19,5 +19,6 @@ struct ApplicationView: View, XNavigationAndTabContent {
             urlString: self.viewModel.getWebviewURLString(),
             accessToken: self.viewModel.getAccessToken()
         )
+        .navigationTitle("신청")
     }
 }
