@@ -1,7 +1,7 @@
 import SwiftUI
 
 public extension View {
-    func backToMainViewMainView(_ isActive: Binding<Bool>) -> some View {
+    func backToMainView(_ isActive: Binding<Bool>) -> some View {
         self.modifier(BackToMainViewModifier(needToBack: isActive))
     }
 }
