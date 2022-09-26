@@ -12,28 +12,10 @@ struct HomeView: View, XNavigationAndTabContent {
 
     var tabInformation: TabInformation {
         TabInformation(
-            title: "홈",
-            navigationTitle: "",
-            tabItemImage: Image(systemName: "square.fill")
+            tabItemText: "홈",
+            tabItemImage: Image(systemName: "square.fill"),
+            backgroundColor: .GrayScale.gray50
         )
-    }
-    var toolBar: Toolbar {
-        Toolbar(contents: [
-            Button(action: {
-            }, label: {
-                Image(systemName: "square.fill")
-                    .font(.system(size: 24))
-                    .tint(.GrayScale.gray200)
-            })
-            .toAnyView(),
-            Button(action: {
-            }, label: {
-                Image(systemName: "square.fill")
-                    .font(.system(size: 24))
-                    .tint(.GrayScale.gray200)
-            })
-            .toAnyView()
-        ])
     }
 
     var body: some View {
@@ -56,6 +38,23 @@ struct HomeView: View, XNavigationAndTabContent {
         }
         .background(Color.GrayScale.gray50)
         .onAppear(perform: viewModel.fetchTodaysMeal)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button(action: {
+                }, label: {
+                    Image(systemName: "square.fill")
+                        .font(.system(size: 24))
+                        .tint(.GrayScale.gray200)
+                })
+                Button(action: {
+                }, label: {
+                    Image(systemName: "square.fill")
+                        .font(.system(size: 24))
+                        .tint(.GrayScale.gray200)
+                })
+            }
+        }
     }
 
 }

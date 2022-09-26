@@ -1,7 +1,5 @@
 import SwiftUI
 
-import AuthService
-
 @main
 struct XQUAREApp: App {
 

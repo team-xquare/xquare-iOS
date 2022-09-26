@@ -18,6 +18,5 @@ struct MainView: View {
             applicationView,
             entireView
         )}
-        .accentColor(.GrayScale.gray800)
     }
 }

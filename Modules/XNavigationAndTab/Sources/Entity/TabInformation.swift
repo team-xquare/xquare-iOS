@@ -2,29 +2,18 @@ import SwiftUI
 
 public struct TabInformation {
 
-    var title: String
-    var navigationTitle: String?
-    var tabItemText: String?
+    var tabItemText: String
     var tabItemImage: Image
+    var backgroundColor: Color
 
     public init(
-        title: String,
-        navigationTitle: String? = nil,
-        tabItemText: String? = nil,
-        tabItemImage: Image
+        tabItemText: String,
+        tabItemImage: Image,
+        backgroundColor: Color = Color(UIColor.systemBackground)
     ) {
-        self.title = title
-        self.navigationTitle = navigationTitle
         self.tabItemText = tabItemText
         self.tabItemImage = tabItemImage
-    }
-
-    func getNavigationTitle() -> String {
-        navigationTitle ?? title
-    }
-
-    func getTabItemText() -> String {
-        tabItemText ?? title
+        self.backgroundColor = backgroundColor
     }
 
 }
