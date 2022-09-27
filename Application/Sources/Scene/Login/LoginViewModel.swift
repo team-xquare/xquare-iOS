@@ -25,24 +25,20 @@ class LoginViewModel: ObservableObject {
     }
 
     func login() {
-        if isInternetAvailable() == false {
-            self.isInternetNotWorking = true
-        } else {
-            self.isInternetNotWorking = false
-            signInUseCase.excute(
-                data: .init(
-                    id: id,
-                    password: password,
-                    deviceToken: Messaging.messaging().fcmToken ?? ""
-                ))
-            .subscribe(onCompleted: { [weak self] in
-                self?.isLoginSuccess = true
-            }, onError: { [weak self] in
-                if $0.asAuthServiceError == .failToSignin {
-                    self?.errorMessage = "아이디나 비밀번호가 일치하지 않습니다."
-                }
-                self?.isLoginSuccess = false
-            }).disposed(by: disposeBag)
-        }
+        self.isInternetNotWorking = false
+        signInUseCase.excute(
+            data: .init(
+                id: id,
+                password: password,
+                deviceToken: Messaging.messaging().fcmToken ?? ""
+            ))
+        .subscribe(onCompleted: { [weak self] in
+            self?.isLoginSuccess = true
+        }, onError: { [weak self] in
+            if $0.asAuthServiceError == .failToSignin {
+                self?.errorMessage = "아이디나 비밀번호가 일치하지 않습니다."
+            }
+            self?.isLoginSuccess = false
+        }).disposed(by: disposeBag)
     }
 }
