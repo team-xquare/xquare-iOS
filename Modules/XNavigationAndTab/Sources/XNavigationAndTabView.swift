@@ -9,8 +9,6 @@ public struct XNavigationAndTabView: View {
     @State private var tabViewSelection: Int = 0
     private var bindedTabViewSelection: Binding<Int>?
 
-    @State private var defaultTabBarHidden: Bool = false
-
     private var contents: [AnyView] = []
     private var tabInfosPerContents: [TabInformation] = []
 
