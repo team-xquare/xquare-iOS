@@ -78,6 +78,9 @@ struct SignupView: View {
                     }
                 }
             }
+            .sdErrorAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
+                SDErrorAlert(errerMessage: "네트워크가 원할하지 않습니다.")
+            })
             .navigationTitle("회원가입")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

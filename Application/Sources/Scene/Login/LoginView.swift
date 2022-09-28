@@ -61,6 +61,9 @@ struct LoginView: View {
                 }
             }
         }
+        .sdErrorAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
+            SDErrorAlert(errerMessage: "네트워크가 원할하지 않습니다.")
+        })
         .fullScreenCover(isPresented: $viewModel.isLoginSuccess) {
             mainView
         }
