@@ -20,7 +20,9 @@ class AuthRepositoryImpl: AuthRepository {
                 self?.loaclTokenDataSource.registerAccessToken(tokenResponse.accessToken)
                 self?.loaclTokenDataSource.registerRefreshToken(tokenResponse.refreshToken)
                 self?.loaclTokenDataSource.registerExpiredAt(tokenResponse.expirationAt)
-            }).catch { _ in
+            }).catch { error in
+                let moyaError = error as? MoyaError
+                guard moyaError?.response?.statusCode != nil else { return .error(AuthServiceError.networkNotWorking) }
                 return .error(AuthServiceError.failToSignin)
             }.asCompletable()
     }
@@ -28,6 +30,8 @@ class AuthRepositoryImpl: AuthRepository {
     func signup(signupEntity: SignupEntity) -> Completable {
         self.remoteAuthDataSource.signup(request: signupEntity.toSignupRequest())
             .catch { [weak self] error in
+                let moyaError = error as? MoyaError
+                guard moyaError?.response?.statusCode != nil else { return .error(AuthServiceError.networkNotWorking) }
                 guard let errorCode = self?.errorToStatusCode(error) else { return .error(error) }
                 switch errorCode {
                 case 409: return .error(AuthServiceError.duplicateId)
@@ -46,6 +50,8 @@ class AuthRepositoryImpl: AuthRepository {
                 self?.loaclTokenDataSource.registerRefreshToken(tokenResponse.refreshToken)
                 self?.loaclTokenDataSource.registerExpiredAt(tokenResponse.expirationAt)
             }).catch { [weak self] error in
+                let moyaError = error as? MoyaError
+                guard moyaError?.response?.statusCode != nil else { return .error(AuthServiceError.networkNotWorking) }
                 guard let errorCode = self?.errorToStatusCode(error) else { return .error(error) }
                 switch errorCode {
                 case 401: return .error(AuthServiceError.tokenExpired)

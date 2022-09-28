@@ -5,6 +5,7 @@ public enum AuthServiceError: Error {
     case tokenExpired
     case failToSignin
     case duplicateId
+    case networkNotWorking
 }
 
 public extension Error {
