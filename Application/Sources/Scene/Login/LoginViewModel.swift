@@ -33,10 +33,13 @@ class LoginViewModel: ObservableObject {
                 deviceToken: Messaging.messaging().fcmToken ?? ""
             ))
         .subscribe(onCompleted: { [weak self] in
+            self?.isInternetNotWorking = false
             self?.isLoginSuccess = true
         }, onError: { [weak self] in
             if $0.asAuthServiceError == .failToSignin {
                 self?.errorMessage = "아이디나 비밀번호가 일치하지 않습니다."
+            } else if $0.asAuthServiceError == .networkNotWorking {
+                self?.isInternetNotWorking = true
             }
             self?.isLoginSuccess = false
         }).disposed(by: disposeBag)

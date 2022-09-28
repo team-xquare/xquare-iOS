@@ -30,10 +30,13 @@ class SignupViewModel: ObservableObject {
             password: password
         ))
         .subscribe(onCompleted: { [weak self] in
+            self?.isInternetNotWorking = false
             self?.isSuccess = true
         }, onError: { [weak self] in
             if $0.asAuthServiceError == .duplicateId {
                 self?.idErrorMessage = "아이디가 중복되었습니다."
+            } else if $0.asAuthServiceError == .networkNotWorking {
+                self?.isInternetNotWorking = true
             }
             self?.isSuccess = false
         })
