@@ -54,7 +54,7 @@ let project = Project(
             shared: true,
             buildAction: BuildAction(targets: ["XQUARE-iOS"]),
             runAction: .runAction(
-                configuration: "DEV", 
+                configuration: "DEV",
                 arguments: Arguments(environment: ["OS_ACTIVITY_MODE": "disable"])
             ),
             archiveAction: .archiveAction(configuration: "DEV"),
