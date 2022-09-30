@@ -9,8 +9,6 @@ public struct XNavigationAndTabView: View {
     @State private var tabViewSelection: Int = 0
     private var bindedTabViewSelection: Binding<Int>?
 
-    @State private var defaultTabBarHidden: Bool = false
-
     private var contents: [AnyView] = []
     private var tabInfosPerContents: [TabInformation] = []
 
@@ -117,16 +115,4 @@ public struct XNavigationAndTabView: View {
         bindedTabViewSelection?.wrappedValue ?? tabViewSelection
     }
 
-}
-
-extension View {
-    @ViewBuilder func isHidden(_ hidden: Bool, remove: Bool = false) -> some View {
-        if hidden {
-            if !remove {
-                self.hidden()
-            }
-        } else {
-            self
-        }
-    }
 }
