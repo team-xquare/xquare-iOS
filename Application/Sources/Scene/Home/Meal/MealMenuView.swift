@@ -18,8 +18,9 @@ struct MealMenuView: View {
                 NavigationLink {
                     mealDetailView
                 } label: {
-                    Image(systemName: "square.fill")
-                        .font(.system(size: 24))
+                    Image.viewMoreIcon
+                        .resizable()
+                        .frame(width: 24, height: 24)
                         .tint(.GrayScale.gray200)
                 }
                 Spacer().frame(width: 16)
