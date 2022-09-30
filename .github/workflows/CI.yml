@@ -61,6 +61,6 @@ jobs:
       run: tuist build
 
     - name: 🧪 test codes
-      if: ${{ needs.prepare-ci.outputs.TYPE != 'Application' }}
+      if: ${{ needs.prepare-ci.outputs.TYPE != 'Application' }} && ${{ -d {steps.working-directory.outputs.PATH}/Tests }}
       working-directory: ${{ steps.working-directory.outputs.PATH }}
       run: tuist test
