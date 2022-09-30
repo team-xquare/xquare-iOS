@@ -23,7 +23,7 @@ jobs:
     - name: Get Name
       run: echo ::set-output name=NAME::$(echo ${{ steps.branch-name.outputs.current_branch }} | cut -d / -f 2)
       id: get_name
-  
+
   check-skip:
     name: Check to skip CI
     needs: prepare-ci
@@ -42,7 +42,6 @@ jobs:
     - name: install needs
       run: |
         bash <(curl -Ls https://install.tuist.io)
-
     - name: cd target type directory
       run: |
         cd ${{ needs.prepare-ci.outputs.TYPE }}
@@ -60,7 +59,13 @@ jobs:
       working-directory: ${{ steps.working-directory.outputs.PATH }}
       run: tuist build
 
+    - name: Check tests existence
+      id: check_tests_existence
+      uses: andstor/file-existence-action@v1
+      with:
+        files: "${{ steps.working-directory.outputs.PATH }}/Tests"
+
     - name: 🧪 test codes
-      if: ${{ needs.prepare-ci.outputs.TYPE != 'Application' }} && ${{ -d {steps.working-directory.outputs.PATH}/Tests }}
+      if: ${{ steps.check_tests_existence.outputs.files_exists == 'true' }}
       working-directory: ${{ steps.working-directory.outputs.PATH }}
       run: tuist test
