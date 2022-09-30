@@ -36,21 +36,23 @@ struct HomeView: View, XNavigationAndTabContent {
             }
             .padding([.leading, .trailing], 16)
         }
+        .navigationBarTitleDisplayMode(.inline)
         .background(Color.GrayScale.gray50)
         .onAppear(perform: viewModel.fetchTodaysMeal)
-        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button(action: {
                 }, label: {
                     Image(systemName: "square.fill")
-                        .font(.system(size: 24))
+                        .resizable()
+                        .frame(width: 24, height: 24)
                         .tint(.GrayScale.gray200)
                 })
                 Button(action: {
                 }, label: {
-                    Image(systemName: "square.fill")
-                        .font(.system(size: 24))
+                    Image.settingIcon
+                        .resizable()
+                        .frame(width: 24, height: 24)
                         .tint(.GrayScale.gray200)
                 })
             }
