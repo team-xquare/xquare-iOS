@@ -12,14 +12,10 @@ public struct UserServiceDependency {
 }
 
 public extension UserServiceDependency {
-    static func resolve() -> UserServiceDependency {
-
-        let authServiceDependency = AuthServiceDependency.resolve()
+    static func resolve(authServiceDependency: AuthServiceDependency) -> UserServiceDependency {
 
         let remoteDataSource = RemoteUserDataSourceImpl(
-            checkIsTokenValidUseCase: authServiceDependency.checkIsTokenValidUseCase,
-            refreshTokenUseCase: authServiceDependency.refreshTokenUseCase,
-            jwtPlugin: authServiceDependency.jwtPlugin
+            authServiceDependency: authServiceDependency
         )
 
         let userRepository = UserRepositoryImpl(

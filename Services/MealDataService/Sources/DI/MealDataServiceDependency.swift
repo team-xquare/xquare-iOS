@@ -8,15 +8,12 @@ public struct MealDataServiceDependency {
 }
 
 public extension MealDataServiceDependency {
-    static func resolve() -> MealDataServiceDependency {
+    static func resolve(authServiceDependency: AuthServiceDependency) -> MealDataServiceDependency {
 
-        let authServiceDpendency = AuthServiceDependency.resolve()
         let localDataSource = LocalDataSourceImpl()
 
         let remoteDataSource: RemoteMealDataSource = RemoteMealDataSourceImpl(
-            checkIsTokenValidUseCase: authServiceDpendency.checkIsTokenValidUseCase,
-            refreshTokenUseCase: authServiceDpendency.refreshTokenUseCase,
-            jwtPlugin: authServiceDpendency.jwtPlugin
+            authServiceDependency: authServiceDependency
         )
 
         let mealRepository: MealRepository = MealRepositoryImpl(

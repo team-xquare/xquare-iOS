@@ -13,14 +13,10 @@ open class RestApiRemoteDataSource<API: XquareAPI> {
 
     private lazy var provider = MoyaProvider<API>(plugins: [self.jwtPlugin])
 
-    public init(
-        checkIsTokenValidUseCase: CheckIsTokenValidUseCase,
-        refreshTokenUseCase: RefreshTokenUseCase,
-        jwtPlugin: JWTPlugin
-    ) {
-        self.checkIsTokenValidUseCase = checkIsTokenValidUseCase
-        self.refreshTokenUseCase = refreshTokenUseCase
-        self.jwtPlugin = jwtPlugin
+    public init(authServiceDependency: AuthServiceDependency) {
+        self.checkIsTokenValidUseCase = authServiceDependency.checkIsTokenValidUseCase
+        self.refreshTokenUseCase = authServiceDependency.refreshTokenUseCase
+        self.jwtPlugin = authServiceDependency.jwtPlugin
     }
 
     public func request(_ api: API) -> Single<Response> {
