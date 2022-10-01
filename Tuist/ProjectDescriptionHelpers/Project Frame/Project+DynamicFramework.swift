@@ -5,7 +5,6 @@ extension Project {
     public static func dynamicFramework(
         name: String,
         platform: Platform,
-        isTestable: Bool = true,
         infoPlist: InfoPlist = .default,
         configurations: [Configuration] = [.debug(name: "DEV"), .release(name: "STAGE"), .release(name: "PROD")],
         dependencies: [TargetDependency]
@@ -27,13 +26,7 @@ extension Project {
                     sources: ["Sources/**"],
                     scripts: [.swiftLintScript],
                     dependencies: dependencies + TargetDependency.universalDependencies
-                )
-            ] + getTestTargetIfNeed()
-        )
-
-        func getTestTargetIfNeed() -> [Target] {
-            guard isTestable else { return [] }
-            return [
+                ),
                 Target(
                     name: name+"Test",
                     platform: platform,
@@ -54,7 +47,7 @@ extension Project {
                     ]
                 )
             ]
-        }
+        )
     }
 
 }

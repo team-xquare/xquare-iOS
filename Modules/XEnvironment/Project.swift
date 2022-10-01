@@ -4,7 +4,6 @@ import ProjectDescriptionHelpers
 let project = Project.dynamicFramework(
     name: "XEnvironment",
     platform: .iOS,
-    isTestable: false,
     infoPlist: .file(path: "SupportingFiles/Info.plist"),
     configurations: [
         .debug(name: "DEV", xcconfig: .relativeToRoot("Configurations/develop.xcconfig")),
