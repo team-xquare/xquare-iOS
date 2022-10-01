@@ -68,6 +68,11 @@ extension UserAPI: XquareAPI {
     }
 
     var jwtTokenType: JWTTokenType {
-        return .none
+        switch self {
+        case .fetchFCMToken, .fetchExcludedUserList:
+            return .none
+        default:
+            return .accessToken
+        }
     }
 }
