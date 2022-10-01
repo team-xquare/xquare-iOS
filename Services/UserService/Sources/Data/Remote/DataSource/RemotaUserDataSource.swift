@@ -9,5 +9,5 @@ protocol RemoteUserDataSource: RestApiRemoteDataSource<UserAPI> {
     func fetchUserListByClass(grade: Int, classNumber: Int) -> Single<[ClassUserEntity]>
     func fetchFCMToken(users: [String]) -> Single<FCMTokensEntity>
     func fetchExcludedUserList(users: [String]) -> Single<UserIdsEntity>
-    func fetchUserPoint(users: [String]) -> Single<UserPointEntity>
+    func fetchUserPoint() -> Single<UserPointEntity>
 }

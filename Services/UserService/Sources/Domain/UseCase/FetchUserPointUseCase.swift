@@ -10,7 +10,7 @@ public class FetchUserPointUseCase {
         self.repository = repository
     }
 
-    public func excute(users: [String]) -> Single<UserPointEntity> {
-        return repository.fetchUserPoint(users: users)
+    public func excute() -> Single<UserPointEntity> {
+        return repository.fetchUserPoint()
     }
 }

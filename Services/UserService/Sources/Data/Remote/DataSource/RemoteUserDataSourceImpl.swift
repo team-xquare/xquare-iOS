@@ -43,8 +43,8 @@ class RemoteUserDataSourceImpl: RestApiRemoteDataSource<UserAPI>, RemoteUserData
             .map { $0.toDomain() }
     }
 
-    func fetchUserPoint(users: [String]) -> Single<UserPointEntity> {
-        return request(.fetchUserPoint(users: users))
+    func fetchUserPoint() -> Single<UserPointEntity> {
+        return request(.fetchUserPoint)
             .map(UserPointResponse.self)
             .map { $0.toDomain() }
     }

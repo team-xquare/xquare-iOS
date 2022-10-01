@@ -10,7 +10,7 @@ enum UserAPI {
     case fetchUserListByClass(grade: Int, classNumber: Int)
     case fetchFCMToken(users: [String])
     case fetchExcludedUserList(users: [String])
-    case fetchUserPoint(users: [String])
+    case fetchUserPoint
 }
 
 extension UserAPI: XquareAPI {
@@ -47,7 +47,7 @@ extension UserAPI: XquareAPI {
                     "class": classNumber
                 ], encoding: URLEncoding.queryString
             )
-        case .fetchFCMToken(let users), .fetchExcludedUserList(let users), .fetchUserPoint(let users):
+        case .fetchFCMToken(let users), .fetchExcludedUserList(let users):
             return .requestParameters(
                 parameters: [
                     "users": users
