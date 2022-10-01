@@ -33,7 +33,7 @@ public class KeychainModule<Key: KeychainKeyType>: KeychainSwift {
         return super.getBool(key.keyString)
     }
 
-    // MARK: - GET
+    // MARK: - DELETE
     @discardableResult
     public func delete(_ key: Key) -> Bool {
         return super.delete(key.keyString)
