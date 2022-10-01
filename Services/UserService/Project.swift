@@ -2,7 +2,7 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.dynamicFramework(
-    name: "UserSerevice",
+    name: "UserService",
     platform: .iOS,
     isTestable: false,
     dependencies: [
