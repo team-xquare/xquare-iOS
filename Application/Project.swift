@@ -33,8 +33,7 @@ let project = Project(
                 .SPM.SemicolonDesign,
                 .target(name: "XquareWidget")
             ] + TargetDependency.universalDependencies,
-            settings: .settings(base: ["OTHER_LDFLAGS": "-ObjC"]),
-            environment: ["OS_ACTIVITY_MODE": "disable"]
+            settings: .settings(base: ["OTHER_LDFLAGS": "-ObjC"])
         ),
         Target(
             name: "XquareWidget",
@@ -54,7 +53,10 @@ let project = Project(
             name: "XQUARE-iOS(DEV)",
             shared: true,
             buildAction: BuildAction(targets: ["XQUARE-iOS"]),
-            runAction: .runAction(configuration: "DEV"),
+            runAction: .runAction(
+                configuration: "DEV",
+                arguments: Arguments(environment: ["OS_ACTIVITY_MODE": "disable"])
+            ),
             archiveAction: .archiveAction(configuration: "DEV"),
             profileAction: .profileAction(configuration: "DEV"),
             analyzeAction: .analyzeAction(configuration: "DEV")
