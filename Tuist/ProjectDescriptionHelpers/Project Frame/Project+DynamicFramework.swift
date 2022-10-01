@@ -28,33 +28,38 @@ extension Project {
                     scripts: [.swiftLintScript],
                     dependencies: dependencies + TargetDependency.universalDependencies
                 )
-            ] + getTestTargetIfNeed()
+            ] + getTestTargetIfNeed(name: name, isTestable: isTestable, platform: platform)
         )
 
-        func getTestTargetIfNeed() -> [Target] {
-            guard isTestable else { return [] }
-            return [
-                Target(
-                    name: name+"Test",
-                    platform: platform,
-                    product: .unitTests,
-                    bundleId: "\(xquareOrganizationName).\(name)Test",
-                    deploymentTarget: .iOS(
-                        targetVersion: "15.0",
-                        devices: [.iphone, .ipad]
-                    ),
-                    sources: ["Tests/**"],
-                    scripts: [.swiftLintScript],
-                    dependencies: [
-                        .target(name: name),
-                        .SPM.Quick,
-                        .SPM.Nimble,
-                        .SPM.RxBlocking,
-                        .SPM.RxNimble
-                    ]
-                )
-            ]
-        }
+    }
+
+    private static func getTestTargetIfNeed(
+        name: String,
+        isTestable: Bool,
+        platform: Platform
+    ) -> [Target] {
+        guard isTestable else { return [] }
+        return [
+            Target(
+                name: name+"Test",
+                platform: platform,
+                product: .unitTests,
+                bundleId: "\(xquareOrganizationName).\(name)Test",
+                deploymentTarget: .iOS(
+                    targetVersion: "15.0",
+                    devices: [.iphone, .ipad]
+                ),
+                sources: ["Tests/**"],
+                scripts: [.swiftLintScript],
+                dependencies: [
+                    .target(name: name),
+                    .SPM.Quick,
+                    .SPM.Nimble,
+                    .SPM.RxBlocking,
+                    .SPM.RxNimble
+                ]
+            )
+        ]
     }
 
 }
