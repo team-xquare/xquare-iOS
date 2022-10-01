@@ -60,20 +60,3 @@ struct HomeView: View, XNavigationAndTabContent {
     }
 
 }
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        let dependency = MealDataServiceDependency.resolve()
-        let mealDetailView = MealDetailView(
-            viewModel: MealDetailViewModel()
-        )
-        // MARK: - ViewModels
-        let homeViewModel = HomeViewModel(
-            fetchMealMenuPerDayUseCase: dependency.fetchDayToMealMenuUseCase
-        )
-        HomeView(
-            viewModel: homeViewModel,
-            mealDetailView: mealDetailView
-        )
-    }
-}

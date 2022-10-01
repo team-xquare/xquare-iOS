@@ -8,7 +8,6 @@ let project = Project.dynamicFramework(
     dependencies: [
         .Module.RestApiMoudle,
         .Module.RxOfflineCacheModule,
-        .Module.XDateUtil,
-        .Service.AuthService
+        .Module.XDateUtil
     ]
 )
