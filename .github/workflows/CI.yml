@@ -42,6 +42,10 @@ jobs:
     - name: install needs
       run: |
         bash <(curl -Ls https://install.tuist.io)
+
+    - name: tuist fetch
+      run: tuist fetch
+
     - name: cd target type directory
       run: |
         cd ${{ needs.prepare-ci.outputs.TYPE }}
@@ -51,9 +55,6 @@ jobs:
         fi
         echo ::set-output name=PATH::$(pwd)
       id: working-directory
-
-    - name: tuist fetch
-      run: tuist fetch
 
     - name: ⚡️ build codes
       working-directory: ${{ steps.working-directory.outputs.PATH }}
