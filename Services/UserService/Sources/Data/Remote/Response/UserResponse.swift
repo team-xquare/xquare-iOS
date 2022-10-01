@@ -1,6 +1,6 @@
 import Foundation
 
-import DateUtilModule
+import XDateUtil
 
 struct UserResponse: Decodable {
     private enum CodingKeys: String, CodingKey {
