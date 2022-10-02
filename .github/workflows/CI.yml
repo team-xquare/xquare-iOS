@@ -2,6 +2,9 @@ name: CI
 
 on: pull_request
 
+env:
+  CACHED_DEPENDENCY_PATHS: ${{ github.workspace }}/Tuist/Dependencies
+
 jobs:
   prepare-ci:
     name: Prepare CI
@@ -11,15 +14,12 @@ jobs:
       NAME: ${{ steps.get_name.outputs.NAME }}
     steps:
     - uses: actions/checkout@v1
-    
     - name: Get branch name
       uses: tj-actions/branch-names@v5.2
       id: branch-name
-    
     - name: Get Type
       run: echo ::set-output name=TYPE::$(echo ${{ steps.branch-name.outputs.current_branch }} | cut -d / -f 1)
       id: get_type
-
     - name: Get Name
       run: echo ::set-output name=NAME::$(echo ${{ steps.branch-name.outputs.current_branch }} | cut -d / -f 2)
       id: get_name
@@ -32,9 +32,34 @@ jobs:
     steps:
         - run: echo "Needs to CI"
 
-  CI:
+  install-dependencies:
+    name: Install dependencies
     runs-on: macOS-latest
     needs: [prepare-ci, check-skip]
+    steps:
+    - uses: actions/checkout@v2
+    - name: install needs
+      run: |
+        bash <(curl -Ls https://install.tuist.io)
+    - name: Compute dependency cache key
+      id: compute_lockfile_hash
+      run: echo "::set-output name=hash::${{ hashFiles('Tuist/Dependencies.swift') }}"
+    - name: Check dependency cache
+      uses: actions/cache@v2
+      id: cache_dependencies
+      with:
+        path: ${{ env.CACHED_DEPENDENCY_PATHS }}
+        key: ${{ steps.compute_lockfile_hash.outputs.hash }}
+    - name: Install dependencies
+      if: steps.cache_dependencies.outputs.cache-hit == ''
+      run: tuist fetch
+    outputs:
+      dependency_cache_key: ${{ steps.compute_lockfile_hash.outputs.hash }}
+    
+
+  CI:
+    runs-on: macOS-latest
+    needs: install-dependencies
 
     steps:
     - uses: actions/checkout@v2
@@ -43,8 +68,11 @@ jobs:
       run: |
         bash <(curl -Ls https://install.tuist.io)
 
-    - name: tuist fetch
-      run: tuist fetch
+    - name: Check dependency cache
+      uses: actions/cache@v2
+      with:
+        path: ${{ env.CACHED_DEPENDENCY_PATHS }}
+        key: ${{ needs.install-dependencies.outputs.dependency_cache_key }}
 
     - name: cd target type directory
       run: |
