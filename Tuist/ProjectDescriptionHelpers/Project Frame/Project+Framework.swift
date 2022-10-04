@@ -2,7 +2,7 @@ import ProjectDescription
 
 extension Project {
 
-    public static func dynamicFramework(
+    public static func framework(
         name: String,
         platform: Platform,
         isTestable: Bool = true,

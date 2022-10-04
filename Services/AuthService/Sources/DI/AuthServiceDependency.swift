@@ -1,15 +1,19 @@
 import Foundation
 
 public struct AuthServiceDependency {
+
+    public static let shared = Self.resolve()
+
     public let checkIsTokenValidUseCase: CheckIsTokenValidUseCase
     public let fetchAccessTokenUseCase: FetchAccessTokenUseCase
     public let refreshTokenUseCase: RefreshTokenUseCase
     public let signinUseCase: SigninUseCase
     public let signupUseCase: SignupUseCase
     public let jwtPlugin: JWTPlugin
+
 }
 
-public extension AuthServiceDependency {
+extension AuthServiceDependency {
     static func resolve() -> AuthServiceDependency {
         // MARK: - Datasources
         let remoteAuthDataSource: RemoteAuthDataSource = RemoteAuthDataSourceImpl()

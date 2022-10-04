@@ -12,10 +12,8 @@ extension AppDependency {
     static func resolve() -> AppDependency {
 
         // MARK: - ServiceDependency
-        let authServiceDependency = AuthServiceDependency.resolve()
-        let mealDataServiceDependency = MealDataServiceDependency.resolve(
-            authServiceDependency: authServiceDependency
-        )
+        let authServiceDependency = AuthServiceDependency.shared
+        let mealDataServiceDependency = MealDataServiceDependency.shared
 
         // MARK: - ViewModels
         let homeViewModel = HomeViewModel(
