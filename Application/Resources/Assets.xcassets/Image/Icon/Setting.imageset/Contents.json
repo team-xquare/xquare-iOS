@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "설정.png",
+      "filename" : "설정.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "설정2x.png",
+      "filename" : "설정2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "설정3x.png",
+      "filename" : "설정3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

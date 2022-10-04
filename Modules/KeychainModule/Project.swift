@@ -1,7 +1,7 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-let project = Project.dynamicFramework(
+let project = Project.framework(
     name: "KeychainModule",
     platform: .iOS,
     isTestable: false,
