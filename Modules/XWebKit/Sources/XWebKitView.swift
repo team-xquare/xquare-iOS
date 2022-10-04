@@ -63,5 +63,8 @@ public struct XWebKitView: View {
             isPresented: self.$state.isImageViewerPresented,
             images: self.state.images
         )
+        .sdErrorAlert(isPresented: self.$state.isErrorAlertPresented) {
+            SDErrorAlert(errerMessage: self.state.errorMessage)
+        }
     }
 }
