@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "오른쪽 더보기.png",
+      "filename" : "ViewMore.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "오른쪽 더보기2x.png",
+      "filename" : "ViewMore2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "오른쪽 더보기3x.png",
+      "filename" : "ViewMore3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
