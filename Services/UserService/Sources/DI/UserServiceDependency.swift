@@ -1,22 +1,22 @@
 import Foundation
 
-import AuthService
-
 public struct UserServiceDependency {
+
+    public static let shared = Self.resolve()
+
     public let fetchUserInformationByIdUseCase: FetchUserInformationByIdUseCase
     public let fetchUserInformationByNameUseCase: FetchUserInformationByNameUseCase
     public let fetchUserListByClassUseCase: FetchUserListByClassUseCase
     public let fetchFCMTokenUseCase: FetchFCMTokenUseCase
     public let fetchExcludedUserListUseCase: FetchExcludedUserListUseCase
     public let fetchUserPointUseCase: FetchUserPointUseCase
+
 }
 
-public extension UserServiceDependency {
-    static func resolve(authServiceDependency: AuthServiceDependency) -> UserServiceDependency {
+extension UserServiceDependency {
+    static func resolve() -> UserServiceDependency {
 
-        let remoteDataSource = RemoteUserDataSourceImpl(
-            authServiceDependency: authServiceDependency
-        )
+        let remoteDataSource = RemoteUserDataSourceImpl()
 
         let userRepository = UserRepositoryImpl(
             remoteDataSource: remoteDataSource

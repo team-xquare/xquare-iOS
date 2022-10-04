@@ -29,6 +29,7 @@ let project = Project(
                 .Module.XWebKit,
                 .Service.AuthService,
                 .Service.MealDataService,
+                .Service.UserService,
                 .SPM.FirebaseMessaging,
                 .SPM.SemicolonDesign,
                 .target(name: "XquareWidget")
