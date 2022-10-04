@@ -24,6 +24,9 @@ class XWebKitState: ObservableObject {
     @Published var alertCancelText: String = ""
     var alertResponse = PublishSubject<Bool>()
 
+    @Published var isErrorAlertPresented: Bool = false
+    @Published var errorMessage: String = ""
+
     init(urlString: String, accessToken: String = "", isPresentated: Binding<Bool>) {
         self.urlString = urlString
         self.accessToken = accessToken

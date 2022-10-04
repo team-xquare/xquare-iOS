@@ -49,6 +49,7 @@ extension ComposedWebView {
         configuration.userContentController.add(self.makeCoordinator(), name: "imageDetail")
         configuration.userContentController.add(self.makeCoordinator(), name: "back")
         configuration.userContentController.add(self.makeCoordinator(), name: "confirm")
+        configuration.userContentController.add(self.makeCoordinator(), name: "error")
     }
 
     private func setEvaluateJavaScript(webView: WKWebView) {
