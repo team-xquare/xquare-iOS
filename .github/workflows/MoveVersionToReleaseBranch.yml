@@ -20,7 +20,7 @@ jobs:
           git config --global user.email 'teamxquare@gmail.com'
           git config pull.rebase false
           git checkout -t origin/release
-          echo $(git merge --squash -Xtheirs origin/develop)
+          echo $(git merge -Xtheirs origin/develop)
           /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${{  github.ref_name }}" Application/SupportingFiles/Info.plist
           /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${{  github.ref_name }}" Application/Widget/SupportingFiles/Info.plist
           git add -A
