@@ -1,12 +1,14 @@
 import SwiftUI
 
 public extension View {
-    func backToMainView(_ isActive: Binding<Bool>) -> some View {
-        self.modifier(BackToMainViewModifier(needToBack: isActive))
+    func backToFirstTab(_ isActive: Binding<Bool>) -> some View {
+        self.modifier(BbackToFirstTabModifier(needToBack: isActive))
     }
 }
 
-struct BackToMainViewModifier: ViewModifier {
+struct BbackToFirstTabModifier: ViewModifier {
+
+    @Environment(\.tabBarSelection) var tabBarSelection
 
     @Binding var needToBack: Bool
 
@@ -14,12 +16,11 @@ struct BackToMainViewModifier: ViewModifier {
         content
             .onChange(of: needToBack) {
                 guard $0 == true else { return }
-                XNavigationAndTabUtil.popToRootView()
-                XNavigationAndTabUtil.moveToFirstTab()
+                self.tabBarSelection.wrappedValue = 0
             }
             .onDisappear {
                 guard needToBack == true else { return }
-                XNavigationAndTabUtil.moveToFirstTab()
+                self.tabBarSelection.wrappedValue = 0
                 needToBack.toggle()
             }
     }
