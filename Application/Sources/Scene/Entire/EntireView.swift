@@ -34,7 +34,6 @@ struct EntireView: View, XNavigationAndTabContent {
                 }
             }
         }
-        .padding(.horizontal, 16)
         .navigationTitle("전체")
     }
 }

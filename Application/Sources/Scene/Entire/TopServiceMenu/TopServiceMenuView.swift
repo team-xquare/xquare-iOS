@@ -14,7 +14,7 @@ struct TopServiceMenuView: View {
             }
         }
         .padding(.top, 20)
-        .padding(.horizontal, 11)
+        .padding(.horizontal, 27)
         .padding(.bottom, 3)
     }
 }

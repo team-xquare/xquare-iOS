@@ -15,5 +15,6 @@ struct ServiceSectionView: View {
                 }
             }
         }
+        .padding(.horizontal, 16)
     }
 }
