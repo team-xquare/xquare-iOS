@@ -4,6 +4,17 @@ import XNavigationAndTab
 
 struct EntireView: View, XNavigationAndTabContent {
 
+    @State var services = [
+        ServiceSection(
+            headerText: "학교",
+            services: ["동아리 지원하기", "오늘의 자습감독 선생님", "랭킹"]
+        ),
+        ServiceSection(
+            headerText: "기숙사",
+            services: ["봉사 지원하기", "청소판 확인하기"]
+        )
+    ]
+
     var tabInformation: TabInformation {
         TabInformation(
             tabItemText: "전체",
@@ -12,13 +23,24 @@ struct EntireView: View, XNavigationAndTabContent {
     }
 
     var body: some View {
-        Text("전체 화면")
-            .navigationTitle("전체")
+        ScrollView {
+            VStack(spacing: 27) {
+                TopServiceMenuView()
+                ForEach(services.indices, id: \.self) { index in
+                    ServiceSectionView(
+                        headerText: services[index].headerText,
+                        services: services[index].services
+                    )
+                }
+            }
+        }
+        .padding(.horizontal, 16)
+        .navigationTitle("전체")
     }
 }
 
-struct EntireView_Previews: PreviewProvider {
-    static var previews: some View {
-        EntireView()
-    }
+// 임시
+struct ServiceSection {
+    var headerText: String
+    var services: [String]
 }
