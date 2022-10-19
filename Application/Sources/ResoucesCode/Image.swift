@@ -8,6 +8,9 @@ extension Image {
 
     // Icon
     static let settingIcon = Image("Setting")
+    static let thumbUpIcon = Image("ThumbUp")
+    static let userIcon = Image("User")
     static let viewMoreIcon = Image("ViewMore")
+    static let warningTriangleIcon = Image("WarningTriangle")
 
 }
