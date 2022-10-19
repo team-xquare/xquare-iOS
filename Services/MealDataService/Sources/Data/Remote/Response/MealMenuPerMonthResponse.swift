@@ -2,9 +2,9 @@ import Foundation
 
 struct MealMenuPerMonthResponse: Decodable {
     let date: String
-    let breakfast: [String]
-    let lunch: [String]
-    let dinner: [String]
+    let breakfast: [String]?
+    let lunch: [String]?
+    let dinner: [String]?
 }
 
 extension MealMenuPerMonthResponse {

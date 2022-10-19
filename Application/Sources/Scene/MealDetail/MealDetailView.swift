@@ -14,6 +14,7 @@ struct MealDetailView: View {
             MealDetailCell(entity: $0)
                 .listRowSeparator(.hidden)
         }
+        .listStyle(.inset)
         .navigationTitle("전체 급식")
         .navigationBarTitleDisplayMode(.large)
         .onAppear {

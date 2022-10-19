@@ -11,7 +11,7 @@ struct MealMenuPerMealTimeView: View {
     init(mealTime: MealTime, menu: [String], kcal: String = "") {
         self.mealTime = mealTime
         self.menu = menu
-        self.kcal = self.menu.removeLast()
+        self.kcal = self.menu.popLast() ?? ""
     }
 
     var body: some View {
@@ -19,17 +19,19 @@ struct MealMenuPerMealTimeView: View {
             alignment: .leading,
             spacing: 6
         ) {
-            HStack(spacing: 8) {
-                Text(mealTime.toString())
-                    .sdText(
-                        type: .body2,
-                        textColor: .GrayScale.gray800
-                    )
-                Text(kcal)
+            if menu != [] {
+                HStack(spacing: 8) {
+                    Text(mealTime.toString())
+                        .sdText(
+                            type: .body2,
+                            textColor: .GrayScale.gray800
+                        )
+                    Text(kcal)
+                        .sdText(type: .body2)
+                }
+                Text(menu.joined(separator: ", "))
                     .sdText(type: .body2)
             }
-            Text(menu.joined(separator: ", "))
-                .sdText(type: .body2)
         }
         .padding(.leading, 16)
     }
