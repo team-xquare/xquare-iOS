@@ -1,6 +1,6 @@
 import Foundation
 
-import RxOfflineCacheModule
+import XOfflineCache
 import Moya
 import RxSwift
 
