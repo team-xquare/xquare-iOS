@@ -8,6 +8,7 @@ public class OfflineCacheUtil<T: Equatable> {
     private var fetchLocalData: (() -> Single<T>)!
     private var fetchRemoteData: (() -> Single<T>)!
     private var refreshLocalData: ((_ remoteData: T) -> Void)!
+    private var isStaticValue: Bool = false
 
     public init() { }
 
@@ -16,8 +17,9 @@ public class OfflineCacheUtil<T: Equatable> {
         return self
     }
 
-    public func remoteData(fetchRemoteData: @escaping () -> Single<T>) -> Self {
+    public func remoteData(fetchRemoteData: @escaping () -> Single<T>, loadOnlyFirstTime: Bool = false) -> Self {
         self.fetchRemoteData = fetchRemoteData
+        self.isStaticValue = loadOnlyFirstTime
         return self
     }
 
@@ -32,10 +34,12 @@ public class OfflineCacheUtil<T: Equatable> {
             do {
                 let local = try await fetchLocalData().value
                 publishSubject.onNext(local)
-                let remote = try await fetchRemoteData().value
-                if local != remote {
-                    publishSubject.onNext(remote)
-                    self.refreshLocalData(remote)
+                if !isStaticValue {
+                    let remote = try await fetchRemoteData().value
+                    if local != remote {
+                        publishSubject.onNext(remote)
+                        self.refreshLocalData(remote)
+                    }
                 }
                 publishSubject.onCompleted()
             } catch {
