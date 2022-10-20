@@ -1,5 +1,6 @@
 import Foundation
 
+import RxCocoa
 import RxSwift
 
 public class OfflineCacheUtil<T: Equatable> {
@@ -26,27 +27,29 @@ public class OfflineCacheUtil<T: Equatable> {
     }
 
     public func createObservable() -> Observable<T> {
-        let local = fetchLocalData()
-            .asObservable()
-            .map { Optional($0) }
-            .catchAndReturn(nil)
-        let remote = fetchRemoteData()
-            .asObservable()
-            .map { Optional($0) }
-        return local
-            .concat(remote)
-            .enumerated()
-            .scan((index: -1, element: nil)) { lastState, newValue in
-                guard lastState.index != -1 else { return newValue }
-                if lastState.element == nil || lastState.element! != newValue.element! {
-                    self.refreshLocalData(newValue.element!)
-                    return newValue
-                } else {
-                    return (newValue.index, nil)
+        let publishSubject = PublishSubject<T>()
+        Task {
+            do {
+                let local = try await fetchLocalData().value
+                publishSubject.onNext(local)
+                let remote = try await fetchRemoteData().value
+                if local != remote {
+                    publishSubject.onNext(remote)
+                    self.refreshLocalData(remote)
+                }
+                publishSubject.onCompleted()
+            } catch {
+                do {
+                    let remote = try await fetchRemoteData().value
+                    publishSubject.onNext(remote)
+                    publishSubject.onCompleted()
+                    self.refreshLocalData(remote)
+                } catch {
+                    publishSubject.onError(error)
                 }
             }
-            .map { $0.element }
-            .compactMap { $0 }
+        }
+        return publishSubject.asObservable()
     }
 
 }
