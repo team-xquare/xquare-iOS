@@ -2,6 +2,7 @@ import Foundation
 
 import AuthService
 import MealDataService
+import UserService
 
 struct AppDependency {
     let launchScreenView: LaunchScreenView
@@ -14,10 +15,12 @@ extension AppDependency {
         // MARK: - ServiceDependency
         let authServiceDependency = AuthServiceDependency.shared
         let mealDataServiceDependency = MealDataServiceDependency.shared
+        let userServiceDependency = UserServiceDependency.shared
 
         // MARK: - ViewModels
         let homeViewModel = HomeViewModel(
-            fetchMealMenuPerDayUseCase: mealDataServiceDependency.fetchDayToMealMenuUseCase
+            fetchMealMenuPerDayUseCase: mealDataServiceDependency.fetchDayToMealMenuUseCase,
+            fetchUserPointUseCase: userServiceDependency.fetchUserPointUseCase
         )
         let applicationViewModel = ApplicationViewModel(
             fetchAccessTokenUseCase: authServiceDependency.fetchAccessTokenUseCase
