@@ -1,6 +1,5 @@
 import Foundation
 
-import RxCocoa
 import RxSwift
 
 public class OfflineCacheUtil<T: Equatable> {
