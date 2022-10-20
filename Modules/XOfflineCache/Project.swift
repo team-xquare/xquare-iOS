@@ -2,7 +2,7 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.framework(
-    name: "RxOfflineCacheModule",
+    name: "XOfflineCache",
     platform: .iOS,
     dependencies: []
 )
