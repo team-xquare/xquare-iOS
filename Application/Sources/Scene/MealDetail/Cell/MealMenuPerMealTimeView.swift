@@ -7,11 +7,11 @@ struct MealMenuPerMealTimeView: View {
     var entity: MealMenuEntity
 
     var body: some View {
-        VStack(
-            alignment: .leading,
-            spacing: 6
-        ) {
-            if entity.menu != [] {
+        if entity.menu != [] {
+            VStack(
+                alignment: .leading,
+                spacing: 6
+            ) {
                 HStack(spacing: 8) {
                     Text(entity.mealTime.toString())
                         .sdText(
@@ -32,8 +32,8 @@ struct MealMenuPerMealTimeView: View {
                         .sdText(type: .body2)
                 }
             }
+            .padding(.leading, 16)
         }
-        .padding(.leading, 16)
     }
 }
 

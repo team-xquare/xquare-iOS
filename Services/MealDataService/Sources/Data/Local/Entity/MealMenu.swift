@@ -5,6 +5,9 @@ struct MealMenu: Equatable {
     let breakfast: String
     let lunch: String
     let dinner: String
+    let breakfastKcal: String
+    let lunchKcal: String
+    let dinnerKcal: String
 }
 
 extension MealMenu {
@@ -12,9 +15,9 @@ extension MealMenu {
         return .init(
             date: day,
             menu: [
-                .init(mealTime: .breakfast, menu: breakfast.components(separatedBy: ", "), kcal: ""),
-                .init(mealTime: .lunch, menu: lunch.components(separatedBy: ", "), kcal: ""),
-                .init(mealTime: .dinner, menu: dinner.components(separatedBy: ", "), kcal: "")
+                .init(mealTime: .breakfast, menu: breakfast.components(separatedBy: ", "), kcal: breakfastKcal),
+                .init(mealTime: .lunch, menu: lunch.components(separatedBy: ", "), kcal: lunchKcal),
+                .init(mealTime: .dinner, menu: dinner.components(separatedBy: ", "), kcal: dinnerKcal)
             ]
         )
     }

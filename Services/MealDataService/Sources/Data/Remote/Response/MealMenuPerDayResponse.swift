@@ -1,9 +1,9 @@
 import Foundation
 
 struct MealMenuPerDayResponse: Decodable {
-    let breakfast: [String]?
-    let lunch: [String]?
-    let dinner: [String]?
+    var breakfast: [String]?
+    var lunch: [String]?
+    var dinner: [String]?
 }
 
 extension MealMenuPerDayResponse {
@@ -12,9 +12,9 @@ extension MealMenuPerDayResponse {
         return .init(
             date: date,
             menu: [
-                .init(mealTime: .breakfast, menu: breakfast, kcal: ""),
-                .init(mealTime: .lunch, menu: lunch, kcal: ""),
-                .init(mealTime: .dinner, menu: dinner, kcal: "")
+                .init(mealTime: .breakfast, menu: breakfast?.dropLast(), kcal: dinner?.popLast() ?? ""),
+                .init(mealTime: .lunch, menu: lunch?.dropLast(), kcal: dinner?.popLast() ?? ""),
+                .init(mealTime: .dinner, menu: dinner?.dropLast(), kcal: dinner?.popLast() ?? "")
             ]
         )
     }
