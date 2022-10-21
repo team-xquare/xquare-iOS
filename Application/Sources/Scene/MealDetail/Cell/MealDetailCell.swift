@@ -18,7 +18,8 @@ struct MealDetailCell: View {
                 ForEach(entity.menu, id: \.mealTime) {
                     MealMenuPerMealTimeView(
                         mealTime: $0.mealTime,
-                        menu: $0.menu ?? []
+                        menu: $0.menu ?? [],
+                        kcal: $0.kcal
                     )
                 }
             }
@@ -36,9 +37,9 @@ struct MealDetailCellView_Previews: PreviewProvider {
         MealDetailCell(entity: .init(
             date: Date(),
             menu: [
-                .init(mealTime: .breakfast, menu: ["밥"]),
-                .init(mealTime: .lunch, menu: ["밥"]),
-                .init(mealTime: .dinner, menu: ["밥"])
+                .init(mealTime: .breakfast, menu: ["밥"], kcal: ""),
+            .init(mealTime: .lunch, menu: ["밥"], kcal: ""),
+                .init(mealTime: .dinner, menu: ["밥"], kcal: "")
             ]))
     }
 }

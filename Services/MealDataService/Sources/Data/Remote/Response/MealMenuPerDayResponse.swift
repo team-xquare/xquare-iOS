@@ -12,9 +12,9 @@ extension MealMenuPerDayResponse {
         return .init(
             date: date,
             menu: [
-                .init(mealTime: .breakfast, menu: breakfast),
-                .init(mealTime: .lunch, menu: lunch),
-                .init(mealTime: .dinner, menu: dinner)
+                .init(mealTime: .breakfast, menu: breakfast, kcal: ""),
+                .init(mealTime: .lunch, menu: lunch, kcal: ""),
+                .init(mealTime: .dinner, menu: dinner, kcal: "")
             ]
         )
     }

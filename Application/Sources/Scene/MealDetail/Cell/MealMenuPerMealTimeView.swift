@@ -30,7 +30,15 @@ struct MealMenuPerMealTimeView: View {
                         .sdText(type: .body2)
                 }
                 Text(menu.joined(separator: ", "))
-                    .sdText(type: .body2)
+                HStack(spacing: 8) {
+                    Text(mealTime.toString())
+                        .sdText(
+                            type: .body2,
+                            textColor: .GrayScale.gray800
+                        )
+                    Text("\(kcal)kcal")
+                        .sdText(type: .body2)
+                }
             }
         }
         .padding(.leading, 16)
@@ -41,7 +49,8 @@ struct MealMenuPerTimeView_Previews: PreviewProvider {
     static var previews: some View {
         MealMenuPerMealTimeView(
             mealTime: .breakfast,
-            menu: ["밥", "국", "찌개"]
+            menu: ["밥", "국", "찌개"],
+            kcal: "19.5kcal"
         )
     }
 }
