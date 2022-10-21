@@ -14,6 +14,10 @@ class OfflineCacheUtilSpec: QuickSpec {
     override func spec() {
         describe("데이터를 불러올때") {
 
+            beforeEach {
+                self.localData = nil
+            }
+
             context("로컬 데이터에서 오류가 발생한다면") {
                 beforeEach {
                     _ = self.offlineCacheUtil
@@ -25,18 +29,15 @@ class OfflineCacheUtilSpec: QuickSpec {
                     expect(self.offlineCacheUtil.createObservable()).array == ["data"]
                 }
                 it("새 데이터를 로컬에 저장해야 한다.") {
-                    let remoteData = try self.offlineCacheUtil
-                        .createObservable()
-                        .toBlocking()
-                        .last()!
-                    expect(self.localData) == remoteData
+                    _ = self.offlineCacheUtil.createObservable().toBlocking().materialize()
+                    expect(self.localData) == "data"
                 }
             }
 
             context("리모트 테이터가 로컬 데이터와 같다면") {
                 beforeEach {
                     _ = self.offlineCacheUtil
-                        .localData { Single.just(self.localData) }
+                        .localData { Single.just("data") }
                         .remoteData { Single.just("data") }
                         .doOnNeedRefresh { self.localData = $0 }
                 }
@@ -48,7 +49,7 @@ class OfflineCacheUtilSpec: QuickSpec {
             context("리모트 테이터가 로컬 데이터와 다르다면") {
                 beforeEach {
                     _ = self.offlineCacheUtil
-                        .localData { Single.just(self.localData) }
+                        .localData { Single.just("data") }
                         .remoteData { Single.just("datadata") }
                         .doOnNeedRefresh { self.localData = $0 }
                 }
@@ -56,11 +57,8 @@ class OfflineCacheUtilSpec: QuickSpec {
                     expect(self.offlineCacheUtil.createObservable()).array == ["data", "datadata"]
                 }
                 it("새 데이터를 로컬에 저장해야 한다.") {
-                    let remoteData = try self.offlineCacheUtil
-                        .createObservable()
-                        .toBlocking()
-                        .last()!
-                    expect(self.localData) == remoteData
+                    _ = self.offlineCacheUtil.createObservable().toBlocking().materialize()
+                    expect(self.localData) == "datadata"
                 }
             }
 
