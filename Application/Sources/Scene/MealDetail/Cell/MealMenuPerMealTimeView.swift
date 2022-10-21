@@ -4,39 +4,31 @@ import SemicolonDesign
 import MealDataService
 
 struct MealMenuPerMealTimeView: View {
-    var mealTime: MealTime
-    var menu: [String]
-    var kcal: String
-
-    init(mealTime: MealTime, menu: [String], kcal: String = "") {
-        self.mealTime = mealTime
-        self.menu = menu
-        self.kcal = self.menu.popLast() ?? ""
-    }
+    var entity: MealMenuEntity
 
     var body: some View {
         VStack(
             alignment: .leading,
             spacing: 6
         ) {
-            if menu != [] {
+            if entity.menu != [] {
                 HStack(spacing: 8) {
-                    Text(mealTime.toString())
+                    Text(entity.mealTime.toString())
                         .sdText(
                             type: .body2,
                             textColor: .GrayScale.gray800
                         )
-                    Text(kcal)
+                    Text(entity.kcal)
                         .sdText(type: .body2)
                 }
-                Text(menu.joined(separator: ", "))
+                Text(entity.menu?.joined(separator: ", ") ?? "")
                 HStack(spacing: 8) {
-                    Text(mealTime.toString())
+                    Text(entity.mealTime.toString())
                         .sdText(
                             type: .body2,
                             textColor: .GrayScale.gray800
                         )
-                    Text("\(kcal)kcal")
+                    Text("\(entity.kcal)kcal")
                         .sdText(type: .body2)
                 }
             }
@@ -48,9 +40,11 @@ struct MealMenuPerMealTimeView: View {
 struct MealMenuPerTimeView_Previews: PreviewProvider {
     static var previews: some View {
         MealMenuPerMealTimeView(
-            mealTime: .breakfast,
-            menu: ["밥", "국", "찌개"],
-            kcal: "19.5kcal"
+            entity: .init(
+                mealTime: .breakfast,
+                menu: ["밥", "국", "찌개"],
+                kcal: ""
+            )
         )
     }
 }

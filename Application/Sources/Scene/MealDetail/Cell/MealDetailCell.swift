@@ -17,9 +17,7 @@ struct MealDetailCell: View {
                     .padding(.leading, 16)
                 ForEach(entity.menu, id: \.mealTime) {
                     MealMenuPerMealTimeView(
-                        mealTime: $0.mealTime,
-                        menu: $0.menu ?? [],
-                        kcal: $0.kcal
+                        entity: $0
                     )
                 }
             }
