@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "DMS1x.png",
+      "filename" : "DDYZD1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "DMS2x.png",
+      "filename" : "DDYZD2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "DMS3x.png",
+      "filename" : "DDYZD3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
