@@ -18,19 +18,10 @@ struct MealMenuPerMealTimeView: View {
                             type: .body2,
                             textColor: .GrayScale.gray800
                         )
-                    Text(entity.kcal)
+                    Text(entity.kcal ?? "")
                         .sdText(type: .body2)
                 }
                 Text(entity.menu?.joined(separator: ", ") ?? "")
-                HStack(spacing: 8) {
-                    Text(entity.mealTime.toString())
-                        .sdText(
-                            type: .body2,
-                            textColor: .GrayScale.gray800
-                        )
-                    Text("\(entity.kcal)kcal")
-                        .sdText(type: .body2)
-                }
             }
             .padding(.leading, 16)
         }
