@@ -10,7 +10,7 @@ struct MealMenuPerMealTimeView: View {
         if entity.menu != nil {
             VStack(
                 alignment: .leading,
-                spacing: 6
+                spacing: 0
             ) {
                 HStack(spacing: 8) {
                     Text(entity.mealTime.toString())
@@ -19,9 +19,14 @@ struct MealMenuPerMealTimeView: View {
                             textColor: .GrayScale.gray800
                         )
                     Text(entity.kcal ?? "")
-                        .sdText(type: .body2)
+                        .sdText(type: .body4)
                 }
+                .padding(.bottom, 4)
                 Text(entity.menu?.joined(separator: ", ") ?? "")
+                    .sdText(
+                        type: .body4,
+                        textColor: .GrayScale.gray900
+                    )
             }
             .padding(.leading, 16)
         }

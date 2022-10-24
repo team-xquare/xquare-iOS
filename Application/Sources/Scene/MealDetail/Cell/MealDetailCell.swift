@@ -10,15 +10,17 @@ struct MealDetailCell: View {
         HStack {
             VStack(
                 alignment: .leading,
-                spacing: 10
+                spacing: 0
             ) {
                 Text(entity.date.toString(format: "M월 d일 (E)"))
-                    .sdText(type: .body1)
+                    .sdText(type: .body1, textColor: .GrayScale.gray900)
                     .padding(.leading, 16)
+                    .padding(.bottom, 10)
                 ForEach(entity.menu, id: \.mealTime) {
                     MealMenuPerMealTimeView(
                         entity: $0
                     )
+                    .padding(.bottom, 8)
                 }
             }
             Spacer()

@@ -5,7 +5,7 @@ struct MealMenuPerDayResponse: Decodable {
         case breakfast
         case lunch
         case dinner
-        case breakfastKcal = "breakfaset_kcal"
+        case breakfastKcal = "breakfast_kcal"
         case lunchKcal = "lunch_kcal"
         case dinnerKcal = "dinner_kcal"
     }

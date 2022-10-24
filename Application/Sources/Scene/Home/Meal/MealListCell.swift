@@ -9,8 +9,16 @@ struct MealListCell: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(entity.mealTime.toString())
-                .sdText(type: .body2)
+            HStack(spacing: 0) {
+                Text(entity.mealTime.toString())
+                    .sdText(
+                        type: .body2,
+                        textColor: .GrayScale.gray800
+                    )
+                    .padding(.trailing, 10)
+                Text(entity.kcal ?? "")
+                    .sdText(type: .body4)
+            }
             Spacer().frame(height: 8)
             ForEach(
                 entity.menu ?? ["등록된 정보가 없습니다."],
@@ -19,7 +27,6 @@ struct MealListCell: View {
                 Text(menu).sdText(type: .body4)
                 Spacer().frame(height: 0)
             }
-            Text(entity.kcal ?? "").sdText(type: .body4)
             Spacer()
         }
         .padding(EdgeInsets(top: 12, leading: 16, bottom: 0, trailing: 16))
