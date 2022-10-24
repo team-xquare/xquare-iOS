@@ -38,7 +38,9 @@ extension WebViewCoordinator {
 
     private func processNavigateBridge(_ messageBody: Any) {
         guard let messageBodyAsString = messageBody as? String else { return }
-        self.parent.state.naviagteLink = parent.state.urlString+messageBodyAsString
+        let messageBodyAsDictionary = messageBodyAsString.convertToDictionary()
+        self.parent.state.naviagteLink = parent.state.urlString+(messageBodyAsDictionary["url"] ?? "")
+        self.parent.state.naviagteTitle = messageBodyAsDictionary["title"] ?? ""
         self.parent.state.needsToNavigate = true
     }
 
