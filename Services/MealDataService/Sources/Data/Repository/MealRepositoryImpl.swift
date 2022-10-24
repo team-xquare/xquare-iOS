@@ -72,13 +72,13 @@ extension MealRepositoryImpl {
             switch menu.mealTime {
             case .breakfast:
                 breakfast = menu.menu?.joined(separator: ", ") ?? ""
-                breakfaseKcal = menu.kcal
+                breakfaseKcal = menu.kcal ?? ""
             case .lunch:
                 lunch = menu.menu?.joined(separator: ", ") ?? ""
-                lunchKcal = menu.kcal
+                lunchKcal = menu.kcal ?? ""
             case .dinner:
                 dinner = menu.menu?.joined(separator: ", ") ?? ""
-                dinnerKcal = menu.kcal
+                dinnerKcal = menu.kcal ?? ""
             }
         }
         return MealMenu(

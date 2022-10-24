@@ -115,7 +115,7 @@ class MealDataServiceSQLiteTask {
 
         while sqlite3_step(statement) == SQLITE_ROW {
             menu = String(cString: sqlite3_column_text(statement, 1))
-            kcal = String(cString: sqlite3_column_text(statement, 2))
+//            kcal = String(cString: sqlite3_column_text(statement, 2))
         }
 
         let menuList = Array(menu.components(separatedBy: "/"))
@@ -178,7 +178,7 @@ class MealDataServiceSQLiteTask {
         while sqlite3_step(statement) == SQLITE_ROW {
             let date = String(cString: sqlite3_column_text(statement, 0))
             let menu = Array(String(cString: sqlite3_column_text(statement, 1)).components(separatedBy: ", "))
-            let kcal = Array(String(cString: sqlite3_column_text(statement, 2)))
+//            let kcal = Array(String(cString: sqlite3_column_text(statement, 2)))
             var breakfast = ""
             var lunch = ""
             var dinner = ""
@@ -200,9 +200,9 @@ class MealDataServiceSQLiteTask {
                     breakfast: breakfast,
                     lunch: lunch,
                     dinner: dinner,
-                    breakfastKcal: <#T##String#>,
-                    lunchKcal: <#T##String#>,
-                    dinnerKcal: <#T##String#>
+                    breakfastKcal: "",
+                    lunchKcal: "",
+                    dinnerKcal: ""
                 ))
         }
 
