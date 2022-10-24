@@ -24,9 +24,9 @@ extension MealMenuPerMonthResponse {
         return .init(
             date: date.toDate(format: .fullDate),
             menu: [
-                .init(mealTime: .breakfast, menu: breakfast, kcal: breakfastKcal ?? ""),
-                .init(mealTime: .lunch, menu: lunch, kcal: lunchKcal ?? ""),
-                .init(mealTime: .dinner, menu: dinner, kcal: dinnerKcal ?? "")
+                .init(mealTime: .breakfast, menu: breakfast, kcal: breakfastKcal),
+                .init(mealTime: .lunch, menu: lunch, kcal: lunchKcal),
+                .init(mealTime: .dinner, menu: dinner, kcal: dinnerKcal)
             ]
         )
     }

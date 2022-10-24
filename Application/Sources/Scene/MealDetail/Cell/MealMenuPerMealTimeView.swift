@@ -7,7 +7,7 @@ struct MealMenuPerMealTimeView: View {
     var entity: MealMenuEntity
 
     var body: some View {
-        if entity.menu != [] {
+        if entity.menu != nil {
             VStack(
                 alignment: .leading,
                 spacing: 6
@@ -33,7 +33,7 @@ struct MealMenuPerTimeView_Previews: PreviewProvider {
         MealMenuPerMealTimeView(
             entity: .init(
                 mealTime: .breakfast,
-                menu: ["밥", "국", "찌개"],
+                menu: ["dsf"],
                 kcal: ""
             )
         )
