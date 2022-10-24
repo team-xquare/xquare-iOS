@@ -1,5 +1,8 @@
 import SwiftUI
 
+import AuthService
+import MealDataService
+
 struct MealDetailView: View {
     @StateObject var viewModel: MealDetailViewModel
 
@@ -11,14 +14,21 @@ struct MealDetailView: View {
             MealDetailCell(entity: $0)
                 .listRowSeparator(.hidden)
         }
+        .listStyle(.inset)
         .navigationTitle("전체 급식")
         .navigationBarTitleDisplayMode(.large)
+        .onAppear {
+            viewModel.fetchMealMenuPerMonth()
+        }
     }
 }
 
 struct MealDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = MealDetailViewModel()
+        let mealDataService = MealDataServiceDependency.shared
+        let viewModel = MealDetailViewModel(
+            fetchMealMenuPerMonthUseCase: mealDataService.fetchMonthToMealMenuUseCase
+        )
         MealDetailView(viewModel: viewModel)
     }
 }
