@@ -4,9 +4,9 @@ import RxSwift
 
 public class OfflineCacheUtil<T: Equatable> {
 
-    private var isStaticValue: Bool!
     private var fetchLocalData: (() -> Single<T>)!
     private var fetchRemoteData: (() -> Single<T>)!
+    private var isStaticData: Bool!
     private var refreshLocalData: ((_ remoteData: T) -> Void)!
 
     public init() { }
@@ -18,7 +18,7 @@ public class OfflineCacheUtil<T: Equatable> {
 
     public func remoteData(loadOnlyFirstTime: Bool = false, fetchRemoteData: @escaping () -> Single<T>) -> Self {
         self.fetchRemoteData = fetchRemoteData
-        self.isStaticValue = loadOnlyFirstTime
+        self.isStaticData = loadOnlyFirstTime
         return self
     }
 
@@ -33,7 +33,7 @@ public class OfflineCacheUtil<T: Equatable> {
             do {
                 let local = try await fetchLocalData().value
                 publishSubject.onNext(local)
-                if !isStaticValue {
+                if !isStaticData {
                     let remote = try await fetchRemoteData().value
                     if local != remote {
                         publishSubject.onNext(remote)
