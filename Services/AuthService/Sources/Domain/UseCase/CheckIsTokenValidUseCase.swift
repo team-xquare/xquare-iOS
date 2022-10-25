@@ -10,7 +10,7 @@ public class CheckIsTokenValidUseCase {
 
     public func excute() throws -> Bool {
         let expiredDate = try self.authRepository.fetchTokenExpiredDate()
-        return Date() <= expiredDate
+        return Date() >= expiredDate
     }
 
 }
