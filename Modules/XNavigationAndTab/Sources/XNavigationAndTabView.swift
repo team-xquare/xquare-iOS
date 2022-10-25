@@ -81,6 +81,7 @@ public struct XNavigationAndTabView: View {
                 .accentColor(.GrayScale.gray800)
             }
         }
+        .environment(\.tabBarSelection, bindedTabViewSelection ?? $tabViewSelection)
     }
 
     var tabview: some View {

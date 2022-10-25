@@ -1,17 +1,15 @@
 import SwiftUI
 
-enum OnboardingImage: CaseIterable {
-    case dms
-
-    var image: Image {
-        switch self {
-        case .dms: return .onboardingDms
-        }
-    }
-
-}
-
 struct OnboardingImageViewer: View {
+
+    private let onboardingViews: [(image: Image, color: Color)] = [
+        (.onboardingDms, .onboardingDms),
+        (.onboardingDnms, .onboardingDnms),
+        (.onboardingDdyzd, .onboardingDdyzd),
+        (.onboardingJobits, .onboardingJobits),
+        (.onboardingXquare, .onboardingXquare)
+    ]
+
     init() {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(.Primary.purple400)
         UIPageControl.appearance().pageIndicatorTintColor = UIColor(.GrayScale.gray200)
@@ -19,12 +17,16 @@ struct OnboardingImageViewer: View {
 
     var body: some View {
         TabView {
-            ForEach(OnboardingImage.allCases, id: \.self) { image in
+            ForEach(self.onboardingViews.indices, id: \.self) { index in
                 VStack {
-                    image.image
-                        .resizable()
-                        .ignoresSafeArea(edges: .top)
-                        .scaledToFill()
+                    ZStack(alignment: .center) {
+                        onboardingViews[index].color
+                            .ignoresSafeArea(edges: .top)
+                        onboardingViews[index].image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .padding(.horizontal, 60)
+                    }
                     Spacer().frame(height: 56)
                 }
             }

@@ -1,24 +1,35 @@
 import SwiftUI
 
+import AuthService
+import MealDataService
+
 struct MealDetailView: View {
+
     @StateObject var viewModel: MealDetailViewModel
+    @State var isReady: Bool = false
 
     var body: some View {
-        List(
-            viewModel.menu,
-            id: \.date
-        ) {
-            MealDetailCell(entity: $0)
-                .listRowSeparator(.hidden)
+        VStack {
+            ScrollViewReader { proxy in
+                ScrollView {
+                    LazyVStack(spacing: 16) {
+                        ForEach(viewModel.menu, id: \.date) {
+                            MealDetailCell(entity: $0)
+                        }
+                    }
+                }
+                .opacity(isReady ? 1 : 0)
+                .onChange(of: self.viewModel.dateToShowData) {
+                    proxy.scrollTo($0, anchor: .top)
+                    withAnimation(Animation.easeInOut.delay(0.3)) {
+                        self.isReady = true
+                    }
+                }
+            }
+            .navigationTitle("전체 급식")
+            .onAppear {
+                viewModel.fetchMealMenuPerMonth()
+            }
         }
-        .navigationTitle("전체 급식")
-        .navigationBarTitleDisplayMode(.large)
-    }
-}
-
-struct MealDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = MealDetailViewModel()
-        MealDetailView(viewModel: viewModel)
     }
 }

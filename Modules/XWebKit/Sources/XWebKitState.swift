@@ -11,6 +11,7 @@ class XWebKitState: ObservableObject {
     @Published var loadingProgress: Double = 0.0
 
     @Published var needsToNavigate: Bool = false
+    @Published var naviagteTitle: String = ""
     @Published var naviagteLink: String = ""
 
     @Published var isImageViewerPresented: Bool = false

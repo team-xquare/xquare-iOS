@@ -32,7 +32,7 @@ extension MealAPI: XquareAPI {
         case .fetchMealMenuPerMonth(let request):
             return .requestParameters(
                 parameters: [
-                    "yaer": request.year,
+                    "year": request.year,
                     "month": request.month
                 ], encoding: URLEncoding.queryString
             )
