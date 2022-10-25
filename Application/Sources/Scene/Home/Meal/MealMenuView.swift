@@ -31,8 +31,7 @@ struct MealMenuView: View {
                     Spacer().frame(width: 8)
                     ForEach(menu, id: \.mealTime) {
                         MealListCell(
-                            mealTime: $0.mealTime.rawValue,
-                            menu: $0.menu ?? ["등록된 급식 정보가 없어요."]
+                            entity: $0
                         )
                     }
                     Spacer().frame(width: 8)

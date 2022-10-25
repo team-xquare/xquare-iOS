@@ -10,17 +10,17 @@ struct MealDetailCell: View {
         HStack {
             VStack(
                 alignment: .leading,
-                spacing: 10
+                spacing: 0
             ) {
                 Text(entity.date.toString(format: "M월 d일 (E)"))
-                    .sdText(type: .body1)
+                    .sdText(type: .body1, textColor: .GrayScale.gray900)
                     .padding(.leading, 16)
+                    .padding(.bottom, 10)
                 ForEach(entity.menu, id: \.mealTime) {
                     MealMenuPerMealTimeView(
-                        mealTime: $0.mealTime,
-                        kcal: 10.0,
-                        menu: $0.menu ?? []
+                        entity: $0
                     )
+                    .padding(.bottom, 8)
                 }
             }
             Spacer()
@@ -37,9 +37,9 @@ struct MealDetailCellView_Previews: PreviewProvider {
         MealDetailCell(entity: .init(
             date: Date(),
             menu: [
-                .init(mealTime: .breakfast, menu: ["밥"]),
-                .init(mealTime: .lunch, menu: ["밥"]),
-                .init(mealTime: .dinner, menu: ["밥"])
+                .init(mealTime: .breakfast, menu: ["밥"], kcal: ""),
+            .init(mealTime: .lunch, menu: ["밥"], kcal: ""),
+                .init(mealTime: .dinner, menu: ["밥"], kcal: "")
             ]))
     }
 }

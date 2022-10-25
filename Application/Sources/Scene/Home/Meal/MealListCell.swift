@@ -1,16 +1,29 @@
 import SwiftUI
+
+import MealDataService
 import SemicolonDesign
 
 struct MealListCell: View {
 
-    var mealTime: String
-    var menu: [String]
+    var entity: MealMenuEntity
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(mealTime).sdText(type: .body2)
+            HStack(spacing: 0) {
+                Text(entity.mealTime.toString())
+                    .sdText(
+                        type: .body2,
+                        textColor: .GrayScale.gray800
+                    )
+                    .padding(.trailing, 10)
+                Text(entity.kcal ?? "")
+                    .sdText(type: .body4)
+            }
             Spacer().frame(height: 8)
-            ForEach(menu, id: \.self) { menu in
+            ForEach(
+                entity.menu ?? ["등록된 정보가 없습니다."],
+                id: \.self
+            ) { menu in
                 Text(menu).sdText(type: .body4)
                 Spacer().frame(height: 0)
             }
@@ -25,6 +38,9 @@ struct MealListCell: View {
 
 struct MealListCell_Previews: PreviewProvider {
     static var previews: some View {
-        MealListCell(mealTime: "아침", menu: ["치킨텐더/머스타드", "훈제황금린", "수리취찰떡", "시리얼/우유", "배동동식혜"])
+        MealListCell(entity: .init(
+            mealTime: .breakfast,
+            menu: ["치킨텐더/머스타드", "훈제황금린", "수리취찰떡", "시리얼/우유", "배동동식혜"],
+            kcal: "123 kcal"))
     }
 }
