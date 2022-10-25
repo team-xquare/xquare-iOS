@@ -28,7 +28,7 @@ class LoaclTokenDataSourceImpl: LoaclTokenDataSource {
     }
 
     func fetchExpiredDate() -> Date? {
-        self.keychain.get(.expiredAt)?.toDate(format: .fullDateWithTime)
+        return self.keychain.get(.expiredAt)?.toDate(format: .fullDateWithTime)
     }
 
 }

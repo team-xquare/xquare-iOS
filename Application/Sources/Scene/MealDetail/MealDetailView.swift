@@ -15,7 +15,7 @@ struct MealDetailView: View {
                     LazyVStack(spacing: 0) {
                         ForEach(viewModel.menu, id: \.date) {
                             MealDetailCell(entity: $0)
-                                .padding(.vertical, 16)
+                                .padding(.top, 16)
                         }
                     }
                 }
