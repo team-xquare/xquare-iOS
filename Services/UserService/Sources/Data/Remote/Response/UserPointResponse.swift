@@ -8,7 +8,7 @@ struct UserPointResponse: Decodable {
         case badPoint = "bad_point"
     }
     let name: String
-    let profileFileName: String
+    let profileFileName: String?
     let goodPoint: Int
     let badPoint: Int
 }
