@@ -26,22 +26,23 @@ public struct XWebKitView: View {
 
     public var body: some View {
         ZStack {
-            ComposedWebView(state: state)
-            if state.loadingProgress != 1 {
+            ComposedWebView(state: self.state)
+            if self.state.loadingProgress != 1 {
                 VStack {
-                    ProgressView(value: state.loadingProgress)
+                    ProgressView(value: self.state.loadingProgress)
                         .progressViewStyle(XWebKitProgressViewStyle())
                     Spacer()
                 }
             }
             NavigationLink(
-                isActive: $state.needsToNavigate,
+                isActive: self.$state.needsToNavigate,
                 destination: {
                     XWebKitView(
-                        urlString: state.naviagteLink,
-                        accessToken: state.accessToken,
-                        isPresentated: $state.needsToNavigate
+                        urlString: self.state.naviagteLink,
+                        accessToken: self.state.accessToken,
+                        isPresentated: self.$state.needsToNavigate
                     )
+                    .navigationTitle(self.state.naviagteTitle)
                     .navigationBarTitleDisplayMode(.inline)
                 },
                 label: { EmptyView() }

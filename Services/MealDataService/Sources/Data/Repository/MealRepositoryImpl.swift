@@ -65,21 +65,30 @@ extension MealRepositoryImpl {
         var breakfast: String = ""
         var lunch: String = ""
         var dinner: String = ""
+        var breakfaseKcal: String = ""
+        var lunchKcal: String = ""
+        var dinnerKcal: String = ""
         for menu in menu.menu {
             switch menu.mealTime {
             case .breakfast:
                 breakfast = menu.menu?.joined(separator: ", ") ?? ""
+                breakfaseKcal = menu.kcal ?? ""
             case .lunch:
                 lunch = menu.menu?.joined(separator: ", ") ?? ""
+                lunchKcal = menu.kcal ?? ""
             case .dinner:
                 dinner = menu.menu?.joined(separator: ", ") ?? ""
+                dinnerKcal = menu.kcal ?? ""
             }
         }
         return MealMenu(
             day: menu.date,
             breakfast: breakfast,
             lunch: lunch,
-            dinner: dinner
+            dinner: dinner,
+            breakfastKcal: breakfaseKcal,
+            lunchKcal: lunchKcal,
+            dinnerKcal: dinnerKcal
         )
     }
 }

@@ -34,7 +34,9 @@ extension AppDependency {
         let launchScreenViewModel = LaunchScreenViewModel(
             refreshTokenUseCase: authServiceDependency.refreshTokenUseCase
         )
-        let mealDetailViewModel = MealDetailViewModel()
+        let mealDetailViewModel = MealDetailViewModel(
+            fetchMealMenuPerMonthUseCase: mealDataServiceDependency.fetchMonthToMealMenuUseCase
+        )
 
         // MARK: - Views
         let mealDetailView = MealDetailView(viewModel: mealDetailViewModel)
