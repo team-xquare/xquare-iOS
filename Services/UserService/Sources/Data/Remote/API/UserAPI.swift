@@ -28,7 +28,7 @@ extension UserAPI: XquareAPI {
         case .fetchFCMToken:
             return "/device-token"
         case .fetchExcludedUserList, .fetchUserPoint:
-            return "/exclude"
+            return "/points"
         default:
             return ""
         }
