@@ -1,6 +1,6 @@
 import Foundation
 
-struct UserPointResponse: Decodable {
+struct UserSimpleInformationResponse: Decodable {
     private enum CodingKeys: String, CodingKey {
         case name
         case profileFileName = "profile_file_name"
@@ -13,11 +13,11 @@ struct UserPointResponse: Decodable {
     let badPoint: Int
 }
 
-extension UserPointResponse {
-    func toDomain() -> UserPointEntity {
+extension UserSimpleInformationResponse {
+    func toDomain() -> UserSimpleInformation {
         return .init(
             name: name,
-            profileFileName: profileFileName,
+            profileFileName: profileFileName ?? "",
             goodPoint: goodPoint,
             badPoint: badPoint
         )

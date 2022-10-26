@@ -2,7 +2,7 @@ import Foundation
 
 import RxSwift
 
-public class FetchUserPointUseCase {
+public class FetchUserSimpleInformationUseCase {
 
     private let repository: UserRepository
 
@@ -10,7 +10,7 @@ public class FetchUserPointUseCase {
         self.repository = repository
     }
 
-    public func excute() -> Single<UserPointEntity> {
-        return repository.fetchUserPoint()
+    public func excute() -> Single<UserSimpleInformation> {
+        return repository.fetchUserSimpleInformation()
     }
 }

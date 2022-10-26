@@ -20,7 +20,7 @@ extension AppDependency {
         // MARK: - ViewModels
         let homeViewModel = HomeViewModel(
             fetchMealMenuPerDayUseCase: mealDataServiceDependency.fetchDayToMealMenuUseCase,
-            fetchUserPointUseCase: userServiceDependency.fetchUserPointUseCase
+            fetchUserPointUseCase: userServiceDependency.fetchUserSimpleInformationUseCase
         )
         let applicationViewModel = ApplicationViewModel(
             fetchAccessTokenUseCase: authServiceDependency.fetchAccessTokenUseCase

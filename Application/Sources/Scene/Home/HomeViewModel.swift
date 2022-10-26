@@ -15,11 +15,11 @@ class HomeViewModel: ObservableObject {
     @Published var menu: [MealMenuEntity] = []
 
     private let fetchMealMenuPerDayUseCase: FetchMealMenuPerDayUseCase
-    private let fetchUserPointUseCase: FetchUserPointUseCase
+    private let fetchUserPointUseCase: FetchUserSimpleInformationUseCase
 
     init(
         fetchMealMenuPerDayUseCase: FetchMealMenuPerDayUseCase,
-        fetchUserPointUseCase: FetchUserPointUseCase
+        fetchUserPointUseCase: FetchUserSimpleInformationUseCase
     ) {
         self.fetchMealMenuPerDayUseCase = fetchMealMenuPerDayUseCase
         self.fetchUserPointUseCase = fetchUserPointUseCase
@@ -38,7 +38,7 @@ class HomeViewModel: ObservableObject {
             .asObservable()
             .subscribe(onNext: {
                 self.name = $0.name
-//                self.imageUrl = $0.profileFileName
+                self.imageUrl = $0.profileFileName
                 self.merit = $0.goodPoint
                 self.demerit = $0.badPoint
             }).disposed(by: disposeBag)
