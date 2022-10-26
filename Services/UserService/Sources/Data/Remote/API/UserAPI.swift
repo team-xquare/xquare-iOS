@@ -10,7 +10,7 @@ enum UserAPI {
     case fetchUserListByClass(grade: Int, classNumber: Int)
     case fetchFCMToken(users: [String])
     case fetchExcludedUserList(users: [String])
-    case fetchUserPoint
+    case fetchUserSimpleInformation
 }
 
 extension UserAPI: XquareAPI {
@@ -27,8 +27,10 @@ extension UserAPI: XquareAPI {
             return "/account-id/\(accountId)"
         case .fetchFCMToken:
             return "/device-token"
-        case .fetchExcludedUserList, .fetchUserPoint:
+        case .fetchExcludedUserList:
             return "/exclude"
+        case .fetchUserSimpleInformation:
+            return "/simple"
         default:
             return ""
         }

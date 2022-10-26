@@ -15,7 +15,7 @@ struct ProfileView: View {
                 AsyncImage(url: URL(string: imageUrl)) { image in
                     image
                         .resizable()
-                        .scaledToFit()
+                        .scaledToFill()
                 } placeholder: {
                     Color.GrayScale.gray200
                 }

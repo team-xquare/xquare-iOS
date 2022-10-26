@@ -1,6 +1,7 @@
 import SwiftUI
 
 import MealDataService
+import UserService
 import RxSwift
 
 class HomeViewModel: ObservableObject {
@@ -14,9 +15,14 @@ class HomeViewModel: ObservableObject {
     @Published var menu: [MealMenuEntity] = []
 
     private let fetchMealMenuPerDayUseCase: FetchMealMenuPerDayUseCase
+    private let fetchUserPointUseCase: FetchUserSimpleInformationUseCase
 
-    init(fetchMealMenuPerDayUseCase: FetchMealMenuPerDayUseCase) {
+    init(
+        fetchMealMenuPerDayUseCase: FetchMealMenuPerDayUseCase,
+        fetchUserPointUseCase: FetchUserSimpleInformationUseCase
+    ) {
         self.fetchMealMenuPerDayUseCase = fetchMealMenuPerDayUseCase
+        self.fetchUserPointUseCase = fetchUserPointUseCase
     }
 
     func fetchTodaysMeal() {
@@ -25,6 +31,17 @@ class HomeViewModel: ObservableObject {
                 self.menu = $0.menu
             })
             .disposed(by: disposeBag)
+    }
+
+    func fetchUserPoint() {
+        self.fetchUserPointUseCase.excute()
+            .asObservable()
+            .subscribe(onNext: {
+                self.name = $0.name
+                self.imageUrl = $0.profileFileName
+                self.merit = $0.goodPoint
+                self.demerit = $0.badPoint
+            }).disposed(by: disposeBag)
     }
 
 }
