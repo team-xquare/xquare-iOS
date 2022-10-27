@@ -31,7 +31,7 @@ struct ComposedWebView: UIViewRepresentable {
 
         if let url = URL(string: self.state.urlString) {
             var urlRequest = URLRequest(url: url)
-            urlRequest.addValue(self.state.accessToken, forHTTPHeaderField: "Authorization")
+            urlRequest.addValue("Bearer \(self.state.accessToken)", forHTTPHeaderField: "Authorization")
             webView.load(urlRequest)
         }
 
