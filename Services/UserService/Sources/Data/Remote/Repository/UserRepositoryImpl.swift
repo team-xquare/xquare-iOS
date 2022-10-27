@@ -39,8 +39,8 @@ public class UserRepositoryImpl: UserRepository {
         return remoteDataSource.fetchExcludedUserList(users: users)
     }
 
-    public func fetchUserPoint() -> Single<UserPointEntity> {
-        return remoteDataSource.fetchUserPoint()
+    public func fetchUserSimpleInformation() -> Single<UserSimpleInformation> {
+        return remoteDataSource.fetchUserSimpleInformation()
     }
 
 }

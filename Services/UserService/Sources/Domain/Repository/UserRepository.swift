@@ -8,5 +8,5 @@ public protocol UserRepository {
     func fetchUserListByClass(grade: Int, classNumber: Int) -> Observable<[ClassUserEntity]>
     func fetchFCMToken(users: [String]) -> Single<FCMTokensEntity>
     func fetchExcludedUserList(users: [String]) -> Single<UserIdsEntity>
-    func fetchUserPoint() -> Single<UserPointEntity>
+    func fetchUserSimpleInformation() -> Single<UserSimpleInformation>
 }

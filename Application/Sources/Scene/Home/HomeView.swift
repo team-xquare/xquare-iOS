@@ -38,7 +38,10 @@ struct HomeView: View, XNavigationAndTabContent {
         }
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.GrayScale.gray50)
-        .onAppear(perform: viewModel.fetchTodaysMeal)
+        .onAppear {
+            viewModel.fetchTodaysMeal()
+            viewModel.fetchUserPoint()
+        }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button(action: {
