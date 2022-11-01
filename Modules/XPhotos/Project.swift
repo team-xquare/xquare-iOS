@@ -5,5 +5,7 @@ let project = Project.framework(
     name: "XPhotos",
     platform: .iOS,
     isTestable: false,
-    dependencies: []
+    dependencies: [
+        .SPM.SemicolonDesign
+    ]
 )
