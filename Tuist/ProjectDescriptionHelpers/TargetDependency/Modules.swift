@@ -9,6 +9,7 @@ extension TargetDependency {
         public static let XDateUtil = module(name: "XDateUtil")
         public static let XEnvironment = module(name: "XEnvironment")
         public static let XNavigationAndTab = module(name: "XNavigationAndTab")
+        public static let XPhotos = module(name: "XPhotos")
         public static let XWebKit = module(name: "XWebKit")
     }
 
