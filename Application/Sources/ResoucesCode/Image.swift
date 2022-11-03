@@ -12,6 +12,13 @@ extension Image {
     static let onboardingXquare = Image("Onboarding-Xquare")
 
     // Icon
+    static let application = Image("Application")
+    static let Bell = Image("Bell")
+    static let BellWithBadge = Image("Bell.badge")
+    static let calendar = Image("Calendar")
+    static let entire = Image("Entire")
+    static let feed = Image("Feed")
+    static let home = Image("Home")
     static let settingIcon = Image("Setting")
     static let thumbUpIcon = Image("ThumbUp")
     static let userIcon = Image("User")
