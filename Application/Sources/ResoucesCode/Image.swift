@@ -13,8 +13,8 @@ extension Image {
 
     // Icon
     static let application = Image("Application")
-    static let Bell = Image("Bell")
-    static let BellWithBadge = Image("Bell.badge")
+    static let bell = Image("Bell")
+    static let bellWithBadge = Image("Bell.badge")
     static let calendar = Image("Calendar")
     static let entire = Image("Entire")
     static let feed = Image("Feed")
