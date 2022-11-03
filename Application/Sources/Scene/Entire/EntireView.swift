@@ -18,7 +18,7 @@ struct EntireView: View, XNavigationAndTabContent {
     var tabInformation: TabInformation {
         TabInformation(
             tabItemText: "전체",
-            tabItemImage: Image(systemName: "square.fill")
+            tabItemImage: .entire
         )
     }
 
