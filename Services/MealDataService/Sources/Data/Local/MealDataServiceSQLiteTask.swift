@@ -2,216 +2,49 @@ import Foundation
 
 import XDateUtil
 import SQLite3
+import Boutique
 
 class MealDataServiceSQLiteTask {
 
     static let shared = MealDataServiceSQLiteTask()
 
-    var dataBase: OpaquePointer?
+    let store = Store<MealMenu>(
+        storage: SQLiteStorageEngine(directory: .defaultStorageDirectory(appendingPath: "MealMenu"))!,
+        cacheIdentifier: \.day
+    )
 
-    let dataBaseName = "xquare.sqlite"
-
-    init() {
-        self.dataBase = createDataBase()
-    }
-
-    private func createDataBase() -> OpaquePointer? {
-
-        var dataBase: OpaquePointer?
-
-        do {
-            let dbPath: String = try FileManager.default.url(
-                for: .documentDirectory,
-                in: .userDomainMask,
-                appropriateFor: nil,
-                create: false).appendingPathComponent(dataBaseName).path
-
-            if sqlite3_open(dbPath, &dataBase) == SQLITE_OK {
-                return dataBase
-            }
-        } catch {
-            print("Error while creating Database -\(error.localizedDescription)")
-        }
-        return nil
-    }
-
-    func createTable() {
-        let query = """
-        CREATE TABLE MealMenu(
-        day TEXT PRIMARY KEY NOT NULL ,
-        menu TEXT NOT NULL,
-        kcal TEXT NOT NULL
-        );
-        """
-        var statement: OpaquePointer?
-
-        if sqlite3_prepare_v2(self.dataBase, query, -1, &statement, nil) == SQLITE_OK {
-            if sqlite3_step(statement) != SQLITE_DONE {
-                let errorMessage = String(cString: sqlite3_errmsg(dataBase))
-                print("\nsqlte3_step failure while creating table: \(errorMessage)")
-            }
-        } else {
-            let errorMessage = String(cString: sqlite3_errmsg(self.dataBase))
-            print("\nsqlite3_prepare failure while creating table: \(errorMessage)")
-        }
-
-        sqlite3_finalize(statement)
-    }
-
-    func save(entity: MealMenu) {
-        let query = """
-        INSERT OR REPLACE
-        INTO
-        MealMenu(day, menu, kcal)
-        VALUES(?, ?, ?);
-        """
-
-        var statement: OpaquePointer?
-
-        if sqlite3_prepare_v2(self.dataBase, query, -1, &statement, nil) == SQLITE_OK {
-            sqlite3_bind_text(statement, 1, entity.day.toString(format: .fullDate), -1, nil)
-            sqlite3_bind_text(statement, 2, "\(entity.breakfast)/\(entity.lunch)/\(entity.dinner)", -1, nil)
-            sqlite3_bind_text(statement, 3, "\(entity.breakfast)/\(entity.lunchKcal)/\(entity.dinner)", -1, nil)
-        } else {
-            print("sqlite binding fail")
-        }
-
-        if sqlite3_step(statement) != SQLITE_DONE {
-            print("sqlite step failure")
-        }
-    }
-
-    // swiftlint:disable function_body_length
-    // swiftlint:disable cyclomatic_complexity
-    func findMealByDay(day: Date) -> MealMenu {
-        let query = """
-        SELECT * FROM MealMenu
-        WHERE day='\(day.toString(format: .fullDate))';
-        """
-
-        var statement: OpaquePointer?
-
-        if sqlite3_prepare_v2(self.dataBase, query, -1, &statement, nil) != SQLITE_OK {
-            let errorMessage = String(cString: sqlite3_errmsg(dataBase)!)
-            print("error while prepare: \(errorMessage)")
-            return .init(
-                day: day,
-                breakfast: "",
-                lunch: "",
-                dinner: "",
-                breakfastKcal: "",
-                lunchKcal: "",
-                dinnerKcal: ""
-            )
-        }
-        var menu: String = ""
-        var kcal: String = ""
-        var breakfast: String = ""
-        var lunch: String = ""
-        var dinner: String = ""
-        var breakfastKcal: String = ""
-        var lunchKcal: String = ""
-        var dinnerKcal: String = ""
-
-        while sqlite3_step(statement) == SQLITE_ROW {
-            menu = String(cString: sqlite3_column_text(statement, 1))
-//            kcal = String(cString: sqlite3_column_text(statement, 2))
-        }
-
-        let menuList = Array(menu.components(separatedBy: "/"))
-        let kcalLit = Array(kcal.components(separatedBy: "/"))
-
-        for index in 0..<menuList.count {
-            switch index {
-            case 0:
-                breakfast = menuList[index]
-            case 1:
-                lunch = menuList[index]
-            case 2:
-                dinner = menuList[index]
-            default:
-                break
-            }
-        }
-        for index in 0..<kcalLit.count {
-            switch index {
-            case 0:
-                breakfastKcal = kcalLit[index]
-            case 1:
-                lunchKcal = kcalLit[index]
-            case 2:
-                dinnerKcal = kcalLit[index]
-            default:
-                break
-            }
-        }
-
-        sqlite3_finalize(statement)
-
-        return .init(
-            day: day,
-            breakfast: breakfast,
-            lunch: lunch,
-            dinner: dinner,
-            breakfastKcal: breakfastKcal,
-            lunchKcal: lunchKcal,
-            dinnerKcal: dinnerKcal
+    func save(entity: MealMenu) async throws {
+        let mealMenu = MealMenu(
+            day: entity.day,
+            breakfast: entity.breakfast,
+            lunch: entity.lunch,
+            dinner: entity.dinner,
+            breakfastKcal: entity.breakfastKcal,
+            lunchKcal: entity.lunchKcal,
+            dinnerKcal: entity.dinner
         )
+
+        try await store
+            .insert(mealMenu)
+            .run()
     }
 
-    func findMealByMonth(day: Date) -> [MealMenu] {
-        let query = """
-        SELECT * FROM MealMenu
-        WHERE day LIKE '\(day.toString(format: .year) + day.toString(format: .month))%';
-        """
-
-        // MARK: Save Login
-        var statement: OpaquePointer?
-        var result: [MealMenu] = []
-
-        if sqlite3_prepare_v2(self.dataBase, query, -1, &statement, nil) != SQLITE_OK {
-            let errorMessage = String(cString: sqlite3_errmsg(dataBase)!)
-            print("error while prepare: \(errorMessage)")
-            return result
-        }
-
-        while sqlite3_step(statement) == SQLITE_ROW {
-            let date = String(cString: sqlite3_column_text(statement, 0))
-            let menu = Array(String(cString: sqlite3_column_text(statement, 1)).components(separatedBy: ", "))
-//            let kcal = Array(String(cString: sqlite3_column_text(statement, 2)))
-            var breakfast = ""
-            var lunch = ""
-            var dinner = ""
-            for index in 0..<menu.count {
-                switch index {
-                case 0:
-                    breakfast = menu[index]
-                case 1:
-                    lunch = menu[index]
-                case 2:
-                    dinner = menu[index]
-                default:
-                    break
-                }
+    func findMealByDay(day: Date) async -> MealMenu {
+        var result = await store
+            .items
+            .filter {
+                $0.day == day.toString(format: .fullDate)
             }
-            result.append(
-                MealMenu(
-                    day: date.toDate(format: .fullDate),
-                    breakfast: breakfast,
-                    lunch: lunch,
-                    dinner: dinner,
-                    breakfastKcal: "",
-                    lunchKcal: "",
-                    dinnerKcal: ""
-                ))
-        }
-
-        return result
+        return result.removeFirst()
     }
 
-    private func onSQLErrorPrintErrorMessage(_ dataBase: OpaquePointer?) {
-        let errorMessage = String(cString: sqlite3_errmsg(dataBase))
-        print("Error preparing update: \(errorMessage)")
-        return
+    @MainActor
+    func findMealByMonth(day: Date) async -> [MealMenu] {
+        let results = store
+            .items
+            .filter {
+                $0.day.contains("\(day.toString(format: .year))-\(day.toString(format: .month))")
+            }
+        return results
     }
 }
