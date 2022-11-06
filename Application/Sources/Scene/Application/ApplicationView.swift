@@ -10,7 +10,7 @@ struct ApplicationView: View, XNavigationAndTabContent {
     var tabInformation: TabInformation {
         TabInformation(
             tabItemText: "신청",
-            tabItemImage: Image(systemName: "square.fill")
+            tabItemImage: .application
         )
     }
 
