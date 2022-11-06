@@ -21,7 +21,7 @@ extension TargetDependency {
         public static let RxNimble = TargetDependency.external(name: "RxNimble")
         public static let RxSwift = TargetDependency.external(name: "RxSwift")
 
-        public static let SQLite = TargetDependency.external(name: "SQLite")
+        public static let Boutique = TargetDependency.external(name: "Boutique")
         public static let SemicolonDesign = TargetDependency.external(name: "SemicolonDesign")
 
     }
