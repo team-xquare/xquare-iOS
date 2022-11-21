@@ -9,7 +9,7 @@ public struct UserServiceDependency {
     public let fetchUserListByClassUseCase: FetchUserListByClassUseCase
     public let fetchFCMTokenUseCase: FetchFCMTokenUseCase
     public let fetchExcludedUserListUseCase: FetchExcludedUserListUseCase
-    public let fetchUserPointUseCase: FetchUserPointUseCase
+    public let fetchUserSimpleInformationUseCase: FetchUserSimpleInformationUseCase
 
 }
 
@@ -42,7 +42,7 @@ extension UserServiceDependency {
             repository: userRepository
         )
 
-        let fetchUserPointUseCase = FetchUserPointUseCase(
+        let fetchUserPointUseCase = FetchUserSimpleInformationUseCase(
             repository: userRepository
         )
 
@@ -52,7 +52,7 @@ extension UserServiceDependency {
             fetchUserListByClassUseCase: fetchUserListByClassUseCase,
             fetchFCMTokenUseCase: fetchFCMTokenUseCase,
             fetchExcludedUserListUseCase: fetchExcludedUserListUseCase,
-            fetchUserPointUseCase: fetchUserPointUseCase
+            fetchUserSimpleInformationUseCase: fetchUserPointUseCase
         )
     }
 }

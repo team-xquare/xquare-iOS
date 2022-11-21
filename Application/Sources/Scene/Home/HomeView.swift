@@ -13,7 +13,7 @@ struct HomeView: View, XNavigationAndTabContent {
     var tabInformation: TabInformation {
         TabInformation(
             tabItemText: "홈",
-            tabItemImage: Image(systemName: "square.fill"),
+            tabItemImage: .home,
             backgroundColor: .GrayScale.gray50
         )
     }
@@ -38,12 +38,15 @@ struct HomeView: View, XNavigationAndTabContent {
         }
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.GrayScale.gray50)
-        .onAppear(perform: viewModel.fetchTodaysMeal)
+        .onAppear {
+            viewModel.fetchTodaysMeal()
+            viewModel.fetchUserPoint()
+        }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button(action: {
                 }, label: {
-                    Image(systemName: "square.fill")
+                    Image.bell
                         .resizable()
                         .frame(width: 24, height: 24)
                         .tint(.GrayScale.gray200)

@@ -16,22 +16,14 @@ struct ComposedWebView: UIViewRepresentable {
 
     func makeUIView(context: Context) -> WKWebView {
 
-        let preferences = WKPreferences()
-        preferences.javaScriptCanOpenWindowsAutomatically = false
-
-        let configuration = WKWebViewConfiguration()
-        configuration.preferences = preferences
-        self.registerBridge(configuration: configuration)
-
-        let webView = WKWebView(frame: CGRect.zero, configuration: configuration)
+        let webView = WKWebView(frame: CGRect.zero, configuration: generateWKWebViewConfiguration())
         webView.navigationDelegate = context.coordinator
         webView.scrollView.delegate = context.coordinator
         self.setLoadingProgress(webView: webView)
         self.setEvaluateJavaScript(webView: webView)
 
         if let url = URL(string: self.state.urlString) {
-            var urlRequest = URLRequest(url: url)
-            urlRequest.addValue(self.state.accessToken, forHTTPHeaderField: "Authorization")
+            let urlRequest = URLRequest(url: url)
             webView.load(urlRequest)
         }
 
@@ -44,13 +36,52 @@ struct ComposedWebView: UIViewRepresentable {
 
 extension ComposedWebView {
 
-    private func registerBridge(configuration: WKWebViewConfiguration) {
-        configuration.userContentController.add(self.makeCoordinator(), name: "navigate")
-        configuration.userContentController.add(self.makeCoordinator(), name: "imageDetail")
-        configuration.userContentController.add(self.makeCoordinator(), name: "back")
-        configuration.userContentController.add(self.makeCoordinator(), name: "confirm")
-        configuration.userContentController.add(self.makeCoordinator(), name: "error")
+    private func generateWKWebViewConfiguration() -> WKWebViewConfiguration {
+
+        let preferences = WKPreferences()
+        preferences.javaScriptCanOpenWindowsAutomatically = false
+
+        let configuration = WKWebViewConfiguration()
+        configuration.preferences = preferences
+
+        self.setWebCookie(cookie: [
+            "accessToken": self.state.accessToken
+        ], configuration: configuration)
+
+        self.registerBridge(name: [
+            "navigate",
+            "imageDetail",
+            "back",
+            "confirm",
+            "error"
+        ], configuration: configuration)
+
+        return configuration
     }
+
+    private func setWebCookie(cookie: [String: String], configuration: WKWebViewConfiguration) {
+        let dataStore = WKWebsiteDataStore.nonPersistent()
+        cookie.forEach {
+            dataStore.httpCookieStore.setCookie(HTTPCookie(properties: [
+                .domain: ".xquare.app",
+                .path: "/",
+                .name: $0.key,
+                .value: $0.value,
+                .secure: "TRUE",
+                HTTPCookiePropertyKey("HttpOnly"): true
+            ])!)
+        }
+        configuration.websiteDataStore = dataStore
+    }
+
+    private func registerBridge(name: [String], configuration: WKWebViewConfiguration) {
+        name.forEach {
+            configuration.userContentController.add(self.makeCoordinator(), name: $0)
+        }
+    }
+}
+
+extension ComposedWebView {
 
     private func setEvaluateJavaScript(webView: WKWebView) {
         self.state.alertResponse.subscribe(onNext: {
