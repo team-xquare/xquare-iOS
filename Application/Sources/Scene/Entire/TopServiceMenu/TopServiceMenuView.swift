@@ -1,10 +1,13 @@
 import SwiftUI
 
 struct TopServiceMenuView: View {
+
+    var pointHistoryView: PointHistoryView
+
     var body: some View {
         HStack(spacing: 9) {
             TopServiceMenuCellView(image: .thumbUpIcon, text: "상벌점 내역") {
-                Text("상벌점 내역")
+                pointHistoryView
             }
             TopServiceMenuCellView(image: .userIcon, text: "마이페이지") {
                 Text("마이페이지")
@@ -17,4 +20,5 @@ struct TopServiceMenuView: View {
         .padding(.horizontal, 27)
         .padding(.bottom, 3)
     }
+
 }

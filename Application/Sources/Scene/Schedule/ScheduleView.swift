@@ -7,7 +7,7 @@ struct ScheduleView: View, XNavigationAndTabContent {
     var tabInformation: TabInformation {
         TabInformation(
             tabItemText: "일정",
-            tabItemImage: Image(systemName: "square.fill")
+            tabItemImage: .calendar
         )
     }
 
