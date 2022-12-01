@@ -87,7 +87,7 @@ struct SignupView: View {
                     Button(action: {
                         self.presentationMode.wrappedValue.dismiss()
                     }, label: {
-                        Image(systemName: "square.fill")
+                        Image("BackButton")
                             .font(.system(size: 24))
                             .tint(.GrayScale.gray200)
                     })

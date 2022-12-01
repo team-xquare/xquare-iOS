@@ -2,8 +2,11 @@ import SwiftUI
 
 import AuthService
 import MealDataService
+import SemicolonDesign
 
 struct MealDetailView: View {
+
+    @Environment(\.presentationMode) var presentationMode
 
     @StateObject var viewModel: MealDetailViewModel
     @State var isReady: Bool = false
@@ -28,9 +31,18 @@ struct MealDetailView: View {
                 }
             }
             .navigationTitle("전체 급식")
-            .onAppear {
-                viewModel.fetchMealMenuPerMonth()
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image("BackButton")
+                            .font(.system(size: 24))
+                            .tint(.GrayScale.gray200)
+                    })
+                }
             }
+            .onAppear(perform: viewModel.fetchMealMenuPerMonth)
         }
     }
 }
