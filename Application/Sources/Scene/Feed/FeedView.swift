@@ -7,7 +7,7 @@ struct FeedView: View, XNavigationAndTabContent {
     var tabInformation: TabInformation {
         TabInformation(
             tabItemText: "피드",
-            tabItemImage: Image(systemName: "square.fill")
+            tabItemImage: .feed
         )
     }
 
