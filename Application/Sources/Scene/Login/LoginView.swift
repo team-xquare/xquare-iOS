@@ -49,17 +49,7 @@ struct LoginView: View {
                 Spacer()
             }
             .navigationTitle("로그인")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image("BackButton")
-                            .font(.system(size: 24))
-                            .tint(.GrayScale.gray200)
-                    })
-                }
-            }
+            .setNavigationBackButton()
         }
         .sdErrorAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
             SDErrorAlert(errerMessage: "네트워크가 원할하지 않습니다.")

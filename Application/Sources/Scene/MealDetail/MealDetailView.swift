@@ -32,18 +32,8 @@ struct MealDetailView: View {
             }
             .navigationBarBackButtonHidden()
             .navigationTitle("전체 급식")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image("BackButton")
-                            .font(.system(size: 24))
-                            .tint(.GrayScale.gray200)
-                    })
-                }
-            }
             .onAppear(perform: viewModel.fetchMealMenuPerMonth)
+            .setNavigationBackButton()
         }
     }
 }
