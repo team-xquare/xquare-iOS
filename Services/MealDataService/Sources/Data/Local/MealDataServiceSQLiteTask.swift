@@ -35,7 +35,15 @@ class MealDataServiceSQLiteTask {
             .filter {
                 $0.day == day.toString(format: .fullDate)
             }
-        return result.removeFirst()
+        return result.first ?? .init(
+            day: Date().toString(format: .fullDate),
+            breakfast: "",
+            lunch: "",
+            dinner: "",
+            breakfastKcal: "",
+            lunchKcal: "",
+            dinnerKcal: ""
+        )
     }
 
     @MainActor
