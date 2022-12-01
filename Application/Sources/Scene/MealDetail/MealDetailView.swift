@@ -30,6 +30,7 @@ struct MealDetailView: View {
                     }
                 }
             }
+            .navigationBarBackButtonHidden()
             .navigationTitle("전체 급식")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
