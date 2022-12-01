@@ -6,8 +6,6 @@ import SemicolonDesign
 
 struct MealDetailView: View {
 
-    @Environment(\.presentationMode) var presentationMode
-
     @StateObject var viewModel: MealDetailViewModel
     @State var isReady: Bool = false
 

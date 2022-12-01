@@ -5,8 +5,6 @@ import AuthService
 
 struct SignupView: View {
 
-    @Environment(\.presentationMode) var presentationMode
-
     @StateObject var viewModel: SignupViewModel
     var loginView: LoginView
 

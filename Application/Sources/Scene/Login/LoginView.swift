@@ -4,8 +4,6 @@ import AuthService
 
 struct LoginView: View {
 
-    @Environment(\.presentationMode) var presentationMode
-
     @StateObject var viewModel: LoginViewModel
     @State var isLoginButtonDisabled: Bool = true
     var mainView: MainView
