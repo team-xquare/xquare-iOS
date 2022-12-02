@@ -39,6 +39,7 @@ extension AppDependency {
         )
 
         // MARK: - Views
+        let pointHistoryView = PointHistoryView()
         let mealDetailView = MealDetailView(viewModel: mealDetailViewModel)
         let homeView = HomeView(
             viewModel: homeViewModel,
@@ -47,7 +48,7 @@ extension AppDependency {
         let scheduleView = ScheduleView()
         let feedView = FeedView()
         let applicationView = ApplicationView(viewModel: applicationViewModel)
-        let entireView = EntireView()
+        let entireView = EntireView(pointHistoryView: pointHistoryView)
         let mainView = MainView(
             homeView: homeView,
             scheduleView: scheduleView,
