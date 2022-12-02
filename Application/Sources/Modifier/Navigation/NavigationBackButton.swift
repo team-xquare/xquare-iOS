@@ -22,6 +22,6 @@ struct NavigationBackButton: ViewModifier {
 
 extension View {
     func setNavigationBackButton() -> some View {
-        modifier(NavigationBackButton())
+        self.modifier(NavigationBackButton())
     }
 }
