@@ -5,8 +5,6 @@ import AuthService
 
 struct SignupView: View {
 
-    @Environment(\.presentationMode) var presentationMode
-
     @StateObject var viewModel: SignupViewModel
     var loginView: LoginView
 
@@ -82,17 +80,7 @@ struct SignupView: View {
                 SDErrorAlert(errerMessage: "네트워크가 원할하지 않습니다.")
             })
             .navigationTitle("회원가입")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image(systemName: "square.fill")
-                            .font(.system(size: 24))
-                            .tint(.GrayScale.gray200)
-                    })
-                }
-            }
+            .setNavigationBackButton()
         }
         .accentColor(.GrayScale.gray800)
     }

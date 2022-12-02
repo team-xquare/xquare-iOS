@@ -2,6 +2,7 @@ import SwiftUI
 
 import AuthService
 import MealDataService
+import SemicolonDesign
 
 struct MealDetailView: View {
 
@@ -27,10 +28,10 @@ struct MealDetailView: View {
                     }
                 }
             }
+            .navigationBarBackButtonHidden()
             .navigationTitle("전체 급식")
-            .onAppear {
-                viewModel.fetchMealMenuPerMonth()
-            }
+            .onAppear(perform: viewModel.fetchMealMenuPerMonth)
+            .setNavigationBackButton()
         }
     }
 }
