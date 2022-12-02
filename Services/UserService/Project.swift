@@ -7,6 +7,6 @@ let project = Project.framework(
     isTestable: false,
     dependencies: [
         .Module.RestApiMoudle,
-        .Module.RxOfflineCacheModule
+        .Module.XOfflineCache
     ]
 )

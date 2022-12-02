@@ -4,6 +4,8 @@ import XNavigationAndTab
 
 struct EntireView: View, XNavigationAndTabContent {
 
+    var pointHistoryView: PointHistoryView
+
     @State var services = [
         ServiceSection(
             headerText: "학교",
@@ -18,14 +20,14 @@ struct EntireView: View, XNavigationAndTabContent {
     var tabInformation: TabInformation {
         TabInformation(
             tabItemText: "전체",
-            tabItemImage: Image(systemName: "square.fill")
+            tabItemImage: .entire
         )
     }
 
     var body: some View {
         ScrollView {
             VStack(spacing: 27) {
-                TopServiceMenuView()
+                TopServiceMenuView(pointHistoryView: pointHistoryView)
                 ForEach(services.indices, id: \.self) { index in
                     ServiceSectionView(
                         headerText: services[index].headerText,
