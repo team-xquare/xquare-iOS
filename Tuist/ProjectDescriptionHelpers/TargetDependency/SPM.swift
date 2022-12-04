@@ -23,6 +23,7 @@ extension TargetDependency {
 
         public static let SQLite = TargetDependency.external(name: "SQLite")
         public static let SemicolonDesign = TargetDependency.external(name: "SemicolonDesign")
+        public static let ComposableArchitecture = TargetDependency.external(name: "ComposableArchitecture")
 
     }
 

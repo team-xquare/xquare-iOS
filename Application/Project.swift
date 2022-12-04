@@ -32,6 +32,7 @@ let project = Project(
                 .Service.UserService,
                 .SPM.FirebaseMessaging,
                 .SPM.SemicolonDesign,
+                .SPM.ComposableArchitecture,
                 .target(name: "XquareWidget")
             ] + TargetDependency.universalDependencies,
             settings: .settings(base: ["OTHER_LDFLAGS": "-ObjC"])
