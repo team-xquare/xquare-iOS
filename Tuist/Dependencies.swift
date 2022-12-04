@@ -2,6 +2,9 @@ import ProjectDescription
 
 let dependencies = Dependencies(
     swiftPackageManager: SwiftPackageManagerDependencies([
+        // Boutique
+        .remote(url: "https://github.com/mergesort/Boutique.git",
+                requirement: .upToNextMajor(from: "2.1.1")),
         // Firebase-iOS-SDK
         .remote(url: "https://github.com/firebase/firebase-ios-sdk",
                 requirement: .upToNextMajor(from: "9.5.0")),
@@ -22,10 +25,7 @@ let dependencies = Dependencies(
                 requirement: .upToNextMajor(from: "6.5.0")),
         // SemicolonDesign
         .remote(url: "https://github.com/semicolonDSM/SemicolonDesign_iOS.git",
-                requirement: .upToNextMajor(from: "1.8.1")),
-        // Boutique
-        .remote(url: "https://github.com/mergesort/Boutique.git",
-                requirement: .upToNextMajor(from: "2.1.1"))
+                requirement: .upToNextMajor(from: "1.8.1"))
     ],
     baseSettings: Settings.settings(
         configurations: [
