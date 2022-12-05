@@ -17,10 +17,12 @@ struct MealDetailCell: View {
                     .padding(.leading, 16)
                     .padding(.bottom, 10)
                 ForEach(entity.menu, id: \.mealTime) {
-                    MealMenuPerMealTimeView(
-                        entity: $0
-                    )
-                    .padding(.bottom, 8)
+                    if $0.menu != [] {
+                        MealMenuPerMealTimeView(
+                            entity: $0
+                        )
+                        .padding(.bottom, 8)
+                    }
                 }
             }
             Spacer()

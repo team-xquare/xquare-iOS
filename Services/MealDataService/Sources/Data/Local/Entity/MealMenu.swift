@@ -1,7 +1,7 @@
 import Foundation
 
-struct MealMenu: Equatable {
-    let day: Date
+struct MealMenu: Codable, Equatable {
+    let day: String
     let breakfast: String
     let lunch: String
     let dinner: String
@@ -13,7 +13,7 @@ struct MealMenu: Equatable {
 extension MealMenu {
     func toDomain() -> MealMenuPerDayEntity {
         return .init(
-            date: day,
+            date: day.toDate(format: .fullDate),
             menu: [
                 .init(mealTime: .breakfast, menu: breakfast.components(separatedBy: ", "), kcal: breakfastKcal),
                 .init(mealTime: .lunch, menu: lunch.components(separatedBy: ", "), kcal: lunchKcal),
