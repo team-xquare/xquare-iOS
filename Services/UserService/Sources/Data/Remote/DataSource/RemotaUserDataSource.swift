@@ -10,4 +10,6 @@ protocol RemoteUserDataSource: RestApiRemoteDataSource<UserAPI> {
     func fetchFCMToken(users: [String]) -> Single<FCMTokensEntity>
     func fetchExcludedUserList(users: [String]) -> Single<UserIdsEntity>
     func fetchUserSimpleInformation() -> Single<UserSimpleInformation>
+    func fetchProfile() -> Single<ProfileEntity>
+    func editProfileImage(profileImage: String) -> Completable
 }
