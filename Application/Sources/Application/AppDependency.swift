@@ -37,6 +37,7 @@ extension AppDependency {
         let mealDetailViewModel = MealDetailViewModel(
             fetchMealMenuPerMonthUseCase: mealDataServiceDependency.fetchMonthToMealMenuUseCase
         )
+        let myPageViewModel = MyPageViewModel()
 
         // MARK: - Views
         let pointHistoryView = PointHistoryView()
@@ -48,7 +49,13 @@ extension AppDependency {
         let scheduleView = ScheduleView()
         let feedView = FeedView()
         let applicationView = ApplicationView(viewModel: applicationViewModel)
-        let entireView = EntireView(pointHistoryView: pointHistoryView)
+        let myPageView = MyPageView(
+            viewModel: myPageViewModel
+        )
+        let entireView = EntireView(
+            pointHistoryView: pointHistoryView,
+            myPageView: myPageView
+        )
         let mainView = MainView(
             homeView: homeView,
             scheduleView: scheduleView,
