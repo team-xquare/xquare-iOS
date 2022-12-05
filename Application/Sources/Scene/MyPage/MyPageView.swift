@@ -14,13 +14,10 @@ struct MyPageView: View {
         ) {
             Spacer()
                 .frame(height: 34)
-            Image(uiImage: viewModel.profileImage)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 60, height: 60)
-                .background(.black)
-                .cornerRadius(30)
-                .padding(.bottom, 6)
+            ProfileImageView(
+                imageUrl: viewModel.profileImagrUrl,
+                uiimage: $viewModel.profileImage
+            )
             Button {
                 viewModel.xPhotosIsPresented = true
             } label: {
@@ -30,7 +27,7 @@ struct MyPageView: View {
             .padding(.bottom, 6)
             MyInformationView(title: "이름", content: viewModel.name)
             MyInformationView(title: "생년월일", content: viewModel.birthDay)
-            MyInformationView(title: "학년 반 번호", content: viewModel.gradeClassNumber)
+            MyInformationView(title: "학년 반 번호", content: viewModel.gradeClassNum)
             MyInformationView(title: "아이디", content: viewModel.id)
             Spacer()
         }
@@ -38,10 +35,13 @@ struct MyPageView: View {
             isPresented: $viewModel.xPhotosIsPresented,
             selection: $viewModel.profileImage
         )
+        .onChange(of: viewModel.profileImage, perform: { _ in
+        })
         .padding(.horizontal, 16)
         .setNavigationBackButton()
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("마이페이지")
+        .onAppear(perform: viewModel.fetchProfile)
     }
 }
