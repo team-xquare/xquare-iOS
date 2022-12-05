@@ -3,6 +3,7 @@ import SwiftUI
 struct TopServiceMenuView: View {
 
     var pointHistoryView: PointHistoryView
+    var myPageView: MyPageView
 
     var body: some View {
         HStack(spacing: 9) {
@@ -10,7 +11,7 @@ struct TopServiceMenuView: View {
                 pointHistoryView
             }
             TopServiceMenuCellView(image: .userIcon, text: "마이페이지") {
-                Text("마이페이지")
+                myPageView
             }
             TopServiceMenuCellView(image: .warningTriangleIcon, text: "버그 제보") {
                 Text("버그 제보")
