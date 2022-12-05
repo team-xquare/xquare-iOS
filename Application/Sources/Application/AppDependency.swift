@@ -37,7 +37,10 @@ extension AppDependency {
         let mealDetailViewModel = MealDetailViewModel(
             fetchMealMenuPerMonthUseCase: mealDataServiceDependency.fetchMonthToMealMenuUseCase
         )
-        let myPageViewModel = MyPageViewModel()
+        let myPageViewModel = MyPageViewModel(
+            fetchProfileUseCase: userServiceDependency.fetchProfileUseCase,
+            editProfileImageUseCase: userServiceDependency.editProfileImageUseCase
+        )
 
         // MARK: - Views
         let pointHistoryView = PointHistoryView()
