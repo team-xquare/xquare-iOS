@@ -8,6 +8,8 @@ let project = Project.framework(
     dependencies: [
         .Module.RestApiMoudle,
         .Module.XDateUtil,
+        .SPM.Boutique,
+        .Module.XDateUtil,
         .Module.XOfflineCache
     ]
 )
