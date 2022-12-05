@@ -27,6 +27,7 @@ let project = Project(
             dependencies: [
                 .Module.XNavigationAndTab,
                 .Module.XWebKit,
+                .Module.XPhotos,
                 .Service.AuthService,
                 .Service.MealDataService,
                 .Service.UserService,

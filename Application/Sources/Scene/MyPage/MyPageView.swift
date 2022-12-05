@@ -1,6 +1,7 @@
 import SwiftUI
 
 import SemicolonDesign
+import XPhotos
 
 struct MyPageView: View {
 
@@ -15,13 +16,13 @@ struct MyPageView: View {
                 .frame(height: 34)
             Image(uiImage: viewModel.profileImage)
                 .resizable()
-                .scaledToFit()
+                .scaledToFill()
                 .frame(width: 60, height: 60)
                 .background(.black)
                 .cornerRadius(30)
                 .padding(.bottom, 6)
             Button {
-                viewModel.showActionSheet = true
+                viewModel.xPhotosIsPresented = true
             } label: {
                 Text("변경하기")
                     .sdText(type: .body4, textColor: .GrayScale.gray900)
@@ -33,6 +34,10 @@ struct MyPageView: View {
             MyInformationView(title: "아이디", content: viewModel.id)
             Spacer()
         }
+        .xPhotoPicker(
+            isPresented: $viewModel.xPhotosIsPresented,
+            selection: $viewModel.profileImage
+        )
         .padding(.horizontal, 16)
         .setNavigationBackButton()
         .navigationBarBackButtonHidden()
