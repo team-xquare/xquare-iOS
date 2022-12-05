@@ -8,13 +8,13 @@ struct NavigationBackButton: ViewModifier {
         content
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
+                    Button {
                         self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
+                    } label: {
                         Image("BackButton")
                             .font(.system(size: 24))
                             .tint(.GrayScale.gray200)
-                    })
+                    }
                 }
             }
     }
@@ -22,6 +22,6 @@ struct NavigationBackButton: ViewModifier {
 
 extension View {
     func setNavigationBackButton() -> some View {
-        modifier(NavigationBackButton())
+        self.modifier(NavigationBackButton())
     }
 }
