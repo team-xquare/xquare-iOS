@@ -1,8 +1,8 @@
 import SwiftUI
 
-import RxSwift
 import SemicolonDesign
 import XNavigationAndTab
+import XPhotos
 
 public struct XWebKitView: View {
 
@@ -53,19 +53,23 @@ public struct XWebKitView: View {
                 title: self.state.alertMessage,
                 content: .init(),
                 button1: (self.state.alertCancelText, {
-                    self.state.alertResponse.onNext(false)
+                    self.state.alertResponse = false
                 }),
                 button2: (self.state.alertConfirmText, {
-                    self.state.alertResponse.onNext(true)
+                    self.state.alertResponse = true
                 })
             )
         }
-        .sdImageView(
+        .xPhotoViewer(
             isPresented: self.$state.isImageViewerPresented,
             images: self.state.images
         )
         .sdErrorAlert(isPresented: self.$state.isErrorAlertPresented) {
             SDErrorAlert(errerMessage: self.state.errorMessage)
         }
+        .xPhotoPicker(
+            isPresented: self.$state.isPhotoPickerPresented,
+            selection: self.$state.selectedImages
+        )
     }
 }

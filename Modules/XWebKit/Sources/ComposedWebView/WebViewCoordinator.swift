@@ -24,6 +24,7 @@ class WebViewCoordinator: NSObject, WKNavigationDelegate, WKScriptMessageHandler
         case "back": self.processBackBridge()
         case "confirm": self.processConfirmBridge(message.body)
         case "error": self.processErrorBridge(message.body)
+        case "photoPicker": self.processPhotoPickerBridge()
         default: break
         }
     }
@@ -70,6 +71,10 @@ extension WebViewCoordinator {
         let messageBodyAsDictionary = messageBodyAsString.convertToDictionary()
         self.parent.state.errorMessage = messageBodyAsDictionary["message"] ?? ""
         self.parent.state.isErrorAlertPresented = true
+    }
+
+    private func processPhotoPickerBridge() {
+        self.parent.state.isPhotoPickerPresented = true
     }
 
 }

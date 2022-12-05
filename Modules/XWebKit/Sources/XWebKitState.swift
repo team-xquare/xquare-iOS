@@ -1,12 +1,15 @@
 import SwiftUI
 
-import RxSwift
-import RxCocoa
+import Combine
 
 class XWebKitState: ObservableObject {
 
     var urlString: String = ""
     var accessToken: String = ""
+
+    var isPresentated: Binding<Bool>
+
+    var cancellables = Set<AnyCancellable>()
 
     @Published var loadingProgress: Double = 0.0
 
@@ -17,16 +20,17 @@ class XWebKitState: ObservableObject {
     @Published var isImageViewerPresented: Bool = false
     @Published var images: [URL] = []
 
-    var isPresentated: Binding<Bool>
-
     @Published var isAlertPresented: Bool = false
     @Published var alertMessage: String = ""
     @Published var alertConfirmText: String = ""
     @Published var alertCancelText: String = ""
-    var alertResponse = PublishSubject<Bool>()
+    @Published var alertResponse: Bool?
 
     @Published var isErrorAlertPresented: Bool = false
     @Published var errorMessage: String = ""
+
+    @Published var isPhotoPickerPresented: Bool = false
+    @Published var selectedImages: [UIImage] = []
 
     init(urlString: String, accessToken: String = "", isPresentated: Binding<Bool>) {
         self.urlString = urlString

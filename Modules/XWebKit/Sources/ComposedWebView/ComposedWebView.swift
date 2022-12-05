@@ -4,11 +4,11 @@ import SwiftUI
 import WebKit
 import RxCocoa
 import RxSwift
+import Combine
 
 struct ComposedWebView: UIViewRepresentable {
 
     @ObservedObject var state: XWebKitState
-    var disposeBag = DisposeBag()
 
     func makeCoordinator() -> WebViewCoordinator {
         WebViewCoordinator(self)
@@ -53,7 +53,8 @@ extension ComposedWebView {
             "imageDetail",
             "back",
             "confirm",
-            "error"
+            "error",
+            "photoPicker"
         ], configuration: configuration)
 
         return configuration
@@ -84,25 +85,43 @@ extension ComposedWebView {
 extension ComposedWebView {
 
     private func setEvaluateJavaScript(webView: WKWebView) {
-        self.state.alertResponse.subscribe(onNext: {
-            self.evaluateJavaScript(webView: webView, bridgeName: "confirm", data: "{ success: \(String($0)) }")
-        }).disposed(by: self.disposeBag)
+
+        self.state.$alertResponse
+            .compactMap { $0 }
+            .sink {
+                self.evaluateJavaScript(webView: webView, bridgeName: "confirm", data: "{ success: \($0) }")
+            }
+            .store(in: &self.state.cancellables)
+
+        self.state.$selectedImages
+            .map { $0.map {
+                guard let jpegData = $0.jpegData(compressionQuality: 1) else { return "" }
+                return jpegData.base64EncodedString()
+            }}
+            .sink {
+                self.evaluateJavaScript(webView: webView, bridgeName: "selectedPhotos", data: "{ photos: \($0) }")
+            }
+            .store(in: &self.state.cancellables)
+
     }
 
     private func evaluateJavaScript(webView: WKWebView, bridgeName: String, data: String) {
-        webView.evaluateJavaScript("""
-        window.dispatchEvent(new CustomEvent('\(bridgeName)XBridge', {
-            detail: \(data)
-        }));
-        """)
+        DispatchQueue.main.async {
+            webView.evaluateJavaScript("""
+            window.dispatchEvent(new CustomEvent('\(bridgeName)XBridge', {
+                detail: \(data)
+            }));
+            """)
+        }
     }
 
     private func setLoadingProgress(webView: WKWebView) {
-        webView.rx.estimatedProgress
-            .subscribe(onNext: {
-                self.state.loadingProgress = $0
-            })
-            .disposed(by: self.disposeBag)
+        Task {
+            let progress = webView.rx.estimatedProgress.values
+            for try await now in progress {
+                self.state.loadingProgress = now
+            }
+        }
     }
 
 }
