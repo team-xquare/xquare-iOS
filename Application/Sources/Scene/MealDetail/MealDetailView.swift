@@ -28,10 +28,10 @@ struct MealDetailView: View {
                     }
                 }
             }
-            .navigationBarBackButtonHidden()
-            .navigationTitle("전체 급식")
-            .onAppear(perform: viewModel.fetchMealMenuPerMonth)
-            .setNavigationBackButton()
         }
+        .navigationTitle("전체 급식")
+        .onAppear(perform: viewModel.fetchMealMenuPerMonth)
+        .navigationBarBackButtonHidden()
+        .setNavigationBackButton()
     }
 }
