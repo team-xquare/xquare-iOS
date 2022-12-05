@@ -43,5 +43,7 @@ struct PointHistoryView: View {
         }
         .navigationTitle("상벌점 내역")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden()
+        .setNavigationBackButton()
     }
 }
