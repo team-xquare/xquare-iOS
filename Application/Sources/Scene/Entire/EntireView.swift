@@ -5,6 +5,7 @@ import XNavigationAndTab
 struct EntireView: View, XNavigationAndTabContent {
 
     var pointHistoryView: PointHistoryView
+    var myPageView: MyPageView
 
     @State var services = [
         ServiceSection(
@@ -27,7 +28,10 @@ struct EntireView: View, XNavigationAndTabContent {
     var body: some View {
         ScrollView {
             VStack(spacing: 27) {
-                TopServiceMenuView(pointHistoryView: pointHistoryView)
+                TopServiceMenuView(
+                    pointHistoryView: pointHistoryView,
+                    myPageView: myPageView
+                )
                 ForEach(services.indices, id: \.self) { index in
                     ServiceSectionView(
                         headerText: services[index].headerText,
