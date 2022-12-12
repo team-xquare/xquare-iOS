@@ -1,6 +1,7 @@
 import Foundation
 
 import UIKit
+import AttachmentService
 import UserService
 import XDateUtil
 import RxSwift
@@ -17,13 +18,16 @@ class MyPageViewModel: ObservableObject {
 
     private let fetchProfileUseCase: FetchProfileUseCase
     private let editProfileImageUseCase: EditProfileImageUseCase
+    private let uploadImageUseCase: UploadImageUseCase
 
     init(
         fetchProfileUseCase: FetchProfileUseCase,
-        editProfileImageUseCase: EditProfileImageUseCase
+        editProfileImageUseCase: EditProfileImageUseCase,
+        uploadImageUseCase: UploadImageUseCase
     ) {
         self.fetchProfileUseCase = fetchProfileUseCase
         self.editProfileImageUseCase = editProfileImageUseCase
+        self.uploadImageUseCase = uploadImageUseCase
     }
 
     private var disposeBag = DisposeBag()
@@ -40,9 +44,22 @@ class MyPageViewModel: ObservableObject {
             .disposed(by: disposeBag)
     }
 
-    func editProfileImage() {
-        self.editProfileImageUseCase.excute(profileImage: profileImageString)
+    func uploadImage() {
+        self.uploadImageUseCase
+            .excute(files: [self.profileImage.jpegData(compressionQuality: 0.5) ?? Data()])
+            .subscribe(onSuccess: {
+                self.editProfileImage(imageUrl: $0[0])
+            }, onFailure: { error in
+                print(error)
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func editProfileImage(imageUrl: String) {
+        print(imageUrl)
+        self.editProfileImageUseCase.excute(profileImage: imageUrl)
             .subscribe(onCompleted: {
+                print("success")
             })
             .disposed(by: disposeBag)
     }
