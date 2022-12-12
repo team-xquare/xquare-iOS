@@ -36,6 +36,7 @@ struct MyPageView: View {
             selection: $viewModel.profileImage
         )
         .onChange(of: viewModel.profileImage, perform: { _ in
+            viewModel.uploadImage()
         })
         .padding(.horizontal, 16)
         .setNavigationBackButton()
