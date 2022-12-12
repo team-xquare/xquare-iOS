@@ -1,5 +1,6 @@
 import Foundation
 
+import AttachmentService
 import AuthService
 import MealDataService
 import UserService
@@ -13,6 +14,7 @@ extension AppDependency {
     static func resolve() -> AppDependency {
 
         // MARK: - ServiceDependency
+        let attachmentServiceDependency = AttachmentServiceDependency.shared
         let authServiceDependency = AuthServiceDependency.shared
         let mealDataServiceDependency = MealDataServiceDependency.shared
         let userServiceDependency = UserServiceDependency.shared
@@ -39,7 +41,8 @@ extension AppDependency {
         )
         let myPageViewModel = MyPageViewModel(
             fetchProfileUseCase: userServiceDependency.fetchProfileUseCase,
-            editProfileImageUseCase: userServiceDependency.editProfileImageUseCase
+            editProfileImageUseCase: userServiceDependency.editProfileImageUseCase,
+            uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase
         )
 
         // MARK: - Views
