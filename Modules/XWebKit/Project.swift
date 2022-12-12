@@ -7,6 +7,7 @@ let project = Project.framework(
     isTestable: false,
     dependencies: [
         .Module.XNavigationAndTab,
+        .Module.XPhotos,
         .SPM.RxCocoa,
         .SPM.SemicolonDesign
     ]
