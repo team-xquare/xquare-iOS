@@ -25,7 +25,9 @@ extension ProfileResponse {
             name: name,
             id: id,
             imageUrl: URL(string: profileImageUrlString ?? ""),
-            gradeClassNum: "\(grade)학년 \(classNum)반 \(num)번",
+            grade: grade,
+            classNumber: classNum,
+            number: num,
             birthDay: birthDay.toDate(format: .fullDate)
         )
     }
