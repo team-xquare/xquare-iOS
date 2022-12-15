@@ -1,5 +1,6 @@
 import Foundation
 
+import AttachmentService
 import AuthService
 import MealDataService
 import UserService
@@ -13,6 +14,7 @@ extension AppDependency {
     static func resolve() -> AppDependency {
 
         // MARK: - ServiceDependency
+        let attachmentServiceDependency = AttachmentServiceDependency.shared
         let authServiceDependency = AuthServiceDependency.shared
         let mealDataServiceDependency = MealDataServiceDependency.shared
         let userServiceDependency = UserServiceDependency.shared
@@ -37,6 +39,11 @@ extension AppDependency {
         let mealDetailViewModel = MealDetailViewModel(
             fetchMealMenuPerMonthUseCase: mealDataServiceDependency.fetchMonthToMealMenuUseCase
         )
+        let myPageViewModel = MyPageViewModel(
+            fetchProfileUseCase: userServiceDependency.fetchProfileUseCase,
+            editProfileImageUseCase: userServiceDependency.editProfileImageUseCase,
+            uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase
+        )
 
         // MARK: - Views
         let pointHistoryView = PointHistoryView()
@@ -48,7 +55,13 @@ extension AppDependency {
         let scheduleView = ScheduleView()
         let feedView = FeedView()
         let applicationView = ApplicationView(viewModel: applicationViewModel)
-        let entireView = EntireView(pointHistoryView: pointHistoryView)
+        let myPageView = MyPageView(
+            viewModel: myPageViewModel
+        )
+        let entireView = EntireView(
+            pointHistoryView: pointHistoryView,
+            myPageView: myPageView
+        )
         let mainView = MainView(
             homeView: homeView,
             scheduleView: scheduleView,

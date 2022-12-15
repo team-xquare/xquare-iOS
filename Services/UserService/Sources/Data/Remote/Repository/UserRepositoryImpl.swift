@@ -43,4 +43,11 @@ public class UserRepositoryImpl: UserRepository {
         return remoteDataSource.fetchUserSimpleInformation()
     }
 
+    public func fetchProfile() -> Single<ProfileEntity> {
+        return remoteDataSource.fetchProfile()
+    }
+
+    public func editProfileImage(profileImage: String) -> Completable {
+        return remoteDataSource.editProfileImage(profileImage: profileImage)
+    }
 }

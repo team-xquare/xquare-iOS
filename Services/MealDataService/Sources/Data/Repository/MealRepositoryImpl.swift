@@ -1,6 +1,6 @@
 import Foundation
 
-import RxOfflineCacheModule
+import XOfflineCache
 import Moya
 import RxSwift
 
@@ -27,15 +27,21 @@ class MealRepositoryImpl: MealRepository {
                 self.remoteDataSource.fetchMealMenuPerDay(date: date.toString(format: .fullDate))
             }
             .doOnNeedRefresh { remoteData in
-                self.localDataSource.registerMealMenuPerDay(menu: self.toMealMenu(remoteData))
+                do {
+                    try self.localDataSource.registerMealMenuPerDay(menu: self.toMealMenu(remoteData))
+                } catch {
+                    print(error)
+                }
             }.createObservable()
     }
 
     func fetchMealMenuPerMonth(date: Date) -> Observable<[MealMenuPerDayEntity]> {
         OfflineCacheUtil<[MealMenuPerDayEntity]>()
             .localData {
-                self.localDataSource.fetchMealMenuPerMonth(day: date)
-                    .map { $0.map { $0.toDomain() } }
+                do {
+                     return self.localDataSource.fetchMealMenuPerMonth(day: date)
+                        .map { $0.map { $0.toDomain() } }
+                }
             }
             .remoteData {
                 self.remoteDataSource.fetchMealMenuPerMonth(
@@ -46,7 +52,11 @@ class MealRepositoryImpl: MealRepository {
                 )
             }
             .doOnNeedRefresh(refreshLocalData: { remoteData in
-                self.localDataSource.registerMealMenuPerMonth(menu: remoteData.map { self.toMealMenu($0) })
+                do {
+                    try self.localDataSource.registerMealMenuPerMonth(menu: remoteData.map { self.toMealMenu($0) })
+                } catch {
+                    print(error)
+                }
             })
             .createObservable()
     }
@@ -82,7 +92,7 @@ extension MealRepositoryImpl {
             }
         }
         return MealMenu(
-            day: menu.date,
+            day: menu.date.toString(format: .fullDate),
             breakfast: breakfast,
             lunch: lunch,
             dinner: dinner,

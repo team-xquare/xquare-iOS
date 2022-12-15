@@ -17,6 +17,7 @@ class MealDetailViewModel: ObservableObject {
     private var disposeBag = DisposeBag()
 
     func fetchMealMenuPerMonth() {
+        self.dateToShowData = Date()
         self.fetchMealMenuPerMonthUseCase.excute(date: Date())
             .subscribe(onNext: { [weak self] in
                 self?.menu = $0

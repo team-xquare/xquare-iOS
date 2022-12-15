@@ -27,9 +27,11 @@ let project = Project(
             dependencies: [
                 .Module.XNavigationAndTab,
                 .Module.XWebKit,
+                .Module.XPhotos,
                 .Service.AuthService,
                 .Service.MealDataService,
                 .Service.UserService,
+                .Service.AttachmentService,
                 .SPM.FirebaseMessaging,
                 .SPM.SemicolonDesign,
                 .target(name: "XquareWidget")
