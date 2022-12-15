@@ -11,6 +11,8 @@ enum UserAPI {
     case fetchFCMToken(users: [String])
     case fetchExcludedUserList(users: [String])
     case fetchUserSimpleInformation
+    case fetchProfile
+    case editProfileImage(profileImage: String)
 }
 
 extension UserAPI: XquareAPI {
@@ -37,7 +39,12 @@ extension UserAPI: XquareAPI {
     }
 
     var method: Moya.Method {
-        return .get
+        switch self {
+        case .editProfileImage:
+            return .patch
+        default:
+            return .get
+        }
     }
 
     var task: Task {
@@ -54,6 +61,12 @@ extension UserAPI: XquareAPI {
                 parameters: [
                     "users": users
                 ], encoding: URLEncoding.queryString
+            )
+        case .editProfileImage(let profileImage):
+            return .requestParameters(
+                parameters: [
+                    "profile_file_name": profileImage
+                ], encoding: JSONEncoding.default
             )
         default:
             return .requestPlain

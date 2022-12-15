@@ -38,10 +38,7 @@ extension AttachmentAPI: XquareAPI {
                     mimeType: "files/jpg"
                 ))
             }
-            if let jsonData = try? JSONSerialization.data(withJSONObject: ["bucketName": "xquare"] ) {
-                multiformData.append(.init(provider: .data(jsonData), name: "request"))
-            }
-            return .uploadMultipart(multiformData)
+            return .uploadCompositeMultipart(multiformData, urlParameters: ["bucketName": "xquare"])
         }
     }
 

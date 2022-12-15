@@ -36,12 +36,16 @@ struct HomeView: View, XNavigationAndTabContent {
             }
             .padding([.leading, .trailing], 16)
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .background(Color.GrayScale.gray50)
+        .onTabSelected(tabIndex: 0, perform: {
+            viewModel.fetchTodaysMeal()
+            viewModel.fetchUserPoint()
+        })
         .onAppear {
             viewModel.fetchTodaysMeal()
             viewModel.fetchUserPoint()
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .background(Color.GrayScale.gray50)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button(action: {

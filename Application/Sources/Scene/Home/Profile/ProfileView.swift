@@ -17,7 +17,9 @@ struct ProfileView: View {
                         .resizable()
                         .scaledToFill()
                 } placeholder: {
-                    Color.GrayScale.gray200
+                    Image("DefaultImage")
+                        .resizable()
+                        .scaledToFill()
                 }
                 .frame(width: 44, height: 44)
                 .cornerRadius(22)

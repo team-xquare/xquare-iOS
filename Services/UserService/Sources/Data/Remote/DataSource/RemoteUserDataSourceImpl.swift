@@ -48,4 +48,15 @@ class RemoteUserDataSourceImpl: RestApiRemoteDataSource<UserAPI>, RemoteUserData
             .map(UserSimpleInformationResponse.self)
             .map { $0.toDomain() }
     }
+
+    func fetchProfile() -> Single<ProfileEntity> {
+        return request(.fetchProfile)
+            .map(ProfileResponse.self)
+            .map { $0.toDomain() }
+    }
+
+    func editProfileImage(profileImage: String) -> Completable {
+        return request(.editProfileImage(profileImage: profileImage))
+            .asCompletable()
+    }
 }

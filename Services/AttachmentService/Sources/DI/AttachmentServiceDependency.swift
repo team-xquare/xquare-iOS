@@ -1,6 +1,8 @@
 import Foundation
 
 public struct AttachmentServiceDependency {
+    public static let shared = resolve()
+
     public let uploadImageUseCase: UploadImageUseCase
 }
 

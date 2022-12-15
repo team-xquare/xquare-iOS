@@ -10,6 +10,8 @@ public struct UserServiceDependency {
     public let fetchFCMTokenUseCase: FetchFCMTokenUseCase
     public let fetchExcludedUserListUseCase: FetchExcludedUserListUseCase
     public let fetchUserSimpleInformationUseCase: FetchUserSimpleInformationUseCase
+    public let fetchProfileUseCase: FetchProfileUseCase
+    public let editProfileImageUseCase: EditProfileImageUseCase
 
 }
 
@@ -46,13 +48,23 @@ extension UserServiceDependency {
             repository: userRepository
         )
 
+        let fetchProfileUseCase = FetchProfileUseCase(
+            repository: userRepository
+        )
+
+        let editProfileImageUseCase = EditProfileImageUseCase(
+            repository: userRepository
+        )
+
         return UserServiceDependency(
             fetchUserInformationByIdUseCase: fetchUserInformationByIdUseCase,
             fetchUserInformationByNameUseCase: fetchUserInformationByNameUseCase,
             fetchUserListByClassUseCase: fetchUserListByClassUseCase,
             fetchFCMTokenUseCase: fetchFCMTokenUseCase,
             fetchExcludedUserListUseCase: fetchExcludedUserListUseCase,
-            fetchUserSimpleInformationUseCase: fetchUserPointUseCase
+            fetchUserSimpleInformationUseCase: fetchUserPointUseCase,
+            fetchProfileUseCase: fetchProfileUseCase,
+            editProfileImageUseCase: editProfileImageUseCase
         )
     }
 }
