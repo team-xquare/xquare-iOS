@@ -32,6 +32,10 @@ class XWebKitState: ObservableObject {
     @Published var isPhotoPickerPresented: Bool = false
     @Published var selectedImages: [UIImage] = []
 
+    @Published var isActionSheetPresented: Bool = false
+    @Published var actionSheetItems: [String] = []
+    @Published var selectedActionSheetItemIndex: Int?
+
     init(urlString: String, accessToken: String = "", isPresentated: Binding<Bool>) {
         self.urlString = urlString
         self.accessToken = accessToken

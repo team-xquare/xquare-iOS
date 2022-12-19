@@ -25,6 +25,7 @@ class WebViewCoordinator: NSObject, WKNavigationDelegate, WKScriptMessageHandler
         case "confirm": self.processConfirmBridge(message.body)
         case "error": self.processErrorBridge(message.body)
         case "photoPicker": self.processPhotoPickerBridge()
+        case "actionSheet": self.processActionSheetBridge(message.body)
         default: break
         }
     }
@@ -77,6 +78,13 @@ extension WebViewCoordinator {
         self.parent.state.isPhotoPickerPresented = true
     }
 
+    private func processActionSheetBridge(_ messageBody: Any) {
+        guard let messageBodyAsString = messageBody as? String else { return }
+        self.parent.state.actionSheetItems = messageBodyAsString
+            .convertToArray()
+        self.parent.state.isActionSheetPresented = true
+    }
+
 }
 
 fileprivate extension String {
@@ -93,7 +101,7 @@ fileprivate extension String {
     func convertToArray() -> [String] {
         return self
             .removeQuotationMarks()
-            .components(separatedBy: ", ")
+            .components(separatedBy: ",")
             .map { $0.removeQuotationMarks() }
     }
 

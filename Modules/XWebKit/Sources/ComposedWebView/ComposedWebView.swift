@@ -54,7 +54,8 @@ extension ComposedWebView {
             "back",
             "confirm",
             "error",
-            "photoPicker"
+            "photoPicker",
+            "actionSheet"
         ], configuration: configuration)
 
         return configuration
@@ -99,7 +100,14 @@ extension ComposedWebView {
                 return jpegData.base64EncodedString()
             }}
             .sink {
-                self.evaluateJavaScript(webView: webView, bridgeName: "selectedPhotos", data: "{ photos: \($0) }")
+                self.evaluateJavaScript(webView: webView, bridgeName: "photoPicker", data: "{ photos: \($0) }")
+            }
+            .store(in: &self.state.cancellables)
+
+        self.state.$selectedActionSheetItemIndex
+            .compactMap { $0 }
+            .sink {
+                self.evaluateJavaScript(webView: webView, bridgeName: "actionSheet", data: "{ index: \($0) }")
             }
             .store(in: &self.state.cancellables)
 

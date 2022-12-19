@@ -71,5 +71,32 @@ public struct XWebKitView: View {
             isPresented: self.$state.isPhotoPickerPresented,
             selection: self.$state.selectedImages
         )
+        .confirmationDialog(
+            "",
+            isPresented: self.$state.isActionSheetPresented,
+            actions: {
+                ForEach(
+                    Array(zip(self.state.actionSheetItems.indices, self.state.actionSheetItems)),
+                    id: \.1
+                ) { index, item in
+                    Button(action: {
+                        self.state.selectedActionSheetItemIndex = index
+                    }, label: {
+                        Text(item)
+                    })
+                }
+            }
+        )
     }
 }
+
+/*
+ ForEach(self.state.actionSheetItems, id: \.self) { item in
+     Button(action: {
+         print("selected: "+item)
+         self.state.selectedActionSheetItemIndex = 0
+     }, label: {
+         Text(item)
+     })
+ }
+ */
