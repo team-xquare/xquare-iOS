@@ -1,9 +1,9 @@
 import SwiftUI
 
 import AuthService
-import RxSwift
 import FirebaseMessaging
-import Network
+import LocalAuthentication
+import RxSwift
 
 class LoginViewModel: ObservableObject {
     @Published var id: String = ""
@@ -11,13 +11,19 @@ class LoginViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     @Published var isLoginSuccess: Bool = false
     @Published var isInternetNotWorking: Bool = false
+    @Published var idAndPassword: IdAndPasswordEntity?
 
     private let signInUseCase: SigninUseCase
+    private let fetchIdAndPasswordUseCase: FetchIdAndPasswordUseCase
 
     private var disposeBag = DisposeBag()
 
-    init(signInUseCase: SigninUseCase) {
+    init(
+        signInUseCase: SigninUseCase,
+        fetchIdAndPasswordUseCase: FetchIdAndPasswordUseCase
+    ) {
         self.signInUseCase = signInUseCase
+        self.fetchIdAndPasswordUseCase = fetchIdAndPasswordUseCase
     }
 
     func textFieldIsEmpty() -> Bool {
@@ -43,5 +49,41 @@ class LoginViewModel: ObservableObject {
             }
             self?.isLoginSuccess = false
         }).disposed(by: disposeBag)
+    }
+
+    func checkUnlock() {
+        fetchIdAndPassword()
+        if idAndPassword?.id ?? "" != "" && idAndPassword?.password ?? "" != "" {
+            requestUnlock()
+        }
+    }
+
+    private func requestUnlock() {
+        let context = LAContext()
+        var error: NSError?
+
+        let canEvaluate = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+
+        if canEvaluate {
+            context.evaluatePolicy(
+                .deviceOwnerAuthenticationWithBiometrics,
+                localizedReason: "To Access Data"
+            ) { success, _ in
+                if success {
+                    self.id = self.idAndPassword?.id ?? ""
+                    self.password = self.idAndPassword?.password ?? ""
+                    self.login()
+                }
+            }
+        }
+    }
+
+    private func fetchIdAndPassword() {
+        self.fetchIdAndPasswordUseCase.excute()
+            .asObservable()
+            .subscribe(onNext: { [weak self] in
+                self?.idAndPassword = $0
+            })
+            .disposed(by: disposeBag)
     }
 }
