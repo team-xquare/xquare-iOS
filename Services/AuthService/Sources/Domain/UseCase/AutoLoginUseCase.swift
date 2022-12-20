@@ -2,7 +2,7 @@ import Foundation
 
 import RxSwift
 
-public class FetchIdAndPasswordUseCase {
+public class AutoLoginUseCase {
 
     private let repository: AuthRepository
 
@@ -11,7 +11,7 @@ public class FetchIdAndPasswordUseCase {
     }
 
     public func excute() -> Single<IdAndPasswordEntity> {
-        return repository.fetchIdAndPassword()
+        return repository.autoLogin()
     }
 
 }

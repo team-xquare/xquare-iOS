@@ -14,16 +14,16 @@ class LoginViewModel: ObservableObject {
     @Published var idAndPassword: IdAndPasswordEntity?
 
     private let signInUseCase: SigninUseCase
-    private let fetchIdAndPasswordUseCase: FetchIdAndPasswordUseCase
+    private let autoLoginUseCase: AutoLoginUseCase
 
     private var disposeBag = DisposeBag()
 
     init(
         signInUseCase: SigninUseCase,
-        fetchIdAndPasswordUseCase: FetchIdAndPasswordUseCase
+        autoLoginUseCase: AutoLoginUseCase
     ) {
         self.signInUseCase = signInUseCase
-        self.fetchIdAndPasswordUseCase = fetchIdAndPasswordUseCase
+        self.autoLoginUseCase = autoLoginUseCase
     }
 
     func textFieldIsEmpty() -> Bool {
@@ -52,7 +52,7 @@ class LoginViewModel: ObservableObject {
     }
 
     func checkUnlock() {
-        fetchIdAndPassword()
+        autoLogin()
         if idAndPassword?.id ?? "" != "" && idAndPassword?.password ?? "" != "" {
             requestUnlock()
         }
@@ -78,8 +78,8 @@ class LoginViewModel: ObservableObject {
         }
     }
 
-    private func fetchIdAndPassword() {
-        self.fetchIdAndPasswordUseCase.excute()
+    private func autoLogin() {
+        self.autoLoginUseCase.excute()
             .asObservable()
             .subscribe(onNext: { [weak self] in
                 self?.idAndPassword = $0

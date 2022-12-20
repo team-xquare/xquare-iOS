@@ -9,7 +9,7 @@ public struct AuthServiceDependency {
     public let refreshTokenUseCase: RefreshTokenUseCase
     public let signinUseCase: SigninUseCase
     public let signupUseCase: SignupUseCase
-    public let fetchIdAndPasswordUsecase: FetchIdAndPasswordUseCase
+    public let autoLoginUseCase: AutoLoginUseCase
     public let jwtPlugin: JWTPlugin
 
 }
@@ -44,7 +44,7 @@ extension AuthServiceDependency {
         let signupUseCase = SignupUseCase(
             authRepository: authRepository
         )
-        let fetchIdAndPasswordUsecase = FetchIdAndPasswordUseCase(
+        let fetchIdAndPasswordUsecase = AutoLoginUseCase(
             repository: authRepository
         )
 
@@ -59,7 +59,7 @@ extension AuthServiceDependency {
             refreshTokenUseCase: refreshTokenUseCase,
             signinUseCase: signinUseCase,
             signupUseCase: signupUseCase,
-            fetchIdAndPasswordUsecase: fetchIdAndPasswordUsecase,
+            autoLoginUseCase: fetchIdAndPasswordUsecase,
             jwtPlugin: jwtPlugin
         )
     }

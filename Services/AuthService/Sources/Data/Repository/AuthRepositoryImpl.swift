@@ -81,7 +81,7 @@ class AuthRepositoryImpl: AuthRepository {
         return expiredDate
     }
 
-    func fetchIdAndPassword() -> Single<IdAndPasswordEntity> {
+    func autoLogin() -> Single<IdAndPasswordEntity> {
         return Single<IdAndPasswordEntity>.create { single in
             let idAndPassword = self.localAuthDataSource.fetchIdAndPassword()
             single(.success(idAndPassword))
