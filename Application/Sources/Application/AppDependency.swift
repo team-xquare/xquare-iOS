@@ -28,7 +28,8 @@ extension AppDependency {
             fetchAccessTokenUseCase: authServiceDependency.fetchAccessTokenUseCase
         )
         let loginViewModel = LoginViewModel(
-            signInUseCase: authServiceDependency.signinUseCase
+            signInUseCase: authServiceDependency.signinUseCase,
+            fetchIdAndPasswordUseCase: authServiceDependency.fetchIdAndPasswordUsecase
         )
         let signupViewModel = SignupViewModel(
             signupUseCase: authServiceDependency.signupUseCase
