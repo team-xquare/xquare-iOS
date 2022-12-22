@@ -49,6 +49,7 @@ struct LoginView: View {
             .navigationTitle("로그인")
             .setNavigationBackButton()
         }
+        .onAppear(perform: viewModel.checkUnlock)
         .sdErrorAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
             SDErrorAlert(errerMessage: "네트워크가 원할하지 않습니다.")
         })
