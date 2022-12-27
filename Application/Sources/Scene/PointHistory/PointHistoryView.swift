@@ -4,8 +4,7 @@ import SemicolonDesign
 
 struct PointHistoryView: View {
 
-    @State var isGoodPointButtonSelected: Bool = true
-    @State var isBadPointButtonSelected: Bool = false
+    @State var selectedIndex: Int = 0
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -14,14 +13,10 @@ struct PointHistoryView: View {
                 .sdText(type: .body4)
                 .padding(.horizontal, 16)
 
-            HStack {
-                SelectButtonView(selection: $isGoodPointButtonSelected, text: "상점") {
-                    self.isBadPointButtonSelected = false
-                }
-                SelectButtonView(selection: $isBadPointButtonSelected, text: "벌점") {
-                    self.isGoodPointButtonSelected = false
-                }
-            }
+            Selector(
+                selectedIndex: self.$selectedIndex,
+                buttonTitles: ["상점", "벌점"]
+            )
             .padding([.horizontal, .vertical], 16)
 
             ScrollView {
