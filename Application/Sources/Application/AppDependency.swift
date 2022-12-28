@@ -45,6 +45,9 @@ extension AppDependency {
             editProfileImageUseCase: userServiceDependency.editProfileImageUseCase,
             uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase
         )
+        let feedViewModel = FeedViewModel(
+            fetchAccessTokenUseCase: authServiceDependency.fetchAccessTokenUseCase
+        )
 
         // MARK: - Views
         let pointHistoryView = PointHistoryView()
@@ -54,7 +57,7 @@ extension AppDependency {
             mealDetailView: mealDetailView
         )
         let scheduleView = ScheduleView()
-        let feedView = FeedView()
+        let feedView = FeedView(viewModel: feedViewModel)
         let applicationView = ApplicationView(viewModel: applicationViewModel)
         let myPageView = MyPageView(
             viewModel: myPageViewModel
