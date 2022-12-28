@@ -1,8 +1,11 @@
 import SwiftUI
 
 import XNavigationAndTab
+import XWebKit
 
 struct FeedView: View, XNavigationAndTabContent {
+
+    @StateObject var viewModel: FeedViewModel
 
     var tabInformation: TabInformation {
         TabInformation(
@@ -12,13 +15,10 @@ struct FeedView: View, XNavigationAndTabContent {
     }
 
     var body: some View {
-        Text("피드 화면")
-            .navigationTitle("피드")
-    }
-}
-
-struct FeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        FeedView()
+        XWebKitView(
+            urlString: viewModel.getWebviewURLString(),
+            accessToken: viewModel.getAccessToken()
+        )
+        .navigationTitle("피드")
     }
 }
