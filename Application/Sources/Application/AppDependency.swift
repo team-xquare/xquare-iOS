@@ -45,6 +45,7 @@ extension AppDependency {
             editProfileImageUseCase: userServiceDependency.editProfileImageUseCase,
             uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase
         )
+        let bugReportViewModel = BugReportViewModel()
 
         // MARK: - Views
         let pointHistoryView = PointHistoryView()
@@ -53,6 +54,7 @@ extension AppDependency {
             viewModel: homeViewModel,
             mealDetailView: mealDetailView
         )
+        let bugReportView = BugReportView(viewModel: bugReportViewModel)
         let scheduleView = ScheduleView()
         let feedView = FeedView()
         let applicationView = ApplicationView(viewModel: applicationViewModel)
@@ -61,7 +63,8 @@ extension AppDependency {
         )
         let entireView = EntireView(
             pointHistoryView: pointHistoryView,
-            myPageView: myPageView
+            myPageView: myPageView,
+            bugReportView: bugReportView
         )
         let mainView = MainView(
             homeView: homeView,
