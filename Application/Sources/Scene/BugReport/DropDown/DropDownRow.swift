@@ -17,11 +17,11 @@ struct DropDownRow: View {
                 Spacer()
                     .frame(width: 12)
                 Text(option)
-                    .sdText(type: .body4)
+                    .sdText(type: .body4, textColor: isSelected ? .black : .GrayScale.gray500)
                 Spacer()
             }
             .frame(height: 32)
-            .background(Color.GrayScale.gray100)
+            .background(Color.white)
         }
     }
 }

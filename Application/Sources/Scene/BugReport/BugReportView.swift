@@ -3,6 +3,7 @@ import SwiftUI
 import SemicolonDesign
 
 struct BugReportView: View {
+    @State private var showDropDown: Bool = false
     @StateObject var viewModel: BugReportViewModel
 
     var body: some View {
@@ -20,14 +21,21 @@ struct BugReportView: View {
                     TextEditor(text: $viewModel.content)
                     Spacer()
                 }
-                DropDownSelector(selectedOptions: $viewModel.bugPlace)
-                    .padding(.bottom, 16)
+                DropDownSelector(
+                    showDropDown: $showDropDown,
+                    selectedOptions: $viewModel.bugPlace
+                )
+                .padding(.bottom, 16)
             }
         }
+        .background(Color.GrayScale.gray0)
         .padding(.horizontal, 16)
         .navigationBarBackButtonHidden()
         .setNavigationBackButton()
         .navigationTitle("버그 제보")
         .navigationBarTitleDisplayMode(.inline)
+        .onTapGesture {
+            showDropDown = false
+        }
     }
 }

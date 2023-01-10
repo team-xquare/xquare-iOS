@@ -20,6 +20,7 @@ struct DropDown: View {
             }
             .cornerRadius(10)
         }
-        .frame(height: CGFloat(options.count) * 40)
+        .frame(width: 120, height: CGFloat(options.count) * 40)
+        .shadow(radius: 0.5)
     }
 }

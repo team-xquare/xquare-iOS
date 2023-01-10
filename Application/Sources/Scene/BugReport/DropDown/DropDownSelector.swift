@@ -3,7 +3,7 @@ import SwiftUI
 import SemicolonDesign
 
 struct DropDownSelector: View {
-    @State private var showDropDown: Bool = false
+    @Binding var showDropDown: Bool
     @Binding var selectedOptions: String
     var optionsSelectedActions: ((_ options: String) -> Void)?
 
@@ -33,6 +33,9 @@ struct DropDownSelector: View {
                         text: $selectedOptions,
                         options: [
                             "홈",
+                            "일정",
+                            "피드",
+                            "신청",
                             "전체"
                         ]) { option in
                             self.showDropDown = false
