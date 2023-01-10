@@ -4,9 +4,11 @@ import AttachmentService
 import AuthService
 import MealDataService
 import UserService
+import ComposableArchitecture
 
 struct AppDependency {
     let launchScreenView: LaunchScreenView
+    let signupView: SignupView
 }
 
 // swiftlint:disable function_body_length
@@ -31,8 +33,10 @@ extension AppDependency {
             signInUseCase: authServiceDependency.signinUseCase,
             autoLoginUseCase: authServiceDependency.autoLoginUseCase
         )
-        let signupViewModel = SignupViewModel(
-            signupUseCase: authServiceDependency.signupUseCase
+        let signupStore = Store(
+            initialState: SignupState(),
+            reducer: SignupReducer.reducer,
+            environment: SignupEnvironment(signupUseCase: authServiceDependency.signupUseCase)
         )
         let launchScreenViewModel = LaunchScreenViewModel(
             refreshTokenUseCase: authServiceDependency.refreshTokenUseCase
@@ -75,7 +79,7 @@ extension AppDependency {
             mainView: mainView
         )
         let signupView = SignupView(
-            viewModel: signupViewModel,
+            store: signupStore,
             loginView: loginView
         )
         let onboardingView = OnboardingView(
@@ -89,7 +93,8 @@ extension AppDependency {
         )
 
         return AppDependency(
-            launchScreenView: launchScreenView
+            launchScreenView: launchScreenView,
+            signupView: signupView
         )
 
     }

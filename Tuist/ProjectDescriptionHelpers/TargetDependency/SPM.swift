@@ -24,6 +24,7 @@ extension TargetDependency {
         public static let RxSwift = TargetDependency.external(name: "RxSwift")
 
         public static let SemicolonDesign = TargetDependency.external(name: "SemicolonDesign")
+        public static let ComposableArchitecture = TargetDependency.external(name: "ComposableArchitecture")
 
     }
 
