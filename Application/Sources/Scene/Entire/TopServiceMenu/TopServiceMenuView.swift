@@ -4,6 +4,7 @@ struct TopServiceMenuView: View {
 
     var pointHistoryView: PointHistoryView
     var myPageView: MyPageView
+    var bugReportView: BugReportView
 
     var body: some View {
         HStack(spacing: 9) {
@@ -14,7 +15,7 @@ struct TopServiceMenuView: View {
                 myPageView
             }
             TopServiceMenuCellView(image: .warningTriangleIcon, text: "버그 제보") {
-                Text("버그 제보")
+                bugReportView
             }
         }
         .padding(.top, 20)

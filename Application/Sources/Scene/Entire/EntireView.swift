@@ -6,6 +6,7 @@ struct EntireView: View, XNavigationAndTabContent {
 
     var pointHistoryView: PointHistoryView
     var myPageView: MyPageView
+    var bugReportView: BugReportView
 
     @State var services = [
         ServiceSection(
@@ -30,7 +31,8 @@ struct EntireView: View, XNavigationAndTabContent {
             VStack(spacing: 27) {
                 TopServiceMenuView(
                     pointHistoryView: pointHistoryView,
-                    myPageView: myPageView
+                    myPageView: myPageView,
+                    bugReportView: bugReportView
                 )
                 ForEach(services.indices, id: \.self) { index in
                     ServiceSectionView(
