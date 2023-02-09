@@ -3,6 +3,9 @@ import SwiftUI
 import XNavigationAndTab
 
 struct ScheduleView: View, XNavigationAndTabContent {
+    @State var showTimeTableView: Bool = true
+    let timeTableView: TimeTableView
+    let academicScheduleView: AcademicScheduleView
 
     var tabInformation: TabInformation {
         TabInformation(
@@ -12,13 +15,19 @@ struct ScheduleView: View, XNavigationAndTabContent {
     }
 
     var body: some View {
-        Text("일정 화면")
-            .navigationTitle("일정")
-    }
-}
-
-struct ScheduleView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScheduleView()
+        VStack(spacing: 0) {
+            ScheduleButtonView(
+                clickTimeTableButton: { showTimeTableView = true },
+                clickAcademicScheduleButton: { showTimeTableView = false },
+                showTimeTable: $showTimeTableView
+            )
+            .padding(.top, 5)
+            if showTimeTableView {
+                timeTableView
+            } else {
+                academicScheduleView
+            }
+            Spacer()
+        }
     }
 }
