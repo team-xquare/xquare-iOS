@@ -46,6 +46,8 @@ extension AppDependency {
             uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase
         )
         let bugReportViewModel = BugReportViewModel()
+        let academicScheduleViewModel = AcademicScheduleViewModel()
+        let writeScheduleViewModel = WriteScheduleViewModel()
 
         // MARK: - Views
         let pointHistoryView = PointHistoryView()
@@ -54,8 +56,17 @@ extension AppDependency {
             viewModel: homeViewModel,
             mealDetailView: mealDetailView
         )
+        let writeScheduleView = WriteScheduleView(viewModel: writeScheduleViewModel)
         let bugReportView = BugReportView(viewModel: bugReportViewModel)
-        let scheduleView = ScheduleView()
+        let timeTableView = TimeTableView()
+        let academicScheduleView = AcademicScheduleView(
+            viewModel: academicScheduleViewModel,
+            writeScheduleView: writeScheduleView
+        )
+        let scheduleView = ScheduleView(
+            timeTableView: timeTableView,
+            academicScheduleView: academicScheduleView
+        )
         let feedView = FeedView()
         let applicationView = ApplicationView(viewModel: applicationViewModel)
         let myPageView = MyPageView(
