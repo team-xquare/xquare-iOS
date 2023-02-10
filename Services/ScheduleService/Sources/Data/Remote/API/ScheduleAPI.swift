@@ -6,7 +6,6 @@ import RestApiModule
 
 enum ScheduleAPI {
     case fetchScheduleForMonth(month: Int)
-    case createSchoolSchedule(name: String, date: String)
     case createSchedule(name: String, date: String)
 }
 
@@ -18,7 +17,7 @@ extension ScheduleAPI: XquareAPI {
 
     var urlPath: String {
         switch self {
-        case .fetchScheduleForMonth, .createSchoolSchedule:
+        case .fetchScheduleForMonth:
             return "/school"
         default:
             return ""
@@ -34,7 +33,7 @@ extension ScheduleAPI: XquareAPI {
                 ],
                 encoding: URLEncoding.default
             )
-        case .createSchoolSchedule(let name, let date), .createSchedule(let name, let date):
+        case .createSchedule(let name, let date):
             return .requestParameters(
                 parameters: [
                     "name": name,

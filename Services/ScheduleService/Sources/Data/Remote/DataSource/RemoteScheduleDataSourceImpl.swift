@@ -11,11 +11,6 @@ class RemoteScheduleDataSourceImpl: RestApiRemoteDataSource<ScheduleAPI>, Remote
             .map { $0.toDomain() }
     }
 
-    func createSchoolSchedule(name: String, date: String) -> Completable {
-        return request(.createSchoolSchedule(name: name, date: date ))
-            .asCompletable()
-    }
-
     func createSchedule(name: String, date: String) -> Completable {
         return request(.createSchedule(name: name, date: date))
             .asCompletable()

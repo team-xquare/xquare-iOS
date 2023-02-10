@@ -15,10 +15,6 @@ public class ScheduleRepositoryImpl: ScheduleRepository {
             .asObservable()
     }
 
-    public func createSchoolSchedule(name: String, date: String) -> Completable {
-        return remoteDataSource.createSchoolSchedule(name: name, date: date)
-    }
-
     public func createSchedule(name: String, date: String) -> Completable {
         return remoteDataSource.createSchedule(name: name, date: date)
     }
