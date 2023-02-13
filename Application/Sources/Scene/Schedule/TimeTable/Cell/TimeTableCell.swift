@@ -1,16 +1,17 @@
 import SwiftUI
 
+import TimeTableService
 import SemicolonDesign
 
 struct TimeTableCell: View {
-    let period: Int
+    let timeTable: DayTimeTableEntity
 
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
-            Text("\(period)교시")
+            Text("\(timeTable.period)교시")
                 .sdText(type: .body1, textColor: .GrayScale.gray900)
                 .padding(.trailing, 12)
-            AsyncImage(url: URL(string: "")) { image in
+            AsyncImage(url: timeTable.subjectImageUrl) { image in
                 image
                     .resizable()
                     .scaledToFill()

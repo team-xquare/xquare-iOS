@@ -1,23 +1,25 @@
 import SwiftUI
 
+import TimeTableService
+
 struct TimeTableView: View {
+    @StateObject var viewModel: TimeTableViewModel
+
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
                 .frame(height: 62)
-            List(1..<8, id: \.self) { num in
-                TimeTableCell(period: num)
-                    .frame(height: 42)
-                    .listRowSeparator(.hidden)
+            TabView {
+                ForEach(viewModel.timeTable, id: \.weekDay) { weekTimeTable in
+                    List(weekTimeTable.dayTimeTable, id: \.period) { timeTable in
+                        TimeTableCell(timeTable: timeTable)
+                            .listRowSeparator(.hidden)
+                    }
+                    .listStyle(.inset)
+                }
             }
-            .listStyle(.inset)
-            .padding(.horizontal, 28)
+            .tabViewStyle(.page)
         }
-    }
-}
-
-struct TimeTableView_Previews: PreviewProvider {
-    static var previews: some View {
-        TimeTableView()
+        .onAppear(perform: viewModel.fetchTimeTable)
     }
 }
