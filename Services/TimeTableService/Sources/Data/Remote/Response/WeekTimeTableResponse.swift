@@ -6,14 +6,14 @@ struct WeekTimeTableResponse: Decodable {
         case dayTimeTable = "day_timetable"
     }
     let weekDay: Int
-    let dayTimeTable: DayTimeTableResponse
+    let dayTimeTable: [DayTimeTableResponse]
 }
 
 extension WeekTimeTableResponse {
     func toDomain() -> WeekTimeTableEntity {
         return .init(
             weekDay: weekDay,
-            dayTimeTable: dayTimeTable.toDomain()
+            dayTimeTable: dayTimeTable.map { $0.toDomain() }
         )
     }
 }
