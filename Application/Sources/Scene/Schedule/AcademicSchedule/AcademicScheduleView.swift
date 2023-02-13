@@ -12,12 +12,12 @@ struct AcademicScheduleView: View {
                 LazyVStack(spacing: 0) {
                     SDCalendar(
                         day: $viewModel.day,
-                        specialDate: viewModel.specialDays
+                        specialDate: viewModel.schedule.map { $0.date }
                     )
                     .padding(.top, 18)
                     .padding(.bottom, 20)
-                    ForEach(0..<4, id: \.self) { _ in
-                        AcademicScheduleCell()
+                    ForEach(viewModel.schedule, id: \.date) {
+                        AcademicScheduleCell(schedule: $0)
                     }
                 }
             }
@@ -33,5 +33,6 @@ struct AcademicScheduleView: View {
             }
             .padding(.trailing, 16)
         }
+        .onAppear(perform: viewModel.fetchScheduleForMonth)
     }
 }
