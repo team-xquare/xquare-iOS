@@ -3,6 +3,8 @@ import Foundation
 import AttachmentService
 import AuthService
 import MealDataService
+import ScheduleService
+import TimeTableService
 import UserService
 
 struct AppDependency {
@@ -17,6 +19,8 @@ extension AppDependency {
         let attachmentServiceDependency = AttachmentServiceDependency.shared
         let authServiceDependency = AuthServiceDependency.shared
         let mealDataServiceDependency = MealDataServiceDependency.shared
+        let scheduleServiceSependency = ScheduleServiceDependency.shared
+        let timeTableServiceDependency = TimeTableServiceDependency.shared
         let userServiceDependency = UserServiceDependency.shared
 
         // MARK: - ViewModels
@@ -46,8 +50,15 @@ extension AppDependency {
             uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase
         )
         let bugReportViewModel = BugReportViewModel()
-        let academicScheduleViewModel = AcademicScheduleViewModel()
-        let writeScheduleViewModel = WriteScheduleViewModel()
+        let academicScheduleViewModel = AcademicScheduleViewModel(
+            fetchScheduleForMonthUseCase: scheduleServiceSependency.fetchScheduleForMonthUseCase
+        )
+        let writeScheduleViewModel = WriteScheduleViewModel(
+            createScheduleUseCase: scheduleServiceSependency.createScheduleUseCase
+        )
+        let timeTableViewModel = TimeTableViewModel(
+            fetchTimeTableForWeekUseCase: timeTableServiceDependency.fetchTimeTableForWeekUseCase
+        )
 
         // MARK: - Views
         let pointHistoryView = PointHistoryView()
@@ -58,7 +69,7 @@ extension AppDependency {
         )
         let writeScheduleView = WriteScheduleView(viewModel: writeScheduleViewModel)
         let bugReportView = BugReportView(viewModel: bugReportViewModel)
-        let timeTableView = TimeTableView()
+        let timeTableView = TimeTableView(viewModel: timeTableViewModel)
         let academicScheduleView = AcademicScheduleView(
             viewModel: academicScheduleViewModel,
             writeScheduleView: writeScheduleView
