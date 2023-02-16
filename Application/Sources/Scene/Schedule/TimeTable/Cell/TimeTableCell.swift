@@ -6,6 +6,7 @@ import SemicolonDesign
 struct TimeTableCell: View {
     let timeTable: DayTimeTableEntity
 
+    // swiftlint:disable line_length
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
             Text("\(timeTable.period)교시")
@@ -22,9 +23,9 @@ struct TimeTableCell: View {
             .cornerRadius(20)
             .padding(.trailing, 12)
             VStack(alignment: .leading, spacing: 1) {
-                Text("창체")
+                Text(timeTable.subjectName)
                     .sdText(type: .body1, textColor: .GrayScale.gray900)
-                Text("08:40 ~ 09:30")
+                Text("\(timeTable.beginTime.toString(format: "hh:mm")) ~ \(timeTable.endTime.toString(format: "hh: mm"))")
                     .sdText(type: .caption, textColor: .GrayScale.gray600)
             }
         }
