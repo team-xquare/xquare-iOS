@@ -7,14 +7,12 @@ struct DayTimeTableResponse: Decodable {
         case endTime = "end_time"
         case subjectName = "subject_name"
         case subjectImageUrlString = "subject_image"
-        case date
     }
     let period: Int
     let beginTime: String
     let endTime: String
     let subjectName: String
     let subjectImageUrlString: String
-    let date: String
 }
 
 extension DayTimeTableResponse {
@@ -24,8 +22,7 @@ extension DayTimeTableResponse {
             beginTime: beginTime.toDate(format: .fullDateWithTime),
             endTime: endTime.toDate(format: .fullDate),
             subjectName: subjectName,
-            subjectImageUrl: URL(string: subjectImageUrlString),
-            date: date.toDate(format: .fullDate)
+            subjectImageUrl: URL(string: subjectImageUrlString)
         )
     }
 }
