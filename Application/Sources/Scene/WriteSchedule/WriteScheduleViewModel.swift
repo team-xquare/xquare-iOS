@@ -24,9 +24,14 @@ class WriteScheduleViewModel: ObservableObject {
             })
             .disposed(by: disposeBag)
     }
-
     func checkStringDatasIsEmpty() {
         self.postButtonIsDisabled = title.isEmpty || day.isEmpty
+    }
+    func resetData() {
+        self.title = ""
+        self.day = ""
+        self.postButtonIsDisabled = true
+        self.isSuccess = false
     }
 
 }

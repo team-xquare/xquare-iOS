@@ -53,6 +53,7 @@ struct WriteScheduleView: View {
                 .disabled(viewModel.postButtonIsDisabled)
             }
         }
+        .onDisappear(perform: viewModel.resetData)
         .navigationTitle("일정 작성")
         .setNavigationBackButton()
         .navigationBarBackButtonHidden()
