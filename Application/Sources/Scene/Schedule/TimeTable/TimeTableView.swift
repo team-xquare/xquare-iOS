@@ -12,7 +12,7 @@ struct TimeTableView: View {
                 .frame(height: 16)
             TabView {
                 ForEach(viewModel.timeTable, id: \.weekDay) { weekTimeTable in
-                    Text(weekTimeTable.weekDay.toString(format: "MM월 dd일 (E)"))
+                    Text(weekTimeTable.date.toString(format: "MM월 dd일 (E)"))
                         .sdText(type: .body2, textColor: .GrayScale.gray900)
                         .padding(.bottom, 16)
                     List(weekTimeTable.dayTimeTable, id: \.period) { timeTable in
