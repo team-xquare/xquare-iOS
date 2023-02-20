@@ -1,5 +1,7 @@
 import Foundation
 
+import XDateUtil
+
 struct DayTimeTableResponse: Decodable {
     private enum CodingKeys: String, CodingKey {
         case period
@@ -19,8 +21,8 @@ extension DayTimeTableResponse {
     func toDomain() -> DayTimeTableEntity {
         return .init(
             period: period,
-            beginTime: beginTime.toDate(format: .fullDateWithTime),
-            endTime: endTime.toDate(format: .fullDate),
+            beginTime: beginTime.toDate(format: .time).addingTimeInterval(-(60 * 60 * 9)),
+            endTime: endTime.toDate(format: .time).addingTimeInterval(-(60 * 60 * 9)),
             subjectName: subjectName,
             subjectImageUrl: URL(string: subjectImageUrlString)
         )

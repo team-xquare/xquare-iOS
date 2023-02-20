@@ -1,5 +1,7 @@
 import Foundation
 
+import XDateUtil
+
 struct WeekTimeTableResponse: Decodable {
     private enum CodingKeys: String, CodingKey {
         case weekDay = "week_day"

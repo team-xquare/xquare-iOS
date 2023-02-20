@@ -25,7 +25,7 @@ struct TimeTableCell: View {
             VStack(alignment: .leading, spacing: 1) {
                 Text(timeTable.subjectName)
                     .sdText(type: .body1, textColor: .GrayScale.gray900)
-                Text("\(timeTable.beginTime.toString(format: "hh:mm")) ~ \(timeTable.endTime.toString(format: "hh: mm"))")
+                Text("\(timeTable.beginTime.toString(format: "HH:mm")) ~ \(timeTable.endTime.toString(format: "HH:mm"))")
                     .sdText(type: .caption, textColor: .GrayScale.gray600)
             }
         }
