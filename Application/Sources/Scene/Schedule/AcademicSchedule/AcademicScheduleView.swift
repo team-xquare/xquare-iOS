@@ -16,10 +16,13 @@ struct AcademicScheduleView: View {
                     )
                     .padding(.top, 18)
                     .padding(.bottom, 20)
-                    ForEach(viewModel.schedule, id: \.date) {
+                    ForEach(viewModel.schedule, id: \.id) {
                         AcademicScheduleCell(schedule: $0)
                     }
                 }
+            }
+            .onChange(of: viewModel.day) { _ in
+                viewModel.fetchScheduleForMonth()
             }
             NavigationLink(destination: writeScheduleView) {
                 Image(systemName: "pencil")
