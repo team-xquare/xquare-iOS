@@ -7,16 +7,16 @@ class AcademicScheduleViewModel: ObservableObject {
     @Published var day = Date()
     @Published var schedule: [ScheduleEntity] = []
 
-    private let fetchScheduleForMonthUseCase: FetchScheduleForMonthUseCase
+    private let fetchSchedulePerMonthUseCase: FetchSchedulePerMonthUseCase
 
     private var disposeBag = DisposeBag()
 
-    init(fetchScheduleForMonthUseCase: FetchScheduleForMonthUseCase) {
-        self.fetchScheduleForMonthUseCase = fetchScheduleForMonthUseCase
+    init(fetchSchedulePerMonthUseCase: FetchSchedulePerMonthUseCase) {
+        self.fetchSchedulePerMonthUseCase = fetchSchedulePerMonthUseCase
     }
 
     func fetchScheduleForMonth() {
-        self.fetchScheduleForMonthUseCase.excute(month: day)
+        self.fetchSchedulePerMonthUseCase.excute(month: day)
             .subscribe(onNext: {
                 self.schedule = $0
             })

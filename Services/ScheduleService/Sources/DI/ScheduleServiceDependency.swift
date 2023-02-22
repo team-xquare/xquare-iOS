@@ -3,7 +3,7 @@ import Foundation
 public struct ScheduleServiceDependency {
     public static let shared = Self.resolve()
 
-    public let fetchScheduleForMonthUseCase: FetchScheduleForMonthUseCase
+    public let fetchScheduleForMonthUseCase: FetchSchedulePerMonthUseCase
     public let createScheduleUseCase: CreateScheduleUseCase
 }
 
@@ -17,7 +17,7 @@ public extension ScheduleServiceDependency {
             remoteDataSource: remoteDataSource
         )
 
-        let fetchScheduleForMonthUseCase = FetchScheduleForMonthUseCase(
+        let fetchScheduleForMonthUseCase = FetchSchedulePerMonthUseCase(
             repository: repository
         )
         let createScheduleUseCase = CreateScheduleUseCase(

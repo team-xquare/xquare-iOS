@@ -51,7 +51,7 @@ extension AppDependency {
         )
         let bugReportViewModel = BugReportViewModel()
         let academicScheduleViewModel = AcademicScheduleViewModel(
-            fetchScheduleForMonthUseCase: scheduleServiceSependency.fetchScheduleForMonthUseCase
+            fetchSchedulePerMonthUseCase: scheduleServiceSependency.fetchScheduleForMonthUseCase
         )
         let writeScheduleViewModel = WriteScheduleViewModel(
             createScheduleUseCase: scheduleServiceSependency.createScheduleUseCase

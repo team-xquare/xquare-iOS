@@ -3,7 +3,7 @@ import Foundation
 import RxSwift
 import XDateUtil
 
-public class FetchScheduleForMonthUseCase {
+public class FetchSchedulePerMonthUseCase {
 
     private let repository: ScheduleRepository
 
