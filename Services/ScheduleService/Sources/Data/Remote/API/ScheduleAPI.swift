@@ -20,7 +20,7 @@ extension ScheduleAPI: XquareAPI {
         case .fetchScheduleForMonth:
             return "/school"
         default:
-            return ""
+            return "/mine"
         }
     }
 

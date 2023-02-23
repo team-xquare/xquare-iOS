@@ -3,7 +3,7 @@ import Foundation
 import RxSwift
 import XDateUtil
 
-public class FetchScheduleForMonthUseCase {
+public class FetchSchedulePerMonthUseCase {
 
     private let repository: ScheduleRepository
 
@@ -12,7 +12,7 @@ public class FetchScheduleForMonthUseCase {
     }
 
     public func excute(month: Date) -> Observable<[ScheduleEntity]> {
-        return repository.fetchScheduleForMonth(month: Int(month.toString(format: .fullDate)) ?? 0)
+        return repository.fetchScheduleForMonth(month: Int(month.toString(format: .month)) ?? 0)
     }
 
 }

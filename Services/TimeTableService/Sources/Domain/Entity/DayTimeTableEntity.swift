@@ -6,5 +6,4 @@ public struct DayTimeTableEntity: Equatable {
     public let endTime: Date
     public let subjectName: String
     public let subjectImageUrl: URL?
-    public let date: Date
 }
