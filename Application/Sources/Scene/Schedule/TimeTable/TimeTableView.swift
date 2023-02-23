@@ -28,8 +28,7 @@ struct TimeTableView: View {
                 }
             }
             .padding(.horizontal, 24)
-            .indexViewStyle(.page(backgroundDisplayMode: .never))
-            .tabViewStyle(.page)
+            .tabViewStyle(.page(indexDisplayMode: .never))
 
             PageControlView(weekDay: $weekDay)
                 .padding(.vertical, 20)
