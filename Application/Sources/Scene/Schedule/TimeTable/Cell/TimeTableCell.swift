@@ -12,6 +12,7 @@ struct TimeTableCell: View {
             Text("\(timeTable.period)교시")
                 .sdText(type: .body1, textColor: .GrayScale.gray900)
                 .padding(.trailing, 12)
+                .frame(width: 58)
             AsyncImage(url: timeTable.subjectImageUrl) { image in
                 image
                     .resizable()
