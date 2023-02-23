@@ -3,6 +3,8 @@ import Foundation
 import AttachmentService
 import AuthService
 import MealDataService
+import ScheduleService
+import TimeTableService
 import UserService
 
 struct AppDependency {
@@ -17,6 +19,8 @@ extension AppDependency {
         let attachmentServiceDependency = AttachmentServiceDependency.shared
         let authServiceDependency = AuthServiceDependency.shared
         let mealDataServiceDependency = MealDataServiceDependency.shared
+        let scheduleServiceSependency = ScheduleServiceDependency.shared
+        let timeTableServiceDependency = TimeTableServiceDependency.shared
         let userServiceDependency = UserServiceDependency.shared
 
         // MARK: - ViewModels
@@ -45,6 +49,16 @@ extension AppDependency {
             editProfileImageUseCase: userServiceDependency.editProfileImageUseCase,
             uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase
         )
+        let bugReportViewModel = BugReportViewModel()
+        let academicScheduleViewModel = AcademicScheduleViewModel(
+            fetchSchedulePerMonthUseCase: scheduleServiceSependency.fetchScheduleForMonthUseCase
+        )
+        let writeScheduleViewModel = WriteScheduleViewModel(
+            createScheduleUseCase: scheduleServiceSependency.createScheduleUseCase
+        )
+        let timeTableViewModel = TimeTableViewModel(
+            fetchTimeTableForWeekUseCase: timeTableServiceDependency.fetchTimeTableForWeekUseCase
+        )
 
         // MARK: - Views
         let pointHistoryView = PointHistoryView()
@@ -53,7 +67,17 @@ extension AppDependency {
             viewModel: homeViewModel,
             mealDetailView: mealDetailView
         )
-        let scheduleView = ScheduleView()
+        let writeScheduleView = WriteScheduleView(viewModel: writeScheduleViewModel)
+        let bugReportView = BugReportView(viewModel: bugReportViewModel)
+        let timeTableView = TimeTableView(viewModel: timeTableViewModel)
+        let academicScheduleView = AcademicScheduleView(
+            viewModel: academicScheduleViewModel,
+            writeScheduleView: writeScheduleView
+        )
+        let scheduleView = ScheduleView(
+            timeTableView: timeTableView,
+            academicScheduleView: academicScheduleView
+        )
         let feedView = FeedView()
         let applicationView = ApplicationView(viewModel: applicationViewModel)
         let myPageView = MyPageView(
@@ -61,7 +85,8 @@ extension AppDependency {
         )
         let entireView = EntireView(
             pointHistoryView: pointHistoryView,
-            myPageView: myPageView
+            myPageView: myPageView,
+            bugReportView: bugReportView
         )
         let mainView = MainView(
             homeView: homeView,
