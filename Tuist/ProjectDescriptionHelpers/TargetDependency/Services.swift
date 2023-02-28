@@ -9,6 +9,7 @@ extension TargetDependency {
         public static let AttachmentService = service(name: "AttachmentService")
         public static let ScheduleService = service(name:"ScheduleService")
         public static let TimeTableService = service(name: "TimeTableService")
+        public static let PointService = service(name: "PointService")
     }
 
     private static func service(name: String) -> TargetDependency {
