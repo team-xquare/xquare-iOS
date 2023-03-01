@@ -34,6 +34,7 @@ let project = Project(
                 .Service.AttachmentService,
                 .Service.TimeTableService,
                 .Service.ScheduleService,
+                .Service.PointService,
                 .SPM.FirebaseMessaging,
                 .SPM.SemicolonDesign,
                 .target(name: "XquareWidget")
