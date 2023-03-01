@@ -5,15 +5,9 @@ import RestApiModule
 
 class RemotePointDataSourceImpl: RestApiRemoteDataSource<PointAPI>, RemotePointDataSource {
 
-    func fetchPoint() -> Single<PointEntity> {
-        return request(.fetchPoint)
-            .map(PointResponse.self)
-            .map { $0.toDomain() }
-    }
-
-    func fetchPointHistory(type: Bool?) -> Single<[PointHistoryEntity]> {
+    func fetchPointHistory(type: Bool?) -> Single<PointEntity> {
         return request(.fetchPointHistory(type: type))
-            .map(PointHistoryListResponse.self)
+            .map(PointResponse.self)
             .map { $0.toDomain() }
     }
 

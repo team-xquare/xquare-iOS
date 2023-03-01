@@ -5,7 +5,6 @@ import Moya
 import RestApiModule
 
 enum PointAPI {
-    case fetchPoint
     case fetchPointHistory(type: Bool?)
 }
 
@@ -16,12 +15,7 @@ extension PointAPI: XquareAPI {
     }
 
     var urlPath: String {
-        switch self {
-        case .fetchPointHistory:
-            return "/history"
-        default:
-            return ""
-        }
+        return "/history"
     }
 
     var task: Task {
@@ -33,8 +27,6 @@ extension PointAPI: XquareAPI {
                 ],
                 encoding: URLEncoding.default
             )
-        default:
-            return .requestPlain
         }
     }
 

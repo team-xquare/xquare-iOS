@@ -10,11 +10,7 @@ class PointRepositoryImpl: PointRepository {
         self.remoteDataSource = remoteDataSource
     }
 
-    func fetchPoint() -> Single<PointEntity> {
-        return remoteDataSource.fetchPoint()
-    }
-
-    func fetchPointHistory(type: Bool?) -> Observable<[PointHistoryEntity]> {
+    func fetchPointHistory(type: Bool?) -> Observable<PointEntity> {
         return remoteDataSource.fetchPointHistory(type: type)
             .asObservable()
     }
