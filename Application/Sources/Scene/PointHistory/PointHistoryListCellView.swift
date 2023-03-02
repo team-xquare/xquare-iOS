@@ -1,24 +1,23 @@
 import SwiftUI
 
 import SemicolonDesign
+import PointService
 import XDateUtil
 
 struct PointHistoryListCellView: View {
 
-    var date: Date
-    var reason: String
-    var point: Int
+    let pointHistory: PointHistoryEntity
 
     var body: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading) {
-                Text(reason)
+                Text(pointHistory.reason)
                     .sdText(type: .body2, textColor: .GrayScale.gray900)
-                Text(date.toString(format: .fullDate))
+                Text(pointHistory.date.toString(format: .fullDate))
                     .sdText(type: .caption)
             }
             Spacer()
-            Text(String(point))
+            Text(String(pointHistory.point))
                 .sdText(type: .heading6)
         }
         .padding([.vertical, .leading], 16)
