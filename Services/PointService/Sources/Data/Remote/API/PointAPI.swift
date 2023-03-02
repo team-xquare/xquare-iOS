@@ -5,7 +5,7 @@ import Moya
 import RestApiModule
 
 enum PointAPI {
-    case fetchPointHistory(type: Bool?)
+    case fetchPointHistory(type: Bool)
 }
 
 extension PointAPI: XquareAPI {

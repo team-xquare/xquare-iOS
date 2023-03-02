@@ -10,7 +10,7 @@ public class FetchPointHistoryUseCase {
         self.repository = repository
     }
 
-    public func excute(type: Bool?) -> Observable<PointEntity> {
+    public func excute(type: Bool) -> Observable<PointEntity> {
         return repository.fetchPointHistory(type: type)
     }
 
