@@ -1,7 +1,6 @@
 import SwiftUI
 
 import SemicolonDesign
-import XPhotos
 
 struct MyPageView: View {
 
@@ -31,7 +30,7 @@ struct MyPageView: View {
             MyInformationView(title: "아이디", content: viewModel.id)
             Spacer()
         }
-        .xPhotoPicker(
+        .sdPhotoPicker(
             isPresented: $viewModel.xPhotosIsPresented,
             selection: $viewModel.profileImage
         )

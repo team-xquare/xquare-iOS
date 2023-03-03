@@ -26,8 +26,6 @@ let project = Project(
             scripts: [.swiftLintScript, .googleInfoPlistScripts],
             dependencies: [
                 .Module.XNavigationAndTab,
-                .Module.XWebKit,
-                .Module.XPhotos,
                 .Service.AuthService,
                 .Service.MealDataService,
                 .Service.UserService,
@@ -37,6 +35,7 @@ let project = Project(
                 .Service.PointService,
                 .SPM.FirebaseMessaging,
                 .SPM.SemicolonDesign,
+                .SPM.XWebKit,
                 .target(name: "XquareWidget")
             ] + TargetDependency.universalDependencies,
             settings: .settings(base: ["OTHER_LDFLAGS": "-ObjC"])
