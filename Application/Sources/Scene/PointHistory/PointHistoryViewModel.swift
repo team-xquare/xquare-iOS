@@ -4,7 +4,6 @@ import RxSwift
 import PointService
 
 class PointHistoryViewModel: ObservableObject {
-    @Published var type = true
     @Published var pointHistories: PointEntity = .init(goodPoint: 0, badPoint: 0, pointHistories: [])
 
     private let fetchPointHistoryUseCase: FetchPointHistoryUseCase
@@ -15,7 +14,7 @@ class PointHistoryViewModel: ObservableObject {
 
     private var disposeBag = DisposeBag()
 
-    func fetchPointHistory() {
+    func fetchPointHistory(type: PointType) {
         self.fetchPointHistoryUseCase.excute(type: type)
             .subscribe(onNext: {
                 self.pointHistories = $0

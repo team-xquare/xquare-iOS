@@ -5,7 +5,7 @@ import Moya
 import RestApiModule
 
 enum PointAPI {
-    case fetchPointHistory(type: Bool)
+    case fetchPointHistory(type: PointType)
 }
 
 extension PointAPI: XquareAPI {
@@ -23,7 +23,7 @@ extension PointAPI: XquareAPI {
         case .fetchPointHistory(let type):
             return .requestParameters(
                 parameters: [
-                    "type": type as Any
+                    "type": type.rawValue
                 ],
                 encoding: URLEncoding.default
             )
