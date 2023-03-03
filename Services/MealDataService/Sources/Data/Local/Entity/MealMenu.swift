@@ -1,5 +1,7 @@
 import Foundation
 
+import XDateUtil
+
 struct MealMenu: Codable, Equatable {
     let day: String
     let breakfast: String

@@ -33,15 +33,3 @@ struct MealDetailCell: View {
         .padding(.horizontal, 16)
     }
 }
-
-struct MealDetailCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        MealDetailCell(entity: .init(
-            date: Date(),
-            menu: [
-                .init(mealTime: .breakfast, menu: ["밥"], kcal: ""),
-            .init(mealTime: .lunch, menu: ["밥"], kcal: ""),
-                .init(mealTime: .dinner, menu: ["밥"], kcal: "")
-            ]))
-    }
-}

@@ -6,7 +6,7 @@ import MealDataService
 class MealDetailViewModel: ObservableObject {
 
     @Published var menu: [MealMenuPerDayEntity] = []
-    @Published var dateToShowData: Date = Date()
+    @Published var dateToShowData: Date = Calendar.current.startOfDay(for: Date())
 
     private let fetchMealMenuPerMonthUseCase: FetchMealMenuPerMonthUseCase
 
@@ -17,7 +17,7 @@ class MealDetailViewModel: ObservableObject {
     private var disposeBag = DisposeBag()
 
     func fetchMealMenuPerMonth() {
-        self.dateToShowData = Date()
+        self.dateToShowData = Calendar.current.startOfDay(for: Date())
         self.fetchMealMenuPerMonthUseCase.excute(date: Date())
             .subscribe(onNext: { [weak self] in
                 self?.menu = $0

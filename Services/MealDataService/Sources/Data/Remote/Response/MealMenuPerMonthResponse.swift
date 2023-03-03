@@ -1,5 +1,7 @@
 import Foundation
 
+import XDateUtil
+
 struct MealMenuPerMonthResponse: Decodable {
     private enum CodingKeys: String, CodingKey {
         case date
