@@ -9,8 +9,6 @@ extension TargetDependency {
         public static let XEnvironment = module(name: "XEnvironment")
         public static let XNavigationAndTab = module(name: "XNavigationAndTab")
         public static let XOfflineCache = module(name: "XOfflineCache")
-        public static let XPhotos = module(name: "XPhotos")
-        public static let XWebKit = module(name: "XWebKit")
     }
 
     private static func module(name: String) -> TargetDependency {
