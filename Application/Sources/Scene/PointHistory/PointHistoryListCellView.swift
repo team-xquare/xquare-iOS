@@ -17,7 +17,7 @@ struct PointHistoryListCellView: View {
                     .sdText(type: .caption)
             }
             Spacer()
-            Text(String(pointHistory.point))
+            Text(pointHistory.pointType ? "\(pointHistory.point)" : "-\(pointHistory.point)")
                 .sdText(type: .heading6)
         }
         .padding([.vertical, .leading], 16)
