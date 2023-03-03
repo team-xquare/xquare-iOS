@@ -5,6 +5,7 @@ import AuthService
 import MealDataService
 import ScheduleService
 import TimeTableService
+import PointService
 import UserService
 
 struct AppDependency {
@@ -22,6 +23,7 @@ extension AppDependency {
         let scheduleServiceSependency = ScheduleServiceDependency.shared
         let timeTableServiceDependency = TimeTableServiceDependency.shared
         let userServiceDependency = UserServiceDependency.shared
+        let pointServiceDependency = PointServiceDependency.shared
 
         // MARK: - ViewModels
         let homeViewModel = HomeViewModel(
@@ -59,9 +61,14 @@ extension AppDependency {
         let timeTableViewModel = TimeTableViewModel(
             fetchTimeTableForWeekUseCase: timeTableServiceDependency.fetchTimeTableForWeekUseCase
         )
+        let pointHistoryViewModel = PointHistoryViewModel(
+            fetchPointHistoryUseCase: pointServiceDependency.fetchPointHistoryUseCase
+        )
 
         // MARK: - Views
-        let pointHistoryView = PointHistoryView()
+        let pointHistoryView = PointHistoryView(
+            viewModel: pointHistoryViewModel
+        )
         let mealDetailView = MealDetailView(viewModel: mealDetailViewModel)
         let homeView = HomeView(
             viewModel: homeViewModel,
