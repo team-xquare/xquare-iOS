@@ -1,5 +1,7 @@
 import Foundation
 
+import XDateUtil
+
 struct MealMenuPerDayResponse: Decodable {
     private enum CodingKeys: String, CodingKey {
         case breakfast
@@ -21,7 +23,7 @@ extension MealMenuPerDayResponse {
     func toDomain() -> MealMenuPerDayEntity {
         let date = Date()
         return .init(
-            date: date,
+            date: date.toString(format: .fullDate),
             menu: [
                 .init(mealTime: .breakfast, menu: breakfast, kcal: breakfastKcal),
                 .init(mealTime: .lunch, menu: lunch, kcal: lunchKcal),
