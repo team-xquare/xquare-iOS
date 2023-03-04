@@ -12,7 +12,7 @@ struct MealDetailCell: View {
                 alignment: .leading,
                 spacing: 0
             ) {
-                Text(entity.date.toString(format: "M월 d일 (E)"))
+                Text(entity.date)
                     .sdText(type: .body1, textColor: .GrayScale.gray900)
                     .padding(.leading, 16)
                     .padding(.bottom, 10)

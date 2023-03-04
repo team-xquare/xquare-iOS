@@ -93,7 +93,7 @@ extension MealRepositoryImpl {
             }
         }
         return MealMenu(
-            day: menu.date.toString(format: .fullDate),
+            day: menu.date,
             breakfast: breakfast,
             lunch: lunch,
             dinner: dinner,

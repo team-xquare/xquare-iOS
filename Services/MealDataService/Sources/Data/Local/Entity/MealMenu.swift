@@ -15,7 +15,7 @@ struct MealMenu: Codable, Equatable {
 extension MealMenu {
     func toDomain() -> MealMenuPerDayEntity {
         return .init(
-            date: day.toDate(format: .fullDate),
+            date: day.toDate(format: .fullDate).toString(format: "M월 d일 (E)"),
             menu: [
                 .init(mealTime: .breakfast, menu: breakfast.components(separatedBy: ", "), kcal: breakfastKcal),
                 .init(mealTime: .lunch, menu: lunch.components(separatedBy: ", "), kcal: lunchKcal),

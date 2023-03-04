@@ -24,7 +24,7 @@ struct MealMenuPerMonthResponse: Decodable {
 extension MealMenuPerMonthResponse {
     func toDomain() -> MealMenuPerDayEntity {
         return .init(
-            date: date.toDate(format: .fullDate),
+            date: date.toDate(format: .fullDate).toString(format: "M월 d일 (E)"),
             menu: [
                 .init(mealTime: .breakfast, menu: breakfast, kcal: breakfastKcal),
                 .init(mealTime: .lunch, menu: lunch, kcal: lunchKcal),
