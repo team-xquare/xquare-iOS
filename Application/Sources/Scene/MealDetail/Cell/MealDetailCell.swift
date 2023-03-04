@@ -12,7 +12,7 @@ struct MealDetailCell: View {
                 alignment: .leading,
                 spacing: 0
             ) {
-                Text(entity.date.toString(format: "M월 d일 (E)"))
+                Text(entity.date)
                     .sdText(type: .body1, textColor: .GrayScale.gray900)
                     .padding(.leading, 16)
                     .padding(.bottom, 10)
@@ -31,17 +31,5 @@ struct MealDetailCell: View {
         .background(Color.GrayScale.gray50)
         .cornerRadius(16)
         .padding(.horizontal, 16)
-    }
-}
-
-struct MealDetailCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        MealDetailCell(entity: .init(
-            date: Date(),
-            menu: [
-                .init(mealTime: .breakfast, menu: ["밥"], kcal: ""),
-            .init(mealTime: .lunch, menu: ["밥"], kcal: ""),
-                .init(mealTime: .dinner, menu: ["밥"], kcal: "")
-            ]))
     }
 }

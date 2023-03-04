@@ -14,9 +14,10 @@ struct MealDetailView: View {
             ScrollViewReader { proxy in
                 ScrollView {
                     LazyVStack(spacing: 0) {
-                        ForEach(viewModel.menu, id: \.date) {
-                            MealDetailCell(entity: $0)
+                        ForEach(0..<viewModel.menu.count, id: \.self) { index in
+                            MealDetailCell(entity: viewModel.menu[index])
                                 .padding(.top, 16)
+                                .id(index)
                         }
                     }
                 }
