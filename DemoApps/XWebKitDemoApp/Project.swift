@@ -20,7 +20,7 @@ let project = Project(
             resources: ["Resources/**"],
             scripts: [.swiftLintScript],
             dependencies: [
-                .Module.XWebKit
+                .SPM.XWebKit
             ] + TargetDependency.universalDependencies,
             settings: .settings(base: ["OTHER_LDFLAGS": "-ObjC"])
         )
