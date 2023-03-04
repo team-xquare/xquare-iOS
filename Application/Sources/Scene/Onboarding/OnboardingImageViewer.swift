@@ -6,7 +6,7 @@ struct OnboardingImageViewer: View {
         (.onboardingDms, .onboardingDms),
         (.onboardingDnms, .onboardingDnms),
         (.onboardingDdyzd, .onboardingDdyzd),
-        (.onboardingJobits, .onboardingJobits),
+        (.onboardingPick, .onboardingPick),
         (.onboardingXquare, .onboardingXquare)
     ]
 
