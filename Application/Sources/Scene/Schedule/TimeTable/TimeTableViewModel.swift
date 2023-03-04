@@ -20,7 +20,7 @@ class TimeTableViewModel: ObservableObject {
         self.fetchTimeTableForWeekUseCase.excute()
             .subscribe(onNext: {
                 self.timeTable = $0
-                self.weekDay = self.getWeekDay() != 6 && self.getWeekDay() != 7 ? self.getWeekDay() : $0.first?.weekDay ?? 1
+                self.weekDay = self.getWeekDay() != 0 && self.getWeekDay() != 6 ? self.getWeekDay() : $0.first?.weekDay ?? 1
             })
             .disposed(by: disposeBag)
     }
