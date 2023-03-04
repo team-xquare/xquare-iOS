@@ -8,7 +8,7 @@ extension Image {
     static let onboardingDms = Image("Onboarding-DMS")
     static let onboardingDnms = Image("Onboarding-DNMS")
     static let onboardingDdyzd = Image("Onboarding-DDYZD")
-    static let onboardingJobits = Image("Onboarding-Jobits")
+    static let onboardingPick = Image("Onboarding-Pick")
     static let onboardingXquare = Image("Onboarding-Xquare")
 
     // Icon
