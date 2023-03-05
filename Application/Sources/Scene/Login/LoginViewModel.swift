@@ -11,6 +11,7 @@ class LoginViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     @Published var isLoginSuccess: Bool = false
     @Published var isInternetNotWorking: Bool = false
+    @Published var idAndPassword: IdAndPasswordEntity?
 
     private let signInUseCase: SigninUseCase
     private let autoLoginUseCase: AutoLoginUseCase
@@ -50,12 +51,38 @@ class LoginViewModel: ObservableObject {
         }).disposed(by: disposeBag)
     }
 
-    func fetchIdAndPassword() {
+    func checkUnlock() {
+        autoLogin()
+        if idAndPassword?.id ?? "" != "" && idAndPassword?.password ?? "" != "" {
+            requestUnlock()
+        }
+    }
+
+    private func requestUnlock() {
+        let context = LAContext()
+        var error: NSError?
+
+        let canEvaluate = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+
+        if canEvaluate {
+            context.evaluatePolicy(
+                .deviceOwnerAuthenticationWithBiometrics,
+                localizedReason: "To Access Data"
+            ) { success, _ in
+                if success {
+                    self.id = self.idAndPassword?.id ?? ""
+                    self.password = self.idAndPassword?.password ?? ""
+                    self.login()
+                }
+            }
+        }
+    }
+
+    private func autoLogin() {
         self.autoLoginUseCase.excute()
             .asObservable()
-            .subscribe(onNext: {
-                self.id = $0.id
-                self.password = $0.password
+            .subscribe(onNext: { [weak self] in
+                self?.idAndPassword = $0
             })
             .disposed(by: disposeBag)
     }

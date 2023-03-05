@@ -44,7 +44,7 @@ struct LoginView: View {
                 FindButtonView()
                 Spacer()
             }
-            .onAppear(perform: viewModel.fetchIdAndPassword)
+            .onAppear(perform: viewModel.checkUnlock)
             .navigationTitle("로그인")
             .setNavigationBackButton()
         }
