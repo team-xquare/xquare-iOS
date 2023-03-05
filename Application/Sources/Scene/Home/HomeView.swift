@@ -47,21 +47,10 @@ struct HomeView: View, XNavigationAndTabContent {
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.GrayScale.gray50)
         .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button(action: {
-                }, label: {
-                    Image.bell
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .tint(.GrayScale.gray200)
-                })
-                Button(action: {
-                }, label: {
-                    Image.settingIcon
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .tint(.GrayScale.gray200)
-                })
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+               Text("홈")
+                    .sdText(type: .heading6, textColor: .GrayScale.gray900)
+                    .padding(.leading, 5)
             }
         }
     }
