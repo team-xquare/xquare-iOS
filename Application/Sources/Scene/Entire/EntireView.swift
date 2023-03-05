@@ -34,12 +34,7 @@ struct EntireView: View, XNavigationAndTabContent {
                     myPageView: myPageView,
                     bugReportView: bugReportView
                 )
-                ForEach(services.indices, id: \.self) { index in
-                    ServiceSectionView(
-                        headerText: services[index].headerText,
-                        services: services[index].services
-                    )
-                }
+                Spacer()
             }
         }
         .navigationTitle("전체")

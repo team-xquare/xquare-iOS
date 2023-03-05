@@ -39,8 +39,7 @@ struct BugReportView: View {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                } label: {
+                Button(action: viewModel.postBug) {
                     Text("제출")
                         .sdText(
                             type: .body4,

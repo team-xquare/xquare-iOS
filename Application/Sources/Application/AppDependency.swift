@@ -51,6 +51,9 @@ extension AppDependency {
             editProfileImageUseCase: userServiceDependency.editProfileImageUseCase,
             uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase
         )
+        let feedViewModel = FeedViewModel(
+            fetchAccessTokenUseCase: authServiceDependency.fetchAccessTokenUseCase
+            )
         let bugReportViewModel = BugReportViewModel()
         let academicScheduleViewModel = AcademicScheduleViewModel(
             fetchSchedulePerMonthUseCase: scheduleServiceSependency.fetchScheduleForMonthUseCase
@@ -74,6 +77,7 @@ extension AppDependency {
             viewModel: homeViewModel,
             mealDetailView: mealDetailView
         )
+        let feedView = FeedView(viewModel: feedViewModel)
         let writeScheduleView = WriteScheduleView(viewModel: writeScheduleViewModel)
         let bugReportView = BugReportView(viewModel: bugReportViewModel)
         let timeTableView = TimeTableView(viewModel: timeTableViewModel)
@@ -85,7 +89,6 @@ extension AppDependency {
             timeTableView: timeTableView,
             academicScheduleView: academicScheduleView
         )
-        let feedView = FeedView()
         let applicationView = ApplicationView(viewModel: applicationViewModel)
         let myPageView = MyPageView(
             viewModel: myPageViewModel
