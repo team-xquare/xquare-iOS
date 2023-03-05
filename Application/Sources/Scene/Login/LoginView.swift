@@ -38,18 +38,16 @@ struct LoginView: View {
                 FillButton(
                     isDisabled: $isLoginButtonDisabled,
                     text: "로그인",
-                    action: {
-                        viewModel.login()
-                    },
+                    action: viewModel.login,
                     type: .rounded
                 )
                 FindButtonView()
                 Spacer()
             }
+            .onAppear(perform: viewModel.fetchIdAndPassword)
             .navigationTitle("로그인")
             .setNavigationBackButton()
         }
-        .onAppear(perform: viewModel.checkUnlock)
         .sdErrorAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
             SDErrorAlert(errerMessage: "네트워크가 원할하지 않습니다.")
         })
