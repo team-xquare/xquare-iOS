@@ -5,13 +5,12 @@ import TimeTableService
 
 struct TimeTableView: View {
     @StateObject var viewModel: TimeTableViewModel
-    @State var weekDay: Int = 1
 
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
                 .frame(height: 16)
-            TabView(selection: $weekDay) {
+            TabView(selection: $viewModel.weekDay) {
                 ForEach(viewModel.timeTable, id: \.weekDay) { weekTimeTable in
                     VStack(alignment: .leading, spacing: 0) {
                         Text(weekTimeTable.date.toString(format: "MM월 dd일 (E)"))
@@ -31,7 +30,11 @@ struct TimeTableView: View {
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
 
-            PageControlView(weekDay: $weekDay)
+            PageControlView(
+                weekDay: $viewModel.weekDay,
+                page: viewModel.timeTable.first?.weekDay ?? 0,
+                count: viewModel.timeTable.count
+            )
                 .padding(.vertical, 20)
         }
         .onAppear(perform: viewModel.fetchTimeTable)

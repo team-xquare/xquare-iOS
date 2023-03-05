@@ -8,4 +8,8 @@ class BugReportViewModel: ObservableObject {
     func checkBugPlaceAndContentIsEmpty() {
         isDisabled = bugPlace.isEmpty || content.isEmpty
     }
+    func postBug() {
+        self.bugPlace = "홈"
+        self.content = ""
+    }
 }

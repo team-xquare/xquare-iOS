@@ -11,6 +11,6 @@ public enum DateFormat: String {
     case month = "MM"
     /// dd
     case day = "dd"
-    // HH:mm:ss
+    /// HH:mm:ss
     case time = "HH:mm:ss"
 }
