@@ -1,5 +1,6 @@
 import SwiftUI
 
+import ScheduleService
 import SemicolonDesign
 
 struct AcademicScheduleView: View {
@@ -17,7 +18,9 @@ struct AcademicScheduleView: View {
                     .padding(.top, 18)
                     .padding(.bottom, 20)
                     ForEach(viewModel.schedule, id: \.id) {
-                        AcademicScheduleCell(schedule: $0)
+                        if $0.date.toString(format: "yyyy MM") == viewModel.day.toString(format: "yyyy MM") {
+                            AcademicScheduleCell(schedule: $0)
+                        }
                     }
                 }
             }
