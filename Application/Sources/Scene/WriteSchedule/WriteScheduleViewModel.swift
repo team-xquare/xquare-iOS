@@ -20,6 +20,7 @@ class WriteScheduleViewModel: ObservableObject {
     func createSchedule() {
         self.createScheduleUseCase.excute(name: title, date: day.toDate(format: .fullDate))
             .subscribe(onCompleted: {
+                self.resetData()
                 self.isSuccess = true
             })
             .disposed(by: disposeBag)

@@ -16,7 +16,7 @@ struct DropDownSelector: View {
                     .sdText(type: .body4)
                     .padding(.leading, 12)
                     .padding(.trailing, 4)
-                Image(systemName: self.showDropDown ? "arrowtriangle.down.fill" : "arrowtriangle.up.fill")
+                Image(systemName: self.showDropDown ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill")
                     .resizable()
                     .frame(width: 7.5, height: 6.75)
                     .foregroundColor(Color.GrayScale.gray600)
