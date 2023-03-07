@@ -76,6 +76,7 @@ public struct XNavigationAndTabView: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                         tabview
                     }
+                    .ignoresSafeArea(.keyboard)
                 }
                 .opacity(index == getTabViewSelection() ? 1 : 0)
                 .accentColor(.GrayScale.gray800)
