@@ -20,7 +20,7 @@ class LocalDataSourceImpl: LocalDataSource {
                 dinner: menu.dinner,
                 breakfastKcal: menu.breakfastKcal,
                 lunchKcal: menu.lunchKcal,
-                dinnerKcal: menu.dinner
+                dinnerKcal: menu.dinnerKcal
             )
 
             try await store
