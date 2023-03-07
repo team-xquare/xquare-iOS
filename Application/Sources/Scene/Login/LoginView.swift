@@ -41,7 +41,6 @@ struct LoginView: View {
                     action: viewModel.login,
                     type: .rounded
                 )
-                FindButtonView()
                 Spacer()
             }
             .onAppear(perform: viewModel.checkUnlock)
