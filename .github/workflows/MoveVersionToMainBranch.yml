@@ -5,26 +5,21 @@ on:
     types: [published]
 
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
       - name: Set env
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-      - name: Test
-        run: |
-          echo $RELEASE_VERSION
-          echo ${{ env.RELEASE_VERSION }}
+
       - name: git merge to main
         run: |
           git config --global user.name 'xquare-admin'
           git config --global user.email 'teamxquare@gmail.com'
           git config pull.rebase false
           git checkout -t origin/main
-          echo $(git merge -Xtheirs ${{ env.RELEASE_VERSION }})
-          /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${{ env.RELEASE_VERSION }}" Application/SupportingFiles/Info.plist
-          /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${{ env.RELEASE_VERSION }}" Application/Widget/SupportingFiles/Info.plist
-          git add -A
-          git commit -m "🚀 :: Deploy version ${{ env.RELEASE_VERSION }} to AppStore"
+          echo $(git merge -Xtheirs origin/release -m "🚀 :: Deploy version ${{ env.RELEASE_VERSION }} to AppStore")
           git push
