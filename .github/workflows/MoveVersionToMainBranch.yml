@@ -16,3 +16,15 @@ jobs:
         run: |
           echo $RELEASE_VERSION
           echo ${{ env.RELEASE_VERSION }}
+      - name: git merge to main
+        run: |
+          git config --global user.name 'xquare-admin'
+          git config --global user.email 'teamxquare@gmail.com'
+          git config pull.rebase false
+          git checkout -t origin/main
+          echo $(git merge -Xtheirs ${{ env.RELEASE_VERSION }})
+          /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${{ env.RELEASE_VERSION }}" Application/SupportingFiles/Info.plist
+          /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${{ env.RELEASE_VERSION }}" Application/Widget/SupportingFiles/Info.plist
+          git add -A
+          git commit -m "🚀 :: Deploy version ${{ env.RELEASE_VERSION }} to AppStore"
+          git push
