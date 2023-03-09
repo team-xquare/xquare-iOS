@@ -29,5 +29,12 @@ struct ScheduleView: View, XNavigationAndTabContent {
             }
             Spacer()
         }
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+               Text("일정")
+                    .sdText(type: .heading6, textColor: .GrayScale.gray900)
+                    .padding(.leading, 5)
+            }
+        }
     }
 }
