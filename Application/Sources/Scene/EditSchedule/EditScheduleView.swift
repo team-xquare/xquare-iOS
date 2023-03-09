@@ -47,7 +47,7 @@ struct EditScheduleView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: editScheudle) {
-                    Text("등록")
+                    Text("수정")
                         .sdText(
                             type: .body3,
                             textColor: editButtonIsDisabled ? .GrayScale.gray300 : .GrayScale.gray800
