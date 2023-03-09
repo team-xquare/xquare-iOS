@@ -1,8 +1,9 @@
 import Foundation
 
+import Moya
 import RxSwift
 
-public class ScheduleRepositoryImpl: ScheduleRepository {
+class ScheduleRepositoryImpl: ScheduleRepository {
 
     let remoteDataSource: RemoteScheduleDataSource
 
@@ -10,13 +11,48 @@ public class ScheduleRepositoryImpl: ScheduleRepository {
         self.remoteDataSource = remoteDataSource
     }
 
-    public func fetchScheduleForMonth(month: Int) -> Observable<[ScheduleEntity]> {
+    func fetchScheduleForMonth(month: Int) -> Observable<[ScheduleEntity]> {
         return remoteDataSource.fetchScheduleForMonth(month: month)
             .asObservable()
     }
 
-    public func createSchedule(name: String, date: String) -> Completable {
+    func createSchedule(name: String, date: String) -> Completable {
         return remoteDataSource.createSchedule(name: name, date: date)
+    }
+
+    func editSchedule(scheduleId: String, name: String, date: String) -> Completable {
+        return remoteDataSource.editShceudle(scheduleId: scheduleId, name: name, date: date)
+            .catch { [weak self] error in
+                let moyaError = error as? MoyaError
+                guard let errorCode = self?.errorToStatusCode(error) else { return .error(error) }
+                switch errorCode {
+                case 404: return .error(ScheduleServiceError.isNotPersonalSchedule)
+                default: return .error(error)
+                }
+            }
+    }
+
+    func deleteSchedule(scheduleId: String) -> Completable {
+        return remoteDataSource.deleteSchedule(scheduleId: scheduleId)
+            .catch { [weak self] error in
+                let moyaError = error as? MoyaError
+                guard let errorCode = self?.errorToStatusCode(error) else { return .error(error) }
+                switch errorCode {
+                case 404: return .error(ScheduleServiceError.isNotPersonalSchedule)
+                default: return .error(error)
+                }
+            }
+    }
+
+}
+
+extension ScheduleRepositoryImpl {
+
+    private func errorToStatusCode(_ error: Error) -> Int? {
+        guard let statusCode = (error as? MoyaError)?.response?.statusCode else {
+            return nil
+        }
+        return statusCode
     }
 
 }

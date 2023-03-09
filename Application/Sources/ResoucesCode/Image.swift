@@ -24,5 +24,7 @@ extension Image {
     static let userIcon = Image("User")
     static let viewMoreIcon = Image("ViewMore")
     static let warningTriangleIcon = Image("WarningTriangle")
+    static let moreIcon = Image("More")
+    static let pencilIcon = Image("Pencil")
 
 }

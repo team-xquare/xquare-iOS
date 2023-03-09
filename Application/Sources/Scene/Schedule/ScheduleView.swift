@@ -29,6 +29,9 @@ struct ScheduleView: View, XNavigationAndTabContent {
             }
             Spacer()
         }
+        .onTabSelected(tabIndex: 1, perform: {
+            academicScheduleView.viewModel.fetchScheduleForMonth()
+        })
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarLeading) {
                Text("일정")
