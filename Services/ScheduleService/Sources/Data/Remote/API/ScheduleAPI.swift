@@ -7,6 +7,8 @@ import RestApiModule
 enum ScheduleAPI {
     case fetchScheduleForMonth(month: Int)
     case createSchedule(name: String, date: String)
+    case editSchedule(scheduleId: String, name: String, date: String)
+    case deleteSchedule(scheduelId: String)
 }
 
 extension ScheduleAPI: XquareAPI {
@@ -19,6 +21,8 @@ extension ScheduleAPI: XquareAPI {
         switch self {
         case .fetchScheduleForMonth:
             return "/school"
+        case .editSchedule(let scheduleId, _, _), .deleteSchedule(let scheduleId):
+            return "/mine/\(scheduleId)"
         default:
             return "/mine"
         }
@@ -33,7 +37,7 @@ extension ScheduleAPI: XquareAPI {
                 ],
                 encoding: URLEncoding.default
             )
-        case .createSchedule(let name, let date):
+        case .createSchedule(let name, let date), .editSchedule(_, let name, let date):
             return .requestParameters(
                 parameters: [
                     "name": name,
@@ -41,12 +45,15 @@ extension ScheduleAPI: XquareAPI {
                 ],
                 encoding: JSONEncoding.default
             )
+        default:
+            return .requestPlain
         }
     }
 
     var errorMapper: [Int: Error]? {
         return [
             401: ScheduleServiceError.unauthorized,
+            404: ScheduleServiceError.isNotPersonalSchedule,
             408: ScheduleServiceError.timeOut,
             409: ScheduleServiceError.conflict,
             429: ScheduleServiceError.tooManyRequests
@@ -57,6 +64,10 @@ extension ScheduleAPI: XquareAPI {
         switch self {
         case .fetchScheduleForMonth:
             return .get
+        case .editSchedule:
+            return .put
+        case .deleteSchedule:
+            return .delete
         default:
             return .post
         }
