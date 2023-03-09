@@ -16,4 +16,14 @@ class RemoteScheduleDataSourceImpl: RestApiRemoteDataSource<ScheduleAPI>, Remote
             .asCompletable()
     }
 
+    func editShceudle(scheduleId: String, name: String, date: String) -> Completable {
+        return request(.editSchedule(scheduleId: scheduleId, name: name, date: date))
+            .asCompletable()
+    }
+
+    func deleteSchedule(scheduleId: String) -> Completable {
+        return request(.deleteSchedule(scheduelId: scheduleId))
+            .asCompletable()
+    }
+
 }
