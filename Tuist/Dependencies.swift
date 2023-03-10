@@ -25,7 +25,7 @@ let dependencies = Dependencies(
                 requirement: .upToNextMajor(from: "6.5.0")),
         // SemicolonDesign
         .remote(url: "https://github.com/semicolonDSM/SemicolonDesign_iOS.git",
-                requirement: .upToNextMajor(from: "1.11.7")),
+                requirement: .upToNextMajor(from: "1.12.0")),
         // XWebKit
         .remote(url: "https://github.com/team-xquare/XWebKit",
                 requirement: .upToNextMajor(from: "1.1.2"))

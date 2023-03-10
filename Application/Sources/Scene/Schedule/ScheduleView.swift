@@ -29,5 +29,15 @@ struct ScheduleView: View, XNavigationAndTabContent {
             }
             Spacer()
         }
+        .onTabSelected(tabIndex: 1, perform: {
+            academicScheduleView.viewModel.fetchScheduleForMonth()
+        })
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+               Text("일정")
+                    .sdText(type: .heading6, textColor: .GrayScale.gray900)
+                    .padding(.leading, 5)
+            }
+        }
     }
 }

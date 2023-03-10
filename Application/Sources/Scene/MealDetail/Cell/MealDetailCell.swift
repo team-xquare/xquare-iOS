@@ -30,6 +30,11 @@ struct MealDetailCell: View {
         .padding(.vertical, 16)
         .background(Color.GrayScale.gray50)
         .cornerRadius(16)
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(lineWidth: entity.date == Date().toString(format: "M월 d일 (E)") ? 1 : 0)
+                .foregroundColor(.Primary.purple100)
+        )
         .padding(.horizontal, 16)
     }
 }

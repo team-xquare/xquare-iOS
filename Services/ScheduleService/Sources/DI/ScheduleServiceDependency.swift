@@ -5,6 +5,8 @@ public struct ScheduleServiceDependency {
 
     public let fetchScheduleForMonthUseCase: FetchSchedulePerMonthUseCase
     public let createScheduleUseCase: CreateScheduleUseCase
+    public let editScheduleUseCase: EditScheduleUseCase
+    public let deleteScheduleUseCase: DeleteScheduleUseCase
 }
 
 public extension ScheduleServiceDependency {
@@ -23,10 +25,18 @@ public extension ScheduleServiceDependency {
         let createScheduleUseCase = CreateScheduleUseCase(
             repository: repository
         )
+        let editScheduleUseCase = EditScheduleUseCase(
+            repository: repository
+        )
+        let deleteScheduleUseCase = DeleteScheduleUseCase(
+            repository: repository
+        )
 
         return ScheduleServiceDependency(
             fetchScheduleForMonthUseCase: fetchScheduleForMonthUseCase,
-            createScheduleUseCase: createScheduleUseCase
+            createScheduleUseCase: createScheduleUseCase,
+            editScheduleUseCase: editScheduleUseCase,
+            deleteScheduleUseCase: deleteScheduleUseCase
         )
     }
 }
