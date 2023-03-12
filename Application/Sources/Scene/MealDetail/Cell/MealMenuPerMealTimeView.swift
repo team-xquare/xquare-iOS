@@ -7,7 +7,7 @@ struct MealMenuPerMealTimeView: View {
     var entity: MealMenuEntity
 
     var body: some View {
-        if entity.menu != nil {
+        if entity.menu != [""] {
             VStack(
                 alignment: .leading,
                 spacing: 0
