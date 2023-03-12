@@ -16,7 +16,11 @@ struct XquareMealWidgetProvider: TimelineProvider {
     }
 
     func placeholder(in context: Context) -> MealEntry {
-        MealEntry(date: Date(), meal: .init(date: Date().toString(format: .fullDate), menu: []), mealTime: getMealTime())
+        MealEntry(
+            date: Date(),
+            meal: .init(date: Date().toString(format: .fullDate), menu: []),
+            mealTime: getMealTime()
+        )
     }
 
     func getSnapshot(in context: Context, completion: @escaping (MealEntry) -> Void) {
