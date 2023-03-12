@@ -12,5 +12,6 @@ public class FetchMealMenuPerDayUseCase {
 
     public func excute(date: Date) -> Observable<MealMenuPerDayEntity> {
         return mealRepository.fetchMealMenuPerDay(date: date)
+            .skip(1)
     }
 }
