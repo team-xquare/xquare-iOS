@@ -50,9 +50,9 @@ struct XquareMealWidgetProvider: TimelineProvider {
     }
 
     private func getMealTime() -> MealTime {
-        if 9 >= Int(Date().toString(format: "HH"))! {
+        if 9 > Int(Date().toString(format: "HH"))! {
             return .breakfast
-        } else if 13 >= Int(Date().toString(format: "HH"))! {
+        } else if 13 > Int(Date().toString(format: "HH"))! {
             return .lunch
         } else {
             return .dinner
@@ -116,7 +116,7 @@ struct SmallXquareMealWidgetView: View {
             }
             Spacer()
         }
-        .padding(8)
+        .padding(10)
     }
 }
 
