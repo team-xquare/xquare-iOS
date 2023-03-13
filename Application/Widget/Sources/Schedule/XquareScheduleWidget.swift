@@ -70,7 +70,11 @@ struct XquareScheduleWidgetEntryView: View {
                     }
                 }
             } else {
-                ScheduleWidgetCell(schedule: "일정이 없습니다.")
+                HStack {
+                    Text("일정이 없습니다.")
+                        .sdText(type: .caption, textColor: .Primary.purple300)
+                    Spacer()
+                }
             }
             Spacer()
         }
