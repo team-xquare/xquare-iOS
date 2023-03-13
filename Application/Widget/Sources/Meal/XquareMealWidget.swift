@@ -89,7 +89,7 @@ struct XquareMealWidgetEntryView: View {
 }
 
 struct SmallXquareMealWidgetView: View {
-
+    @Environment(\.colorScheme) var colorScheme
     let entry: XquareMealWidgetProvider.Entry
     var mealMenu: MealMenuEntity?
 
@@ -99,29 +99,48 @@ struct SmallXquareMealWidgetView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(entry.mealTime.rawValue)
-                .sdText(type: .body4, textColor: .GrayScale.gray900)
-                .padding(.trailing, 10)
-                .padding(.top, 3)
-            Text(entry.date.toString(format: .fullDate))
-                .sdText(type: .caption, textColor: .GrayScale.gray600)
-                .padding(.bottom, 10)
-            if mealMenu?.menu ?? [] != [""] {
-                Text("\(mealMenu?.menu?.joined(separator: ", ") ?? "") (\(mealMenu?.kcal ?? ""))")
-                    .sdText(type: .caption, textColor: .GrayScale.gray900)
+        ZStack {
+            if colorScheme == .light {
+                Color.white.ignoresSafeArea()
             } else {
-                Text("등록된 정보가 없습니다.")
-                    .sdText(type: .caption, textColor: .GrayScale.gray900)
+                Color.GrayScale.gray900.ignoresSafeArea()
             }
-            Spacer()
+            VStack(alignment: .leading, spacing: 0) {
+                Text(entry.mealTime.rawValue)
+                    .sdText(
+                        type: .body4,
+                        textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                    )
+                    .padding(.trailing, 10)
+                    .padding(.top, 3)
+                Text(entry.date.toString(format: .fullDate))
+                    .sdText(
+                        type: .caption,
+                        textColor: colorScheme == .light ? .GrayScale.gray600 : .GrayScale.gray500
+                    )
+                    .padding(.bottom, 10)
+                if mealMenu?.menu ?? [] != [""] {
+                    Text("\(mealMenu?.menu?.joined(separator: ", ") ?? "") (\(mealMenu?.kcal ?? ""))")
+                        .sdText(
+                            type: .caption,
+                            textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                        )
+                } else {
+                    Text("등록된 정보가 없습니다.")
+                        .sdText(
+                            type: .caption,
+                            textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                        )
+                }
+                Spacer()
+            }
+            .padding(10)
         }
-        .padding(10)
     }
 }
 
 struct MediumXquareMealWidgetView: View {
-
+    @Environment(\.colorScheme) var colorScheme
     let entry: XquareMealWidgetProvider.Entry
     var mealMenu: MealMenuEntity?
 
@@ -136,23 +155,36 @@ struct MediumXquareMealWidgetView: View {
                 .frame(height: 10)
             HStack(spacing: 0) {
                 Text(entry.mealTime.rawValue)
-                    .sdText(type: .body4, textColor: .GrayScale.gray900)
+                    .sdText(
+                        type: .body4,
+                        textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                    )
                     .padding(.trailing, 10)
                 Text(entry.date.toString(format: .fullDate))
-                    .sdText(type: .caption, textColor: .GrayScale.gray600)
+                    .sdText(
+                        type: .caption,
+                        textColor: colorScheme == .light ? .GrayScale.gray600 : .GrayScale.gray500
+                    )
                 Spacer()
             }
             .padding(.bottom, 10)
             if mealMenu?.menu ?? [] != [""] {
                 Text("\(mealMenu?.menu?.joined(separator: ", ") ?? "") (\(mealMenu?.kcal ?? ""))")
-                    .sdText(type: .caption, textColor: .GrayScale.gray900)
+                    .sdText(
+                        type: .caption,
+                        textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                    )
             } else {
                 Text("등록된 정보가 없습니다.")
-                    .sdText(type: .caption, textColor: .GrayScale.gray900)
+                    .sdText(
+                        type: .caption,
+                        textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                    )
             }
             Spacer()
         }
         .padding(24)
+        .background(colorScheme == .light ? .white : .GrayScale.gray900)
     }
 }
 struct XquareMealWidget: Widget {
