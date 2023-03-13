@@ -53,14 +53,21 @@ struct ScheduleEntry: TimelineEntry {
 }
 
 struct XquareScheduleWidgetEntryView: View {
+    @Environment(\.colorScheme) var colorScheme
     var entry: XquareScheduleWidgetProvider.Entry
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(entry.date.toString(format: "E요일"))
-                .sdText(type: .caption, textColor: .black)
+                .sdText(
+                    type: .caption,
+                    textColor: colorScheme == .light ? .black : .white
+                )
             Text(entry.date.toString(format: "dd일"))
-                .sdText(type: .heading4, textColor: .black)
+                .sdText(
+                    type: .heading4,
+                    textColor: colorScheme == .light ? .black : .white
+                )
                 .padding(.bottom, 5)
             if entry.schedule != [] {
                 ForEach(entry.schedule, id: \.id) { schedule in
