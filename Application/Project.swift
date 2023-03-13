@@ -48,9 +48,13 @@ let project = Project(
             infoPlist: .file(path: Path("Widget/SupportingFiles/Info.plist")),
             sources: "Widget/Sources/**",
             resources: "Widget/Resources/**",
+            entitlements: Path("Widget/SupportingFiles/XquareWidget.entitlements"),
             dependencies: [
-                .SPM.SemicolonDesign
-            ]
+                .SPM.SemicolonDesign,
+                .Service.MealDataService,
+                .Service.ScheduleService,
+                .Module.XDateUtil
+            ] + TargetDependency.universalDependencies
         )
     ],
     schemes: [
