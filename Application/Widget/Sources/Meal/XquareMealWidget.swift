@@ -99,36 +99,43 @@ struct SmallXquareMealWidgetView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(entry.mealTime.rawValue)
-                .sdText(
-                    type: .body4,
-                    textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
-                )
-                .padding(.trailing, 10)
-                .padding(.top, 3)
-            Text(entry.date.toString(format: .fullDate))
-                .sdText(
-                    type: .caption,
-                    textColor: colorScheme == .light ? .GrayScale.gray600 : .GrayScale.gray500
-                )
-                .padding(.bottom, 10)
-            if mealMenu?.menu ?? [] != [""] {
-                Text("\(mealMenu?.menu?.joined(separator: ", ") ?? "") (\(mealMenu?.kcal ?? ""))")
-                    .sdText(
-                        type: .caption,
-                        textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
-                    )
+        ZStack {
+            if colorScheme == .light {
+                Color.white.ignoresSafeArea()
             } else {
-                Text("등록된 정보가 없습니다.")
+                Color.GrayScale.gray900.ignoresSafeArea()
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                Text(entry.mealTime.rawValue)
                     .sdText(
-                        type: .caption,
+                        type: .body4,
                         textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
                     )
+                    .padding(.trailing, 10)
+                    .padding(.top, 3)
+                Text(entry.date.toString(format: .fullDate))
+                    .sdText(
+                        type: .caption,
+                        textColor: colorScheme == .light ? .GrayScale.gray600 : .GrayScale.gray500
+                    )
+                    .padding(.bottom, 10)
+                if mealMenu?.menu ?? [] != [""] {
+                    Text("\(mealMenu?.menu?.joined(separator: ", ") ?? "") (\(mealMenu?.kcal ?? ""))")
+                        .sdText(
+                            type: .caption,
+                            textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                        )
+                } else {
+                    Text("등록된 정보가 없습니다.")
+                        .sdText(
+                            type: .caption,
+                            textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                        )
+                }
+                Spacer()
             }
-            Spacer()
+            .padding(10)
         }
-        .padding(10)
     }
 }
 
@@ -177,6 +184,7 @@ struct MediumXquareMealWidgetView: View {
             Spacer()
         }
         .padding(24)
+        .background(colorScheme == .light ? .white : .GrayScale.gray900)
     }
 }
 struct XquareMealWidget: Widget {

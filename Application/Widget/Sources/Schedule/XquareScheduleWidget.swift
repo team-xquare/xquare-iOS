@@ -86,6 +86,7 @@ struct XquareScheduleWidgetEntryView: View {
             Spacer()
         }
         .padding([.top, .leading], 16)
+        .background(colorScheme == .light ? .white : .GrayScale.gray900)
     }
 }
 
