@@ -75,9 +75,11 @@ extension AppDependency {
             viewModel: pointHistoryViewModel
         )
         let mealDetailView = MealDetailView(viewModel: mealDetailViewModel)
+        let notificationView = NotificationView()
         let homeView = HomeView(
             viewModel: homeViewModel,
-            mealDetailView: mealDetailView
+            mealDetailView: mealDetailView,
+            notificationView: notificationView
         )
         let feedView = FeedView(viewModel: feedViewModel)
         let writeScheduleView = WriteScheduleView(viewModel: writeScheduleViewModel)
