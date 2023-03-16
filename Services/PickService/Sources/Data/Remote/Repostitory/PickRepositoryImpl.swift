@@ -10,15 +10,18 @@ class PickRepositoryImpl: PickRepository {
     }
 
     func fetchOutingReturnTime() -> Observable<OutingReturnTimeEntity> {
-        return remoteDataSource.fetchOutingReturnTime().asObservable()
+        return remoteDataSource.fetchOutingReturnTime()
+            .asObservable()
     }
 
     func fetchOutingPass() -> Observable<OutingPassEntity> {
-        return remoteDataSource.fetchOutingPass().asObservable()
+        return remoteDataSource.fetchOutingPass()
+            .asObservable()
     }
 
     func fetchMovedClass() -> Observable<MovedClassEntity> {
-        return remoteDataSource.fetchMovedClass().asObservable()
+        return remoteDataSource.fetchMovedClass()
+            .asObservable()
     }
 
 }
