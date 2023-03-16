@@ -9,7 +9,7 @@ struct OutingReturnTimeResponse: Decodable {
 
     let userId: String
     let name: String
-    let endTime: String
+    let endTime: Date
 
 }
 

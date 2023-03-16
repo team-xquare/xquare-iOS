@@ -14,8 +14,8 @@ struct OutingPassResponse: Decodable {
     let profileFileName: String
     let studentNumber: String
     let studentName: String
-    let startTime: String
-    let endTime: String
+    let startTime: Date
+    let endTime: Date
     let reason: String
     let teacherName: String
 
