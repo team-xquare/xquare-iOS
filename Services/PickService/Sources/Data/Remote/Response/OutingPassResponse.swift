@@ -8,17 +8,17 @@ struct OutingPassResponse: Decodable {
         case startTime = "start_time"
         case endTime = "end_time"
         case reason
-        case teacher_name = "teacher_name"
+        case teacherName = "teacher_name"
     }
-    
+
     let profileFileName: String
     let studentNumber: String
     let studentName: String
     let startTime: String
     let endTime: String
     let reason: String
-    let teacher_name: String
-    
+    let teacherName: String
+
 }
 
 extension OutingPassResponse {
@@ -30,7 +30,7 @@ extension OutingPassResponse {
             startTime: self.startTime,
             endTime: self.endTime,
             reason: self.reason,
-            teacherName: self.teacher_name
+            teacherName: self.teacherName
         )
     }
 }

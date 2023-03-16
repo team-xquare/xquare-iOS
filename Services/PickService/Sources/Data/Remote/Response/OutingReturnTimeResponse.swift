@@ -6,7 +6,7 @@ struct OutingReturnTimeResponse: Decodable {
         case name
         case endTime = "end_time"
     }
-    
+
     let userId: String
     let name: String
     let endTime: String

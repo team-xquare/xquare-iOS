@@ -5,10 +5,10 @@ struct MovedClassResponse: Decodable {
         case name
         case locationClassroom = "location_classroom"
     }
-    
+
     let name: String
     let locationClassroom: String
-    
+
 }
 
 extension MovedClassResponse {
