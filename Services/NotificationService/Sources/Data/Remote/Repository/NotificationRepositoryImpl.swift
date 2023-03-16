@@ -41,6 +41,5 @@ class NotificationRepositoryImpl: NotificationRepository {
         return fetchUncheckNotificationCount()
             .asObservable()
     }
-    
-    
+
 }

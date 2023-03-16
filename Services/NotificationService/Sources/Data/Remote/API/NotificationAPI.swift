@@ -37,7 +37,7 @@ extension NotificationAPI: XquareAPI {
         }
     }
 
-    var errorMapper: [Int : Error]? {
+    var errorMapper: [Int: Error]? {
         [
             401: NotificationServiceError.unauthorized,
             408: NotificationServiceError.timeOut,
@@ -45,7 +45,7 @@ extension NotificationAPI: XquareAPI {
             429: NotificationServiceError.tooManyRequests
         ]
     }
-    
+
     var method: Moya.Method {
         switch self {
         case .activeNotificationCategory:
@@ -76,6 +76,5 @@ extension NotificationAPI: XquareAPI {
     var jwtTokenType: JWTTokenType {
         return .accessToken
     }
-    
-    
+
 }
