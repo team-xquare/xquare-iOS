@@ -8,6 +8,7 @@ enum PickAPI {
     case fetchOutingReturnTime
     case fetchMovedClass
     case fetchOutingPass
+    case deleteReturnClass(period: Int)
 }
 
 extension PickAPI: XquareAPI {
@@ -24,6 +25,8 @@ extension PickAPI: XquareAPI {
             return "/class-room/location"
         case .fetchOutingPass:
             return "/applications/picnic"
+        case .deleteReturnClass:
+            return "/applications/"
         }
     }
 
@@ -35,8 +38,24 @@ extension PickAPI: XquareAPI {
         ]
     }
 
+    var task: Task {
+        switch self {
+        case .deleteReturnClass(let period):
+            return .requestParameters(parameters: [
+                "period": period
+            ], encoding: JSONEncoding.default)
+        default:
+            return .requestPlain
+        }
+    }
+
     var method: Moya.Method {
-        return .get
+        switch self {
+        case .deleteReturnClass:
+            return .delete
+        default:
+            return .get
+        }
     }
 
     var jwtTokenType: JWTTokenType {

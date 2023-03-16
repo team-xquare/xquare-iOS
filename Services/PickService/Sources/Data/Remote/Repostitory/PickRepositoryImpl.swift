@@ -24,4 +24,8 @@ class PickRepositoryImpl: PickRepository {
             .asObservable()
     }
 
+    func deleteReturnClass(period: Int) -> Completable {
+        return remoteDataSource.deleteReturnClass(period: period)
+    }
+
 }
