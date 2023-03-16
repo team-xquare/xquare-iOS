@@ -4,13 +4,13 @@ import RxSwift
 
 public class FetchOutingReturnTimeUseCase {
 
-    private let pickRepository: PickRepository
+    private let repository: PickRepository
 
-    init(pickRepository: PickRepository) {
-        self.pickRepository = pickRepository
+    init(repository: PickRepository) {
+        self.repository = repository
     }
 
-    public func excute() -> Single<OutingReturnTimeEntity> {
-        self.pickRepository.fetchOutingReturnTime()
+    public func excute() -> Observable<OutingReturnTimeEntity> {
+        self.repository.fetchOutingReturnTime()
     }
 }

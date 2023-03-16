@@ -4,14 +4,14 @@ import RxSwift
 
 public class FetchOutingPassUseCase {
 
-    private let pickRepository: PickRepository
+    private let repository: PickRepository
 
-    init(pickRepository: PickRepository) {
-        self.pickRepository = pickRepository
+    init(repository: PickRepository) {
+        self.repository = repository
     }
 
-    public func excute() -> Single<OutingPassEntity> {
-        self.pickRepository.fetchOutingPass()
+    public func excute() -> Observable<OutingPassEntity> {
+        self.repository.fetchOutingPass()
     }
 
 }

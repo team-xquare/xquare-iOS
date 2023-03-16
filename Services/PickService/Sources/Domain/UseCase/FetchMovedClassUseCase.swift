@@ -4,13 +4,13 @@ import RxSwift
 
 public class FetchMovedClassUseCase {
 
-    private let pickRepository: PickRepository
+    private let repository: PickRepository
 
-    init(pickRepository: PickRepository) {
-        self.pickRepository = pickRepository
+    init(repository: PickRepository) {
+        self.repository = repository
     }
 
-    public func excute() -> Single<MovedClassEntity> {
-        self.pickRepository.fetchMovedClass()
+    public func excute() -> Observable<MovedClassEntity> {
+        self.repository.fetchMovedClass()
     }
 }
