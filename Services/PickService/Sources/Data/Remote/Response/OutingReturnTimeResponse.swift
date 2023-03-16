@@ -9,7 +9,7 @@ struct OutingReturnTimeResponse: Decodable {
 
     let userId: String
     let name: String
-    let endTime: Date
+    let endTime: String
 
 }
 
@@ -18,7 +18,7 @@ extension OutingReturnTimeResponse {
         return .init(
             userId: self.userId,
             name: self.name,
-            endTime: self.endTime
+            endTime: self.endTime.toDate(format: .time)
         )
     }
 }
