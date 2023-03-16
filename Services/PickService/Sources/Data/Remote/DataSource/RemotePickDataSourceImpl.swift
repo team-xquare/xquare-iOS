@@ -2,7 +2,7 @@ import Foundation
 import RxSwift
 import RestApiModule
 
-class RemotePointDataSourceImpl: RestApiRemoteDataSource<PickAPI>, RemotePickDataSource {
+class RemotePickDataSourceImpl: RestApiRemoteDataSource<PickAPI>, RemotePickDataSource {
 
     func fetchOutingReturnTime() -> Single<OutingReturnTimeEntity> {
         return request(.fetchOutingReturnTime)
