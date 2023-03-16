@@ -27,10 +27,6 @@ extension PickAPI: XquareAPI {
         }
     }
 
-    var task: Task {
-        return .requestPlain
-    }
-
     var errorMapper: [Int: Error]? {
         return [
             400: PickServiceError.badRequest,
