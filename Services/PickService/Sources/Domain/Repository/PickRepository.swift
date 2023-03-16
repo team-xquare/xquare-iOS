@@ -3,7 +3,7 @@ import Foundation
 import RxSwift
 
 public protocol PickRepository {
-    func fetchOutingReturnTime() -> Single<OutingReturnTimeEntity>
-    func fetchOutingPass() -> Single<OutingPassEntity>
-    func fetchMovedClass() -> Single<MovedClassEntity>
+    func fetchOutingReturnTime() -> Observable<OutingReturnTimeEntity>
+    func fetchOutingPass() -> Observable<OutingPassEntity>
+    func fetchMovedClass() -> Observable<MovedClassEntity>
 }

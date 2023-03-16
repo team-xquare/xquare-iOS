@@ -9,16 +9,16 @@ class PickRepositoryImpl: PickRepository {
         self.remoteDataSource = remoteDataSource
     }
 
-    func fetchOutingReturnTime() -> Single<OutingReturnTimeEntity> {
-        return remoteDataSource.fetchOutingReturnTime()
+    func fetchOutingReturnTime() -> Observable<OutingReturnTimeEntity> {
+        return remoteDataSource.fetchOutingReturnTime().asObservable()
     }
 
-    func fetchOutingPass() -> Single<OutingPassEntity> {
-        return remoteDataSource.fetchOutingPass()
+    func fetchOutingPass() -> Observable<OutingPassEntity> {
+        return remoteDataSource.fetchOutingPass().asObservable()
     }
 
-    func fetchMovedClass() -> Single<MovedClassEntity> {
-        return remoteDataSource.fetchMovedClass()
+    func fetchMovedClass() -> Observable<MovedClassEntity> {
+        return remoteDataSource.fetchMovedClass().asObservable()
     }
 
 }
