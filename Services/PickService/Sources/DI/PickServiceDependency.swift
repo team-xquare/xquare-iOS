@@ -31,7 +31,6 @@ extension PickServiceDependency {
             pickRepository: pickRepository
         )
 
-
         return PickServiceDependency(
             fetchOutingPassUseCase: fetchOutingPassUseCase,
             fetchMovedClassUseCase: fetchMovedClassUseCase,

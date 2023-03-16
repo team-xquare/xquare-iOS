@@ -12,13 +12,12 @@ class RemotePointDataSourceImpl: RestApiRemoteDataSource<PickAPI>, RemotePickDat
     func fetchMovedClass() -> Single<MovedClassEntity> {
         return request(.fetchMovedClass)
             .map(MovedClassResponse.self)
-            .map{ $0.toDomain() }
+            .map { $0.toDomain() }
     }
     func fetchOutingPass() -> Single<OutingPassEntity> {
         return request(.fetchMovedClass)
             .map(OutingPassResponse.self)
-            .map{ $0.toDomain() }
+            .map { $0.toDomain() }
     }
 
 }
-
