@@ -13,7 +13,7 @@ public struct PickServiceDependency {
 extension PickServiceDependency {
     static func resolve() -> PickServiceDependency {
         // MARK: - Datasources
-        let remotePickDataSource: RemotePickDataSource = RemotePointDataSourceImpl()
+        let remotePickDataSource: RemotePickDataSource = RemotePickDataSourceImpl()
 
         // MARK: - Respositories
         let pickRepository: PickRepository = PickRepositoryImpl(
@@ -22,13 +22,13 @@ extension PickServiceDependency {
 
         // MARK: - UseCases
         let fetchOutingPassUseCase = FetchOutingPassUseCase(
-            pickRepository: pickRepository
+            repository: pickRepository
         )
         let fetchMovedClassUseCase = FetchMovedClassUseCase(
-            pickRepository: pickRepository
+            repository: pickRepository
         )
         let fetchOutingReturnTimeUseCase = FetchOutingReturnTimeUseCase(
-            pickRepository: pickRepository
+            repository: pickRepository
         )
 
         return PickServiceDependency(
