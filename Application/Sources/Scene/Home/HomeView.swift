@@ -9,6 +9,7 @@ struct HomeView: View, XNavigationAndTabContent {
 
     @StateObject var viewModel: HomeViewModel
     var mealDetailView: MealDetailView
+    let notificationView: NotificationView
 
     var tabInformation: TabInformation {
         TabInformation(
@@ -52,6 +53,13 @@ struct HomeView: View, XNavigationAndTabContent {
                     .sdText(type: .heading6, textColor: .GrayScale.gray900)
                     .padding(.leading, 5)
             }
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                NavigationLink(destination: notificationView) {
+                    Image.bell
+                        .frame(width: 24, height: 24)
+                }
+            }
+
         }
     }
 
