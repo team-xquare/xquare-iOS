@@ -7,5 +7,5 @@ protocol RemotePickDataSource: RestApiRemoteDataSource<PickAPI> {
     func fetchOutingReturnTime() -> Single<OutingReturnTimeEntity>
     func fetchMovedClass() -> Single<MovedClassEntity>
     func fetchOutingPass() -> Single<OutingPassEntity>
-    func deleteReturnClass(period: Int) -> Completable
+    func deleteReturnClass() -> Completable
 }

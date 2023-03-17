@@ -10,7 +10,7 @@ public class DeleteReturnClassUseCase {
         self.repository = repository
     }
 
-    public func excute(period: Int) -> Completable {
-        self.repository.deleteReturnClass(period: period)
+    public func excute() -> Completable {
+        self.repository.deleteReturnClass()
     }
 }
