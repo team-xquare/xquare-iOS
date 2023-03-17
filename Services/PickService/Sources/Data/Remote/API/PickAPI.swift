@@ -42,7 +42,6 @@ extension PickAPI: XquareAPI {
 
     var task: Task {
         return .requestPlain
-    
     }
 
     var method: Moya.Method {
