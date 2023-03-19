@@ -7,7 +7,7 @@ struct NotificationResponse: Decodable {
         case id
         case title
         case content
-        case sendAt = "send_at"
+        case sendAt = "sent_at"
         case isRead = "is_read"
         case userId = "user_id"
         case name
@@ -29,7 +29,7 @@ extension NotificationResponse {
             id: id,
             title: title,
             content: content,
-            sendAt: sendAt.toDate(format: .fullDate),
+            sendAt: sendAt.toDate(format: .fullDateWithTime),
             isRead: isRead,
             userId: userId,
             name: name,
