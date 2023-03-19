@@ -47,8 +47,8 @@ struct LoginView: View {
             .navigationTitle("로그인")
             .setNavigationBackButton()
         }
-        .sdErrorAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
-            SDErrorAlert(errerMessage: "네트워크가 원할하지 않습니다.")
+        .sdOkayAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
+            SDOkayAlert(title: "문제가 발생했습니다.", message: "네트워크가 원할하지 않습니다.")
         })
         .fullScreenCover(isPresented: $viewModel.isLoginSuccess) {
             mainView
