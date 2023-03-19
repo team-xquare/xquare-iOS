@@ -10,6 +10,7 @@ extension TargetDependency {
         public static let ScheduleService = service(name:"ScheduleService")
         public static let TimeTableService = service(name: "TimeTableService")
         public static let PointService = service(name: "PointService")
+        public static let PickService = service(name: "PickService")
         public static let NotificationService = service(name: "NotificationService")
     }
 
