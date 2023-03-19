@@ -10,7 +10,7 @@ public class FetchPostedNotificationListUseCase {
         self.repository = repository
     }
 
-    public func excute(categoryId: String) -> Observable<[NotificationEntity]> {
+    public func excute() -> Observable<[NotificationEntity]> {
         return repository.fetchPostedNotificationList()
     }
 
