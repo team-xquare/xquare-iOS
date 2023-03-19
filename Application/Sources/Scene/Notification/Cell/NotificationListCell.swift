@@ -1,6 +1,7 @@
 import SwiftUI
 
 import SemicolonDesign
+import XDateUtil
 
 struct NotificationListCell: View {
     let image: Image
@@ -23,7 +24,7 @@ struct NotificationListCell: View {
 
                     Spacer()
 
-                    Text(time)
+                    Text("\(Int(Date().toString(format: "HH")) ?? 0 - (Int(time) ?? 0))")
                         .sdText(type: .caption)
                 }
 
