@@ -1,4 +1,6 @@
 import Foundation
+
+import Moya
 import RxSwift
 import RestApiModule
 
@@ -15,7 +17,7 @@ class RemotePickDataSourceImpl: RestApiRemoteDataSource<PickAPI>, RemotePickData
             .map { $0.toDomain() }
     }
     func fetchOutingPass() -> Single<OutingPassEntity> {
-        return request(.fetchMovedClass)
+        return request(.fetchOutingPass)
             .map(OutingPassResponse.self)
             .map { $0.toDomain() }
     }
