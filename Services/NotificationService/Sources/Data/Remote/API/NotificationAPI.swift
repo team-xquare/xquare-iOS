@@ -33,7 +33,7 @@ extension NotificationAPI: XquareAPI {
         case .fetchUncheckNotificationCount:
             return "/unread"
         default:
-            return ""
+            return "/list"
         }
     }
 
