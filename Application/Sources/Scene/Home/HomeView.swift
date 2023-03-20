@@ -79,9 +79,11 @@ struct HomeView: View, XNavigationAndTabContent {
                 }
             }
         }
-        .sdErrorAlert(isPresented: $viewModel.isPresentErrorAlert,
-            sdAlert: {
-            SDErrorAlert(errerMessage: "교실 복귀에 문제가 발생하였습니다.")
+        .sdOkayAlert(isPresented: $viewModel.isPresentErrorAlert, sdAlert: {
+            SDOkayAlert(title: "교실로 이동할 수 없습니다.", message: "관리에게 문의해주세요!")
+        })
+        .sdOkayAlert(isPresented: $viewModel.isSuccessReturnClass, sdAlert: {
+            SDOkayAlert(title: "이동 완료", message: "교실로 이동하였습니다.")
         })
     }
 
