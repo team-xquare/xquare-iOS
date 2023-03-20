@@ -56,8 +56,8 @@ struct AcademicScheduleView: View {
         .onChange(of: viewModel.day) { _ in
             viewModel.fetchScheduleForMonth()
         }
-        .sdErrorAlert(isPresented: $viewModel.showErrorAlert, sdAlert: {
-            SDErrorAlert(errerMessage: viewModel.errorMessage)
+        .sdOkayAlert(isPresented: $viewModel.showErrorAlert, sdAlert: {
+            SDOkayAlert(title: "문제가 발생했습니다.", message: viewModel.errorMessage)
         })
         .sdBottomSheet(isPresented: $isShowBottomSheet) {
             SDBottomSheet(buttons: [
