@@ -52,8 +52,8 @@ struct OutingPassView: View {
                    perform: { _ in
             self.isCapture = true
         })
-        .sdErrorAlert(isPresented: $isCapture, sdAlert: {
-            SDErrorAlert(errerMessage: "외출증을 캡처하여 악용한다면 불이익을 얻을 수 있습니다.")
+        .sdOkayAlert(isPresented: $isCapture, sdAlert: {
+            SDOkayAlert(title: "캡처 감지", message: "외출증을 캡처하여 악용한다면 불이익을 얻을 수 있습니다.")
         })
     }
 }
