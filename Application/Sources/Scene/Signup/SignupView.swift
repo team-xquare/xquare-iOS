@@ -76,11 +76,11 @@ struct SignupView: View {
                     }
                 }
             }
-            .sdErrorAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
-                SDErrorAlert(errerMessage: "네트워크가 원할하지 않습니다.")
+            .sdOkayAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
+                SDOkayAlert(title: "문제가 발생했습니다.", message: "네트워크가 원할하지 않습니다.")
             })
-            .sdErrorAlert(isPresented: $viewModel.isServerError, sdAlert: {
-                SDErrorAlert(errerMessage: "서버에 문제가 생겼습니다\n(담당자에게 문의해주세요)")
+            .sdOkayAlert(isPresented: $viewModel.isServerError, sdAlert: {
+                SDOkayAlert(title: "문제가 발생했습니다.", message: "서버에 문제가 생겼습니다\n(담당자에게 문의해주세요)")
             })
             .navigationTitle("회원가입")
             .setNavigationBackButton()
