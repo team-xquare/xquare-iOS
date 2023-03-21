@@ -6,6 +6,7 @@ struct OutingPassView: View {
     @StateObject var viewModel: OutingPassViewModel
     @State var isCapture: Bool = false
 
+    // swiftlint:disable line_length
     var body: some View {
         VStack {
             Spacer()
@@ -16,7 +17,7 @@ struct OutingPassView: View {
             .frame(height: 30)
             .padding(.bottom, 44)
             HStack(alignment: .center) {
-                AsyncImage(url: URL(string: viewModel.imageUrl)) { image in
+                AsyncImage(url: URL(string: viewModel.outingPassData.profileFileName)) { image in
                     image
                         .resizable()
                         .scaledToFill()
@@ -28,14 +29,17 @@ struct OutingPassView: View {
                 .frame(width: 60, height: 60)
                 .cornerRadius(30)
                 Spacer().frame(width: 16)
-                Text("\(viewModel.studentNumber) \(viewModel.name)")
+                Text("\(viewModel.outingPassData.studentNumber) \(viewModel.outingPassData.studentName)")
                     .sdText(type: .heading6)
                 Spacer()
             }
             Spacer().frame(height: 38)
-            OutingInformationView(title: "외출 시간", content: viewModel.time)
-            OutingInformationView(title: "사유", content: viewModel.resone)
-            OutingInformationView(title: "확인교사", content: viewModel.teacher)
+            OutingInformationView(
+                title: "외출 시간",
+                content: "\(viewModel.outingPassData.startTime.toString(format: "HH:mm")) ~ \(viewModel.outingPassData.endTime.toString(format: "HH:mm"))"
+            )
+            OutingInformationView(title: "사유", content: viewModel.outingPassData.reason)
+            OutingInformationView(title: "확인교사", content: viewModel.outingPassData.teacherName)
             Spacer()
             GeometryReader { gemotry in
                 SlidingTextView(geometryProxy: gemotry)
