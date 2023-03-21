@@ -29,8 +29,8 @@ extension OutingPassResponse {
             profileFileName: self.profileFileName,
             studentNumber: self.studentNumber,
             studentName: self.studentName,
-            startTime: self.startTime.toDate(format: .time),
-            endTime: self.endTime.toDate(format: .time),
+            startTime: self.startTime.toDate(format: .time).addingTimeInterval(-(60 * 60 * 9)),
+            endTime: self.endTime.toDate(format: .time).addingTimeInterval(-(60 * 60 * 9)),
             reason: self.reason,
             teacherName: self.teacherName
         )
