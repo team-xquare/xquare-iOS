@@ -44,9 +44,7 @@ struct HomeView: View, XNavigationAndTabContent {
                     MovedClassView(
                         name: viewModel.name,
                         locationClassroom: viewModel.locationClassroom,
-                        comeBackClassroom: {
-                            viewModel.deleteReturnClass()
-                        }
+                        comeBackClassroom: viewModel.deleteReturnClass
                     )
                 }
             }
