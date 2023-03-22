@@ -31,7 +31,7 @@ extension NotificationResponse {
             id: id,
             title: title,
             content: content,
-            sendAt: sendAt.toDate(format: "yyyy-MM-dd'T'HH:mm:ss"),
+            sendAt: sendAt.toDate(format: .fullDateWithTime),
             isRead: isRead,
             userId: userId,
             destination: destination,

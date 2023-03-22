@@ -6,9 +6,4 @@ public extension String {
         XDateFormatter.shared.timeZone = TimeZone(identifier: "UTC")
         return XDateFormatter.shared.date(from: self)!
     }
-    func toDate(format: String) -> Date {
-        XDateFormatter.shared.dateFormat = format
-        XDateFormatter.shared.timeZone = TimeZone(identifier: "UTC")
-        return XDateFormatter.shared.date(from: self)!
-    }
 }
