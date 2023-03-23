@@ -7,6 +7,7 @@ import ScheduleService
 import TimeTableService
 import PointService
 import UserService
+import NotificationService
 
 struct AppDependency {
     let launchScreenView: LaunchScreenView
@@ -24,6 +25,7 @@ extension AppDependency {
         let timeTableServiceDependency = TimeTableServiceDependency.shared
         let userServiceDependency = UserServiceDependency.shared
         let pointServiceDependency = PointServiceDependency.shared
+        let notificationServiceDependency = NotificationServiceDependency.shared
 
         // MARK: - ViewModels
         let homeViewModel = HomeViewModel(
@@ -69,13 +71,16 @@ extension AppDependency {
         let pointHistoryViewModel = PointHistoryViewModel(
             fetchPointHistoryUseCase: pointServiceDependency.fetchPointHistoryUseCase
         )
+        let notificationViewModel = NotificationViewModel(
+            fetchPostedNotificationListUseCase: notificationServiceDependency.fetchPostedNotificationListUseCase
+        )
 
         // MARK: - Views
         let pointHistoryView = PointHistoryView(
             viewModel: pointHistoryViewModel
         )
         let mealDetailView = MealDetailView(viewModel: mealDetailViewModel)
-        let notificationView = NotificationView()
+        let notificationView = NotificationView(viewModel: notificationViewModel)
         let homeView = HomeView(
             viewModel: homeViewModel,
             mealDetailView: mealDetailView,
