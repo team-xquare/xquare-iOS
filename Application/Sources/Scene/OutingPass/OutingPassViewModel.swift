@@ -4,7 +4,7 @@ import RxSwift
 import PickService
 
 class OutingPassViewModel: ObservableObject {
-    @Published var outingPassData: OutingPassEntity? = nil
+    @Published var outingPassData: OutingPassEntity?
 
     private let fetchOutingPassUseCase: FetchOutingPassUseCase
 
