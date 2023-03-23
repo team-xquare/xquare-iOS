@@ -4,15 +4,7 @@ import RxSwift
 import PickService
 
 class OutingPassViewModel: ObservableObject {
-    @Published var outingPassData: OutingPassEntity = .init(
-        profileFileName: "",
-        studentNumber: "",
-        studentName: "",
-        startTime: Date(),
-        endTime: Date(),
-        reason: "",
-        teacherName: ""
-    )
+    @Published var outingPassData: OutingPassEntity? = nil
 
     private let fetchOutingPassUseCase: FetchOutingPassUseCase
 
