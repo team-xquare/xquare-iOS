@@ -88,7 +88,6 @@ extension AppDependency {
             viewModel: pointHistoryViewModel
         )
         let mealDetailView = MealDetailView(viewModel: mealDetailViewModel)
-        let notificationView = NotificationView()
         let outingPassView = OutingPassView(viewModel: outingPassViewModel)
         let notificationView = NotificationView(viewModel: notificationViewModel)
         let homeView = HomeView(
