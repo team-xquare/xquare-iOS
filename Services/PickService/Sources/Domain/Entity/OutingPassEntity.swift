@@ -1,13 +1,13 @@
 import Foundation
 
 public struct OutingPassEntity: Equatable {
-    private let profileFileName: String
-    private let studentNumber: String
-    private let studentName: String
-    private let startTime: Date
-    private let endTime: Date
-    private let reason: String
-    private let teacherName: String
+    public let profileFileName: String
+    public let studentNumber: String
+    public let studentName: String
+    public let startTime: Date
+    public let endTime: Date
+    public let reason: String
+    public let teacherName: String
 
     public init(
         profileFileName: String,

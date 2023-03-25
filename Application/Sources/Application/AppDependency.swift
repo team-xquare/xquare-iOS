@@ -7,6 +7,7 @@ import ScheduleService
 import TimeTableService
 import PointService
 import UserService
+import PickService
 import NotificationService
 
 struct AppDependency {
@@ -25,12 +26,16 @@ extension AppDependency {
         let timeTableServiceDependency = TimeTableServiceDependency.shared
         let userServiceDependency = UserServiceDependency.shared
         let pointServiceDependency = PointServiceDependency.shared
+        let pickServiceDependency = PickServiceDependency.shared
         let notificationServiceDependency = NotificationServiceDependency.shared
 
         // MARK: - ViewModels
         let homeViewModel = HomeViewModel(
             fetchMealMenuPerDayUseCase: mealDataServiceDependency.fetchDayToMealMenuUseCase,
-            fetchUserPointUseCase: userServiceDependency.fetchUserSimpleInformationUseCase
+            fetchUserPointUseCase: userServiceDependency.fetchUserSimpleInformationUseCase,
+            fetchOutingReturnTimeUseCase: pickServiceDependency.fetchOutingReturnTimeUseCase,
+            fetchMovedClassUseCase: pickServiceDependency.fetchMovedClassUseCase,
+            deleteReturnClassUseCase: pickServiceDependency.deleteReturnClassUseCase
         )
         let applicationViewModel = ApplicationViewModel(
             fetchAccessTokenUseCase: authServiceDependency.fetchAccessTokenUseCase
@@ -47,6 +52,9 @@ extension AppDependency {
         )
         let mealDetailViewModel = MealDetailViewModel(
             fetchMealMenuPerMonthUseCase: mealDataServiceDependency.fetchMonthToMealMenuUseCase
+        )
+        let outingPassViewModel = OutingPassViewModel(
+            fetchOutingPassUseCase: pickServiceDependency.fetchOutingPassUseCase
         )
         let myPageViewModel = MyPageViewModel(
             fetchProfileUseCase: userServiceDependency.fetchProfileUseCase,
@@ -80,11 +88,13 @@ extension AppDependency {
             viewModel: pointHistoryViewModel
         )
         let mealDetailView = MealDetailView(viewModel: mealDetailViewModel)
+        let outingPassView = OutingPassView(viewModel: outingPassViewModel)
         let notificationView = NotificationView(viewModel: notificationViewModel)
         let homeView = HomeView(
             viewModel: homeViewModel,
             mealDetailView: mealDetailView,
-            notificationView: notificationView
+            notificationView: notificationView,
+            outingPassView: outingPassView
         )
         let feedView = FeedView(viewModel: feedViewModel)
         let writeScheduleView = WriteScheduleView(viewModel: writeScheduleViewModel)

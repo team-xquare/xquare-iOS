@@ -1,5 +1,7 @@
 import Foundation
 
+import XDateUtil
+
 struct OutingReturnTimeResponse: Decodable {
     private enum CodingKeys: String, CodingKey {
         case userId = "user_id"

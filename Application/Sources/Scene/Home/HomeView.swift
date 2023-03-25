@@ -10,6 +10,7 @@ struct HomeView: View, XNavigationAndTabContent {
     @StateObject var viewModel: HomeViewModel
     var mealDetailView: MealDetailView
     let notificationView: NotificationView
+    let outingPassView: OutingPassView
 
     var tabInformation: TabInformation {
         TabInformation(
@@ -21,29 +22,45 @@ struct HomeView: View, XNavigationAndTabContent {
 
     var body: some View {
         ScrollView {
-            VStack {
-                Spacer().frame(height: 5)
+            VStack(spacing: 16) {
                 ProfileView(
                     imageUrl: viewModel.imageUrl,
                     name: viewModel.name,
                     merit: viewModel.merit,
                     demerit: viewModel.demerit
                 )
-                Spacer().frame(height: 16)
                 MealMenuView(
                     mealDetailView: mealDetailView,
                     menu: viewModel.menu
                 )
+                if viewModel.isShowOutingView {
+                    OutingView(
+                        outingPassView: outingPassView,
+                        name: viewModel.name,
+                        endTime: viewModel.endTime
+                    )
+                }
+                if viewModel.isShowMovedClass {
+                    MovedClassView(
+                        name: viewModel.name,
+                        locationClassroom: viewModel.locationClassroom,
+                        comeBackClassroom: viewModel.deleteReturnClass
+                    )
+                }
             }
-            .padding([.leading, .trailing], 16)
+            .padding(.horizontal, 16)
         }
         .onTabSelected(tabIndex: 0, perform: {
             viewModel.fetchTodaysMeal()
             viewModel.fetchUserPoint()
+            viewModel.fetchOutingPass()
+            viewModel.fetchMovedClass()
         })
         .onAppear {
             viewModel.fetchTodaysMeal()
             viewModel.fetchUserPoint()
+            viewModel.fetchOutingPass()
+            viewModel.fetchMovedClass()
         }
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.GrayScale.gray50)
@@ -59,8 +76,13 @@ struct HomeView: View, XNavigationAndTabContent {
                         .frame(width: 24, height: 24)
                 }
             }
-
         }
+        .sdOkayAlert(isPresented: $viewModel.isPresentErrorAlert, sdAlert: {
+            SDOkayAlert(title: "교실로 이동할 수 없습니다.", message: "관리에게 문의해주세요!")
+        })
+        .sdOkayAlert(isPresented: $viewModel.isSuccessReturnClass, sdAlert: {
+            SDOkayAlert(title: "이동 완료", message: "교실로 이동하였습니다.")
+        })
     }
 
 }
