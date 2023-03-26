@@ -33,7 +33,8 @@ extension AppDependency {
             fetchUserPointUseCase: userServiceDependency.fetchUserSimpleInformationUseCase
         )
         let applicationViewModel = ApplicationViewModel(
-            fetchAccessTokenUseCase: authServiceDependency.fetchAccessTokenUseCase
+            fetchAccessTokenUseCase: authServiceDependency.fetchAccessTokenUseCase,
+            refreshTokenIfExpiredUseCase: authServiceDependency.refreshTokenIfExpiredUseCase
         )
         let loginViewModel = LoginViewModel(
             signInUseCase: authServiceDependency.signinUseCase,
@@ -54,8 +55,9 @@ extension AppDependency {
             uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase
         )
         let feedViewModel = FeedViewModel(
-            fetchAccessTokenUseCase: authServiceDependency.fetchAccessTokenUseCase
-            )
+            fetchAccessTokenUseCase: authServiceDependency.fetchAccessTokenUseCase,
+            refreshTokenIfExpiredUseCase: authServiceDependency.refreshTokenIfExpiredUseCase
+        )
         let bugReportViewModel = BugReportViewModel()
         let academicScheduleViewModel = AcademicScheduleViewModel(
             fetchSchedulePerMonthUseCase: scheduleServiceSependency.fetchScheduleForMonthUseCase,

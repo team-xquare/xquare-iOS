@@ -17,8 +17,10 @@ struct FeedView: View, XNavigationAndTabContent {
     var body: some View {
         XWebKitView(
             urlString: viewModel.getWebviewURLString(),
-            accessToken: viewModel.getAccessToken()
+            accessTokenGetter: viewModel.getAccessToken
         )
         .navigationTitle("피드")
+        .onAppear { viewModel.refreshTokenIfExpired() }
+        .onTabSelected(tabIndex: 2) { viewModel.refreshTokenIfExpired() }
     }
 }
