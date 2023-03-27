@@ -1,16 +1,23 @@
 import Foundation
 
 import AuthService
+import RxSwift
 
 class ApplicationViewModel: ObservableObject {
 
-    private let webviewURLString: String = "https://service.xquare.app/apply"
-    private var accessToken: String = ""
-
     private let fetchAccessTokenUseCase: FetchAccessTokenUseCase
+    private let refreshTokenIfExpiredUseCase: RefreshTokenIfExpiredUseCase
 
-    init(fetchAccessTokenUseCase: FetchAccessTokenUseCase) {
+    private let disposeBag = DisposeBag()
+
+    private let webviewURLString: String = "https://service.xquare.app/apply"
+
+    init(
+        fetchAccessTokenUseCase: FetchAccessTokenUseCase,
+        refreshTokenIfExpiredUseCase: RefreshTokenIfExpiredUseCase
+    ) {
         self.fetchAccessTokenUseCase = fetchAccessTokenUseCase
+        self.refreshTokenIfExpiredUseCase = refreshTokenIfExpiredUseCase
     }
 
     func getWebviewURLString() -> String {
@@ -23,6 +30,12 @@ class ApplicationViewModel: ObservableObject {
         } catch {
             return ""
         }
+    }
+
+    func refreshTokenIfExpired() {
+        self.refreshTokenIfExpiredUseCase.excute()
+            .subscribe()
+            .disposed(by: self.disposeBag)
     }
 
 }
