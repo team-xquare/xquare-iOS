@@ -1,5 +1,7 @@
 import Foundation
 
+import XDateUtil
+
 struct OutingPassResponse: Decodable {
     private enum CodingKeys: String, CodingKey {
         case profileFileName = "profile_file_name"
@@ -26,7 +28,7 @@ extension OutingPassResponse {
         return .init(
             profileFileName: self.profileFileName,
             studentNumber: self.studentNumber,
-            studentName: self.studentNumber,
+            studentName: self.studentName,
             startTime: self.startTime.toDate(format: .time),
             endTime: self.endTime.toDate(format: .time),
             reason: self.reason,

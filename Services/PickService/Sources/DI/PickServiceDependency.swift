@@ -7,7 +7,7 @@ public struct PickServiceDependency {
     public let fetchOutingPassUseCase: FetchOutingPassUseCase
     public let fetchMovedClassUseCase: FetchMovedClassUseCase
     public let fetchOutingReturnTimeUseCase: FetchOutingReturnTimeUseCase
-
+    public let deleteReturnClassUseCase: DeleteReturnClassUseCase
 }
 
 extension PickServiceDependency {
@@ -30,11 +30,15 @@ extension PickServiceDependency {
         let fetchOutingReturnTimeUseCase = FetchOutingReturnTimeUseCase(
             repository: repository
         )
+        let deleteReturnClassUseCase = DeleteReturnClassUseCase(
+            repository: repository
+        )
 
         return PickServiceDependency(
             fetchOutingPassUseCase: fetchOutingPassUseCase,
             fetchMovedClassUseCase: fetchMovedClassUseCase,
-            fetchOutingReturnTimeUseCase: fetchOutingReturnTimeUseCase
+            fetchOutingReturnTimeUseCase: fetchOutingReturnTimeUseCase,
+            deleteReturnClassUseCase: deleteReturnClassUseCase
         )
     }
 }
