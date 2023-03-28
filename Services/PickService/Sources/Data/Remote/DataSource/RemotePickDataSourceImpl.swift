@@ -21,9 +21,15 @@ class RemotePickDataSourceImpl: RestApiRemoteDataSource<PickAPI>, RemotePickData
             .map(OutingPassResponse.self)
             .map { $0.toDomain() }
     }
-    func deleteReturnClass() -> RxSwift.Completable {
+    func deleteReturnClass() -> Completable {
         return request(.deleteReturnClass)
             .asCompletable()
+    }
+
+    func fetchTodaySelfStudyTeacher() -> Single<TodaySelfStudyTeacherEntity> {
+        return request(.fetchTodaySelfStudyTeacher)
+            .map(TodaySelfStudyTeacherResponse.self)
+            .map { $0.toDomain() }
     }
 
 }
