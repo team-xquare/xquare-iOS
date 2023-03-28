@@ -24,6 +24,11 @@ class PickRepositoryImpl: PickRepository {
             .asObservable()
     }
 
+    func fetchTodaySelfStudyTeacher() -> Observable<TodaySelfStudyTeacherEntity> {
+        return remoteDataSource.fetchTodaySelfStudyTeacher()
+            .asObservable()
+    }
+
     func deleteReturnClass() -> Completable {
         return remoteDataSource.deleteReturnClass()
     }
