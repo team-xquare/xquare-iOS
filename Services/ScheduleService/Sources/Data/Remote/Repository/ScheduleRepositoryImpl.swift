@@ -23,7 +23,6 @@ class ScheduleRepositoryImpl: ScheduleRepository {
     func editSchedule(scheduleId: String, name: String, date: String) -> Completable {
         return remoteDataSource.editShceudle(scheduleId: scheduleId, name: name, date: date)
             .catch { [weak self] error in
-                let moyaError = error as? MoyaError
                 guard let errorCode = self?.errorToStatusCode(error) else { return .error(error) }
                 switch errorCode {
                 case 404: return .error(ScheduleServiceError.isNotPersonalSchedule)
@@ -35,7 +34,6 @@ class ScheduleRepositoryImpl: ScheduleRepository {
     func deleteSchedule(scheduleId: String) -> Completable {
         return remoteDataSource.deleteSchedule(scheduleId: scheduleId)
             .catch { [weak self] error in
-                let moyaError = error as? MoyaError
                 guard let errorCode = self?.errorToStatusCode(error) else { return .error(error) }
                 switch errorCode {
                 case 404: return .error(ScheduleServiceError.isNotPersonalSchedule)
