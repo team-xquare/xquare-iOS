@@ -9,6 +9,7 @@ enum PickAPI {
     case fetchMovedClass
     case fetchOutingPass
     case deleteReturnClass
+    case fetchTodaySelfStudyTeacher
 }
 
 extension PickAPI: XquareAPI {
@@ -27,6 +28,8 @@ extension PickAPI: XquareAPI {
             return "/applications/picnic"
         case .deleteReturnClass:
             return "/applications"
+        case .fetchTodaySelfStudyTeacher:
+            return "/self-study/today"
         }
     }
 
