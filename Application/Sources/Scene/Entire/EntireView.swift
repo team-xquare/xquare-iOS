@@ -1,8 +1,11 @@
 import SwiftUI
 
+import SemicolonDesign
 import XNavigationAndTab
 
 struct EntireView: View, XNavigationAndTabContent {
+
+    @StateObject var viewModel: EntireViewModel
 
     var pointHistoryView: PointHistoryView
     var myPageView: MyPageView
@@ -28,16 +31,34 @@ struct EntireView: View, XNavigationAndTabContent {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 27) {
+            LazyVStack(spacing: 27) {
                 TopServiceMenuView(
                     pointHistoryView: pointHistoryView,
                     myPageView: myPageView,
                     bugReportView: bugReportView
                 )
+                ServiceSectionButtonView(
+                    headerText: "사용자",
+                    services: [
+                        (text: "로그아웃", action: { viewModel.showLogoutAlert = true })
+                    ])
                 Spacer()
             }
         }
         .navigationTitle("전체")
+        .onAppear { self.viewModel.isDidLogout = false }
+        .sdAlert(isPresented: $viewModel.showLogoutAlert) {
+            SDAlert(
+                title: "정말 로그아웃 하시겠습니까?",
+                button1: (text: "네", action: {
+                    viewModel.logout()
+                    viewModel.showLogoutAlert = false
+            }),
+                button2: (text: "아니요", action: {
+                    viewModel.showLogoutAlert = false
+                })
+            )
+        }
     }
 }
 
