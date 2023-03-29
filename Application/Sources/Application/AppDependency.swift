@@ -84,6 +84,9 @@ extension AppDependency {
         let notificationViewModel = NotificationViewModel(
             fetchPostedNotificationListUseCase: notificationServiceDependency.fetchPostedNotificationListUseCase
         )
+        let entireViewModel = EntireViewModel(
+            logoutUseCase: authServiceDependency.logoutUseCase
+        )
 
         // MARK: - Views
         let pointHistoryView = PointHistoryView(
@@ -115,6 +118,7 @@ extension AppDependency {
             viewModel: myPageViewModel
         )
         let entireView = EntireView(
+            viewModel: entireViewModel,
             pointHistoryView: pointHistoryView,
             myPageView: myPageView,
             bugReportView: bugReportView
