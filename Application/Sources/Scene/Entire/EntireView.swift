@@ -35,6 +35,15 @@ struct EntireView: View, XNavigationAndTabContent {
                     bugReportView: bugReportView
                 )
                 Spacer()
+                ServiceSectionView(
+                    headerText: "학교",
+                    services: [
+                        (
+                            text: "오늘의 자습감독 선생님",
+                            destination: myPageView
+                        )
+                    ]
+                )
             }
         }
         .navigationTitle("전체")
