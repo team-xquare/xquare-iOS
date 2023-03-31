@@ -114,8 +114,8 @@ extension AppDependency {
         let myPageView = MyPageView(
             viewModel: myPageViewModel
         )
-        let selfStudyTeacherViewModel = SelfStudyTeacherViewModel() //임시
-        let selfStudyTeacherView = SelfStudyTeacherView(viewModel: selfStudyTeacherViewModel) //임시
+        let selfStudyTeacherViewModel = SelfStudyTeacherViewModel()
+        let selfStudyTeacherView = SelfStudyTeacherView(viewModel: selfStudyTeacherViewModel)
         let entireView = EntireView(
             pointHistoryView: pointHistoryView,
             myPageView: myPageView,
