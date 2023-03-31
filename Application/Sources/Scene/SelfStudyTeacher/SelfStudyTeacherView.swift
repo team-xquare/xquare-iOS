@@ -6,13 +6,12 @@ struct SelfStudyTeacherView: View {
     @State var isReady: Bool = false
     var body: some View {
         VStack {
-            Spacer().frame(height: 20)
             ScrollViewReader { proxy in
                 ScrollView {
-                    LazyVStack(spacing: 16) {
+                    LazyVStack(spacing: 0) {
                         ForEach(0..<31) { _ in
                             SelfStudyTeacherCellView()
-                                .padding(.horizontal, 16)
+                                .padding([.horizontal, .top], 16)
                         }
                     }
                 }
