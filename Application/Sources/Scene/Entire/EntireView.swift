@@ -4,10 +4,6 @@ import XNavigationAndTab
 
 struct EntireView: View, XNavigationAndTabContent {
 
-    var pointHistoryView: PointHistoryView
-    var myPageView: MyPageView
-    var bugReportView: BugReportView
-
     @State var services = [
         ServiceSection(
             headerText: "학교",
@@ -29,11 +25,7 @@ struct EntireView: View, XNavigationAndTabContent {
     var body: some View {
         ScrollView {
             VStack(spacing: 27) {
-                TopServiceMenuView(
-                    pointHistoryView: pointHistoryView,
-                    myPageView: myPageView,
-                    bugReportView: bugReportView
-                )
+                TopServiceMenuView()
                 Spacer()
             }
         }

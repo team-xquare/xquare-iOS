@@ -5,8 +5,8 @@ import AuthService
 
 struct SignupView: View {
 
+    @EnvironmentObject var onboardingRouter: OnboardingRouter
     @StateObject var viewModel: SignupViewModel
-    var loginView: LoginView
 
     var body: some View {
         NavigationView {
@@ -66,16 +66,16 @@ struct SignupView: View {
                     FillButton(
                         isDisabled: $viewModel.isDisabled,
                         text: "입력 완료",
-                        action: {
-                            viewModel.signup()
-                        },
+                        action: viewModel.signup,
                         type: .rounded
                     )
-                    .fullScreenCover(isPresented: $viewModel.isSuccess) {
-                        loginView
-                    }
                 }
             }
+            .onChange(of: viewModel.isSuccess, perform: { isSuccess in
+                if isSuccess {
+                    onboardingRouter.navigateTo(.login)
+                }
+            })
             .sdOkayAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
                 SDOkayAlert(title: "문제가 발생했습니다.", message: "네트워크가 원할하지 않습니다.")
             })

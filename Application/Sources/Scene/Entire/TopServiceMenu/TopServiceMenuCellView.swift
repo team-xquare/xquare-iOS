@@ -1,13 +1,13 @@
 import SwiftUI
 
-struct TopServiceMenuCellView<Destination>: View where Destination: View {
+struct TopServiceMenuCellView: View {
 
     var image: Image
     var text: String
-    var destination: () -> Destination
+    var action: () -> Void
 
     var body: some View {
-        NavigationLink(destination: destination) {
+        Button(action: action) {
             VStack(alignment: .center, spacing: 6) {
                 image
                     .resizable()

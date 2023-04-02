@@ -5,8 +5,13 @@ import SemicolonDesign
 struct LaunchScreenView: View {
 
     @StateObject var viewModel: LaunchScreenViewModel
-    var onboardingView: OnboardingView
-    var mainView: MainView
+    @EnvironmentObject var onboardingRouter: OnboardingRouter
+
+    let homeRouter = HomeRouter(rootScreen: .home, factory: .init())
+    let scheduleRouter = ScheduleRouter(rootScreen: .schedule, factory: .init())
+    let feedRouter = FeedRouter(rootScreen: .feed, factory: .init())
+    let applicationRouter = ApplicationRouter(rootScreen: .application, factory: .init())
+    let entireRouter = EntireRouter(rootScreen: .entire, factory: .init())
 
     var body: some View {
         ZStack {
@@ -15,14 +20,25 @@ struct LaunchScreenView: View {
             Image.logo
                 .frame(width: 250, height: 250, alignment: .center)
         }
-        .fullScreenCover(isPresented: self.$viewModel.isSuccessToRefreshToken) {
-            mainView
+        .onChange(of: viewModel.isSuccessToRefreshToken, perform: { isSuccess in
+            if isSuccess {
+                onboardingRouter.presentFullScreen(.main)
+            }
+        })
+        .onChange(of: viewModel.isFailureToRefreshToken, perform: { isFaile in
+            if isFaile {
+                onboardingRouter.presentFullScreen(.onboarding)
+            }
+        })
+        .onAppear(perform: viewModel.refreshToken)
+        .onDisappear {
+            viewModel.isFailureToRefreshToken = false
+            viewModel.isSuccessToRefreshToken = false
         }
-        .fullScreenCover(isPresented: self.$viewModel.isFailureToRefreshToken) {
-            onboardingView
-        }
-        .onAppear {
-            self.viewModel.refreshToken()
-        }
+        .environmentObject(homeRouter)
+        .environmentObject(scheduleRouter)
+        .environmentObject(feedRouter)
+        .environmentObject(applicationRouter)
+        .environmentObject(entireRouter)
     }
 }

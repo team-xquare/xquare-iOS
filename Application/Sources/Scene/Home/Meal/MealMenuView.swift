@@ -5,7 +5,7 @@ import MealDataService
 
 struct MealMenuView: View {
 
-    var mealDetailView: MealDetailView
+    @EnvironmentObject var homeRouter: HomeRouter
     var menu: [MealMenuEntity]
 
     var body: some View {
@@ -15,8 +15,8 @@ struct MealMenuView: View {
                 Spacer().frame(width: 12)
                 Text("오늘의 메뉴").sdText(type: .body1)
                 Spacer()
-                NavigationLink {
-                    mealDetailView
+                Button {
+                    homeRouter.navigateTo(.home)
                 } label: {
                     Image.viewMoreIcon
                         .resizable()

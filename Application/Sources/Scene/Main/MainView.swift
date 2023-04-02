@@ -4,19 +4,19 @@ import SemicolonDesign
 import XNavigationAndTab
 
 struct MainView: View {
-    let homeView: HomeView
-    let scheduleView: ScheduleView
-    let feedView: FeedView
-    let applicationView: ApplicationView
-    let entireView: EntireView
+    @EnvironmentObject var homeRouter: HomeRouter
+    @EnvironmentObject var scheduleRouter: ScheduleRouter
+    @EnvironmentObject var feedRouter: FeedRouter
+    @EnvironmentObject var applicationRouter: ApplicationRouter
+    @EnvironmentObject var entireRouter: EntireRouter
 
     var body: some View {
         XNavigationAndTabView {(
-            homeView,
-            scheduleView,
-            feedView,
-            applicationView,
-            entireView
+            homeRouter.start(),
+            scheduleRouter.start(),
+            feedRouter.start(),
+            applicationRouter.start(),
+            entireRouter.start()
         )}
     }
 }
