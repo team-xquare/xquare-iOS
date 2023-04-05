@@ -72,7 +72,7 @@ struct SignupView: View {
             }
             .onChange(of: viewModel.isSuccess, perform: { isSuccess in
                 if isSuccess {
-                    self.xquareRouter.navigateTo(.login)
+                    self.xquareRouter.dismissLast()
                 }
             })
             .sdOkayAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
