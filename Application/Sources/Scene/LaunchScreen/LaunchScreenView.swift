@@ -4,14 +4,8 @@ import SemicolonDesign
 
 struct LaunchScreenView: View {
 
+    @EnvironmentObject var xquareRouter: XquareRouter
     @StateObject var viewModel: LaunchScreenViewModel
-    @EnvironmentObject var onboardingRouter: OnboardingRouter
-
-    let homeRouter = HomeRouter(rootScreen: .home, factory: .init())
-    let scheduleRouter = ScheduleRouter(rootScreen: .schedule, factory: .init())
-    let feedRouter = FeedRouter(rootScreen: .feed, factory: .init())
-    let applicationRouter = ApplicationRouter(rootScreen: .application, factory: .init())
-    let entireRouter = EntireRouter(rootScreen: .entire, factory: .init())
 
     var body: some View {
         ZStack {
@@ -22,12 +16,12 @@ struct LaunchScreenView: View {
         }
         .onChange(of: viewModel.isSuccessToRefreshToken, perform: { isSuccess in
             if isSuccess {
-                onboardingRouter.presentFullScreen(.main)
+                self.xquareRouter.presentFullScreen(.main)
             }
         })
         .onChange(of: viewModel.isFailureToRefreshToken, perform: { isFaile in
             if isFaile {
-                onboardingRouter.presentFullScreen(.onboarding)
+                self.xquareRouter.presentFullScreen(.onboarding)
             }
         })
         .onAppear(perform: viewModel.refreshToken)
@@ -35,10 +29,5 @@ struct LaunchScreenView: View {
             viewModel.isFailureToRefreshToken = false
             viewModel.isSuccessToRefreshToken = false
         }
-        .environmentObject(homeRouter)
-        .environmentObject(scheduleRouter)
-        .environmentObject(feedRouter)
-        .environmentObject(applicationRouter)
-        .environmentObject(entireRouter)
     }
 }

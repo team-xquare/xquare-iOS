@@ -1,13 +1,15 @@
 import SwiftUI
 
 import MealDataService
+import UserService
+import PickService
 
 import SemicolonDesign
 import XNavigationAndTab
 
 struct HomeView: View, XNavigationAndTabContent {
 
-    @EnvironmentObject var homeRouter: HomeRouter
+    @EnvironmentObject var xquareRouter: XquareRouter
     @StateObject var viewModel: HomeViewModel
 
     var tabInformation: TabInformation {
@@ -68,7 +70,7 @@ struct HomeView: View, XNavigationAndTabContent {
             }
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button {
-                    homeRouter.navigateTo(.notification)
+                    self.xquareRouter.navigateTo(.notification)
                 } label: {
                     Image.bell
                         .frame(width: 24, height: 24)

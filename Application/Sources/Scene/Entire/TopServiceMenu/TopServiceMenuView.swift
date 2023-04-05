@@ -1,19 +1,18 @@
 import SwiftUI
 
 struct TopServiceMenuView: View {
-
-    @EnvironmentObject var entireRouter: EntireRouter
+    @EnvironmentObject var xquareRouter: XquareRouter
 
     var body: some View {
         HStack(spacing: 9) {
             TopServiceMenuCellView(image: .thumbUpIcon, text: "상벌점 내역") {
-                entireRouter.navigateTo(.pointHistory)
+                self.xquareRouter.navigateTo(.pointHistory)
             }
             TopServiceMenuCellView(image: .userIcon, text: "마이페이지") {
-                entireRouter.navigateTo(.myPage)
+                self.xquareRouter.navigateTo(.myPage)
             }
             TopServiceMenuCellView(image: .warningTriangleIcon, text: "버그 제보") {
-                entireRouter.navigateTo(.bugReport)
+                self.xquareRouter.navigateTo(.bugReport)
             }
         }
         .padding(.top, 20)

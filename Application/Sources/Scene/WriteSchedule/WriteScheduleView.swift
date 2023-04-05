@@ -55,7 +55,7 @@ struct WriteScheduleView: View {
         }
         .onDisappear(perform: viewModel.resetData)
         .navigationTitle("일정 작성")
-        .setNavigationBackButton()
+        .setNavigationBackButtonWithRouter()
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)
     }

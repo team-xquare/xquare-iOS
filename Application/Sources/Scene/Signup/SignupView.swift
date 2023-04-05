@@ -5,11 +5,10 @@ import AuthService
 
 struct SignupView: View {
 
-    @EnvironmentObject var onboardingRouter: OnboardingRouter
+    @EnvironmentObject var xquareRouter: XquareRouter
     @StateObject var viewModel: SignupViewModel
 
     var body: some View {
-        NavigationView {
             ZStack {
                 ScrollView {
                     VStack(spacing: 20) {
@@ -73,7 +72,7 @@ struct SignupView: View {
             }
             .onChange(of: viewModel.isSuccess, perform: { isSuccess in
                 if isSuccess {
-                    onboardingRouter.navigateTo(.login)
+                    self.xquareRouter.navigateTo(.login)
                 }
             })
             .sdOkayAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
@@ -83,8 +82,7 @@ struct SignupView: View {
                 SDOkayAlert(title: "문제가 발생했습니다.", message: "서버에 문제가 생겼습니다\n(담당자에게 문의해주세요)")
             })
             .navigationTitle("회원가입")
-            .setNavigationBackButton()
-        }
-        .accentColor(.GrayScale.gray800)
+            .setNavigationBackButtonWithRouter()
+            .accentColor(.GrayScale.gray800)
     }
 }

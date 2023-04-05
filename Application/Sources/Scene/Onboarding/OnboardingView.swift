@@ -4,19 +4,18 @@ import UIKit
 import SemicolonDesign
 
 struct OnboardingView: View {
-
-    @EnvironmentObject var onboardingRouter: OnboardingRouter
+    @EnvironmentObject var xquareRouter: XquareRouter
 
     var body: some View {
         VStack {
             OnboardingImageViewer()
             FillButton(
                 text: "바로 시작하기",
-                action: { self.onboardingRouter.presentFullScreen(.signup) },
+                action: { self.xquareRouter.presentFullScreen(.signup) },
                 type: .rounded
             )
             Button(action: {
-                self.onboardingRouter.presentFullScreen(.login)
+                self.xquareRouter.presentFullScreen(.login)
             }, label: {
                 HStack {
                     Text("이미 계정이 있으신가요?")

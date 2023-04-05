@@ -36,6 +36,6 @@ struct MealDetailView: View {
         .onAppear(perform: viewModel.fetchMealMenuPerMonth)
         .onDisappear { viewModel.dateToShowData = nil }
         .navigationBarBackButtonHidden()
-        .setNavigationBackButton()
+        .setNavigationBackButtonWithRouter()
     }
 }

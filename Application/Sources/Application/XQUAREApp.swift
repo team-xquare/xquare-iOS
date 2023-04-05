@@ -4,12 +4,12 @@ import SwiftUI
 struct XQUAREApp: App {
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    let onboardingRouter = OnboardingRouter(rootScreen: .launchScreen, factory: .init())
+    let xquareRouter = XquareRouter(rootScreen: .launch, factory: .init())
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(onboardingRouter)
+                .environmentObject(xquareRouter)
         }
     }
 

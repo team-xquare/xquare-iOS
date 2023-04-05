@@ -1,22 +1,27 @@
 import SwiftUI
 
 import SemicolonDesign
+import MealDataService
+import UserService
+import PickService
+import TimeTableService
+import ScheduleService
 import XNavigationAndTab
 
 struct MainView: View {
-    @EnvironmentObject var homeRouter: HomeRouter
-    @EnvironmentObject var scheduleRouter: ScheduleRouter
-    @EnvironmentObject var feedRouter: FeedRouter
-    @EnvironmentObject var applicationRouter: ApplicationRouter
-    @EnvironmentObject var entireRouter: EntireRouter
+    let homeView: HomeView
+    let scheduleView: ScheduleView
+    let feedView: FeedView
+    let applicationView: ApplicationView
+    let entireView: EntireView
 
     var body: some View {
         XNavigationAndTabView {(
-            homeRouter.start(),
-            scheduleRouter.start(),
-            feedRouter.start(),
-            applicationRouter.start(),
-            entireRouter.start()
+            homeView,
+            scheduleView,
+            feedView,
+            applicationView,
+            entireView
         )}
     }
 }

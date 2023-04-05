@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var onboardingRouter: OnboardingRouter
+    @EnvironmentObject var xquareRouter: XquareRouter
 
     var body: some View {
-        onboardingRouter.start()
+        xquareRouter.start()
     }
 }

@@ -4,8 +4,8 @@ import ScheduleService
 import SemicolonDesign
 
 struct AcademicScheduleView: View {
-    @EnvironmentObject var scheduleRouter: ScheduleRouter
     @StateObject var viewModel: AcademicScheduleViewModel
+    @EnvironmentObject var xquareRouter: XquareRouter
     @State var isShowBottomSheet: Bool = false
     @State var moveEditScheduleView: Bool = false
 
@@ -34,7 +34,7 @@ struct AcademicScheduleView: View {
                 Spacer().frame(height: 100)
             }
             Button {
-                scheduleRouter.navigateTo(.writeSchedule)
+                self.xquareRouter.navigateTo(.writeScheudle)
             } label: {
                 Image.pencilIcon
                     .resizable()

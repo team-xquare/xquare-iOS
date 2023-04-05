@@ -4,12 +4,11 @@ import AuthService
 
 struct LoginView: View {
 
-    @EnvironmentObject var onboardingRouter: OnboardingRouter
+    @EnvironmentObject var xquareRouter: XquareRouter
     @StateObject var viewModel: LoginViewModel
     @State var isLoginButtonDisabled: Bool = true
 
     var body: some View {
-        NavigationView {
             VStack {
                 Spacer()
                     .frame(height: 16)
@@ -45,15 +44,14 @@ struct LoginView: View {
             }
             .onAppear(perform: viewModel.checkUnlock)
             .navigationTitle("로그인")
-            .setNavigationBackButton()
-        }
-        .sdOkayAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
-            SDOkayAlert(title: "문제가 발생했습니다.", message: "네트워크가 원할하지 않습니다.")
-        })
-        .onChange(of: viewModel.isLoginSuccess, perform: { isSuccess in
-            if isSuccess {
-                onboardingRouter.navigateTo(.main)
-            }
-        })
+            .setNavigationBackButtonWithRouter()
+            .sdOkayAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
+                SDOkayAlert(title: "문제가 발생했습니다.", message: "네트워크가 원할하지 않습니다.")
+            })
+            .onChange(of: viewModel.isLoginSuccess, perform: { isSuccess in
+                if isSuccess {
+                    self.xquareRouter.presentFullScreen(.main)
+                }
+            })
     }
 }

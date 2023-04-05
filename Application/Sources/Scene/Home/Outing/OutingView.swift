@@ -5,7 +5,7 @@ import SemicolonDesign
 
 struct OutingView: View {
 
-    @EnvironmentObject var homeRouter: HomeRouter
+    @EnvironmentObject var xquareRouter: XquareRouter
     var name: String
     var endTime: Date
 
@@ -23,7 +23,7 @@ struct OutingView: View {
             }
             Spacer()
             Button {
-                homeRouter.navigateTo(.outingPass)
+                self.xquareRouter.navigateTo(.outingPass)
             } label: {
                 Text("외출증 확인하기")
                     .sdText(type: .body3, textColor: .GrayScale.gray0)
