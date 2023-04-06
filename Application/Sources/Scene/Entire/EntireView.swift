@@ -26,10 +26,7 @@ struct EntireView: View, XNavigationAndTabContent {
                 ServiceSectionView(
                     headerText: "학교",
                     services: [
-                        (
-                            text: "오늘의 자습감독 선생님",
-                            destination: selfStudyTeacherView
-                        )
+                        (text: "오늘의 자습감독 선생님", destination: selfStudyTeacherView)
                     ]
                 )
             }
