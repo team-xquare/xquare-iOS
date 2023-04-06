@@ -1,7 +1,7 @@
 import SwiftUI
 
 import SemicolonDesign
-
+import XDateUtil
 struct OutingPassView: View {
     @StateObject var viewModel: OutingPassViewModel
     @State var isCapture: Bool = false
@@ -61,3 +61,4 @@ struct OutingPassView: View {
         })
     }
 }
+// swiftlint:enable line_length

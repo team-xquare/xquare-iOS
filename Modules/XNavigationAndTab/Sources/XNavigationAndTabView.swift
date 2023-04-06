@@ -119,3 +119,4 @@ public struct XNavigationAndTabView: View {
     }
 
 }
+// swiftlint:enable large_tuple
