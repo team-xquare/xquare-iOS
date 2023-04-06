@@ -150,3 +150,4 @@ extension AppDependency {
 
     }
 }
+// swiftlint:enable function_body_length
