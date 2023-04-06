@@ -12,17 +12,6 @@ import TimeTableService
 
 class XquareRouterFactory: RouterFactory {
 
-    // MARK: - Dependency
-    let authServiceDependency = AuthServiceDependency.shared
-    let attachmentServiceDependency = AttachmentServiceDependency.shared
-    let userServiceDependency = UserServiceDependency.shared
-    let pointServiceDependency = PointServiceDependency.shared
-    let pickeServiceDependency = PickServiceDependency.shared
-    let notificatoinServiceDependency = NotificationServiceDependency.shared
-    let mealDataServiceDependency = MealDataServiceDependency.shared
-    let scheduleServiceDependency = ScheduleServiceDependency.shared
-    let timeTableServiceDependency = TimeTableServiceDependency.shared
-
     // MARK: - View
     var launchScreenView: LaunchScreenView
     var onboardingView: OnboardingView
@@ -42,6 +31,16 @@ class XquareRouterFactory: RouterFactory {
 
     // swiftlint:disable function_body_length
     init() {
+        let authServiceDependency = AuthServiceDependency.shared
+        let attachmentServiceDependency = AttachmentServiceDependency.shared
+        let userServiceDependency = UserServiceDependency.shared
+        let pointServiceDependency = PointServiceDependency.shared
+        let pickeServiceDependency = PickServiceDependency.shared
+        let notificatoinServiceDependency = NotificationServiceDependency.shared
+        let mealDataServiceDependency = MealDataServiceDependency.shared
+        let scheduleServiceDependency = ScheduleServiceDependency.shared
+        let timeTableServiceDependency = TimeTableServiceDependency.shared
+
         let launchScreenViewModel = LaunchScreenViewModel(
             refreshTokenUseCase: authServiceDependency.refreshTokenUseCase
         )
@@ -131,6 +130,7 @@ class XquareRouterFactory: RouterFactory {
         )
         self.writeScheduleView = WriteScheduleView(viewModel: writeScheduleViewModel)
     }
+    // swiftlint:enable function_body_length
 
     // swiftlint:disable cyclomatic_complexity
     @ViewBuilder func makeBody(for screen: XquareRoute) -> some View {
@@ -161,4 +161,5 @@ class XquareRouterFactory: RouterFactory {
             bugReportView
         }
     }
+    // swiftlint:enable cyclomatic_complexity
 }
