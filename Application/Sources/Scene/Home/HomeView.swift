@@ -1,9 +1,5 @@
 import SwiftUI
 
-import MealDataService
-import UserService
-import PickService
-
 import SemicolonDesign
 import XNavigationAndTab
 

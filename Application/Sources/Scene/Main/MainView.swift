@@ -1,14 +1,10 @@
 import SwiftUI
 
 import SemicolonDesign
-import MealDataService
-import UserService
-import PickService
-import TimeTableService
-import ScheduleService
 import XNavigationAndTab
 
 struct MainView: View {
+    @EnvironmentObject var xquareRouter: XquareRouter
     let homeView: HomeView
     let scheduleView: ScheduleView
     let feedView: FeedView
@@ -16,7 +12,7 @@ struct MainView: View {
     let entireView: EntireView
 
     var body: some View {
-        XNavigationAndTabView {(
+        XNavigationAndTabView(selection: $xquareRouter.tabBarSelection) {(
             homeView,
             scheduleView,
             feedView,
