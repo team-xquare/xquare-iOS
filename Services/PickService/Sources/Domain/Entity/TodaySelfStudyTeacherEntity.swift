@@ -1,13 +1,12 @@
 import Foundation
 
 public struct TodaySelfStudyTeacherEntity: Equatable {
-    public let secondFloor: String
-    public let thirdFloor: String
-    public let fourthFloor: String
+    public let type, date: String
+    public let teacher: [String]
 
-    public init(secondFloor: String, thirdFloor: String, fourthFloor: String) {
-        self.secondFloor = secondFloor
-        self.thirdFloor = thirdFloor
-        self.fourthFloor = fourthFloor
+    public init(type: String, date: String, teacher: [String]) {
+        self.type = type
+        self.date = date
+        self.teacher = teacher
     }
 }

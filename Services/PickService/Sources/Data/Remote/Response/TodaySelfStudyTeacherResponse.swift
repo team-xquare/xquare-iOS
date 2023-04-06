@@ -3,24 +3,16 @@ import Foundation
 import XDateUtil
 
 struct TodaySelfStudyTeacherResponse: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case secondFloor = "second_floor"
-        case thirdFloor = "third_floor"
-        case fourthFloor = "fourth_floor"
-    }
-
-    let secondFloor: String
-    let thirdFloor: String
-    let fourthFloor: String
-
+    let type, date: String
+    let teacher: [String]
 }
 
 extension TodaySelfStudyTeacherResponse {
     func toDomain() -> TodaySelfStudyTeacherEntity {
         return .init(
-            secondFloor: self.secondFloor,
-            thirdFloor: self.thirdFloor,
-            fourthFloor: self.fourthFloor
+            type: self.type,
+            date: date.toDate(format: .fullDate).toString(format: "M월 d일 (E)"),
+            teacher: self.teacher
         )
     }
 }

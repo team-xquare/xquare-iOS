@@ -24,8 +24,8 @@ class PickRepositoryImpl: PickRepository {
             .asObservable()
     }
 
-    func fetchTodaySelfStudyTeacher() -> Observable<TodaySelfStudyTeacherEntity> {
-        return remoteDataSource.fetchTodaySelfStudyTeacher()
+    func fetchTodaySelfStudyTeacher(month: Date) -> Observable<[TodaySelfStudyTeacherEntity]> {
+        return remoteDataSource.fetchTodaySelfStudyTeacher(month: month.toString(format: .month))
             .asObservable()
     }
 
