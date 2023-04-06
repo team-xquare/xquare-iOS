@@ -74,4 +74,9 @@ extension Router {
     func popToRoot() {
         self.stack.removeLast(self.stack.count - 1)
     }
+
+    func moveTabTo(index: Int) {
+        self.tabBarSelection = index
+    }
+
 }
