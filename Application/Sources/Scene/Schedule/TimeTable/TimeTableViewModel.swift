@@ -28,3 +28,4 @@ class TimeTableViewModel: ObservableObject {
         return (Calendar.current.dateComponents([.weekday], from: Date()).weekday ?? 0) - 1
     }
 }
+// swiftlint:enable line_length

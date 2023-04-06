@@ -61,3 +61,4 @@ struct OutingPassView: View {
         })
     }
 }
+// swiftlint:enable line_length

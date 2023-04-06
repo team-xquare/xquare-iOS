@@ -32,3 +32,4 @@ struct TimeTableCell: View {
         }
     }
 }
+// swiftlint:enable line_length
