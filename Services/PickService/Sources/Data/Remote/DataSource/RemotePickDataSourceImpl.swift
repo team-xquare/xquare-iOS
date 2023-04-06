@@ -26,9 +26,9 @@ class RemotePickDataSourceImpl: RestApiRemoteDataSource<PickAPI>, RemotePickData
             .asCompletable()
     }
 
-    func fetchTodaySelfStudyTeacher() -> Single<TodaySelfStudyTeacherEntity> {
-        return request(.fetchTodaySelfStudyTeacher)
-            .map(TodaySelfStudyTeacherResponse.self)
+    func fetchTodaySelfStudyTeacher(month: String) -> Single<[TodaySelfStudyTeacherEntity]> {
+        return request(.fetchTodaySelfStudyTeacher(month: month))
+            .map(TodaySelfStudyTeacherListResponse.self)
             .map { $0.toDomain() }
     }
 

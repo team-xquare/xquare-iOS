@@ -10,7 +10,7 @@ public class FetchTodaySelfStudyTeacherUseCase {
         self.repository = repository
     }
 
-    public func excute() -> Observable<TodaySelfStudyTeacherEntity> {
-        self.repository.fetchTodaySelfStudyTeacher()
+    public func excute(month: Date) -> Observable<[TodaySelfStudyTeacherEntity]> {
+        self.repository.fetchTodaySelfStudyTeacher(month: month)
     }
 }
