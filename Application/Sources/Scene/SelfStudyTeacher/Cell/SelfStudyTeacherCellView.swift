@@ -3,7 +3,7 @@ import SemicolonDesign
 import XDateUtil
 
 struct SelfStudyTeacherCellView: View {
-    var date = "3월 31일 (금)"
+    var date: String
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 16) {
@@ -24,16 +24,11 @@ struct SelfStudyTeacherCellView: View {
         }
         .padding(16)
         .background(Color.GrayScale.gray50)
+        .cornerRadius(16)
         .overlay(
             RoundedRectangle(cornerRadius: 16)
                 .stroke(lineWidth: date == Date().toString(format: "M월 d일 (E)") ? 1 : 0)
                 .foregroundColor(.Primary.purple100)
         )
-    }
-}
-
-struct SelfStudyTeacherCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        SelfStudyTeacherCellView()
     }
 }

@@ -9,8 +9,8 @@ struct SelfStudyTeacherView: View {
             ScrollViewReader { proxy in
                 ScrollView {
                     LazyVStack(spacing: 0) {
-                        ForEach(0..<31) { _ in
-                            SelfStudyTeacherCellView()
+                        ForEach(1..<32) { index in
+                            SelfStudyTeacherCellView(date: "4월 \(index)일 (수)")
                                 .padding([.horizontal, .top], 16)
                         }
                     }
