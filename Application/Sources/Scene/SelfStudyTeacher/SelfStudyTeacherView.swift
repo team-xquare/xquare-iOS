@@ -9,9 +9,13 @@ struct SelfStudyTeacherView: View {
             ScrollViewReader { proxy in
                 ScrollView {
                     LazyVStack(spacing: 0) {
-                        ForEach(viewModel.selfStudyList, id: \.date) {
-                            SelfStudyTeacherCellView(entity: $0, date: $0.date)
-                                .padding([.horizontal, .top], 16)
+                        ForEach(0..<viewModel.selfStudyList.count, id: \.self) { index in
+                            SelfStudyTeacherCellView(
+                                entity: viewModel.selfStudyList[index],
+                                date: viewModel.selfStudyList[index].date
+                            )
+                            .padding([.horizontal, .top], 16)
+                            .id(index)
                         }
                     }
                 }
