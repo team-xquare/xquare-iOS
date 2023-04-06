@@ -15,7 +15,7 @@ protocol ScreenProtocol {
 
 protocol RouterObject: AnyObject {
     associatedtype Screen = ScreenProtocol
-    associatedtype Body = View & XNavigationAndTabContent
+    associatedtype Body = View
 
     func start() -> Body
     func navigateTo(_ screen: Screen)
