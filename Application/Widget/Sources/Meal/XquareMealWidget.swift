@@ -119,7 +119,7 @@ struct SmallXquareMealWidgetView: View {
                         textColor: colorScheme == .light ? .GrayScale.gray600 : .GrayScale.gray500
                     )
                     .padding(.bottom, 10)
-                if mealMenu?.menu ?? [] != [""] {
+                if mealMenu?.menu ?? [] != [""] && mealMenu?.menu != nil {
                     Text("\(mealMenu?.menu?.joined(separator: ", ") ?? "") (\(mealMenu?.kcal ?? ""))")
                         .sdText(
                             type: .caption,
@@ -168,7 +168,7 @@ struct MediumXquareMealWidgetView: View {
                 Spacer()
             }
             .padding(.bottom, 10)
-            if mealMenu?.menu ?? [] != [""] {
+            if mealMenu?.menu ?? [] != [""] && mealMenu?.menu != nil {
                 Text("\(mealMenu?.menu?.joined(separator: ", ") ?? "") (\(mealMenu?.kcal ?? ""))")
                     .sdText(
                         type: .caption,
