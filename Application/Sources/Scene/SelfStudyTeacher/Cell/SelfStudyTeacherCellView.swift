@@ -1,8 +1,10 @@
 import SwiftUI
+import PickService
 import SemicolonDesign
 import XDateUtil
 
 struct SelfStudyTeacherCellView: View {
+    var entity: TodaySelfStudyTeacherEntity
     var date: String
     var body: some View {
         HStack {
@@ -10,12 +12,14 @@ struct SelfStudyTeacherCellView: View {
                 Text(date)
                     .sdText(type: .body2, textColor: Color.GrayScale.gray900)
                 VStack(spacing: 8) {
-                    ForEach(2..<5) { index in
-                        HStack(alignment: .center, spacing: 12) {
-                            Text("\(index)층")
-                                .sdText(type: .body4, textColor: Color.GrayScale.gray800)
-                            Text("신요셉선생님")
-                                .sdText(type: .body2, textColor: Color.GrayScale.gray900)
+                    ForEach(0..<entity.teacher.count, id: \.self) { index in
+                        if entity.teacher[index] != "" {
+                            HStack(alignment: .center, spacing: 12) {
+                                Text("\(index)층")
+                                    .sdText(type: .body4, textColor: Color.GrayScale.gray800)
+                                Text(entity.teacher[index])
+                                    .sdText(type: .body2, textColor: Color.GrayScale.gray900)
+                            }
                         }
                     }
                 }
