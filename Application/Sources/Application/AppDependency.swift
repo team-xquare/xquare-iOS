@@ -84,6 +84,8 @@ extension AppDependency {
         let notificationViewModel = NotificationViewModel(
             fetchPostedNotificationListUseCase: notificationServiceDependency.fetchPostedNotificationListUseCase
         )
+        let selfStudyTeacherViewModel = SelfStudyTeacherViewModel(
+            fetchTodaySelfStudyTeacherUseCase: pickServiceDependency.fetchTodaySelfStudyTeacherUseCase)
 
         // MARK: - Views
         let pointHistoryView = PointHistoryView(
@@ -114,10 +116,12 @@ extension AppDependency {
         let myPageView = MyPageView(
             viewModel: myPageViewModel
         )
+        let selfStudyTeacherView = SelfStudyTeacherView(viewModel: selfStudyTeacherViewModel)
         let entireView = EntireView(
             pointHistoryView: pointHistoryView,
             myPageView: myPageView,
-            bugReportView: bugReportView
+            bugReportView: bugReportView,
+            selfStudyTeacherView: selfStudyTeacherView
         )
         let mainView = MainView(
             homeView: homeView,
