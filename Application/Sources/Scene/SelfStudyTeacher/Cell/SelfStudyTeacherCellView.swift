@@ -15,10 +15,11 @@ struct SelfStudyTeacherCellView: View {
                     ForEach(0..<entity.teacher.count, id: \.self) { index in
                         if entity.teacher[index] != "" {
                             HStack(alignment: .center, spacing: 12) {
-                                Text("\(index)층")
+                                Text("\(index + 1)층")
                                     .sdText(type: .body4, textColor: Color.GrayScale.gray800)
                                 Text("\(entity.teacher[index]) 선생님")
                                     .sdText(type: .body2, textColor: Color.GrayScale.gray900)
+                                Spacer()
                             }
                         }
                     }
