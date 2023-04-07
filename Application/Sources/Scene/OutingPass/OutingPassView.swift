@@ -51,7 +51,7 @@ struct OutingPassView: View {
         .onAppear(perform: viewModel.fetchOutingPass)
         .navigationTitle("외출증")
         .navigationBarBackButtonHidden()
-        .setNavigationBackButton()
+        .setNavigationBackButtonWithRouter()
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.userDidTakeScreenshotNotification),
                    perform: { _ in
             self.isCapture = true

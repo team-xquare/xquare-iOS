@@ -18,6 +18,7 @@ class SelfStudyTeacherViewModel: ObservableObject {
     func fetchTodaySelfStudyTeacherPerMonth() {
         self.fetchTodaySelfStudyTeacherUseCase.excute(month: Date())
             .subscribe(onNext: { [weak self] in
+                print($0)
                 self?.selfStudyList = $0
                 self?.dateToShowData = self?.calculateDateToShowData(allMenu: $0)
             }).disposed(by: disposeBag)

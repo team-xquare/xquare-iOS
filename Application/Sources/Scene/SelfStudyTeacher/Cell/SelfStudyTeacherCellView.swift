@@ -17,7 +17,7 @@ struct SelfStudyTeacherCellView: View {
                             HStack(alignment: .center, spacing: 12) {
                                 Text("\(index)층")
                                     .sdText(type: .body4, textColor: Color.GrayScale.gray800)
-                                Text(entity.teacher[index])
+                                Text("\(entity.teacher[index]) 선생님")
                                     .sdText(type: .body2, textColor: Color.GrayScale.gray900)
                             }
                         }

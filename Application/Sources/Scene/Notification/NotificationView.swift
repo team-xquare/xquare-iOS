@@ -19,7 +19,7 @@ struct NotificationView: View {
         .onAppear(perform: viewModel.fetchNotification)
         .navigationTitle("알림")
         .navigationBarTitleDisplayMode(.inline)
-        .setNavigationBackButton()
+        .setNavigationBackButtonWithRouter()
         .navigationBarBackButtonHidden()
     }
 }

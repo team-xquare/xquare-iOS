@@ -1,18 +1,16 @@
 import SwiftUI
 
-struct ServiceSectionView<Destination>: View where Destination: View {
+struct ServiceSectionView: View {
 
     var headerText: String
-    var services: [(text: String, destination: Destination)]
+    var services: [(text: String, view: XquareRoute)]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 11) {
             Text(headerText)
                 .sdText(type: .body1, textColor: .GrayScale.gray900)
             ForEach(services, id: \.text) { service in
-                ServiceListCellView(text: service.text) {
-                    service.destination
-                }
+                ServiceListCellView(text: service.text, view: service.view)
             }
         }
         .padding(.horizontal, 16)

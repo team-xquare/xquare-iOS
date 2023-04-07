@@ -4,11 +4,7 @@ import XNavigationAndTab
 
 struct EntireView: View, XNavigationAndTabContent {
 
-    var pointHistoryView: PointHistoryView
-    var myPageView: MyPageView
-    var bugReportView: BugReportView
-    var selfStudyTeacherView: SelfStudyTeacherView
-    var tabInformation: TabInformation {
+var tabInformation: TabInformation {
         TabInformation(
             tabItemText: "전체",
             tabItemImage: .entire
@@ -18,17 +14,12 @@ struct EntireView: View, XNavigationAndTabContent {
     var body: some View {
         ScrollView {
             VStack(spacing: 27) {
-                TopServiceMenuView(
-                    pointHistoryView: pointHistoryView,
-                    myPageView: myPageView,
-                    bugReportView: bugReportView
-                )
+                TopServiceMenuView()
                 ServiceSectionView(
                     headerText: "학교",
-                    services: [
-                        (text: "오늘의 자습감독 선생님", destination: selfStudyTeacherView)
-                    ]
+                    services: [(text: "오늘의 자습감독 선생님", view: .selfStudyTeacher)]
                 )
+                Spacer()
             }
         }
         .navigationTitle("전체")

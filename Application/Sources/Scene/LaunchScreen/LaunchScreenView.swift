@@ -4,9 +4,8 @@ import SemicolonDesign
 
 struct LaunchScreenView: View {
 
+    @EnvironmentObject var xquareRouter: XquareRouter
     @StateObject var viewModel: LaunchScreenViewModel
-    var onboardingView: OnboardingView
-    var mainView: MainView
 
     var body: some View {
         ZStack {
@@ -15,14 +14,20 @@ struct LaunchScreenView: View {
             Image.logo
                 .frame(width: 250, height: 250, alignment: .center)
         }
-        .fullScreenCover(isPresented: self.$viewModel.isSuccessToRefreshToken) {
-            mainView
-        }
-        .fullScreenCover(isPresented: self.$viewModel.isFailureToRefreshToken) {
-            onboardingView
-        }
-        .onAppear {
-            self.viewModel.refreshToken()
+        .onChange(of: viewModel.isSuccessToRefreshToken, perform: { isSuccess in
+            if isSuccess {
+                self.xquareRouter.presentFullScreen(.main)
+            }
+        })
+        .onChange(of: viewModel.isFailureToRefreshToken, perform: { isFaile in
+            if isFaile {
+                self.xquareRouter.presentFullScreen(.onboarding)
+            }
+        })
+        .onAppear(perform: viewModel.refreshToken)
+        .onDisappear {
+            viewModel.isFailureToRefreshToken = false
+            viewModel.isSuccessToRefreshToken = false
         }
     }
 }

@@ -12,5 +12,6 @@ public class FetchTodaySelfStudyTeacherUseCase {
 
     public func excute(month: Date) -> Observable<[TodaySelfStudyTeacherEntity]> {
         self.repository.fetchTodaySelfStudyTeacher(month: month)
+            .map { $0.filter { $0.teacher != ["", "", "", "", ""] } }
     }
 }
