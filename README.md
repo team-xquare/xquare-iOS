@@ -45,7 +45,7 @@ DSM 학교 관리 시스템
 │   │   ├── Router
 │   │   └── Scene
 │   ├── SupportingFiles
-│   ├── Widget
+│   └── Widget
 ├── Modules
 │   ├── KeychainModule
 │   ├── RestApiModule
@@ -65,4 +65,4 @@ DSM 학교 관리 시스템
 │   └── UserService
 ├── Tuist
 ├── Workspace.swift
-├── ci_scripts
+└── ci_scripts
