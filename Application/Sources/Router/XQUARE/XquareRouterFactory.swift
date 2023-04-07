@@ -13,21 +13,22 @@ import TimeTableService
 class XquareRouterFactory: RouterFactory {
 
     // MARK: - View
-    var launchScreenView: LaunchScreenView
-    var onboardingView: OnboardingView
-    var mainView: MainView
-    var loginView: LoginView
-    var signupView: SignupView
+    let launchScreenView: LaunchScreenView
+    let onboardingView: OnboardingView
+    let mainView: MainView
+    let loginView: LoginView
+    let signupView: SignupView
 
-    var mealDetailView: MealDetailView
-    var notificationView: NotificationView
-    var outingPassView: OutingPassView
+    let mealDetailView: MealDetailView
+    let notificationView: NotificationView
+    let outingPassView: OutingPassView
 
-    var writeScheduleView: WriteScheduleView
+    let writeScheduleView: WriteScheduleView
 
-    var pointHistoryView: PointHistoryView
-    var myPageView: MyPageView
-    var bugReportView: BugReportView
+    let pointHistoryView: PointHistoryView
+    let myPageView: MyPageView
+    let bugReportView: BugReportView
+    let selfStudyTeacherView: SelfStudyTeacherView
 
     // swiftlint:disable function_body_length
     init() {
@@ -129,6 +130,10 @@ class XquareRouterFactory: RouterFactory {
             createScheduleUseCase: scheduleServiceDependency.createScheduleUseCase
         )
         self.writeScheduleView = WriteScheduleView(viewModel: writeScheduleViewModel)
+        let selfStudyTeacherViewModel = SelfStudyTeacherViewModel(
+            fetchTodaySelfStudyTeacherUseCase: pickeServiceDependency.fetchTodaySelfStudyTeacherUseCase
+        )
+        self.selfStudyTeacherView = SelfStudyTeacherView(viewModel: selfStudyTeacherViewModel)
     }
     // swiftlint:enable function_body_length
 
@@ -159,6 +164,8 @@ class XquareRouterFactory: RouterFactory {
             myPageView
         case .bugReport:
             bugReportView
+        case .selfStudyTeacher:
+            selfStudyTeacherView
         }
     }
     // swiftlint:enable cyclomatic_complexity
