@@ -1,16 +1,12 @@
 import SwiftUI
 
-import MealDataService
-
 import SemicolonDesign
 import XNavigationAndTab
 
 struct HomeView: View, XNavigationAndTabContent {
 
+    @EnvironmentObject var xquareRouter: XquareRouter
     @StateObject var viewModel: HomeViewModel
-    var mealDetailView: MealDetailView
-    let notificationView: NotificationView
-    let outingPassView: OutingPassView
 
     var tabInformation: TabInformation {
         TabInformation(
@@ -30,12 +26,10 @@ struct HomeView: View, XNavigationAndTabContent {
                     demerit: viewModel.demerit
                 )
                 MealMenuView(
-                    mealDetailView: mealDetailView,
                     menu: viewModel.menu
                 )
                 if viewModel.isShowOutingView {
                     OutingView(
-                        outingPassView: outingPassView,
                         name: viewModel.name,
                         endTime: viewModel.endTime
                     )
@@ -71,7 +65,9 @@ struct HomeView: View, XNavigationAndTabContent {
                     .padding(.leading, 5)
             }
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                NavigationLink(destination: notificationView) {
+                Button {
+                    self.xquareRouter.navigateTo(.notification)
+                } label: {
                     Image.bell
                         .frame(width: 24, height: 24)
                 }

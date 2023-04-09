@@ -4,6 +4,7 @@ import SemicolonDesign
 import XNavigationAndTab
 
 struct MainView: View {
+    @EnvironmentObject var xquareRouter: XquareRouter
     let homeView: HomeView
     let scheduleView: ScheduleView
     let feedView: FeedView
@@ -11,12 +12,15 @@ struct MainView: View {
     let entireView: EntireView
 
     var body: some View {
-        XNavigationAndTabView {(
+        XNavigationAndTabView(selection: $xquareRouter.tabBarSelection) {(
             homeView,
             scheduleView,
             feedView,
             applicationView,
             entireView
         )}
+        .onAppear {
+            xquareRouter.moveTabTo(index: 0)
+        }
     }
 }

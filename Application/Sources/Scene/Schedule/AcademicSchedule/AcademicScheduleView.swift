@@ -5,9 +5,9 @@ import SemicolonDesign
 
 struct AcademicScheduleView: View {
     @StateObject var viewModel: AcademicScheduleViewModel
+    @EnvironmentObject var xquareRouter: XquareRouter
     @State var isShowBottomSheet: Bool = false
     @State var moveEditScheduleView: Bool = false
-    let writeScheduleView: WriteScheduleView
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -33,7 +33,9 @@ struct AcademicScheduleView: View {
                 }
                 Spacer().frame(height: 100)
             }
-            NavigationLink(destination: writeScheduleView) {
+            Button {
+                self.xquareRouter.navigateTo(.writeScheudle)
+            } label: {
                 Image.pencilIcon
                     .resizable()
                     .frame(width: 22.4, height: 22.4)

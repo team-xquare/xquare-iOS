@@ -9,6 +9,7 @@ enum PickAPI {
     case fetchMovedClass
     case fetchOutingPass
     case deleteReturnClass
+    case fetchTodaySelfStudyTeacher(month: String)
 }
 
 extension PickAPI: XquareAPI {
@@ -27,6 +28,8 @@ extension PickAPI: XquareAPI {
             return "/applications/picnic"
         case .deleteReturnClass:
             return "/applications"
+        case .fetchTodaySelfStudyTeacher:
+            return "/admin/director"
         }
     }
 
@@ -46,6 +49,17 @@ extension PickAPI: XquareAPI {
             return .delete
         default:
             return .get
+        }
+    }
+
+    var task: Task {
+        switch self {
+        case .fetchTodaySelfStudyTeacher(let month):
+            return .requestParameters(parameters: [
+                "month": month
+            ], encoding: URLEncoding.queryString)
+        default:
+            return .requestPlain
         }
     }
 
