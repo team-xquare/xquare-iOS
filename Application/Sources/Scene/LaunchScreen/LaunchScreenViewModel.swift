@@ -17,6 +17,8 @@ class LaunchScreenViewModel: ObservableObject {
     }
 
     func refreshToken() {
+        self.isSuccessToRefreshToken = false
+        self.isFailureToRefreshToken = false
         self.refreshTokenUseCase.excute()
             .subscribe(onCompleted: {
                 self.isSuccessToRefreshToken = true

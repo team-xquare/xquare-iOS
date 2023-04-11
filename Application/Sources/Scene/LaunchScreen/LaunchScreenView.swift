@@ -24,10 +24,10 @@ struct LaunchScreenView: View {
                 self.xquareRouter.presentFullScreen(.onboarding)
             }
         })
+        .onChange(of: self.xquareRouter.stack.last?.screen, perform: {
+            guard $0 == .launch else { return }
+            viewModel.refreshToken()
+        })
         .onAppear(perform: viewModel.refreshToken)
-        .onDisappear {
-            viewModel.isFailureToRefreshToken = false
-            viewModel.isSuccessToRefreshToken = false
-        }
     }
 }

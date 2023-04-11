@@ -31,7 +31,7 @@ struct RouterContext<ScreenType: ScreenProtocol> {
 }
 
 class Router<ScreenType, Factory: RouterFactory>: ObservableObject, RouterObject where Factory.Screen == ScreenType {
-    @Published private var stack: [RouterContext<ScreenType>] = []
+    @Published var stack: [RouterContext<ScreenType>] = []
     @Published var tabBarSelection: Int = 0
 
     var factory: Factory
