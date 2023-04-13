@@ -7,7 +7,7 @@ struct LoginView: View {
     @EnvironmentObject var xquareRouter: XquareRouter
     @StateObject var viewModel: LoginViewModel
     @State var isLoginButtonDisabled: Bool = true
-
+    @State var isShowChangeIdPasswordAlert: Bool = false
     var body: some View {
             VStack {
                 Spacer()
@@ -40,11 +40,20 @@ struct LoginView: View {
                     action: viewModel.login,
                     type: .rounded
                 )
+                Button(action: {
+                    isShowChangeIdPasswordAlert.toggle()
+                }, label: {
+                    Text("아이디 찾기 / 비밀번호 찾기")
+                        .sdText(type: .body4, textColor: .GrayScale.gray700)
+                })
                 Spacer()
             }
             .onAppear(perform: viewModel.checkUnlock)
             .navigationTitle("로그인")
             .setNavigationBackButtonWithRouter()
+            .sdOkayAlert(isPresented: $isShowChangeIdPasswordAlert, sdAlert: {
+                SDOkayAlert(title: "알림", message: "XQUARE 페이스북페이지에 문의해주세요.")
+            })
             .sdOkayAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
                 SDOkayAlert(title: "문제가 발생했습니다.", message: "네트워크가 원할하지 않습니다.")
             })
