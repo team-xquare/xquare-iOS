@@ -24,8 +24,9 @@ class TimeTableViewModel: ObservableObject {
             })
             .disposed(by: disposeBag)
     }
+    // swiftlint:enable line_length
+
     private func getWeekDay() -> Int {
         return (Calendar.current.dateComponents([.weekday], from: Date()).weekday ?? 0) - 1
     }
 }
-// swiftlint:enable line_length
