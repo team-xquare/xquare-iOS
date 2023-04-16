@@ -63,6 +63,7 @@ class LoginViewModel: ObservableObject {
         self.isLoginSuccess = false
         self.id = ""
         self.password = ""
+        self.errorMessage = ""
     }
 
     private func requestUnlock() {
