@@ -5,7 +5,6 @@ import RxSwift
 
 class EntireViewModel: ObservableObject {
     @Published var showLogoutAlert: Bool = false
-    @Published var isDidLogout: Bool = false
 
     private let logoutUseCase: LogoutUseCase
     private var disposeBag = DisposeBag()
@@ -16,9 +15,7 @@ class EntireViewModel: ObservableObject {
 
     func logout() {
         self.logoutUseCase.excute()
-            .subscribe(onCompleted: {
-                self.isDidLogout = true
-            })
+            .subscribe(onCompleted: { })
             .disposed(by: disposeBag)
     }
 }
