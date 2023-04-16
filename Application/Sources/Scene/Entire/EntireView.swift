@@ -32,17 +32,12 @@ struct EntireView: View, XNavigationAndTabContent {
                 }
             }
             .navigationTitle("전체")
-            .onAppear { self.viewModel.isDidLogout = false }
-            .onChange(of: viewModel.isDidLogout, perform: { isLogout in
-                if isLogout {
-                    self.xquareRouter.popToRoot()
-                }
-            })
             .sdAlert(isPresented: $viewModel.showLogoutAlert) {
                 SDAlert(
                     title: "정말 로그아웃 하시겠습니까?",
                     button1: (text: "네", action: {
                         viewModel.logout()
+                        self.xquareRouter.popToRoot()
                     }),
                     button2: (text: "아니요", action: { })
                 )
