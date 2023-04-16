@@ -17,11 +17,13 @@ struct LaunchScreenView: View {
         .onChange(of: viewModel.isSuccessToRefreshToken, perform: { isSuccess in
             if isSuccess {
                 self.xquareRouter.presentFullScreen(.main)
+                self.viewModel.isSuccessToRefreshToken = false
             }
         })
         .onChange(of: viewModel.isFailureToRefreshToken, perform: { isFaile in
             if isFaile {
                 self.xquareRouter.presentFullScreen(.onboarding)
+                self.viewModel.isFailureToRefreshToken = false
             }
         })
         .onChange(of: self.xquareRouter.stack.last?.screen, perform: {
