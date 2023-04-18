@@ -21,8 +21,8 @@ extension DayTimeTableResponse {
     func toDomain() -> DayTimeTableEntity {
         return .init(
             period: period,
-            beginTime: beginTime.toDate(format: .time).addingTimeInterval(-(60 * 60 * 9)),
-            endTime: endTime.toDate(format: .time).addingTimeInterval(-(60 * 60 * 9)),
+            beginTime: beginTime.toDate(format: .time),
+            endTime: endTime.toDate(format: .time),
             subjectName: subjectName,
             subjectImageUrl: URL(string: subjectImageUrlString)
         )

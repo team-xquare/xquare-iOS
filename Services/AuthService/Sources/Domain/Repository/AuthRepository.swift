@@ -9,4 +9,5 @@ public protocol AuthRepository {
     func fetchAccessToken() throws -> String
     func fetchTokenExpiredDate() throws -> Date
     func autoLogin() -> Single<IdAndPasswordEntity>
+    func logout() -> Completable
 }

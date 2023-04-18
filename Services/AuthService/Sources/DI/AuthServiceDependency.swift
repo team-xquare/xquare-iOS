@@ -10,6 +10,8 @@ public struct AuthServiceDependency {
     public let signinUseCase: SigninUseCase
     public let signupUseCase: SignupUseCase
     public let autoLoginUseCase: AutoLoginUseCase
+    public let refreshTokenIfExpiredUseCase: RefreshTokenIfExpiredUseCase
+    public let logoutUseCase: LogoutUseCase
     public let jwtPlugin: JWTPlugin
 
 }
@@ -47,6 +49,12 @@ extension AuthServiceDependency {
         let fetchIdAndPasswordUsecase = AutoLoginUseCase(
             repository: authRepository
         )
+        let refreshTokenIfExpiredUseCase = RefreshTokenIfExpiredUseCase(
+            authRepository: authRepository
+        )
+        let logoutUseCase = LogoutUseCase(
+            repository: authRepository
+        )
 
         // MARK: - Plugin
         let jwtPlugin = JWTPlugin(
@@ -60,6 +68,8 @@ extension AuthServiceDependency {
             signinUseCase: signinUseCase,
             signupUseCase: signupUseCase,
             autoLoginUseCase: fetchIdAndPasswordUsecase,
+            refreshTokenIfExpiredUseCase: refreshTokenIfExpiredUseCase,
+            logoutUseCase: logoutUseCase,
             jwtPlugin: jwtPlugin
         )
     }

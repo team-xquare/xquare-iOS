@@ -4,23 +4,18 @@ import UIKit
 import SemicolonDesign
 
 struct OnboardingView: View {
-
-    @State var isSignupViewPresented: Bool = false
-    @State var isLoginViewPresented: Bool = false
-
-    var signupView: SignupView
-    var loginView: LoginView
+    @EnvironmentObject var xquareRouter: XquareRouter
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             OnboardingImageViewer()
             FillButton(
                 text: "바로 시작하기",
-                action: { self.isSignupViewPresented = true },
+                action: { self.xquareRouter.navigateTo(.signup) },
                 type: .rounded
             )
             Button(action: {
-                self.isLoginViewPresented = true
+                self.xquareRouter.navigateTo(.login)
             }, label: {
                 HStack {
                     Text("이미 계정이 있으신가요?")
@@ -31,12 +26,7 @@ struct OnboardingView: View {
             })
             Spacer(minLength: 40)
         }
-        .ignoresSafeArea(edges: .top)
-        .fullScreenCover(isPresented: self.$isSignupViewPresented) {
-            signupView
-        }
-        .fullScreenCover(isPresented: self.$isLoginViewPresented) {
-            loginView
-        }
+        .background(Color.white)
+        .edgesIgnoringSafeArea(.top)
     }
 }

@@ -1,21 +1,18 @@
 import SwiftUI
 
 struct TopServiceMenuView: View {
-
-    var pointHistoryView: PointHistoryView
-    var myPageView: MyPageView
-    var bugReportView: BugReportView
+    @EnvironmentObject var xquareRouter: XquareRouter
 
     var body: some View {
         HStack(spacing: 9) {
             TopServiceMenuCellView(image: .thumbUpIcon, text: "상벌점 내역") {
-                pointHistoryView
+                self.xquareRouter.navigateTo(.pointHistory)
             }
             TopServiceMenuCellView(image: .userIcon, text: "마이페이지") {
-                myPageView
+                self.xquareRouter.navigateTo(.myPage)
             }
             TopServiceMenuCellView(image: .warningTriangleIcon, text: "버그 제보") {
-                bugReportView
+                self.xquareRouter.navigateTo(.bugReport)
             }
         }
         .padding(.top, 20)

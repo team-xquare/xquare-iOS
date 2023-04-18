@@ -2,13 +2,16 @@ import SwiftUI
 
 import SemicolonDesign
 
-struct ServiceListCellView<Destination>: View where Destination: View {
+struct ServiceListCellView: View {
 
+    @EnvironmentObject var xquareRouter: XquareRouter
     var text: String
-    var destination: () -> Destination
+    var view: XquareRoute
 
     var body: some View {
-        NavigationLink(destination: destination) {
+        Button {
+            xquareRouter.navigateTo(view)
+        } label: {
             HStack {
                 Text(text)
                     .sdText(type: .body2, textColor: .GrayScale.gray900)

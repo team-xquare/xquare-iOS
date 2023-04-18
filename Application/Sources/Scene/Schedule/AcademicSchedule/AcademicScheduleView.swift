@@ -5,20 +5,20 @@ import SemicolonDesign
 
 struct AcademicScheduleView: View {
     @StateObject var viewModel: AcademicScheduleViewModel
+    @EnvironmentObject var xquareRouter: XquareRouter
     @State var isShowBottomSheet: Bool = false
     @State var moveEditScheduleView: Bool = false
-    let writeScheduleView: WriteScheduleView
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             ScrollView(showsIndicators: false) {
+                SDCalendar(
+                    day: $viewModel.day,
+                    specialDate: viewModel.schedule.map { $0.date }
+                )
+                .padding(.top, 18)
+                .padding(.bottom, 20)
                 LazyVStack(spacing: 0) {
-                    SDCalendar(
-                        day: $viewModel.day,
-                        specialDate: viewModel.schedule.map { $0.date }
-                    )
-                    .padding(.top, 18)
-                    .padding(.bottom, 20)
                     ForEach(viewModel.schedule, id: \.id) {
                         if $0.date.toString(format: "yyyy MM") == viewModel.day.toString(format: "yyyy MM") {
                             AcademicScheduleCell(
@@ -31,8 +31,11 @@ struct AcademicScheduleView: View {
                         }
                     }
                 }
+                Spacer().frame(height: 100)
             }
-            NavigationLink(destination: writeScheduleView) {
+            Button {
+                self.xquareRouter.navigateTo(.writeScheudle)
+            } label: {
                 Image.pencilIcon
                     .resizable()
                     .frame(width: 22.4, height: 22.4)
@@ -56,8 +59,8 @@ struct AcademicScheduleView: View {
         .onChange(of: viewModel.day) { _ in
             viewModel.fetchScheduleForMonth()
         }
-        .sdErrorAlert(isPresented: $viewModel.showErrorAlert, sdAlert: {
-            SDErrorAlert(errerMessage: viewModel.errorMessage)
+        .sdOkayAlert(isPresented: $viewModel.showErrorAlert, sdAlert: {
+            SDOkayAlert(title: "문제가 발생했습니다.", message: viewModel.errorMessage)
         })
         .sdBottomSheet(isPresented: $isShowBottomSheet) {
             SDBottomSheet(buttons: [

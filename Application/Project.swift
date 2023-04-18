@@ -33,6 +33,8 @@ let project = Project(
                 .Service.TimeTableService,
                 .Service.ScheduleService,
                 .Service.PointService,
+                .Service.PickService,
+                .Service.NotificationService,
                 .SPM.FirebaseMessaging,
                 .SPM.SemicolonDesign,
                 .SPM.XWebKit,

@@ -17,8 +17,10 @@ struct ApplicationView: View, XNavigationAndTabContent {
     var body: some View {
         XWebKitView(
             urlString: self.viewModel.getWebviewURLString(),
-            accessToken: self.viewModel.getAccessToken()
+            accessTokenGetter: self.viewModel.getAccessToken
         )
         .navigationTitle("신청")
+        .onAppear { viewModel.refreshTokenIfExpired() }
+        .onTabSelected(tabIndex: 3) { viewModel.refreshTokenIfExpired() }
     }
 }

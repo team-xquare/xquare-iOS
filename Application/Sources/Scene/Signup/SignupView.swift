@@ -5,11 +5,10 @@ import AuthService
 
 struct SignupView: View {
 
+    @EnvironmentObject var xquareRouter: XquareRouter
     @StateObject var viewModel: SignupViewModel
-    var loginView: LoginView
 
     var body: some View {
-        NavigationView {
             ZStack {
                 ScrollView {
                     VStack(spacing: 20) {
@@ -66,25 +65,25 @@ struct SignupView: View {
                     FillButton(
                         isDisabled: $viewModel.isDisabled,
                         text: "입력 완료",
-                        action: {
-                            viewModel.signup()
-                        },
+                        action: viewModel.signup,
                         type: .rounded
                     )
-                    .fullScreenCover(isPresented: $viewModel.isSuccess) {
-                        loginView
-                    }
                 }
             }
-            .sdErrorAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
-                SDErrorAlert(errerMessage: "네트워크가 원할하지 않습니다.")
+            .onChange(of: viewModel.isSuccess, perform: { isSuccess in
+                if isSuccess {
+                    self.xquareRouter.dismissLast()
+                }
             })
-            .sdErrorAlert(isPresented: $viewModel.isServerError, sdAlert: {
-                SDErrorAlert(errerMessage: "서버에 문제가 생겼습니다\n(담당자에게 문의해주세요)")
+            .sdOkayAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
+                SDOkayAlert(title: "문제가 발생했습니다.", message: "네트워크가 원할하지 않습니다.")
             })
-            .navigationTitle("회원가입")
-            .setNavigationBackButton()
-        }
-        .accentColor(.GrayScale.gray800)
+            .sdOkayAlert(isPresented: $viewModel.isServerError, sdAlert: {
+                SDOkayAlert(title: "문제가 발생했습니다.", message: "서버에 문제가 생겼습니다\n(담당자에게 문의해주세요)")
+            })
+            .navigationBarTitle("회원가입", displayMode: .large)
+            .setNavigationBackButtonWithRouter()
+            .accentColor(.GrayScale.gray800)
+            .navigationBarBackButtonHidden()
     }
 }
