@@ -66,7 +66,7 @@ struct BugReportView: View {
         .sdOkayAlert(isPresented: $viewModel.networking, sdAlert: {
             SDOkayAlert(title: "오류", message: "네트워크 오류")
         })
-        .onDisappear {viewModel.viewDisAppear()}
+        .onAppear {viewModel.viewAppear()}
         .onChange(of: viewModel.bugImage, perform: { _ in
             viewModel.bugImageUrl = [""]
             viewModel.isLoading = true
