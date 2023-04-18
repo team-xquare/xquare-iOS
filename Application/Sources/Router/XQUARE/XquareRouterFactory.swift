@@ -125,7 +125,8 @@ class XquareRouterFactory: RouterFactory {
         self.myPageView = MyPageView(viewModel: myPageViewModel)
 
         let bugReportViewModel = BugReportViewModel(
-            postBugReportUseCase: bugServiceDependency.postBugReportUseCase
+            postBugReportUseCase: bugServiceDependency.postBugReportUseCase,
+            uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase
         )
 
         self.bugReportView = BugReportView(viewModel: bugReportViewModel)
