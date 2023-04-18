@@ -18,6 +18,9 @@ struct PageControlView: View {
                         RoundedRectangle(cornerRadius: 6)
                             .strokeBorder(Color.gray, lineWidth: 1)
                     }
+                    .onTapGesture {
+                        weekDay = index
+                    }
             }
         }
     }

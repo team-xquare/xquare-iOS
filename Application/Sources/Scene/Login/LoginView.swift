@@ -43,14 +43,17 @@ struct LoginView: View {
                 Spacer()
             }
             .onAppear(perform: viewModel.checkUnlock)
-            .navigationTitle("로그인")
+            .onDisappear(perform: viewModel.reset)
+            .navigationBarTitle("로그인", displayMode: .large)
             .setNavigationBackButtonWithRouter()
+            .navigationBarBackButtonHidden()
             .sdOkayAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
                 SDOkayAlert(title: "문제가 발생했습니다.", message: "네트워크가 원할하지 않습니다.")
             })
             .onChange(of: viewModel.isLoginSuccess, perform: { isSuccess in
                 if isSuccess {
                     self.xquareRouter.presentFullScreen(.main)
+                    self.viewModel.isLoginSuccess = false
                 }
             })
     }

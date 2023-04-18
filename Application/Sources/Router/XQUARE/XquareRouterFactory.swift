@@ -83,6 +83,9 @@ class XquareRouterFactory: RouterFactory {
             fetchAccessTokenUseCase: authServiceDependency.fetchAccessTokenUseCase,
             refreshTokenIfExpiredUseCase: authServiceDependency.refreshTokenIfExpiredUseCase
         )
+        let entireViewModel = EntireViewModel(
+            logoutUseCase: authServiceDependency.logoutUseCase
+        )
 
         self.mainView = MainView(
             homeView: .init(viewModel: homeViewModel),
@@ -92,7 +95,7 @@ class XquareRouterFactory: RouterFactory {
             ),
             feedView: .init(viewModel: feedViewModel),
             applicationView: .init(viewModel: applicationViewModel),
-            entireView: .init()
+            entireView: .init(viewModel: entireViewModel)
         )
 
         let mealDetailViewModel = MealDetailViewModel(

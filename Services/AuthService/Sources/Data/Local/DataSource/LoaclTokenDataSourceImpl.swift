@@ -35,4 +35,10 @@ class LoaclTokenDataSourceImpl: LoaclTokenDataSource {
         self.keychain.get(.expiredAt)?.toDate(format: .fullDateWithTime)
     }
 
+    func resetToken() {
+        self.keychain.delete(.accessToken)
+        self.keychain.delete(.refreshToken)
+        self.keychain.delete(.expiredAt)
+    }
+
 }

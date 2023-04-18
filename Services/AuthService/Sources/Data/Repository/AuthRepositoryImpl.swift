@@ -88,6 +88,14 @@ class AuthRepositoryImpl: AuthRepository {
             return Disposables.create()
         }
     }
+
+    func logout() -> Completable {
+        Completable.create { completable in
+            self.loaclTokenDataSource.resetToken()
+            completable(.completed)
+            return Disposables.create()
+        }
+    }
 }
 
 extension AuthRepositoryImpl {
