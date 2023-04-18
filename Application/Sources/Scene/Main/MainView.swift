@@ -19,8 +19,5 @@ struct MainView: View {
             applicationView,
             entireView
         )}
-        .onAppear {
-            xquareRouter.moveTabTo(index: 0)
-        }
     }
 }
