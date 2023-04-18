@@ -47,15 +47,16 @@ class BugReportViewModel: ObservableObject {
             category: bugPlace,
             imageUrls: bugImageUrl)
         ).subscribe(onCompleted: {
-            self.viewDisAppear()
+            self.viewAppear()
         }, onError: { _ in
             self.networking = true
         }).disposed(by: disposeBag)
     }
-    func viewDisAppear() {
+    func viewAppear() {
         self.content = ""
         self.bugImage = UIImage()
         self.isLoading = false
         self.bugPlace = "홈"
+        self.checkBugPlaceAndContentIsEmpty()
     }
 }
