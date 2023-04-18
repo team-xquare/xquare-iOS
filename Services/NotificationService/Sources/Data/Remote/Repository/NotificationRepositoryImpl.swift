@@ -38,7 +38,7 @@ class NotificationRepositoryImpl: NotificationRepository {
     }
 
     func fetchUncheckNotificationCount() -> Observable<Int> {
-        return fetchUncheckNotificationCount()
+        return remoteDataSource.fetchUncheckNotificationCount()
             .asObservable()
     }
 

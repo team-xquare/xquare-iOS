@@ -31,14 +31,13 @@ struct TimeTableView: View {
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
             }
-
             PageControlView(
                 weekDay: $viewModel.weekDay,
                 page: viewModel.timeTable.first?.weekDay ?? 0,
                 count: viewModel.timeTable.count
             )
-                .padding(.vertical, 20)
+            .padding(.vertical, 20)
+            .onAppear(perform: viewModel.fetchTimeTable)
         }
-        .onAppear(perform: viewModel.fetchTimeTable)
     }
 }

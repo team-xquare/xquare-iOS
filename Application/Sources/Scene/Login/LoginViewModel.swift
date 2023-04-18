@@ -52,10 +52,18 @@ class LoginViewModel: ObservableObject {
     }
 
     func checkUnlock() {
+        reset()
         autoLogin()
         if idAndPassword?.id ?? "" != "" && idAndPassword?.password ?? "" != "" {
             requestUnlock()
         }
+    }
+
+    func reset() {
+        self.isLoginSuccess = false
+        self.id = ""
+        self.password = ""
+        self.errorMessage = ""
     }
 
     private func requestUnlock() {

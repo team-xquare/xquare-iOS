@@ -52,7 +52,6 @@ class AcademicScheduleViewModel: ObservableObject {
     }
 
     func deleteSchedule() {
-        print(self.scheduleId)
         self.deleteScheduleUseCase.excute(scheduleId: scheduleId)
             .subscribe(onCompleted: {
                 self.schedule = self.schedule.filter { $0.id != self.scheduleId }
