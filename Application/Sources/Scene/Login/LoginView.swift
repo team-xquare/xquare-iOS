@@ -3,11 +3,10 @@ import SemicolonDesign
 import AuthService
 
 struct LoginView: View {
-
+    @Environment(\.openURL) var openURL
     @EnvironmentObject var xquareRouter: XquareRouter
     @StateObject var viewModel: LoginViewModel
     @State var isLoginButtonDisabled: Bool = true
-
     var body: some View {
             VStack {
                 Spacer()
@@ -40,17 +39,27 @@ struct LoginView: View {
                     action: viewModel.login,
                     type: .rounded
                 )
+                Button(action: {
+                    openURL(URL(string: "https://www.facebook.com/profile.php?id=100091948951498")!)
+                }, label: {
+                    Text("아이디 찾기 / 비밀번호 찾기")
+                        .sdText(type: .body4, textColor: .GrayScale.gray700)
+                })
                 Spacer()
             }
             .onAppear(perform: viewModel.checkUnlock)
-            .navigationTitle("로그인")
+            .onDisappear(perform: viewModel.reset)
+            .navigationBarTitle("로그인", displayMode: .large)
             .setNavigationBackButtonWithRouter()
+            .navigationBarBackButtonHidden()
             .sdOkayAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
                 SDOkayAlert(title: "문제가 발생했습니다.", message: "네트워크가 원할하지 않습니다.")
             })
             .onChange(of: viewModel.isLoginSuccess, perform: { isSuccess in
                 if isSuccess {
                     self.xquareRouter.presentFullScreen(.main)
+                    self.xquareRouter.moveTabTo(index: 0)
+                    self.viewModel.isLoginSuccess = false
                 }
             })
     }

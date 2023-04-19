@@ -7,4 +7,5 @@ protocol LoaclTokenDataSource {
     func fetchRefreshToken() -> String?
     func registerExpiredAt(_ expiredAt: String)
     func fetchExpiredDate() -> Date?
+    func resetToken()
 }
