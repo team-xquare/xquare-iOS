@@ -33,7 +33,7 @@ struct SelfStudyTeacherCellView: View {
         .overlay(
             RoundedRectangle(cornerRadius: 16)
                 .stroke(lineWidth: date == Date().toString(format: "M월 d일 (E)") ? 1 : 0)
-                .foregroundColor(.Primary.purple100)
+                .foregroundColor(.Primary.purple200)
         )
     }
 }
