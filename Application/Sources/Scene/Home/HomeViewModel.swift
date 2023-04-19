@@ -90,4 +90,8 @@ class HomeViewModel: ObservableObject {
             })
             .disposed(by: disposeBag)
     }
+    func viewAppear() {
+        self.isShowMovedClass = false
+        self.isShowOutingView = false
+    }
 }
