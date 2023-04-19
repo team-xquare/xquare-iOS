@@ -81,7 +81,12 @@ struct SignupView: View {
             .sdOkayAlert(isPresented: $viewModel.isServerError, sdAlert: {
                 SDOkayAlert(title: "문제가 발생했습니다.", message: "서버에 문제가 생겼습니다\n(담당자에게 문의해주세요)")
             })
-            .navigationBarTitle("회원가입", displayMode: .large)
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    Text("회원가입")
+                        .sdText(type: .heading6, textColor: .GrayScale.gray900)
+                }
+            }
             .setNavigationBackButtonWithRouter()
             .accentColor(.GrayScale.gray800)
             .navigationBarBackButtonHidden()
