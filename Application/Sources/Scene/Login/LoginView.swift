@@ -3,11 +3,10 @@ import SemicolonDesign
 import AuthService
 
 struct LoginView: View {
-
+    @Environment(\.openURL) var openURL
     @EnvironmentObject var xquareRouter: XquareRouter
     @StateObject var viewModel: LoginViewModel
     @State var isLoginButtonDisabled: Bool = true
-
     var body: some View {
             VStack {
                 Spacer()
@@ -40,6 +39,12 @@ struct LoginView: View {
                     action: viewModel.login,
                     type: .rounded
                 )
+                Button(action: {
+                    openURL(URL(string: "https://www.facebook.com/profile.php?id=100091948951498")!)
+                }, label: {
+                    Text("아이디 찾기 / 비밀번호 찾기")
+                        .sdText(type: .body4, textColor: .GrayScale.gray700)
+                })
                 Spacer()
             }
             .onAppear(perform: viewModel.checkUnlock)
@@ -53,6 +58,7 @@ struct LoginView: View {
             .onChange(of: viewModel.isLoginSuccess, perform: { isSuccess in
                 if isSuccess {
                     self.xquareRouter.presentFullScreen(.main)
+                    self.xquareRouter.moveTabTo(index: 0)
                     self.viewModel.isLoginSuccess = false
                 }
             })
