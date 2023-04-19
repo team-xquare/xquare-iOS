@@ -3,7 +3,7 @@ import SwiftUI
 import SemicolonDesign
 
 struct ProfileView: View {
-
+    @EnvironmentObject var xquareRouter: XquareRouter
     var imageUrl: String
     var name: String
     var merit: Int
@@ -34,8 +34,10 @@ struct ProfileView: View {
             .frame(height: 76)
             .background(Color.GrayScale.gray0)
             .cornerRadius(16)
+            .onTapGesture {
+                xquareRouter.navigateTo(.myPage)
+            }
     }
-
 }
 
 struct ProfileView_Previews: PreviewProvider {
