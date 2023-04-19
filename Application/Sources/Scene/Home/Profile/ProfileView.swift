@@ -35,7 +35,7 @@ struct ProfileView: View {
             .background(Color.GrayScale.gray0)
             .cornerRadius(16)
             .onTapGesture {
-                xquareRouter.navigateTo(.myPage)
+                xquareRouter.navigateTo(.pointHistory)
             }
     }
 }
