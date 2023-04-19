@@ -54,7 +54,6 @@ class BugReportViewModel: ObservableObject {
     }
     func viewAppear() {
         self.content = ""
-        self.bugImage = UIImage()
         self.isLoading = false
         self.bugPlace = "홈"
         self.checkBugPlaceAndContentIsEmpty()

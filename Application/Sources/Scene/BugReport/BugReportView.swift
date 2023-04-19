@@ -72,6 +72,7 @@ struct BugReportView: View {
             viewModel.isLoading = true
             viewModel.uploadImage()
         })
+        .onDisappear {viewModel.bugImage = UIImage()}
         .padding(.horizontal, 16)
         .navigationBarBackButtonHidden()
         .setNavigationBackButton()
