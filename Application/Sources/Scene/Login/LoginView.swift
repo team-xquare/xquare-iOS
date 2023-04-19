@@ -58,6 +58,7 @@ struct LoginView: View {
             .onChange(of: viewModel.isLoginSuccess, perform: { isSuccess in
                 if isSuccess {
                     self.xquareRouter.presentFullScreen(.main)
+                    self.xquareRouter.moveTabTo(index: 0)
                     self.viewModel.isLoginSuccess = false
                 }
             })
