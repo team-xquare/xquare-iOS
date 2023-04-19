@@ -31,7 +31,13 @@ struct EntireView: View, XNavigationAndTabContent {
                     Spacer()
                 }
             }
-            .navigationTitle("전체")
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    Text("전체")
+                        .sdText(type: .heading6, textColor: .GrayScale.gray900)
+                        .padding(.leading, 5)
+                }
+            }
             .sdAlert(isPresented: $viewModel.showLogoutAlert) {
                 SDAlert(
                     title: "정말 로그아웃 하시겠습니까?",
