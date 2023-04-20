@@ -28,33 +28,34 @@ struct HomeView: View, XNavigationAndTabContent {
                 MealMenuView(
                     menu: viewModel.menu
                 )
-                if viewModel.isShowOutingView {
-                    OutingView(
-                        name: viewModel.name,
-                        endTime: viewModel.endTime
-                    )
-                }
-                if viewModel.isShowMovedClass {
-                    MovedClassView(
-                        name: viewModel.name,
-                        locationClassroom: viewModel.locationClassroom,
-                        comeBackClassroom: viewModel.deleteReturnClass
-                    )
-                }
+//                if viewModel.isShowOutingView {
+//                    OutingView(
+//                        name: viewModel.name,
+//                        endTime: viewModel.endTime
+//                    )
+//                }
+//                if viewModel.isShowMovedClass {
+//                    MovedClassView(
+//                        name: viewModel.name,
+//                        locationClassroom: viewModel.locationClassroom,
+//                        comeBackClassroom: viewModel.deleteReturnClass
+//                    )
+//                }
             }
             .padding(.horizontal, 16)
         }
         .onTabSelected(tabIndex: 0, perform: {
             viewModel.fetchTodaysMeal()
             viewModel.fetchUserPoint()
-            viewModel.fetchOutingPass()
-            viewModel.fetchMovedClass()
+//            viewModel.fetchOutingPass()
+//            viewModel.fetchMovedClass()
         })
         .onAppear {
+            viewModel.viewAppear()
             viewModel.fetchTodaysMeal()
             viewModel.fetchUserPoint()
-            viewModel.fetchOutingPass()
-            viewModel.fetchMovedClass()
+//            viewModel.fetchOutingPass()
+//            viewModel.fetchMovedClass()
         }
         .navigationBarTitleDisplayMode(.inline)
         .background(Color.GrayScale.gray50)

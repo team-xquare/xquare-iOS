@@ -37,7 +37,7 @@ struct ScheduleButtonView: View {
                         .frame(width: 152, height: 36)
                 }
                 Button(action: clickAcademicScheduleButton) {
-                    Text("학사 일정")
+                    Text("학사일정")
                         .sdText(
                             type: .body4,
                             textColor: !showTimeTable ? .GrayScale.gray900 : .GrayScale.gray600
