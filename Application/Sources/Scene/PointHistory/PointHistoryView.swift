@@ -25,6 +25,7 @@ struct PointHistoryView: View {
                     self.isGoodPointButtonSelected = false
                     self.viewModel.fetchPointHistory(type: .badPoint)
                 }
+                Spacer()
             }
             .padding([.horizontal, .vertical], 16)
             ScrollView {
@@ -34,10 +35,10 @@ struct PointHistoryView: View {
             }.padding(16)
 
         }
+        .onAppear { viewModel.fetchPointHistory(type: .goodPoint) }
         .navigationTitle("상벌점 내역")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
         .setNavigationBackButton()
-        .onAppear { viewModel.fetchPointHistory(type: .goodPoint) }
     }
 }
