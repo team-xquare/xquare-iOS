@@ -68,6 +68,7 @@ class HomeViewModel: ObservableObject {
                 self.isShowOutingView = true
             }, onError: {
                 print($0)
+                self.isShowOutingView = false
             })
             .disposed(by: disposeBag)
     }
@@ -80,6 +81,7 @@ class HomeViewModel: ObservableObject {
                 self.isShowMovedClass = true
             }, onError: {
                 print($0)
+                self.isShowMovedClass = false
             })
             .disposed(by: disposeBag)
     }
