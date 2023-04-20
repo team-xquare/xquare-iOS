@@ -15,7 +15,7 @@ struct EntireView: View, XNavigationAndTabContent {
     }
 
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 27) {
                 VStack(spacing: 27) {
                     TopServiceMenuView()

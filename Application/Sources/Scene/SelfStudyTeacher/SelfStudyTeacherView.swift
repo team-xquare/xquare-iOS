@@ -7,7 +7,7 @@ struct SelfStudyTeacherView: View {
     var body: some View {
         VStack {
             ScrollViewReader { proxy in
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: 0) {
                         ForEach(0..<viewModel.selfStudyList.count, id: \.self) { index in
                             SelfStudyTeacherCellView(
