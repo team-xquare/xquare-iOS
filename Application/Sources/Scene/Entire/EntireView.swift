@@ -19,10 +19,10 @@ struct EntireView: View, XNavigationAndTabContent {
             LazyVStack(spacing: 27) {
                 VStack(spacing: 27) {
                     TopServiceMenuView()
-//                    ServiceSectionView(
-//                        headerText: "학교",
-//                        services: [(text: "오늘의 자습감독 선생님", view: .selfStudyTeacher)]
-//                    )
+                    ServiceSectionView(
+                        headerText: "학교",
+                        services: [(text: "오늘의 자습감독 선생님", view: .selfStudyTeacher)]
+                    )
                     ServiceSectionButtonView(
                         headerText: "사용자",
                         services: [
@@ -32,6 +32,7 @@ struct EntireView: View, XNavigationAndTabContent {
                 }
             }
             .navigationTitle("전체")
+            .navigationBarTitleDisplayMode(.large)
             .sdAlert(isPresented: $viewModel.showLogoutAlert) {
                 SDAlert(
                     title: "정말 로그아웃 하시겠습니까?",

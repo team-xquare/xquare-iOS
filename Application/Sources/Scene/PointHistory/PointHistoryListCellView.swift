@@ -10,7 +10,7 @@ struct PointHistoryListCellView: View {
 
     var body: some View {
         HStack(alignment: .center) {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text(pointHistory.reason)
                     .sdText(type: .body2, textColor: .GrayScale.gray900)
                 Text(pointHistory.date.toString(format: .fullDate))

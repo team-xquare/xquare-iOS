@@ -43,7 +43,7 @@ struct BugReportView: View {
                     Text("제출")
                         .sdText(
                             type: .body4,
-                            textColor: viewModel.isDisabled ? .GrayScale.gray200 : .GrayScale.gray800
+                            textColor: viewModel.isDisabled ? .GrayScale.gray400 : .GrayScale.gray800
                         )
                 }
                 .disabled(viewModel.isDisabled)

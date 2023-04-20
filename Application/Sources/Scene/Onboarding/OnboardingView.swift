@@ -17,7 +17,7 @@ struct OnboardingView: View {
             Button(action: {
                 self.xquareRouter.navigateTo(.login)
             }, label: {
-                HStack {
+                HStack(spacing: 2) {
                     Text("이미 계정이 있으신가요?")
                         .sdText(type: .body4)
                     Text("로그인하기")

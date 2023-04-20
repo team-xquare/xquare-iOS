@@ -6,6 +6,7 @@ public enum PickServiceError: Error {
     case notFound
     case forbidden
     case conflict
+    case severError
 }
 
 public extension Error {
