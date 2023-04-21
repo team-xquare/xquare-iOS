@@ -5,6 +5,7 @@ import AttachmentService
 import UserService
 import XDateUtil
 import RxSwift
+import AuthService
 
 class MyPageViewModel: ObservableObject {
     @Published var profileImage = UIImage()
@@ -15,19 +16,23 @@ class MyPageViewModel: ObservableObject {
     @Published var id: String = ""
     @Published var xPhotosIsPresented: Bool = false
     @Published var profileImageString: String = ""
+    @Published var showLogoutAlert: Bool = false
 
     private let fetchProfileUseCase: FetchProfileUseCase
     private let editProfileImageUseCase: EditProfileImageUseCase
     private let uploadImageUseCase: UploadImageUseCase
+    private let logoutUseCase: LogoutUseCase
 
     init(
         fetchProfileUseCase: FetchProfileUseCase,
         editProfileImageUseCase: EditProfileImageUseCase,
-        uploadImageUseCase: UploadImageUseCase
+        uploadImageUseCase: UploadImageUseCase,
+        logoutUseCase: LogoutUseCase
     ) {
         self.fetchProfileUseCase = fetchProfileUseCase
         self.editProfileImageUseCase = editProfileImageUseCase
         self.uploadImageUseCase = uploadImageUseCase
+        self.logoutUseCase = logoutUseCase
     }
 
     private var disposeBag = DisposeBag()
@@ -57,6 +62,12 @@ class MyPageViewModel: ObservableObject {
         self.editProfileImageUseCase.excute(profileImage: imageUrl)
             .subscribe(onCompleted: {
             })
+            .disposed(by: disposeBag)
+    }
+
+    func withdrawal() {
+        self.logoutUseCase.excute()
+            .subscribe(onCompleted: { })
             .disposed(by: disposeBag)
     }
 }

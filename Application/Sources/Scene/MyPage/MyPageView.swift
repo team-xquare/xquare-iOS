@@ -5,6 +5,7 @@ import SemicolonDesign
 struct MyPageView: View {
 
     @StateObject var viewModel: MyPageViewModel
+    @EnvironmentObject var xquareRouter: XquareRouter
 
     var body: some View {
         VStack(
@@ -28,12 +29,32 @@ struct MyPageView: View {
             MyInformationView(title: "생년월일", content: viewModel.birthDay)
             MyInformationView(title: "학년 반 번호", content: viewModel.gradeClassNum)
             MyInformationView(title: "아이디", content: viewModel.id)
+            Button(action: {
+                viewModel.showLogoutAlert = true
+            }, label: {
+                Text("회원탈퇴")
+                    .sdText(type: .body3, textColor: Color.System.red700)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 16)
+                    .background(Color.System.red50)
+                    .cornerRadius(8)
+            })
             Spacer()
         }
         .sdPhotoPicker(
             isPresented: $viewModel.xPhotosIsPresented,
             selection: $viewModel.profileImage
         )
+        .sdAlert(isPresented: $viewModel.showLogoutAlert) {
+            SDAlert(
+                title: "정말 회원탈퇴 하시겠습니까?",
+                button1: (text: "네", action: {
+                    viewModel.withdrawal()
+                    self.xquareRouter.popToRoot()
+                }),
+                button2: (text: "아니요", action: { })
+            )
+        }
         .onChange(of: viewModel.profileImage, perform: { _ in
             viewModel.uploadImage()
         })

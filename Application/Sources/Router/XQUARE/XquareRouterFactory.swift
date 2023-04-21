@@ -121,7 +121,8 @@ class XquareRouterFactory: RouterFactory {
         let myPageViewModel = MyPageViewModel(
             fetchProfileUseCase: userServiceDependency.fetchProfileUseCase,
             editProfileImageUseCase: userServiceDependency.editProfileImageUseCase,
-            uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase
+            uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase,
+            logoutUseCase: authServiceDependency.logoutUseCase
         )
         self.myPageView = MyPageView(viewModel: myPageViewModel)
 
