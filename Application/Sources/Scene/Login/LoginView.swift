@@ -49,9 +49,10 @@ struct LoginView: View {
             }
             .onAppear(perform: viewModel.checkUnlock)
             .onDisappear(perform: viewModel.reset)
-            .navigationBarTitle("로그인", displayMode: .large)
-            .setNavigationBackButtonWithRouter()
             .navigationBarBackButtonHidden()
+            .navigationTitle("로그인")
+            .navigationBarTitleDisplayMode(.large)
+            .setNavigationBackButtonWithRouter()
             .sdOkayAlert(isPresented: $viewModel.isInternetNotWorking, sdAlert: {
                 SDOkayAlert(title: "문제가 발생했습니다.", message: "네트워크가 원할하지 않습니다.")
             })

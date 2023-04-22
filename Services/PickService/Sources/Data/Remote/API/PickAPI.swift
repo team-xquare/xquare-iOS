@@ -39,7 +39,8 @@ extension PickAPI: XquareAPI {
             401: PickServiceError.unauthorized,
             403: PickServiceError.forbidden,
             404: PickServiceError.notFound,
-            409: PickServiceError.conflict
+            409: PickServiceError.conflict,
+            500: PickServiceError.severError
         ]
     }
 
