@@ -7,8 +7,8 @@ import RestApiModule
 class RemoteBugDataSourceImpl: RestApiRemoteDataSource<BugAPI>, RemoteBugDataSource {
     private let provider = MoyaProvider<BugAPI>()
 
-    func postBugReport(request: PostBugRequest) -> RxSwift.Single<PostBugReportResponse> {
+    func postBugReport(request: PostBugRequest) -> RxSwift.Completable {
         return provider.rx.request(.postBugReport(request: request))
-            .map(PostBugReportResponse.self)
+            .asCompletable()
     }
 }
