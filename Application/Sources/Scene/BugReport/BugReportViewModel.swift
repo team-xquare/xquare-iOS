@@ -12,6 +12,7 @@ class BugReportViewModel: ObservableObject {
     @Published var bugImage: UIImage = UIImage()
     @Published var xPhotosIsPresented: Bool = false
     @Published var isLoading: Bool = false
+    var catagory = "HOME"
     private let postBugReportUseCase: PostBugReportUseCase
     private let uploadImageUseCase: UploadImageUseCase
 
@@ -44,11 +45,13 @@ class BugReportViewModel: ObservableObject {
     func postBug() {
         postBugReportUseCase.excute(data: .init(
             reason: content,
-            category: bugPlace,
+            category: catagory,
             imageUrls: bugImageUrl)
         ).subscribe(onCompleted: {
             self.viewAppear()
-        }, onError: { _ in
+        }, onError: {
+            print(self.catagory)
+            print($0)
             self.networking = true
         }).disposed(by: disposeBag)
     }
@@ -56,6 +59,21 @@ class BugReportViewModel: ObservableObject {
         self.content = ""
         self.isLoading = false
         self.bugPlace = "홈"
+        self.catagory = "HOME"
         self.checkBugPlaceAndContentIsEmpty()
+    }
+    func checkCategory(cata: String) {
+        switch cata {
+        case "피드":
+            catagory = "FEED"
+        case "일정":
+            catagory = "SCHEDULE"
+        case "신청":
+            catagory = "APPLICATION"
+        case "전체":
+            catagory = "ALL"
+        default:
+            catagory = "HOME"
+        }
     }
 }
