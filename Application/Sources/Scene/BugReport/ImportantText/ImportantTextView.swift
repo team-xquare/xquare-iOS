@@ -10,7 +10,7 @@ struct ImportantTextView: View {
             Text(text)
                 .sdText(type: .body4, textColor: .GrayScale.gray900)
             Text(isImportant ? "*" : "")
-                .foregroundColor(.red)
+                .foregroundColor(Color.System.red400)
         }
     }
 }
