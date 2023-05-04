@@ -5,31 +5,29 @@ import SemicolonDesign
 import XDateUtil
 
 struct NotificationListCell: View {
+    @EnvironmentObject var xquareRouter: XquareRouter
     let entity: NotificationEntity
 
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
-
             topicToImage(topic: entity.topic)
                 .frame(width: 24, height: 24)
                 .padding(.trailing, 4)
                 .foregroundColor(entity.isRead ? .GrayScale.gray700 : .Primary.purple400)
 
-            VStack(alignment: .leading, spacing: 0) {
-
+            VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 4) {
-                    Text(entity.categoryName)
+                    Text(entity.title)
                         .sdText(type: .caption)
 
                     Spacer()
-
                     Text(getTimeForSend(date: entity.sendAt))
                         .sdText(type: .caption)
                 }
                 Text(entity.content)
                     .sdText(type: .body3, textColor: .GrayScale.gray900)
             }
-            .padding(.top, 2)
+            .padding(.top, 3)
 
         }
         .padding(16)
@@ -49,16 +47,20 @@ struct NotificationListCell: View {
             return "\((Int(today.toString(format: "mm")) ?? 0) - (Int(date.toString(format: "mm")) ?? 0))분 전"
         }
     }
+    // swiftlint:disable line_length
     private func topicToImage(topic: NotificationTopic) -> Image {
         switch topic {
-        case .feed:
-            return .feed
-        case .application:
-            return .application
-        case .schedule:
-            return .calendar
-        default:
-            return Image.entire
+        case .applicationWeekendMeal, .applicationStay, .applicationMoveClassRoom, .applicationPicnic, .applicationPicnicPass, .applicationWeekendPicnic, .applicationWeekendPicnicReservation:
+            return Image.application
+        case .allGoodPoint:
+            return Image.thumbUpNotiIcon
+        case .allBadPoint, .allPenaltyLevel:
+            return Image.thumbDownNotiIcon
+        case .scheduleLocal, .scheduleSocial:
+            return Image.calendar
+        case .feedNotice, .feedComment, .feedLike:
+            return Image.feed
         }
     }
+    // swiftlint:enable line_length
 }
