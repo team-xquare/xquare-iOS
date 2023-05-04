@@ -7,7 +7,5 @@ public struct NotificationEntity: Equatable {
     public let sendAt: Date
     public let isRead: Bool
     public let userId: String
-    public let destination: String
-    public let categoryName: String
     public let topic: NotificationTopic
 }
