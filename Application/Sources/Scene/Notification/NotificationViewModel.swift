@@ -16,7 +16,7 @@ class NotificationViewModel: ObservableObject {
     func fetchNotification() {
         self.fetchPostedNotificationListUseCase.excute()
             .subscribe(onNext: {
-                self.notifications = $0
+                self.notifications = $0.sorted(by: { $0.sendAt > $1.sendAt })
             })
             .disposed(by: disposeBag)
     }
