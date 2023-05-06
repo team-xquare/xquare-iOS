@@ -17,6 +17,7 @@ struct SignupView: View {
                         SDTextField(
                             title: "인증코드",
                             placeholder: "6자리를 입력해주세요",
+                            isImportant: true,
                             text: $viewModel.authCode
                         )
                         .padding(.horizontal, 16)
@@ -26,6 +27,7 @@ struct SignupView: View {
                         SDTextField(
                             title: "아이디",
                             placeholder: "영문, 숫자 6~20자",
+                            isImportant: true,
                             text: $viewModel.id,
                             errorMessage: viewModel.idErrorMessage
                         )
@@ -36,6 +38,7 @@ struct SignupView: View {
                         SDTextField(
                             title: "비밀번호",
                             placeholder: "숫자, 영문, 특수문자 조합 최소 6자",
+                            isImportant: true,
                             text: $viewModel.password,
                             isSecure: true
                         )
@@ -47,6 +50,7 @@ struct SignupView: View {
                         SDTextField(
                             title: "비밀번호 재입력",
                             placeholder: "재입력",
+                            isImportant: true,
                             text: $viewModel.reEnterPassword,
                             errorMessage: viewModel.passwordErrorMessage,
                             isSecure: true
