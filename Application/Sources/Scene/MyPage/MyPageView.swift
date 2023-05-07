@@ -48,11 +48,11 @@ struct MyPageView: View {
         .sdAlert(isPresented: $viewModel.showLogoutAlert) {
             SDAlert(
                 title: "정말 회원탈퇴 하시겠습니까?",
-                button1: (text: "네", action: {
+                button1: (text: "아니요", action: { }),
+                button2: (text: "네", action: {
                     viewModel.withdrawal()
                     self.xquareRouter.popToRoot()
-                }),
-                button2: (text: "아니요", action: { })
+                })
             )
         }
         .onChange(of: viewModel.profileImage, perform: { _ in
