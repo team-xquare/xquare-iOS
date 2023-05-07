@@ -10,8 +10,6 @@ struct NotificationResponse: Decodable {
         case sendAt = "sent_at"
         case isRead = "is_read"
         case userId = "user_id"
-        case destination
-        case categoryName = "category_name"
         case topic
     }
     let id: String
@@ -20,8 +18,6 @@ struct NotificationResponse: Decodable {
     let sendAt: String
     let isRead: Bool
     let userId: String
-    let destination: String
-    let categoryName: String
     let topic: String
 }
 
@@ -34,9 +30,7 @@ extension NotificationResponse {
             sendAt: sendAt.toDate(format: .fullDateWithTime),
             isRead: isRead,
             userId: userId,
-            destination: destination,
-            categoryName: categoryName,
-            topic: .init(rawValue: topic) ?? .all
+            topic: .init(rawValue: topic) ?? .allGoodPoint
         )
     }
 }

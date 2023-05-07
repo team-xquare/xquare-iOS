@@ -10,7 +10,7 @@ struct SelfStudyTeacherCellView: View {
         HStack {
             VStack(alignment: .leading, spacing: 16) {
                 Text(date)
-                    .sdText(type: .body2, textColor: Color.GrayScale.gray900)
+                    .sdText(type: .body1, textColor: Color.GrayScale.gray900)
                 VStack(spacing: 8) {
                     ForEach(0..<entity.teacher.count, id: \.self) { index in
                         if entity.teacher[index] != "" {
