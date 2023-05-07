@@ -11,6 +11,6 @@ class BugRepositoryImpl: BugRepository {
     }
 
     func postBugReport(postBugEntity: PostBugReportEntity) -> RxSwift.Completable {
-        self.remoteDataSource.postBugReport(request: postBugEntity.toBugReportRequest())
+        self.remoteDataSource.postBugReport(requests: postBugEntity.toBugReportRequest())
     }
 }
