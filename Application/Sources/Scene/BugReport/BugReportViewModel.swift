@@ -12,6 +12,7 @@ class BugReportViewModel: ObservableObject {
     @Published var bugImage: UIImage = UIImage()
     @Published var xPhotosIsPresented: Bool = false
     @Published var isLoading: Bool = false
+    @Published var isEmpty: Bool = false
     var catagory = "HOME"
     private let postBugReportUseCase: PostBugReportUseCase
     private let uploadImageUseCase: UploadImageUseCase
@@ -33,13 +34,13 @@ class BugReportViewModel: ObservableObject {
         self.uploadImageUseCase
             .excute(files: [self.bugImage.jpegData(compressionQuality: 0.5) ?? Data()])
             .subscribe(onSuccess: {
-                print($0)
                 self.isLoading = false
                 self.bugImageUrl = $0
+                self.isEmpty = false
             }, onFailure: { _ in
                 self.isLoading = false
-                self.networking = true
-                self.bugImage = UIImage()
+                self.bugImageUrl = [""]
+                self.isEmpty = true
             }).disposed(by: disposeBag)
     }
     func postBug() {
@@ -49,9 +50,6 @@ class BugReportViewModel: ObservableObject {
             imageUrls: bugImageUrl)
         ).subscribe(onCompleted: {
             self.viewAppear()
-        }, onError: {
-            print(self.catagory)
-            print($0)
             self.networking = true
         }).disposed(by: disposeBag)
     }
@@ -61,6 +59,8 @@ class BugReportViewModel: ObservableObject {
         self.bugPlace = "홈"
         self.catagory = "HOME"
         self.checkBugPlaceAndContentIsEmpty()
+        self.isEmpty = true
+        self.bugImageUrl = [""]
     }
     func checkCategory(cata: String) {
         switch cata {

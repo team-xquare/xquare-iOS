@@ -4,7 +4,7 @@ import SemicolonDesign
 struct BugImageView: View {
     @Binding var isLoading: Bool
     @Binding var uiimage: UIImage
-
+    @Binding var isEmpty: Bool
     var body: some View {
         if isLoading {
             ProgressView()
@@ -13,7 +13,7 @@ struct BugImageView: View {
                 .cornerRadius(8)
                 .padding(.bottom, 24)
         } else {
-            if uiimage == UIImage() {
+            if isEmpty {
                 Spacer()
                     .frame(width: 160, height: 160)
                     .background(Color.GrayScale.gray100)

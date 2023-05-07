@@ -24,7 +24,8 @@ struct BugReportView: View {
 
                         BugImageView(
                             isLoading: $viewModel.isLoading,
-                            uiimage: $viewModel.bugImage
+                            uiimage: $viewModel.bugImage,
+                            isEmpty: $viewModel.isEmpty
                         )
                         .onTapGesture {
                             viewModel.xPhotosIsPresented = true
@@ -67,15 +68,13 @@ struct BugReportView: View {
             selection: $viewModel.bugImage
         )
         .sdOkayAlert(isPresented: $viewModel.networking, sdAlert: {
-            SDOkayAlert(title: "오류", message: "네트워크 오류")
+            SDOkayAlert(title: "버그제보", message: "제보 감사합니다! 사용자님들의 제보로 더 나은 스퀘어를 만들어갑니다!")
         })
         .onAppear {viewModel.viewAppear()}
         .onChange(of: viewModel.bugImage, perform: { _ in
-            viewModel.bugImageUrl = [""]
             viewModel.isLoading = true
             viewModel.uploadImage()
         })
-        .onDisappear {viewModel.bugImage = UIImage()}
         .padding(.horizontal, 16)
         .navigationBarBackButtonHidden()
         .setNavigationBackButton()
