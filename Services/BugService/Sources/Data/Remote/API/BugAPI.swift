@@ -14,7 +14,7 @@ extension BugAPI: XquareAPI {
     }
 
     var urlPath: String {
-        return "/"
+        return "/report"
     }
 
     var method: Moya.Method {
