@@ -43,8 +43,10 @@ struct NotificationListCell: View {
             return "\((Int(today.toString(format: "dd")) ?? 0) - (Int(date.toString(format: "dd")) ?? 0))일 전"
         } else if Int(today.toString(format: "HH")) ?? 0 > Int(date.toString(format: "HH")) ?? 0 {
             return "\((Int(today.toString(format: "HH")) ?? 0) - (Int(date.toString(format: "HH")) ?? 0))시간 전"
-        } else {
+        } else if Int(today.toString(format: "mm")) ?? 0 > Int(date.toString(format: "mm")) ?? 0 {
             return "\((Int(today.toString(format: "mm")) ?? 0) - (Int(date.toString(format: "mm")) ?? 0))분 전"
+        } else {
+            return "방금 전"
         }
     }
     // swiftlint:disable line_length
