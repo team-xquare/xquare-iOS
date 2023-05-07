@@ -21,6 +21,8 @@ extension Image {
     static let home = Image("Home")
     static let settingIcon = Image("Setting")
     static let thumbUpIcon = Image("ThumbUp")
+    static let thumbUpNotiIcon = Image("ThumbUpNoti")
+    static let thumbDownNotiIcon = Image("ThumbDownNoti")
     static let userIcon = Image("User")
     static let viewMoreIcon = Image("ViewMore")
     static let warningTriangleIcon = Image("WarningTriangle")

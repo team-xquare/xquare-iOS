@@ -65,14 +65,14 @@ struct HomeView: View, XNavigationAndTabContent {
                     .sdText(type: .heading6, textColor: .GrayScale.gray900)
                     .padding(.leading, 5)
             }
-//            ToolbarItemGroup(placement: .navigationBarTrailing) {
-//                Button {
-//                    self.xquareRouter.navigateTo(.notification)
-//                } label: {
-//                    Image.bell
-//                        .frame(width: 24, height: 24)
-//                }
-//            }
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button {
+                    self.xquareRouter.navigateTo(.notification)
+                } label: {
+                    Image.bell
+                        .frame(width: 24, height: 24)
+                }
+            }
         }
         .sdOkayAlert(isPresented: $viewModel.isPresentErrorAlert, sdAlert: {
             SDOkayAlert(title: "교실로 이동할 수 없습니다.", message: "관리에게 문의해주세요!")
