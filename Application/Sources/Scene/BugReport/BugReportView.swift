@@ -44,9 +44,6 @@ struct BugReportView: View {
                         showDropDown: $showDropDown,
                         selectedOptions: $viewModel.bugPlace
                     )
-                    .onChange(of: viewModel.bugPlace) { _ in
-                        viewModel.checkCategory(cata: viewModel.bugPlace)
-                    }
                     .padding(.bottom, 16)
                 }
             }

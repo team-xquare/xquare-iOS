@@ -3,5 +3,5 @@ import Foundation
 import RxSwift
 
 public protocol BugRepository {
-    func postBugReport(postBugEntity: PostBugReportEntity) -> Completable
+    func postBugReport(reason: String, category: BugCategory, imageUrl: [String]) -> Completable
 }

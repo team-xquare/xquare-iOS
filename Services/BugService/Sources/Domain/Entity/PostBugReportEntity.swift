@@ -15,13 +15,3 @@ public struct PostBugReportEntity {
         self.imageUrls = imageUrls
     }
 }
-
-extension PostBugReportEntity {
-    func toBugReportRequest() -> PostBugRequest {
-        return .init(
-            reason: self.reason,
-            category: self.category,
-            imageUrls: self.imageUrls
-        )
-    }
-}

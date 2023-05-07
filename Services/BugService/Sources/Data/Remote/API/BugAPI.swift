@@ -5,7 +5,7 @@ import Moya
 import RestApiModule
 
 enum BugAPI {
-    case postBugReport(request: PostBugRequest)
+    case postBugReport(reason: String, category: BugCategory, imageUrl: [String])
 }
 
 extension BugAPI: XquareAPI {
@@ -37,8 +37,15 @@ extension BugAPI: XquareAPI {
 
     var task: Task {
         switch self {
-        case .postBugReport(let request):
-            return .requestJSONEncodable(request)
+        case .postBugReport(let reason, let category, let imageUrl):
+            return .requestParameters(
+                parameters: [
+                    "reason": reason,
+                    "category": category.rawValue,
+                    "image_urls": imageUrl
+                ],
+                encoding: JSONEncoding.default
+            )
         }
     }
 

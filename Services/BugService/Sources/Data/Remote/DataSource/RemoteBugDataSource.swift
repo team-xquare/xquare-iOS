@@ -4,5 +4,5 @@ import RxSwift
 import RestApiModule
 
 protocol RemoteBugDataSource: RestApiRemoteDataSource<BugAPI> {
-    func postBugReport(requests: PostBugRequest) -> Completable
+    func postBugReport(reason: String, category: BugCategory, imageUrl: [String]) -> Completable
 }

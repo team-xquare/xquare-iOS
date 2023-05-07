@@ -10,8 +10,12 @@ public class PostBugReportUseCase {
         self.repository = repository
     }
 
-    public func excute(data: PostBugReportEntity) -> Completable {
-        self.repository.postBugReport(postBugEntity: data)
+    public func excute(
+        reason: String,
+        category: BugCategory,
+        imageUrl: [String]
+    ) -> Completable {
+        return repository.postBugReport(reason: reason, category: category, imageUrl: imageUrl)
     }
 
 }

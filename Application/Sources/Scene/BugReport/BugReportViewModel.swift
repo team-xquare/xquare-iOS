@@ -13,7 +13,7 @@ class BugReportViewModel: ObservableObject {
     @Published var xPhotosIsPresented: Bool = false
     @Published var isLoading: Bool = false
     @Published var isEmpty: Bool = false
-    var catagory = "HOME"
+    var catagory: BugCategory = .home
     private let postBugReportUseCase: PostBugReportUseCase
     private let uploadImageUseCase: UploadImageUseCase
 
@@ -44,10 +44,11 @@ class BugReportViewModel: ObservableObject {
             }).disposed(by: disposeBag)
     }
     func postBug() {
-        postBugReportUseCase.excute(data: .init(
+        checkBugPlace()
+        postBugReportUseCase.excute(
             reason: content,
             category: catagory,
-            imageUrls: bugImageUrl)
+            imageUrl: bugImageUrl
         ).subscribe(onCompleted: {
             self.viewAppear()
             self.networking = true
@@ -57,23 +58,23 @@ class BugReportViewModel: ObservableObject {
         self.content = ""
         self.isLoading = false
         self.bugPlace = "홈"
-        self.catagory = "HOME"
+        self.catagory = .home
         self.checkBugPlaceAndContentIsEmpty()
         self.isEmpty = true
         self.bugImageUrl = [""]
     }
-    func checkCategory(cata: String) {
-        switch cata {
-        case "피드":
-            catagory = "FEED"
-        case "일정":
-            catagory = "SCHEDULE"
+    private func checkBugPlace() {
+        switch bugPlace {
         case "신청":
-            catagory = "APPLICATION"
+            self.catagory = .application
         case "전체":
-            catagory = "ALL"
+            self.catagory = .all
+        case "피드":
+            self.catagory = .feed
+        case "일정":
+            self.catagory = .schedule
         default:
-            catagory = "HOME"
+            self.catagory = .all
         }
     }
 }
