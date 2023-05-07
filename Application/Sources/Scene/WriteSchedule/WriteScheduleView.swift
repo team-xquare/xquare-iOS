@@ -12,6 +12,7 @@ struct WriteScheduleView: View {
             SDTextField(
                 title: "일정제목",
                 placeholder: "최소 2자 이상",
+                isImportant: true,
                 text: $viewModel.title
             )
             .padding(.top, 16)
@@ -21,6 +22,7 @@ struct WriteScheduleView: View {
             SDTextField(
                 title: "날짜 선택",
                 placeholder: "날짜를 선택해주세요",
+                isImportant: true,
                 text: $viewModel.day
             )
             .disabled(true)
