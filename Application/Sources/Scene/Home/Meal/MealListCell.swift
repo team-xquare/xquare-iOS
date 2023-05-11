@@ -13,11 +13,12 @@ struct MealListCell: View {
                 Text(entity.mealTime.toString())
                     .sdText(
                         type: .body2,
-                        textColor: .GrayScale.gray800
+                        textColor: entity.mealTime.isMealTime() ? .Primary.purple300 : .GrayScale.gray800
                     )
                     .padding(.trailing, 10)
+                Spacer()
                 Text(entity.kcal ?? "")
-                    .sdText(type: .body4)
+                    .sdText(type: .caption)
             }
             Spacer().frame(height: 8)
             ForEach(
@@ -31,6 +32,11 @@ struct MealListCell: View {
         }
         .padding(EdgeInsets(top: 12, leading: 16, bottom: 0, trailing: 16))
         .frame(width: 148, height: 198, alignment: .leading)
+        .overlay {
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(lineWidth: 3)
+                .foregroundColor(entity.mealTime.isMealTime() ? .Primary.purple100 : .clear)
+        }
         .background(Color.GrayScale.gray50)
         .cornerRadius(8)
     }

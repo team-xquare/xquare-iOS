@@ -18,8 +18,9 @@ struct MealMenuPerMealTimeView: View {
                             type: .body2,
                             textColor: .GrayScale.gray800
                         )
+                    Spacer()
                     Text(entity.kcal ?? "")
-                        .sdText(type: .body4)
+                        .sdText(type: .body2)
                 }
                 .padding(.bottom, 4)
                 Text(entity.menu?.joined(separator: ", ") ?? "")
@@ -29,6 +30,7 @@ struct MealMenuPerMealTimeView: View {
                     )
             }
             .padding(.leading, 16)
+            .padding(.trailing, 14)
         }
     }
 }
