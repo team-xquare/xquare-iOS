@@ -12,7 +12,7 @@ struct MealListCell: View {
             HStack(spacing: 0) {
                 Text(entity.mealTime.toString())
                     .sdText(
-                        type: .body2,
+                        type: .body1,
                         textColor: entity.mealTime.isMealTime() ? .Primary.purple300 : .GrayScale.gray800
                     )
                     .padding(.trailing, 10)
