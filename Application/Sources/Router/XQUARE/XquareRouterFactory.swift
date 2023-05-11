@@ -23,6 +23,7 @@ class XquareRouterFactory: RouterFactory {
     let mealDetailView: MealDetailView
     let notificationView: NotificationView
     let outingPassView: OutingPassView
+    let settingView: SettingView
 
     let writeScheduleView: WriteScheduleView
 
@@ -115,6 +116,8 @@ class XquareRouterFactory: RouterFactory {
         )
         self.outingPassView = OutingPassView(viewModel: outingPassViewModel)
 
+        self.settingView = SettingView(isToggle: true)
+
         let pointHistoryViewModel = PointHistoryViewModel(
             fetchPointHistoryUseCase: pointServiceDependency.fetchPointHistoryUseCase
         )
@@ -165,6 +168,8 @@ class XquareRouterFactory: RouterFactory {
             notificationView
         case .outingPass:
             outingPassView
+        case .setting:
+            settingView
         case .writeScheudle:
             writeScheduleView
         case .pointHistory:

@@ -11,6 +11,7 @@ enum XquareRoute: ScreenProtocol {
     case mealDetail
     case notification
     case outingPass
+    case setting
 
     // Schedule
     case writeScheudle
@@ -23,7 +24,7 @@ enum XquareRoute: ScreenProtocol {
 
     var embedInNavigationView: Bool {
         switch self {
-        case .launch, .mealDetail, .notification, .outingPass, .login, .signup,
+        case .launch, .mealDetail, .notification, .outingPass, .setting, .login, .signup,
                 .writeScheudle, .myPage, .bugReport, .pointHistory, .selfStudyTeacher:
             return false
         default:
