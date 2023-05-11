@@ -15,14 +15,10 @@ struct MealMenuView: View {
                 Spacer().frame(width: 12)
                 Text("오늘의 메뉴").sdText(type: .body1)
                 Spacer()
-                Button {
-                    self.xquareRouter.navigateTo(.mealDetail)
-                } label: {
-                    Image.viewMoreIcon
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .tint(.GrayScale.gray200)
-                }
+                Image.viewMoreIcon
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .tint(.GrayScale.gray200)
                 Spacer().frame(width: 16)
             }
             Spacer().frame(height: 14)
@@ -41,6 +37,9 @@ struct MealMenuView: View {
         }
         .background(Color.GrayScale.gray0)
         .cornerRadius(16)
+        .onTapGesture {
+            self.xquareRouter.navigateTo(.mealDetail)
+        }
     }
 
 }
