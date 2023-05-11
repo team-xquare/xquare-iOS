@@ -1,6 +1,6 @@
 import Foundation
 import UIKit
-import BugService
+import ReportService
 import RxSwift
 import AttachmentService
 class BugReportViewModel: ObservableObject {

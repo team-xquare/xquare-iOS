@@ -9,7 +9,7 @@ import NotificationService
 import MealDataService
 import ScheduleService
 import TimeTableService
-import BugService
+import ReportService
 
 class XquareRouterFactory: RouterFactory {
 
@@ -42,7 +42,7 @@ class XquareRouterFactory: RouterFactory {
         let mealDataServiceDependency = MealDataServiceDependency.shared
         let scheduleServiceDependency = ScheduleServiceDependency.shared
         let timeTableServiceDependency = TimeTableServiceDependency.shared
-        let bugServiceDependency = BugServiceDependency.shared
+        let reportServiceDependency = ReportServiceDependency.shared
 
         let launchScreenViewModel = LaunchScreenViewModel(
             refreshTokenUseCase: authServiceDependency.refreshTokenUseCase
@@ -129,7 +129,7 @@ class XquareRouterFactory: RouterFactory {
         self.myPageView = MyPageView(viewModel: myPageViewModel)
 
         let bugReportViewModel = BugReportViewModel(
-            postBugReportUseCase: bugServiceDependency.postBugReportUseCase,
+            postBugReportUseCase: reportServiceDependency.postBugReportUseCase,
             uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase
         )
 
