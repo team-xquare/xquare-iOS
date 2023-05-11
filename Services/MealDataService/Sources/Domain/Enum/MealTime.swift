@@ -17,4 +17,17 @@ public extension MealTime {
             return "저녁"
         }
     }
+
+    func isMealTime() -> Bool {
+        let nowTime = Date()
+        var nowMeal: MealTime = .breakfast
+        if Int(nowTime.toString(format: "HH")) ?? 0 >= 18 && Int(nowTime.toString(format: "mm")) ?? 0 >= 0 {
+            nowMeal = .dinner
+        } else if Int(nowTime.toString(format: "HH")) ?? 0 >= 13 && Int(nowTime.toString(format: "mm")) ?? 0 >= 0 {
+            nowMeal = .lunch
+        } else {
+            nowMeal = .breakfast
+        }
+        return nowMeal == self
+    }
 }
