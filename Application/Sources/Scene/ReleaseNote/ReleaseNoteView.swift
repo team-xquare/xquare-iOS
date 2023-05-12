@@ -28,6 +28,6 @@ struct ReleaseNoteView: View {
         .onDisappear(perform: viewModel.resetReleaseNoteList)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
-        .setNavigationBackButton() 
+        .setNavigationBackButton()
     }
 }
