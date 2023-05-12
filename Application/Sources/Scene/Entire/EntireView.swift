@@ -26,7 +26,7 @@ struct EntireView: View, XNavigationAndTabContent {
                         ]
                     )
                     ServiceSectionButtonView(
-                        headerText: "사용자",
+                        headerText: "앱",
                         services: [
                             (text: "로그아웃", action: { viewModel.showLogoutAlert = true }),
                             (text: "업데이트 사항", action: { xquareRouter.navigateTo(.releaseNote) })
