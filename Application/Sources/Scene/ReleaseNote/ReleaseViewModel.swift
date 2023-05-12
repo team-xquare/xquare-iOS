@@ -20,5 +20,8 @@ class ReleaseNoteViewModel: ObservableObject {
                 self.releaseNoteList = $0
             }).disposed(by: disposeBag)
     }
+    func resetReleaseNoteList() {
+        self.releaseNoteList = []
+    }
 
 }
