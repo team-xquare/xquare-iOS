@@ -10,12 +10,12 @@ struct OutingPassView: View {
     var body: some View {
         VStack {
             Spacer()
-                .frame(height: 12)
+                .frame(height: 8)
             GeometryReader { gemotry in
                 SlidingTextView(geometryProxy: gemotry)
             }
             .frame(height: 20)
-            .padding(.bottom, 20)
+            .padding(.bottom, 30)
             HStack(alignment: .center) {
                 AsyncImage(url: URL(string: viewModel.outingPassData?.profileFileName ?? "DefaultImage")) { image in
                     image
@@ -34,7 +34,7 @@ struct OutingPassView: View {
                 Spacer()
             }
             Spacer().frame(height: 18)
-            OutingInformationView(title: "외출 날짜", content: "2023년 5월 12일")
+            OutingInformationView(title: "외출 날짜", content: viewModel.outingPassData?.picnicDate.toString(format: "yyyy년 M월 d일 ") ?? "")
             OutingInformationView(
                 title: "외출 시간",
                 content: "\(viewModel.outingPassData?.startTime.toString(format: "HH:mm") ?? "") ~ \(viewModel.outingPassData?.endTime.toString(format: "HH:mm") ?? "")"
