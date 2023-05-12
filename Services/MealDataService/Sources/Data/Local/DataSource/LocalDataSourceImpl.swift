@@ -13,38 +13,45 @@ class LocalDataSourceImpl: LocalDataSource {
 
     func registerMealMenuPerDay(menu: MealMenu) {
         Task {
-            let mealMenu = MealMenu(
-                day: menu.day,
-                breakfast: menu.breakfast,
-                lunch: menu.lunch,
-                dinner: menu.dinner,
-                breakfastKcal: menu.breakfastKcal,
-                lunchKcal: menu.lunchKcal,
-                dinnerKcal: menu.dinnerKcal
-            )
-
-            try await store
-                .insert(mealMenu)
-                .run()
+            do {
+                let mealMenu = MealMenu(
+                    day: menu.day,
+                    breakfast: menu.breakfast,
+                    lunch: menu.lunch,
+                    dinner: menu.dinner,
+                    breakfastKcal: menu.breakfastKcal,
+                    lunchKcal: menu.lunchKcal,
+                    dinnerKcal: menu.dinnerKcal
+                )
+                try await store
+                    .insert(mealMenu)
+                    .run()
+            } catch {
+                print("Error inserting meal menu: \(error.localizedDescription)")
+            }
         }
     }
 
     func registerMealMenuPerMonth(menu: [MealMenu]) {
         for item in menu {
             Task {
-                let mealMenu = MealMenu(
-                    day: item.day,
-                    breakfast: item.breakfast,
-                    lunch: item.lunch,
-                    dinner: item.dinner,
-                    breakfastKcal: item.breakfastKcal,
-                    lunchKcal: item.lunchKcal,
-                    dinnerKcal: item.dinnerKcal
-                )
+                do {
+                    let mealMenu = MealMenu(
+                        day: item.day,
+                        breakfast: item.breakfast,
+                        lunch: item.lunch,
+                        dinner: item.dinner,
+                        breakfastKcal: item.breakfastKcal,
+                        lunchKcal: item.lunchKcal,
+                        dinnerKcal: item.dinnerKcal
+                    )
+                    try await store
+                        .insert(mealMenu)
+                        .run()
+                } catch {
+                    print("Error inserting meal menu: \(error.localizedDescription)")
+                }
 
-                try await store
-                    .insert(mealMenu)
-                    .run()
             }
         }
     }
