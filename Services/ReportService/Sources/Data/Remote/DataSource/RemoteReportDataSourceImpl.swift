@@ -17,4 +17,9 @@ class RemoteReportDataSourceImpl: RestApiRemoteDataSource<ReportAPI>, RemoteRepo
         ))
             .asCompletable()
     }
+    func fetchReleaseNote() -> Single<[ReleaseNoteEntity]> {
+        return request(.fetchReleaseNote)
+            .map(ReleaseNoteListResponse.self)
+            .map { $0.toDomain() }
+    }
 }
