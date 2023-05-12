@@ -11,6 +11,8 @@ struct OutingPassResponse: Decodable {
         case endTime = "end_time"
         case reason
         case teacherName = "teacher_name"
+        case picnicDate = "picnic_date"
+
     }
 
     let profileFileName: String
@@ -20,6 +22,7 @@ struct OutingPassResponse: Decodable {
     let endTime: String
     let reason: String
     let teacherName: String
+    let picnicDate: String
 
 }
 
@@ -32,7 +35,8 @@ extension OutingPassResponse {
             startTime: self.startTime.toDate(format: .time),
             endTime: self.endTime.toDate(format: .time),
             reason: self.reason,
-            teacherName: self.teacherName
+            teacherName: self.teacherName,
+            picnicDate: self.picnicDate.toDate(format: .fullDate)
         )
     }
 }
