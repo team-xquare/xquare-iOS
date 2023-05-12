@@ -5,17 +5,15 @@ struct ReleaseNoteView: View {
     @StateObject var viewModel: ReleaseNoteViewModel
     @State var isReady: Bool = false
     var body: some View {
-        VStack {
-            ScrollView(showsIndicators: false) {
-                LazyVStack(spacing: 0) {
-                    ForEach(0..<viewModel.releaseNoteList.count, id: \.self) { index in
-                        ReleaseNoteCellView(
-                            entity: viewModel.releaseNoteList[index],
-                            index: viewModel.releaseNoteList.startIndex == index
-                        )
-                        .padding([.horizontal, .top], 16)
-                        .id(index)
-                    }
+        ScrollView(showsIndicators: false) {
+            LazyVStack(spacing: 0) {
+                ForEach(0..<viewModel.releaseNoteList.count, id: \.self) { index in
+                    ReleaseNoteCellView(
+                        entity: viewModel.releaseNoteList[index],
+                        index: viewModel.releaseNoteList.startIndex == index
+                    )
+                    .padding([.horizontal, .top], 16)
+                    .id(index)
                 }
             }
             .opacity(isReady ? 1 : 0)
@@ -27,9 +25,9 @@ struct ReleaseNoteView: View {
         }
         .navigationTitle("업데이트 사항")
         .onAppear(perform: viewModel.fetchReleaseNote)
-        .onDisappear { viewModel.releaseNoteList = [] }
+        .onDisappear(perform: viewModel.resetReleaseNoteList)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
-        .setNavigationBackButton()
+        .setNavigationBackButton() 
     }
 }
