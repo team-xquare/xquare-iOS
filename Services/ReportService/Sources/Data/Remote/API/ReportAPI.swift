@@ -6,6 +6,7 @@ import RestApiModule
 
 enum ReportAPI {
     case postBugReport(reason: String, category: BugCategory, imageUrl: [String])
+    case fetchReleaseNote
 }
 
 extension ReportAPI: XquareAPI {
@@ -14,11 +15,21 @@ extension ReportAPI: XquareAPI {
     }
 
     var urlPath: String {
-        return "/report"
+        switch self {
+        case .postBugReport:
+            return "/report"
+        case .fetchReleaseNote:
+            return "/note/list"
+        }
     }
 
     var method: Moya.Method {
-        return .post
+        switch self {
+        case .postBugReport:
+            return .post
+        case .fetchReleaseNote:
+            return .get
+        }
     }
 
     var errorMapper: [Int: Error]? {
@@ -46,6 +57,8 @@ extension ReportAPI: XquareAPI {
                 ],
                 encoding: JSONEncoding.default
             )
+        default:
+            return .requestPlain
         }
     }
 
