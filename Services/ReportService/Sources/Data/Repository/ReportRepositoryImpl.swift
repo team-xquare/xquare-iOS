@@ -21,4 +21,7 @@ class ReportRepositoryImpl: ReportRepository {
             imageUrl: imageUrl
         )
     }
+    func fetchReleaseNote() -> Observable<[ReleaseNoteEntity]> {
+        return remoteDataSource.fetchReleaseNote().asObservable()
+    }
 }
