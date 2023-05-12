@@ -24,15 +24,14 @@ struct MealMenuView: View {
             Spacer().frame(height: 14)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
-                    Spacer().frame(width: 8)
                     ForEach(menu, id: \.mealTime) {
                         MealListCell(
                             entity: $0
                         )
                     }
-                    Spacer().frame(width: 8)
                 }
             }
+            .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
             Spacer().frame(height: 16)
         }
         .background(Color.GrayScale.gray0)
