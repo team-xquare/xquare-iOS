@@ -13,7 +13,7 @@ struct MealListCell: View {
                 Text(entity.mealTime.toString())
                     .sdText(
                         type: .body1,
-                        textColor: entity.mealTime.isMealTime() ? .Primary.purple300 : .GrayScale.gray800
+                        textColor: entity.mealTime.checkIsNow() ? .Primary.purple300 : .GrayScale.gray800
                     )
                     .padding(.trailing, 10)
                 Spacer()
@@ -35,7 +35,7 @@ struct MealListCell: View {
         .overlay {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(lineWidth: 3)
-                .foregroundColor(entity.mealTime.isMealTime() ? .Primary.purple100 : .clear)
+                .foregroundColor(entity.mealTime.checkIsNow() ? .Primary.purple100 : .clear)
         }
         .background(Color.GrayScale.gray50)
         .cornerRadius(8)
