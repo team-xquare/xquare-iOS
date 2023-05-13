@@ -51,7 +51,6 @@ class LocalDataSourceImpl: LocalDataSource {
                 } catch {
                     print("Error inserting meal menu: \(error.localizedDescription)")
                 }
-
             }
         }
     }
