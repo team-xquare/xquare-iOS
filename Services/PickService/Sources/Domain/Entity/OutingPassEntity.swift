@@ -8,6 +8,7 @@ public struct OutingPassEntity: Equatable {
     public let endTime: Date
     public let reason: String
     public let teacherName: String
+    public let picnicDate: Date
 
     public init(
         profileFileName: String,
@@ -16,7 +17,8 @@ public struct OutingPassEntity: Equatable {
         startTime: Date,
         endTime: Date,
         reason: String,
-        teacherName: String
+        teacherName: String,
+        picnicDate: Date
     ) {
         self.profileFileName = profileFileName
         self.studentNumber = studentNumber
@@ -25,5 +27,6 @@ public struct OutingPassEntity: Equatable {
         self.endTime = endTime
         self.reason = reason
         self.teacherName = teacherName
+        self.picnicDate = picnicDate
     }
 }
