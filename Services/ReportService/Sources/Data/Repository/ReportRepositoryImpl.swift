@@ -2,11 +2,11 @@ import Foundation
 
 import RxSwift
 
-class BugRepositoryImpl: BugRepository {
+class ReportRepositoryImpl: ReportRepository {
 
-    private let remoteDataSource: RemoteBugDataSource
+    private let remoteDataSource: RemoteReportDataSource
 
-    init(remoteDataSource: RemoteBugDataSource) {
+    init(remoteDataSource: RemoteReportDataSource) {
         self.remoteDataSource = remoteDataSource
     }
 
@@ -20,5 +20,8 @@ class BugRepositoryImpl: BugRepository {
             category: category,
             imageUrl: imageUrl
         )
+    }
+    func fetchReleaseNote() -> Observable<[ReleaseNoteEntity]> {
+        return remoteDataSource.fetchReleaseNote().asObservable()
     }
 }

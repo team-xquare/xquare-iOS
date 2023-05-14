@@ -2,6 +2,7 @@ import Foundation
 
 import RxSwift
 
-public protocol BugRepository {
+public protocol ReportRepository {
     func postBugReport(reason: String, category: BugCategory, imageUrl: [String]) -> Completable
+    func fetchReleaseNote() -> Observable<[ReleaseNoteEntity]>
 }
