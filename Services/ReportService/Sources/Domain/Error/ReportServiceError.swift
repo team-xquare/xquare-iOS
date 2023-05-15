@@ -1,6 +1,6 @@
 import Foundation
 
-public enum BugServiceError: Error {
+public enum ReportServiceError: Error {
     case badRequest
     case unauthorized
     case notFound
@@ -13,7 +13,7 @@ public enum BugServiceError: Error {
 }
 
 public extension Error {
-    var asBugServiceError: BugServiceError? {
-        self as? BugServiceError
+    var asReportServiceError: ReportServiceError? {
+        self as? ReportServiceError
     }
 }

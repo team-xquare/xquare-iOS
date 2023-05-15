@@ -21,12 +21,15 @@ struct EntireView: View, XNavigationAndTabContent {
                     TopServiceMenuView()
                     ServiceSectionView(
                         headerText: "학교",
-                        services: [(text: "오늘의 자습감독 선생님", view: .selfStudyTeacher)]
+                        services: [
+                            (text: "오늘의 자습감독 선생님", view: .selfStudyTeacher)
+                        ]
                     )
                     ServiceSectionButtonView(
-                        headerText: "사용자",
+                        headerText: "앱",
                         services: [
                             (text: "로그아웃", action: { viewModel.showLogoutAlert = true })
+//                            (text: "업데이트 사항", action: { xquareRouter.navigateTo(.releaseNote) })
                         ])
                     Spacer()
                 }

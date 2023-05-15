@@ -4,9 +4,9 @@ import RxSwift
 
 public class PostBugReportUseCase {
 
-    private let repository: BugRepository
+    private let repository: ReportRepository
 
-    init(repository: BugRepository) {
+    init(repository: ReportRepository) {
         self.repository = repository
     }
 
