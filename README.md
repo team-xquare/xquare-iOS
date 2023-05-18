@@ -1,5 +1,7 @@
-
 # XQUARE
+![iOS badge](https://img.shields.io/badge/iOS-15.0%2B-green) ![swift badge](https://img.shields.io/badge/swift-5-orange)
+
+
 DSM 학교 관리 시스템
 
 
@@ -26,13 +28,12 @@ DSM 학교 관리 시스템
 - [SemicolonDesign](https://github.com/semicolonDSM/SemicolonDesign_iOS.git)
 - [XWebKit](https://github.com/team-xquare/XWebKit)
 
-## Requirements
 
-- iOS 15+
-- Swift 5
-- SPM
+## Based Architecture
+![iOS](https://github.com/team-xquare/xquare-iOS/assets/67373938/117c10bd-a118-44af-ae47-9ad2b409c31c)
 
-## Architecture
+
+## File structure
 ```bash
 ├── Application
 │   ├── Project.swift
