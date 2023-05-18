@@ -1,4 +1,5 @@
-# XQUARE
+![Frame 653](https://github.com/team-xquare/xquare-iOS/assets/67373938/5939941a-df1a-4ef5-88bd-9f4fb0d33a0e)
+
 ![iOS badge](https://img.shields.io/badge/iOS-15.0%2B-green) ![swift badge](https://img.shields.io/badge/swift-5-orange)
 
 
