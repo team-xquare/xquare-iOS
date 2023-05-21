@@ -22,14 +22,23 @@ struct MealMenuView: View {
                 Spacer().frame(width: 16)
             }
             Spacer().frame(height: 14)
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ForEach(menu, id: \.mealTime) {
-                        MealListCell(
-                            entity: $0
-                        )
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        ForEach(menu, id: \.mealTime) {
+                            MealListCell(
+                                entity: $0
+                            )
+                        }
                     }
                 }
+                .onChange(of: menu, perform: {
+                    $0.forEach {
+                        if $0.mealTime.checkIsNow() {
+                            proxy.scrollTo($0.mealTime)
+                        }
+                    }
+                })
             }
             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
             Spacer().frame(height: 16)
