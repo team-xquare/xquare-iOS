@@ -11,7 +11,6 @@ class EditMyPageViewModel: ObservableObject {
     @Published var profileImage = UIImage()
     @Published var profileImagrUrl: URL?
     @Published var name: String = "]"
-    @Published var birthDay: String = ""
     @Published var gradeClassNum: String = ""
     @Published var id: String = ""
     @Published var xPhotosIsPresented: Bool = false
@@ -42,7 +41,6 @@ class EditMyPageViewModel: ObservableObject {
             .subscribe(onSuccess: {
                 self.name = $0.name
                 self.gradeClassNum = "\($0.grade)학년 \($0.classNumber)반 \($0.number)번"
-                self.birthDay = $0.birthDay.toString(format: "yyyy.MM.dd")
                 self.id = $0.id
                 self.profileImagrUrl = $0.imageUrl
             })
@@ -62,12 +60,6 @@ class EditMyPageViewModel: ObservableObject {
         self.editProfileImageUseCase.excute(profileImage: imageUrl)
             .subscribe(onCompleted: {
             })
-            .disposed(by: disposeBag)
-    }
-
-    func withdrawal() {
-        self.logoutUseCase.excute()
-            .subscribe(onCompleted: { })
             .disposed(by: disposeBag)
     }
 }

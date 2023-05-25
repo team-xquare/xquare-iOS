@@ -14,15 +14,21 @@ struct MyPageView: View {
         ) {
             Spacer().frame(height: 20)
             HStack(alignment: .center, spacing: 16) {
-                AsyncImage(url: viewModel.profileImagrUrl) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                } placeholder: {
-                    Image("DefaultImage")
+//                AsyncImage(url: viewModel.profileImagrUrl) { image in
+//                    image
+//                        .resizable()
+//                        .scaledToFill()
+//                } placeholder: {
+//                    Image("DefaultImage")
+//                }
+//                .frame(width: 60, height: 60)
+//                .cornerRadius(30)
+                ProfileImageView(
+                    imageUrl: viewModel.profileImagrUrl,
+                    uiimage: $viewModel.profileImage
+                ).onTapGesture {
+                    viewModel.xPhotosIsPresented = true
                 }
-                .frame(width: 60, height: 60)
-                .cornerRadius(30)
                 VStack(alignment: .leading, spacing: 0) {
                     Text(viewModel.name)
                         .sdText(type: .body1, textColor: .GrayScale.gray900)
@@ -59,16 +65,20 @@ struct MyPageView: View {
                 })
             )
         }
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button {
-                    self.xquareRouter.navigateTo(.editMyPage)
-                } label: {
-                    Text("수정")
-                        .sdText(type: .body1)
-                }
-            }
-        }
+//        .toolbar {
+//            ToolbarItemGroup(placement: .navigationBarTrailing) {
+//                Button {
+//                    self.xquareRouter.navigateTo(.editMyPage)
+//                } label: {
+//                    Text("수정")
+//                        .sdText(type: .body1)
+//                }
+//            }
+//        }
+        .sdPhotoPicker(
+            isPresented: $viewModel.xPhotosIsPresented,
+            selection: $viewModel.profileImage
+        )
         .onChange(of: viewModel.profileImage, perform: { _ in
             viewModel.uploadImage()
         })
