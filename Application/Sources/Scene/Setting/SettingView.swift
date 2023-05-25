@@ -2,7 +2,9 @@ import SwiftUI
 import SemicolonDesign
 
 struct SettingView: View {
-    @State var isToggle: Bool
+
+    @StateObject var viewModel: SettingViewModel
+
     var body: some View {
         VStack(alignment: .center) {
             Spacer().frame(height: 16)
@@ -16,22 +18,22 @@ struct SettingView: View {
             ToggleView(
                 title: "피드 알림",
                 subTitle: "피드의 댓글과 좋아요 등의 알림을 설정해요",
-                isToggle: $isToggle
+                isToggle: $viewModel.isFeedToggle
             )
             ToggleView(
                 title: "신청 알림",
                 subTitle: "급식과 외출신청 등의 알림을 설정해요",
-                isToggle: $isToggle
+                isToggle: $viewModel.isApplicationToggle
             )
             ToggleView(
                 title: "상벌점 알림",
                 subTitle: "상벌점 등의 알림을 설정해요",
-                isToggle: $isToggle
+                isToggle: $viewModel.isAllToggle
             )
             ToggleView(
                 title: "일정 알림",
                 subTitle: "일정의 알림을 설정해요",
-                isToggle: $isToggle
+                isToggle: $viewModel.isScheduleToggle
             )
             Spacer()
         }
@@ -39,5 +41,16 @@ struct SettingView: View {
         .navigationBarTitleDisplayMode(.inline)
         .setNavigationBackButtonWithRouter()
         .navigationBarBackButtonHidden()
+        .onAppear(perform: viewModel.fetchActivatedCategoryList)
+        .onDisappear {
+            [
+                ("FEED", viewModel.isFeedToggle),
+                ("ALL", viewModel.isAllToggle),
+                ("APPLICATION", viewModel.isApplicationToggle),
+                ("SCHEDULE", viewModel.isScheduleToggle)
+            ].forEach({
+                viewModel.activeNotificationCategory(topic: $0.0, isActivated: $0.1)
+            })
+        }
     }
 }
