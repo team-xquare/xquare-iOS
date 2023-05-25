@@ -89,6 +89,10 @@ class XquareRouterFactory: RouterFactory {
         let entireViewModel = EntireViewModel(
             logoutUseCase: authServiceDependency.logoutUseCase
         )
+        let settingViewModel = SettingViewModel(
+            activeNotificationCategoryUseCase: notificatoinServiceDependency.activeNotificationCategoryUseCase,
+            fetchActivatedCategoryListUseCase: notificatoinServiceDependency.fetchActivitedCategoryLiseUseCase
+        )
 
         self.mainView = MainView(
             homeView: .init(viewModel: homeViewModel),
@@ -116,7 +120,7 @@ class XquareRouterFactory: RouterFactory {
         )
         self.outingPassView = OutingPassView(viewModel: outingPassViewModel)
 
-        self.settingView = SettingView(isToggle: true)
+        self.settingView = SettingView(viewModel: settingViewModel)
 
         let pointHistoryViewModel = PointHistoryViewModel(
             fetchPointHistoryUseCase: pointServiceDependency.fetchPointHistoryUseCase
