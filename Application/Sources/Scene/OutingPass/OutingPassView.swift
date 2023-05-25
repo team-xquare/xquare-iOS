@@ -17,17 +17,25 @@ struct OutingPassView: View {
             .frame(height: 20)
             .padding(.bottom, 30)
             HStack(alignment: .center) {
-                AsyncImage(url: URL(string: viewModel.outingPassData?.profileFileName ?? "DefaultImage")) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                } placeholder: {
+                if let imageURL = viewModel.outingPassData?.profileFileName {
+                    AsyncImage(url: URL(string: imageURL)) { image in
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    } placeholder: {
+                        Image("DefaultImage")
+                            .resizable()
+                            .scaledToFill()
+                    }
+                    .frame(width: 60, height: 60)
+                    .cornerRadius(30)
+                } else {
                     Image("DefaultImage")
                         .resizable()
                         .scaledToFill()
+                        .frame(width: 60, height: 60)
+                        .cornerRadius(30)
                 }
-                .frame(width: 60, height: 60)
-                .cornerRadius(30)
                 Spacer().frame(width: 16)
                 Text("\(viewModel.outingPassData?.studentNumber ?? "") \(viewModel.outingPassData?.studentName ?? "")")
                     .sdText(type: .heading5)
