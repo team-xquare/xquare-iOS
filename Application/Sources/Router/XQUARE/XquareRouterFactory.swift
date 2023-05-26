@@ -9,7 +9,7 @@ import NotificationService
 import MealDataService
 import ScheduleService
 import TimeTableService
-import BugService
+import ReportService
 
 class XquareRouterFactory: RouterFactory {
 
@@ -31,6 +31,7 @@ class XquareRouterFactory: RouterFactory {
     let myPageView: MyPageView
     let bugReportView: BugReportView
     let selfStudyTeacherView: SelfStudyTeacherView
+    let releaseNoteView: ReleaseNoteView
 
     // swiftlint:disable function_body_length
     init() {
@@ -43,7 +44,7 @@ class XquareRouterFactory: RouterFactory {
         let mealDataServiceDependency = MealDataServiceDependency.shared
         let scheduleServiceDependency = ScheduleServiceDependency.shared
         let timeTableServiceDependency = TimeTableServiceDependency.shared
-        let bugServiceDependency = BugServiceDependency.shared
+        let reportServiceDependency = ReportServiceDependency.shared
 
         let launchScreenViewModel = LaunchScreenViewModel(
             refreshTokenUseCase: authServiceDependency.refreshTokenUseCase
@@ -136,7 +137,7 @@ class XquareRouterFactory: RouterFactory {
         self.myPageView = MyPageView(viewModel: myPageViewModel)
 
         let bugReportViewModel = BugReportViewModel(
-            postBugReportUseCase: bugServiceDependency.postBugReportUseCase,
+            postBugReportUseCase: reportServiceDependency.postBugReportUseCase,
             uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase
         )
 
@@ -150,6 +151,10 @@ class XquareRouterFactory: RouterFactory {
             fetchTodaySelfStudyTeacherUseCase: pickeServiceDependency.fetchTodaySelfStudyTeacherUseCase
         )
         self.selfStudyTeacherView = SelfStudyTeacherView(viewModel: selfStudyTeacherViewModel)
+        let releaseNoteViewModel = ReleaseNoteViewModel(
+            fetchReleaseNoteUseCase: reportServiceDependency.fetchReleaseNoteUseCase
+        )
+        self.releaseNoteView = ReleaseNoteView(viewModel: releaseNoteViewModel)
     }
     // swiftlint:enable function_body_length
 
@@ -184,6 +189,8 @@ class XquareRouterFactory: RouterFactory {
             bugReportView
         case .selfStudyTeacher:
             selfStudyTeacherView
+        case .releaseNote:
+            releaseNoteView
         }
     }
     // swiftlint:enable cyclomatic_complexity

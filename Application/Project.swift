@@ -34,7 +34,7 @@ let project = Project(
                 .Service.ScheduleService,
                 .Service.PointService,
                 .Service.PickService,
-                .Service.BugService,
+                .Service.ReportService,
                 .Service.NotificationService,
                 .SPM.FirebaseMessaging,
                 .SPM.SemicolonDesign,

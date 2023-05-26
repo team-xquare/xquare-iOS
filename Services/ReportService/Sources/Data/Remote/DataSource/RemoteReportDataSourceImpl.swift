@@ -4,7 +4,7 @@ import Moya
 import RxSwift
 import RestApiModule
 
-class RemoteBugDataSourceImpl: RestApiRemoteDataSource<BugAPI>, RemoteBugDataSource {
+class RemoteReportDataSourceImpl: RestApiRemoteDataSource<ReportAPI>, RemoteReportDataSource {
     func postBugReport(
         reason: String,
         category: BugCategory,
@@ -16,5 +16,10 @@ class RemoteBugDataSourceImpl: RestApiRemoteDataSource<BugAPI>, RemoteBugDataSou
             imageUrl: imageUrl
         ))
             .asCompletable()
+    }
+    func fetchReleaseNote() -> Single<[ReleaseNoteEntity]> {
+        return request(.fetchReleaseNote)
+            .map(ReleaseNoteListResponse.self)
+            .map { $0.toDomain() }
     }
 }

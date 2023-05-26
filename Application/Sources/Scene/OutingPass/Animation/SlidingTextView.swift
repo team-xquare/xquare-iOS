@@ -19,7 +19,7 @@ struct SlidingTextView: View {
                     .onReceive(timer) { _ in
                         self.animatedSliding.toggle()
                     }
-                    .frame(height: 30)
+                    .frame(height: 20)
             }
         }
         .frame(
