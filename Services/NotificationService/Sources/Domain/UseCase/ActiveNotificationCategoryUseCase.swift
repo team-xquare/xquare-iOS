@@ -10,8 +10,8 @@ public class ActiveNotificationCategoryUseCase {
         self.repositry = repositry
     }
 
-    public func excute(categoryId: String) -> Completable {
-        return repositry.activeNotificationCategory(categoryId: categoryId)
+    public func excute(topic: String, isActivated: Bool) -> Completable {
+        return repositry.activeNotificationCategory(topic: topic, isActivated: isActivated)
     }
 
 }
