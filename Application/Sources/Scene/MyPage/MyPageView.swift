@@ -14,15 +14,6 @@ struct MyPageView: View {
         ) {
             Spacer().frame(height: 20)
             HStack(alignment: .center, spacing: 16) {
-//                AsyncImage(url: viewModel.profileImagrUrl) { image in
-//                    image
-//                        .resizable()
-//                        .scaledToFill()
-//                } placeholder: {
-//                    Image("DefaultImage")
-//                }
-//                .frame(width: 60, height: 60)
-//                .cornerRadius(30)
                 ProfileImageView(
                     imageUrl: viewModel.profileImagrUrl,
                     uiimage: $viewModel.profileImage
@@ -41,7 +32,6 @@ struct MyPageView: View {
             .padding(.leading, 4)
             MyInformationView(title: "아이디", content: viewModel.id)
             MyInformationView(title: "생년월일", content: viewModel.birthDay)
-//            MyInformationView(title: "깃허브 계정", content: viewModel.id)
             Spacer()
             Button(action: {
                 viewModel.showLogoutAlert = true
@@ -65,16 +55,6 @@ struct MyPageView: View {
                 })
             )
         }
-//        .toolbar {
-//            ToolbarItemGroup(placement: .navigationBarTrailing) {
-//                Button {
-//                    self.xquareRouter.navigateTo(.editMyPage)
-//                } label: {
-//                    Text("수정")
-//                        .sdText(type: .body1)
-//                }
-//            }
-//        }
         .sdPhotoPicker(
             isPresented: $viewModel.xPhotosIsPresented,
             selection: $viewModel.profileImage

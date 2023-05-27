@@ -28,7 +28,6 @@ class XquareRouterFactory: RouterFactory {
 
     let pointHistoryView: PointHistoryView
     let myPageView: MyPageView
-    let editMyPageView: EditMyPageView
     let bugReportView: BugReportView
     let selfStudyTeacherView: SelfStudyTeacherView
     let releaseNoteView: ReleaseNoteView
@@ -150,13 +149,6 @@ class XquareRouterFactory: RouterFactory {
         )
         self.releaseNoteView = ReleaseNoteView(viewModel: releaseNoteViewModel)
 
-        let editMyPageViewModel = EditMyPageViewModel(
-            fetchProfileUseCase: userServiceDependency.fetchProfileUseCase,
-            editProfileImageUseCase: userServiceDependency.editProfileImageUseCase,
-            uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase,
-            logoutUseCase: authServiceDependency.logoutUseCase
-        )
-        self.editMyPageView = EditMyPageView(viewModel: editMyPageViewModel)
     }
     // swiftlint:enable function_body_length
 
@@ -185,8 +177,6 @@ class XquareRouterFactory: RouterFactory {
             pointHistoryView
         case .myPage:
             myPageView
-        case .editMyPage:
-            editMyPageView
         case .bugReport:
             bugReportView
         case .selfStudyTeacher:
