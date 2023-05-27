@@ -13,7 +13,7 @@ struct CategoryResponse: Decodable {
 extension CategoryResponse {
     func toDomain() -> CategoryEntity {
         return .init(
-            topic: .init(rawValue: topic) ?? .ALL,
+            topic: .init(rawValue: topic) ?? .all,
             isActivate: isActivate
         )
     }

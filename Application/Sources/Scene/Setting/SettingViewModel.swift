@@ -34,10 +34,10 @@ class SettingViewModel: ObservableObject {
             .subscribe(onNext: {
                 $0.forEach {
                     switch $0.topic {
-                    case .FEED: self.isFeedToggle = $0.isActivate
-                    case .APPLICATION: self.isApplicationToggle = $0.isActivate
-                    case .ALL: self.isAllToggle = $0.isActivate
-                    case .SCHEDULE: self.isScheduleToggle = $0.isActivate
+                    case .feed: self.isFeedToggle = $0.isActivate
+                    case .application: self.isApplicationToggle = $0.isActivate
+                    case .all: self.isAllToggle = $0.isActivate
+                    case .schedule: self.isScheduleToggle = $0.isActivate
                     }
                 }
             })

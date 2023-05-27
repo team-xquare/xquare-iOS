@@ -1,8 +1,8 @@
 import Foundation
 
 public enum NotificationActivateTopic: String {
-    case FEED = "FEED"
-    case APPLICATION = "APPLICATION"
-    case ALL = "ALL"
-    case SCHEDULE = "SCHEDULE"
+    case feed = "FEED"
+    case application = "APPLICATION"
+    case all = "ALL"
+    case schedule = "SCHEDULE"
 }
