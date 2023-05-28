@@ -13,23 +13,13 @@ struct MyPageView: View {
             spacing: 0
         ) {
             Spacer().frame(height: 20)
-            HStack(alignment: .center, spacing: 16) {
-                EditableProfileImageView(
-                        imageUrl: viewModel.profileImagrUrl,
-                        uiimage: $viewModel.profileImage
-                ).onTapGesture {
-                    viewModel.xPhotosIsPresented = true
-                }
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(viewModel.name)
-                        .sdText(type: .body1, textColor: .GrayScale.gray900)
-                    Text(viewModel.gradeClassNum)
-                        .sdText(type: .body2, textColor: .GrayScale.gray900)
-                }
-                Spacer()
-            }
-            .padding(.bottom, 20)
-            .padding(.leading, 4)
+            MyProfileView(
+                imageUrl: viewModel.profileImagrUrl,
+                uiimage: $viewModel.profileImage,
+                name: viewModel.name,
+                gradeClassNum: viewModel.gradeClassNum,
+                xPhotosIsPresented: $viewModel.xPhotosIsPresented
+            )
             MyInformationView(title: "아이디", content: viewModel.id)
             MyInformationView(title: "생년월일", content: viewModel.birthDay)
             Spacer()
