@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ProfileImageView: View {
+struct EditableProfileImageView: View {
     var imageUrl: URL?
     @Binding var uiimage: UIImage
 

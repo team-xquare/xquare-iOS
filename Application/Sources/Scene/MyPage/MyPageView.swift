@@ -14,9 +14,9 @@ struct MyPageView: View {
         ) {
             Spacer().frame(height: 20)
             HStack(alignment: .center, spacing: 16) {
-                ProfileImageView(
-                    imageUrl: viewModel.profileImagrUrl,
-                    uiimage: $viewModel.profileImage
+                EditableProfileImageView(
+                        imageUrl: viewModel.profileImagrUrl,
+                        uiimage: $viewModel.profileImage
                 ).onTapGesture {
                     viewModel.xPhotosIsPresented = true
                 }
