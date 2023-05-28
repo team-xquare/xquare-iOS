@@ -17,8 +17,8 @@ class RemoteNotificationDataSourceImpl: RestApiRemoteDataSource<NotificationAPI>
             .map { $0.toDomain() }
     }
 
-    func activeNotificationCategory(topic: String, isActivated: Bool) -> Completable {
-        return request(.activeNotificationCategory(topic: topic, isActivated: isActivated))
+    func activeNotificationCategory(topic: NotificationActivateTopic, isActivated: Bool) -> Completable {
+        return request(.activeNotificationCategory(topic: topic.rawValue, isActivated: isActivated))
             .asCompletable()
     }
 

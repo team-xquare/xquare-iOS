@@ -20,7 +20,7 @@ class NotificationRepositoryImpl: NotificationRepository {
             .asObservable()
     }
 
-    func activeNotificationCategory(topic: String, isActivated: Bool) -> Completable {
+    func activeNotificationCategory(topic: NotificationActivateTopic, isActivated: Bool) -> Completable {
         return remoteDataSource.activeNotificationCategory(topic: topic, isActivated: isActivated)
     }
 
