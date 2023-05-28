@@ -42,15 +42,6 @@ struct SettingView: View {
         .setNavigationBackButtonWithRouter()
         .navigationBarBackButtonHidden()
         .onAppear(perform: viewModel.fetchActivatedCategoryList)
-        .onDisappear {
-            [
-                ("FEED", viewModel.isFeedToggle),
-                ("ALL", viewModel.isAllToggle),
-                ("APPLICATION", viewModel.isApplicationToggle),
-                ("SCHEDULE", viewModel.isScheduleToggle)
-            ].forEach({
-                viewModel.activeNotificationCategory(topic: $0.0, isActivated: $0.1)
-            })
-        }
+        .onDisappear(perform: viewModel.activeNotificationCategory)
     }
 }
