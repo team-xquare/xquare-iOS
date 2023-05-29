@@ -1,7 +1,7 @@
 import Foundation
 
 public struct OutingPassEntity: Equatable {
-    public let profileFileName: String
+    public let profileFileName: String?
     public let studentNumber: String
     public let studentName: String
     public let startTime: Date
@@ -11,7 +11,7 @@ public struct OutingPassEntity: Equatable {
     public let picnicDate: Date
 
     public init(
-        profileFileName: String,
+        profileFileName: String?,
         studentNumber: String,
         studentName: String,
         startTime: Date,
