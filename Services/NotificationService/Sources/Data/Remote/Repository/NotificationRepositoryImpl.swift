@@ -20,12 +20,8 @@ class NotificationRepositoryImpl: NotificationRepository {
             .asObservable()
     }
 
-    func activeNotificationCategory(categoryId: String) -> Completable {
-        return remoteDataSource.activeNotificationCategory(categoryId: categoryId)
-    }
-
-    func inactiveNotificationCategory(categoryId: String) -> RxSwift.Completable {
-        return remoteDataSource.inactiveNotificationCategory(categoryId: categoryId)
+    func activeNotificationCategory(topic: NotificationActivateTopic, isActivated: Bool) -> Completable {
+        return remoteDataSource.activeNotificationCategory(topic: topic, isActivated: isActivated)
     }
 
     func fetchPostedNotificationList() -> Observable<[NotificationEntity]> {
