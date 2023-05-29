@@ -32,10 +32,10 @@ public enum JWTTokenType {
 // MARK: - JWTPlugin
 final public class JWTPlugin: PluginType {
 
-    private let loaclTokenDataSource: LoaclTokenDataSource
+    private let localTokenDataSource: LocalTokenDataSource
 
-    init(loaclTokenDataSource: LoaclTokenDataSource) {
-        self.loaclTokenDataSource = loaclTokenDataSource
+    init(localTokenDataSource: LocalTokenDataSource) {
+        self.localTokenDataSource = localTokenDataSource
     }
 
     public func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
@@ -68,11 +68,11 @@ extension JWTPlugin {
     }
 
     private func fetchAccessToken() -> String? {
-        self.loaclTokenDataSource.fetchAccessToken()
+        self.localTokenDataSource.fetchAccessToken()
     }
 
     private func fetchRefreshToken() -> String? {
-        self.loaclTokenDataSource.fetchRefreshToken()
+        self.localTokenDataSource.fetchRefreshToken()
     }
 
 }
