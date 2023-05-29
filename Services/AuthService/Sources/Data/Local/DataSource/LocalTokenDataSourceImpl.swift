@@ -3,7 +3,7 @@ import Foundation
 import XDateUtil
 import KeychainModule
 
-class LoaclTokenDataSourceImpl: LoaclTokenDataSource {
+class LocalTokenDataSourceImpl: LocalTokenDataSource {
 
     let keychain = KeychainModule<KeychainTypeForAuth>()
 
