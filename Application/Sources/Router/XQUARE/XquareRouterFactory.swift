@@ -148,6 +148,7 @@ class XquareRouterFactory: RouterFactory {
             fetchReleaseNoteUseCase: reportServiceDependency.fetchReleaseNoteUseCase
         )
         self.releaseNoteView = ReleaseNoteView(viewModel: releaseNoteViewModel)
+
     }
     // swiftlint:enable function_body_length
 
