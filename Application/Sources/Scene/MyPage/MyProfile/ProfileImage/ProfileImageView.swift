@@ -10,19 +10,18 @@ struct ProfileImageView: View {
                 image
                     .resizable()
                     .scaledToFill()
+                    .frame(width: 60, height: 60)
             } placeholder: {
                 Image("DefaultImage")
             }
             .frame(width: 60, height: 60)
             .cornerRadius(30)
-            .padding(.bottom, 6)
         } else {
             Image(uiImage: uiimage)
                 .resizable()
                 .scaledToFill()
                 .frame(width: 60, height: 60)
                 .cornerRadius(30)
-                .padding(.bottom, 6)
         }
     }
 }

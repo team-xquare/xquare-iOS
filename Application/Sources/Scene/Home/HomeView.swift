@@ -51,7 +51,6 @@ struct HomeView: View, XNavigationAndTabContent {
             viewModel.fetchMovedClass()
         })
         .onAppear {
-            viewModel.viewAppear()
             viewModel.fetchTodaysMeal()
             viewModel.fetchUserPoint()
             viewModel.fetchOutingPass()

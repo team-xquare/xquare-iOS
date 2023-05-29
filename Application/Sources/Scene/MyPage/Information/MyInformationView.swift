@@ -22,6 +22,7 @@ struct MyInformationView: View {
             .padding(.leading, 16)
             .frame(height: 44)
             .background(Color.GrayScale.gray50)
+            .cornerRadius(8)
             .overlay { RoundedRectangle(cornerRadius: 8).stroke(Color.GrayScale.gray300) }
         }
         .padding(.bottom, 20)
