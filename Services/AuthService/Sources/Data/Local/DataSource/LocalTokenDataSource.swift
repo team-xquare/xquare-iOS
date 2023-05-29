@@ -1,6 +1,6 @@
 import Foundation
 
-protocol LoaclTokenDataSource {
+protocol LocalTokenDataSource {
     func registerAccessToken(_ accessToken: String)
     func fetchAccessToken() -> String?
     func registerRefreshToken(_ refreshToken: String)

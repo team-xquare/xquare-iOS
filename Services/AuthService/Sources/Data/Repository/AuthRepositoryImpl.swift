@@ -6,23 +6,23 @@ import RxSwift
 class AuthRepositoryImpl: AuthRepository {
 
     private let remoteAuthDataSource: RemoteAuthDataSource
-    private let loaclTokenDataSource: LoaclTokenDataSource
+    private let localTokenDataSource: LocalTokenDataSource
     private let localAuthDataSource: LocalAuthDataSource
 
     init(remoteAuthDataSource: RemoteAuthDataSource,
-         loaclTokenDataSource: LoaclTokenDataSource,
+         localTokenDataSource: LocalTokenDataSource,
          localAuthDataSource: LocalAuthDataSource) {
         self.remoteAuthDataSource = remoteAuthDataSource
-        self.loaclTokenDataSource = loaclTokenDataSource
+        self.localTokenDataSource = localTokenDataSource
         self.localAuthDataSource = localAuthDataSource
     }
 
     func signin(signinEntity: SigninEntity) -> Completable {
         self.remoteAuthDataSource.signin(request: signinEntity.toSigninRequest())
             .do(onSuccess: { [weak self] tokenResponse in
-                self?.loaclTokenDataSource.registerAccessToken(tokenResponse.accessToken)
-                self?.loaclTokenDataSource.registerRefreshToken(tokenResponse.refreshToken)
-                self?.loaclTokenDataSource.registerExpiredAt(tokenResponse.expirationAt)
+                self?.localTokenDataSource.registerAccessToken(tokenResponse.accessToken)
+                self?.localTokenDataSource.registerRefreshToken(tokenResponse.refreshToken)
+                self?.localTokenDataSource.registerExpiredAt(tokenResponse.expirationAt)
                 self?.localAuthDataSource.registerIdAndPassword(id: signinEntity.id, password: signinEntity.password)
             }).catch { error in
                 let moyaError = error as? MoyaError
@@ -48,14 +48,14 @@ class AuthRepositoryImpl: AuthRepository {
     }
 
     func refreshToken() -> Completable {
-        guard let refershToken = self.loaclTokenDataSource.fetchRefreshToken() else {
+        guard let refershToken = self.localTokenDataSource.fetchRefreshToken() else {
             return Completable.error(AuthServiceError.noToken)
         }
         return self.remoteAuthDataSource.refreshToken(refreshToken: refershToken)
             .do(onSuccess: { [weak self] tokenResponse in
-                self?.loaclTokenDataSource.registerAccessToken(tokenResponse.accessToken)
-                self?.loaclTokenDataSource.registerRefreshToken(tokenResponse.refreshToken)
-                self?.loaclTokenDataSource.registerExpiredAt(tokenResponse.expirationAt)
+                self?.localTokenDataSource.registerAccessToken(tokenResponse.accessToken)
+                self?.localTokenDataSource.registerRefreshToken(tokenResponse.refreshToken)
+                self?.localTokenDataSource.registerExpiredAt(tokenResponse.expirationAt)
             }).catch { [weak self] error in
                 let moyaError = error as? MoyaError
                 guard moyaError?.response?.statusCode != nil else { return .error(AuthServiceError.networkNotWorking) }
@@ -68,14 +68,14 @@ class AuthRepositoryImpl: AuthRepository {
     }
 
     func fetchAccessToken() throws -> String {
-        guard let accessToken = self.loaclTokenDataSource.fetchAccessToken() else {
+        guard let accessToken = self.localTokenDataSource.fetchAccessToken() else {
             throw AuthServiceError.noToken
         }
         return accessToken
     }
 
     func fetchTokenExpiredDate() throws -> Date {
-        guard let expiredDate = self.loaclTokenDataSource.fetchExpiredDate() else {
+        guard let expiredDate = self.localTokenDataSource.fetchExpiredDate() else {
             throw AuthServiceError.noToken
         }
         return expiredDate
@@ -91,7 +91,7 @@ class AuthRepositoryImpl: AuthRepository {
 
     func logout() -> Completable {
         Completable.create { completable in
-            self.loaclTokenDataSource.resetToken()
+            self.localTokenDataSource.resetToken()
             completable(.completed)
             return Disposables.create()
         }

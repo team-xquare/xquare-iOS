@@ -20,13 +20,13 @@ extension AuthServiceDependency {
     static func resolve() -> AuthServiceDependency {
         // MARK: - Datasources
         let remoteAuthDataSource: RemoteAuthDataSource = RemoteAuthDataSourceImpl()
-        let loaclTokenDataSource: LoaclTokenDataSource = LoaclTokenDataSourceImpl()
+        let localTokenDataSource: LocalTokenDataSource = LocalTokenDataSourceImpl()
         let localAuthDataSource: LocalAuthDataSource = LocalAuthDataSourceImpl()
 
         // MARK: - Respositories
         let authRepository: AuthRepository = AuthRepositoryImpl(
             remoteAuthDataSource: remoteAuthDataSource,
-            loaclTokenDataSource: loaclTokenDataSource,
+            localTokenDataSource: localTokenDataSource,
             localAuthDataSource: localAuthDataSource
         )
 
@@ -58,7 +58,7 @@ extension AuthServiceDependency {
 
         // MARK: - Plugin
         let jwtPlugin = JWTPlugin(
-            loaclTokenDataSource: loaclTokenDataSource
+            localTokenDataSource: localTokenDataSource
         )
 
         return AuthServiceDependency(
