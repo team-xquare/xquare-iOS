@@ -12,6 +12,7 @@ extension Image {
     static let onboardingXquare = Image("Onboarding-Xquare")
 
     // Icon
+    static let camera = Image("Camera")
     static let application = Image("Application")
     static let bell = Image("Bell")
     static let bellWithBadge = Image("Bell.badge")

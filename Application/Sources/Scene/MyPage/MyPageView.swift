@@ -12,23 +12,17 @@ struct MyPageView: View {
             alignment: .center,
             spacing: 0
         ) {
-            Spacer()
-                .frame(height: 34)
-            ProfileImageView(
+            Spacer().frame(height: 20)
+            MyProfileView(
                 imageUrl: viewModel.profileImagrUrl,
-                uiimage: $viewModel.profileImage
+                uiimage: $viewModel.profileImage,
+                name: viewModel.name,
+                gradeClassNum: viewModel.gradeClassNum,
+                xPhotosIsPresented: $viewModel.xPhotosIsPresented
             )
-            Button {
-                viewModel.xPhotosIsPresented = true
-            } label: {
-                Text("변경하기")
-                    .sdText(type: .body4, textColor: .GrayScale.gray900)
-            }
-            .padding(.bottom, 6)
-            MyInformationView(title: "이름", content: viewModel.name)
-            MyInformationView(title: "생년월일", content: viewModel.birthDay)
-            MyInformationView(title: "학년 반 번호", content: viewModel.gradeClassNum)
             MyInformationView(title: "아이디", content: viewModel.id)
+            MyInformationView(title: "생년월일", content: viewModel.birthDay)
+            Spacer()
             Button(action: {
                 viewModel.showLogoutAlert = true
             }, label: {
@@ -39,12 +33,8 @@ struct MyPageView: View {
                     .background(Color.System.red50)
                     .cornerRadius(8)
             })
-            Spacer()
+            .padding(.bottom, 40)
         }
-        .sdPhotoPicker(
-            isPresented: $viewModel.xPhotosIsPresented,
-            selection: $viewModel.profileImage
-        )
         .sdAlert(isPresented: $viewModel.showLogoutAlert) {
             SDAlert(
                 title: "정말 회원탈퇴 하시겠습니까?",
@@ -55,6 +45,10 @@ struct MyPageView: View {
                 })
             )
         }
+        .sdPhotoPicker(
+            isPresented: $viewModel.xPhotosIsPresented,
+            selection: $viewModel.profileImage
+        )
         .onChange(of: viewModel.profileImage, perform: { _ in
             viewModel.uploadImage()
         })
