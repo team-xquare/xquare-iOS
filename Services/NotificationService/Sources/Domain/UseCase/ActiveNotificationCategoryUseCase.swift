@@ -10,8 +10,11 @@ public class ActiveNotificationCategoryUseCase {
         self.repositry = repositry
     }
 
-    public func excute(topic: NotificationActivateTopic, isActivated: Bool) -> Completable {
-        return repositry.activeNotificationCategory(topic: topic, isActivated: isActivated)
+    public func excute(topics: [NotificationActivateTopic: Bool]) -> Completable {
+        let observables = topics.map {
+            return repositry.activeNotificationCategory(topic: $0.key, isActivated: $0.value)
+        }
+        return Completable.zip(observables)
     }
 
 }
