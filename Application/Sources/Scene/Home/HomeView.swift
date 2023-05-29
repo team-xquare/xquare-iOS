@@ -65,11 +65,19 @@ struct HomeView: View, XNavigationAndTabContent {
                     .padding(.leading, 5)
             }
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button {
-                    self.xquareRouter.navigateTo(.notification)
-                } label: {
-                    Image.bell
-                        .frame(width: 24, height: 24)
+                HStack {
+                    Button {
+                        self.xquareRouter.navigateTo(.notification)
+                    } label: {
+                        Image.bell
+                            .frame(width: 24, height: 24)
+                    }
+                    Button {
+                        self.xquareRouter.navigateTo(.setting)
+                    } label: {
+                        Image.settingIcon
+                            .frame(width: 24, height: 24)
+                    }
                 }
             }
         }

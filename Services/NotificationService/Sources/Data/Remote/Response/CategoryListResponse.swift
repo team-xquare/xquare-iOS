@@ -1,11 +1,11 @@
 import Foundation
 
 struct CategoryListResponse: Decodable {
-    let categories: [CategoryResponse]
+    let settings: [CategoryResponse]
 }
 
 extension CategoryListResponse {
     func toDomain() -> [CategoryEntity] {
-        return categories.map { $0.toDomain() }
+        return settings.map { $0.toDomain() }
     }
 }

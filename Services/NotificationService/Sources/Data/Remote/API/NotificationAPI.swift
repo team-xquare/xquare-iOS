@@ -7,8 +7,7 @@ import Moya
 enum NotificationAPI {
     case fetchNotificationCategoryList(defaultActivated: Bool)
     case fetchActivatedNotificationCategoryList
-    case activeNotificationCategory(categoryId: String)
-    case inactiveNotificationCategory(categoryId: String)
+    case activeNotificationCategory(topic: String, isActivated: Bool)
     case fetchPostedNotificationList
     case checkNotification(notificationId: String)
     case fetchUncheckNotificationCount
@@ -24,10 +23,8 @@ extension NotificationAPI: XquareAPI {
         switch self {
         case .fetchNotificationCategoryList:
             return "/categories"
-        case .fetchActivatedNotificationCategoryList:
+        case .fetchActivatedNotificationCategoryList, .activeNotificationCategory:
             return "/tags"
-        case .activeNotificationCategory(let categoryId), .inactiveNotificationCategory(let categoryId):
-            return "/tags/\(categoryId)"
         case .checkNotification(let notificationId):
             return "/\(notificationId)"
         case .fetchUncheckNotificationCount:
@@ -50,8 +47,6 @@ extension NotificationAPI: XquareAPI {
         switch self {
         case .activeNotificationCategory:
             return .patch
-        case .inactiveNotificationCategory:
-            return .delete
         case .checkNotification:
             return .post
         default:
@@ -67,6 +62,14 @@ extension NotificationAPI: XquareAPI {
                     "default_activated": defaultActivated
                 ],
                 encoding: URLEncoding.default
+            )
+        case .activeNotificationCategory(let topic, let isActivated):
+            return .requestParameters(
+                parameters: [
+                    "topic": topic,
+                    "is-activated": isActivated
+                ],
+                encoding: URLEncoding.queryString
             )
         default:
             return .requestPlain

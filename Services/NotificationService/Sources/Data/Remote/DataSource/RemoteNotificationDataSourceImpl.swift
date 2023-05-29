@@ -17,13 +17,8 @@ class RemoteNotificationDataSourceImpl: RestApiRemoteDataSource<NotificationAPI>
             .map { $0.toDomain() }
     }
 
-    func activeNotificationCategory(categoryId: String) -> Completable {
-        return request(.activeNotificationCategory(categoryId: categoryId))
-            .asCompletable()
-    }
-
-    func inactiveNotificationCategory(categoryId: String) -> Completable {
-        return request(.inactiveNotificationCategory(categoryId: categoryId))
+    func activeNotificationCategory(topic: NotificationActivateTopic, isActivated: Bool) -> Completable {
+        return request(.activeNotificationCategory(topic: topic.rawValue, isActivated: isActivated))
             .asCompletable()
     }
 
@@ -43,5 +38,4 @@ class RemoteNotificationDataSourceImpl: RestApiRemoteDataSource<NotificationAPI>
             .map(UnreadCountResponse.self)
             .map { $0.unreadCount }
     }
-
 }

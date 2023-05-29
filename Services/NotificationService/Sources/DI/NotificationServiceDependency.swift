@@ -5,7 +5,6 @@ public struct NotificationServiceDependency {
     public let fetchNotificationCategoryListUseCase: FetchNotificationCategoryListUseCase
     public let fetchActivitedCategoryLiseUseCase: FetchActivatedCategoryListUseCase
     public let activeNotificationCategoryUseCase: ActiveNotificationCategoryUseCase
-    public let inactiveNotificationCategoryUseCase: InactiveNotifcationCategoryUseCase
     public let fetchPostedNotificationListUseCase: FetchPostedNotificationListUseCase
     public let checkNotificationUseCase: CheckNotificationUseCase
     public let fetchUncheckNotificationCountUseCase: FetchUncheckNotificationCountUseCase
@@ -27,9 +26,6 @@ extension NotificationServiceDependency {
         let activeNotificationCategoryUseCase = ActiveNotificationCategoryUseCase(
             repositry: repository
         )
-        let inactiveNotificationCategoryUseCase = InactiveNotifcationCategoryUseCase(
-            reposiotry: repository
-        )
         let fetchPostedNotificationListUseCase = FetchPostedNotificationListUseCase(
             repository: repository
         )
@@ -44,7 +40,6 @@ extension NotificationServiceDependency {
             fetchNotificationCategoryListUseCase: fetchNotificationCategoryListUseCase,
             fetchActivitedCategoryLiseUseCase: fetchActivitedCategoryListUseCase,
             activeNotificationCategoryUseCase: activeNotificationCategoryUseCase,
-            inactiveNotificationCategoryUseCase: inactiveNotificationCategoryUseCase,
             fetchPostedNotificationListUseCase: fetchPostedNotificationListUseCase,
             checkNotificationUseCase: checkNotificationUseCase,
             fetchUncheckNotificationCountUseCase: fetchUncheckNotificationCountUseCase
