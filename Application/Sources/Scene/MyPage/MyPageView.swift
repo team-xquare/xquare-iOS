@@ -9,35 +9,59 @@ struct MyPageView: View {
 
     var body: some View {
         VStack(
-            alignment: .center,
+            alignment: .leading,
             spacing: 0
         ) {
             Spacer().frame(height: 20)
-            MyProfileView(
-                imageUrl: viewModel.profileImagrUrl,
-                uiimage: $viewModel.profileImage,
-                name: viewModel.name,
-                gradeClassNum: viewModel.gradeClassNum,
-                xPhotosIsPresented: $viewModel.xPhotosIsPresented
+            VStack(alignment: .leading, spacing: 0) {
+                Rectangle().frame(height: 0)
+                MyProfileView(
+                    imageUrl: viewModel.profileImagrUrl,
+                    uiimage: $viewModel.profileImage,
+                    name: viewModel.name,
+                    gradeClassNum: viewModel.gradeClassNum,
+                    xPhotosIsPresented: $viewModel.xPhotosIsPresented
+                )
+                .padding([.leading, .top], 16)
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("아이디: \(viewModel.id)")
+                        .sdText(type: .caption2)
+                    Text("생년월일: \(viewModel.birthDay)")
+                        .sdText(type: .caption2)
+                }
+                .padding([.leading, .bottom], 16)
+            }
+            .background(Color.GrayScale.gray50)
+            .cornerRadius(12)
+            .overlay {
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(lineWidth: 1)
+                    .foregroundColor(.GrayScale.gray300)
+            }
+            .padding(.horizontal, 16)
+            ServiceSectionButtonView(
+                headerText: "계정 설정",
+                services: [
+                    (text: "로그아웃", action: { viewModel.showLogoutAlert = true }, textColor: .GrayScale.gray900),
+                    (text: "회원탈퇴", action: { viewModel.showQuitAlert = true }, textColor: .System.red600)
+                ]
             )
-            MyInformationView(title: "아이디", content: viewModel.id)
-            MyInformationView(title: "생년월일", content: viewModel.birthDay)
+            .padding(.top, 16)
             Spacer()
-            Button(action: {
-                viewModel.showLogoutAlert = true
-            }, label: {
-                Text("회원탈퇴")
-                    .sdText(type: .body3, textColor: Color.System.red700)
-                    .padding(.vertical, 8)
-                    .padding(.horizontal, 16)
-                    .background(Color.System.red50)
-                    .cornerRadius(8)
-            })
-            .padding(.bottom, 40)
+        }
+        .sdAlert(isPresented: $viewModel.showQuitAlert) {
+            SDAlert(
+                title: "정말 회원탈퇴 하시겠습니까?",
+                button1: (text: "아니요", action: { }),
+                button2: (text: "네", action: {
+                    viewModel.withdrawal()
+                    self.xquareRouter.popToRoot()
+                })
+            )
         }
         .sdAlert(isPresented: $viewModel.showLogoutAlert) {
             SDAlert(
-                title: "정말 회원탈퇴 하시겠습니까?",
+                title: "정말 로그아웃 하시겠습니까?",
                 button1: (text: "아니요", action: { }),
                 button2: (text: "네", action: {
                     viewModel.withdrawal()
@@ -52,7 +76,6 @@ struct MyPageView: View {
         .onChange(of: viewModel.profileImage, perform: { _ in
             viewModel.uploadImage()
         })
-        .padding(.horizontal, 16)
         .setNavigationBackButton()
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)
