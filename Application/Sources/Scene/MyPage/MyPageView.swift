@@ -23,13 +23,7 @@ struct MyPageView: View {
                     xPhotosIsPresented: $viewModel.xPhotosIsPresented
                 )
                 .padding([.leading, .top], 16)
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("아이디: \(viewModel.id)")
-                        .sdText(type: .caption2)
-                    Text("생년월일: \(viewModel.birthDay)")
-                        .sdText(type: .caption2)
-                }
-                .padding([.leading, .bottom], 16)
+                MyInfoIDAndBirthDay(id: viewModel.id, birthDay: viewModel.birthDay)
             }
             .background(Color.GrayScale.gray50)
             .cornerRadius(12)
