@@ -18,7 +18,7 @@ struct MealListCell: View {
                     .padding(.trailing, 10)
                 Spacer()
                 Text(entity.kcal ?? "")
-                    .sdText(type: .caption)
+                    .sdText(type: .caption2)
             }
             Spacer().frame(height: 8)
             ForEach(
