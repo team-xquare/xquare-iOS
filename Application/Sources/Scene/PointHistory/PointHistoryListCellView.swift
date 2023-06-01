@@ -14,7 +14,7 @@ struct PointHistoryListCellView: View {
                 Text(pointHistory.reason)
                     .sdText(type: .body2, textColor: .GrayScale.gray900)
                 Text(pointHistory.date.toString(format: .fullDate))
-                    .sdText(type: .caption)
+                    .sdText(type: .caption2)
             }
             Spacer()
             Text("\(pointHistory.point)")
