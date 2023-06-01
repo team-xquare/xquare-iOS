@@ -125,7 +125,7 @@ extension XNavigationAndTabView {
     }
 
     private func generateHapticImpact() {
-        let generator = UIImpactFeedbackGenerator(style: .medium)
+        let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
     }
 
