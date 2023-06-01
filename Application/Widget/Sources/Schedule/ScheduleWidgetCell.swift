@@ -22,7 +22,7 @@ struct ScheduleWidgetCell: View {
             HStack {
                 Text(schedule)
                     .sdText(
-                        type: .caption,
+                        type: .caption2,
                         textColor: colorScheme == .light ? .Primary.purple400 : .Primary.purple900
                     )
                     .padding(.leading, 10)
