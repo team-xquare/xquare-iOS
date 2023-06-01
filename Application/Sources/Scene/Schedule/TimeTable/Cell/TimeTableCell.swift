@@ -27,7 +27,7 @@ struct TimeTableCell: View {
                 Text(timeTable.subjectName)
                     .sdText(type: .body1, textColor: .GrayScale.gray900)
                 Text("\(timeTable.beginTime.toString(format: "HH:mm")) ~ \(timeTable.endTime.toString(format: "HH:mm"))")
-                    .sdText(type: .caption, textColor: .GrayScale.gray600)
+                    .sdText(type: .caption2, textColor: .GrayScale.gray600)
             }
         }
     }

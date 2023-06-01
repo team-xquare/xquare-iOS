@@ -13,7 +13,7 @@ struct ToggleView: View {
                 Text(title)
                     .sdText(type: .body1, textColor: .GrayScale.gray900)
                 Text(subTitle)
-                    .sdText(type: .caption, textColor: .GrayScale.gray500)
+                    .sdText(type: .caption2, textColor: .GrayScale.gray500)
             }
             Spacer()
             Toggle("", isOn: $isToggle)

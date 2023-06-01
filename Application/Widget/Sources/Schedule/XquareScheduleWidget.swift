@@ -60,7 +60,7 @@ struct XquareScheduleWidgetEntryView: View {
         VStack(alignment: .leading, spacing: 0) {
             Text(entry.date.toString(format: "E요일"))
                 .sdText(
-                    type: .caption,
+                    type: .caption2,
                     textColor: colorScheme == .light ? .black : .white
                 )
             Text(entry.date.toString(format: "dd일"))
@@ -79,7 +79,7 @@ struct XquareScheduleWidgetEntryView: View {
             } else {
                 HStack {
                     Text("일정이 없습니다.")
-                        .sdText(type: .caption, textColor: .Primary.purple300)
+                        .sdText(type: .caption2, textColor: .Primary.purple300)
                     Spacer()
                 }
             }
