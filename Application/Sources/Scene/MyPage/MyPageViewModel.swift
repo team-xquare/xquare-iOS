@@ -10,12 +10,13 @@ import AuthService
 class MyPageViewModel: ObservableObject {
     @Published var profileImage = UIImage()
     @Published var profileImagrUrl: URL?
-    @Published var name: String = "]"
+    @Published var name: String = ""
     @Published var birthDay: String = ""
     @Published var gradeClassNum: String = ""
     @Published var id: String = ""
     @Published var xPhotosIsPresented: Bool = false
     @Published var profileImageString: String = ""
+    @Published var showQuitAlert: Bool = false
     @Published var showLogoutAlert: Bool = false
 
     private let fetchProfileUseCase: FetchProfileUseCase
@@ -42,7 +43,7 @@ class MyPageViewModel: ObservableObject {
             .subscribe(onSuccess: {
                 self.name = $0.name
                 self.gradeClassNum = "\($0.grade)학년 \($0.classNumber)반 \($0.number)번"
-                self.birthDay = $0.birthDay.toString(format: "yyyy.MM.dd")
+                self.birthDay = $0.birthDay.toString(format: "yyyy년 MM월 dd일")
                 self.id = $0.id
                 self.profileImagrUrl = $0.imageUrl
             })
