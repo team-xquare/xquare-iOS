@@ -13,26 +13,15 @@ struct MyPageView: View {
             spacing: 0
         ) {
             Spacer().frame(height: 20)
-            VStack(alignment: .leading, spacing: 0) {
-                Rectangle().frame(height: 0)
-                MyProfileView(
-                    imageUrl: viewModel.profileImagrUrl,
-                    uiimage: $viewModel.profileImage,
-                    name: viewModel.name,
-                    gradeClassNum: viewModel.gradeClassNum,
-                    xPhotosIsPresented: $viewModel.xPhotosIsPresented
-                )
-                .padding([.leading, .top], 16)
-                MyInfoIDAndBirthDay(id: viewModel.id, birthDay: viewModel.birthDay)
-            }
-            .background(Color.GrayScale.gray50)
-            .cornerRadius(12)
-            .overlay {
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(lineWidth: 1)
-                    .foregroundColor(.GrayScale.gray300)
-            }
-            .padding(.horizontal, 16)
+            MyInformationView(
+                imageUrl: viewModel.profileImagrUrl,
+                name: viewModel.name,
+                gradeClassNum: viewModel.gradeClassNum,
+                id: viewModel.id,
+                birthDay: viewModel.birthDay,
+                uiImage: $viewModel.profileImage,
+                xPhotosIsPresented: $viewModel.xPhotosIsPresented
+            )
             ServiceSectionButtonView(
                 headerText: "계정 설정",
                 services: [
