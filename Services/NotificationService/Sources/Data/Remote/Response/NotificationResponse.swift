@@ -27,7 +27,7 @@ extension NotificationResponse {
             id: id,
             title: title,
             content: content,
-            sendAt: sendAt.toDate(format: .fullDateWithTime),
+            sendAt: sendAt.toDate(format: .fullDateWithMilliSecondTime),
             isRead: isRead,
             userId: userId,
             topic: .init(rawValue: topic) ?? .allGoodPoint
