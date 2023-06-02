@@ -10,8 +10,9 @@ struct ReleaseNoteCellView: View {
         HStack {
             VStack(alignment: .leading, spacing: 5) {
                 Text("\(entity.releaseVersion) 업데이트 🚀")
-                    .sdText(type: .body1, textColor: Color.GrayScale.gray900)
+                    .sdText(type: .body1, textColor: .GrayScale.gray900)
                     .padding(.bottom, 5)
+                    .padding(.top, 16)
                 Text("새로운 기능")
                     .sdText(type: .body3, textColor: .GrayScale.gray900)
                 Text("\(entity.featureContent)")
@@ -21,10 +22,11 @@ struct ReleaseNoteCellView: View {
                     .sdText(type: .body3, textColor: .GrayScale.gray900)
                 Text("\(entity.bugFixContent)")
                     .sdText(type: .body4, textColor: .GrayScale.gray800)
+                    .padding(.bottom, 16)
             }
             Spacer()
         }
-        .padding(16)
+        .padding(.horizontal, 16)
         .background(Color.GrayScale.gray50)
         .cornerRadius(16)
         .overlay(
