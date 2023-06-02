@@ -35,20 +35,24 @@ struct NotificationListCell: View {
     }
 
     private func getTimeForSend(date: Date) -> String {
-        let today = Date()
-
-        if Int(today.toString(format: "MM")) ?? 0 > Int(date.toString(format: "MM")) ?? 0 {
-            return "\((Int(today.toString(format: "MM")) ?? 0) - (Int(date.toString(format: "MM")) ?? 0))달 전"
-        } else if Int(today.toString(format: "dd")) ?? 0 > Int(date.toString(format: "dd")) ?? 0 {
-            return "\((Int(today.toString(format: "dd")) ?? 0) - (Int(date.toString(format: "dd")) ?? 0))일 전"
-        } else if Int(today.toString(format: "HH")) ?? 0 > Int(date.toString(format: "HH")) ?? 0 {
-            return "\((Int(today.toString(format: "HH")) ?? 0) - (Int(date.toString(format: "HH")) ?? 0))시간 전"
-        } else if Int(today.toString(format: "mm")) ?? 0 > Int(date.toString(format: "mm")) ?? 0 {
-            return "\((Int(today.toString(format: "mm")) ?? 0) - (Int(date.toString(format: "mm")) ?? 0))분 전"
-        } else {
-            return "방금 전"
+            let today = Date()
+            var resultMinute = calculateToMinute(date: today) - calculateToMinute(date: date)
+            if resultMinute / 60 == 0 && resultMinute % 60 == 0 {
+                return "방금 전"
+            } else if resultMinute / 60 == 0 {
+                return "\(resultMinute % 60)분 전"
+            } else if resultMinute / 60 / 24 == 0 {
+                return "\(resultMinute / 60 % 24)시간 전"
+            } else if resultMinute / 60 / 24 / 30 == 0 {
+                return "\(resultMinute / 60 / 24 % 30)일 전"
+            } else {
+                return "\(resultMinute / 60 / 24 / 30)달 전"
+            }
         }
-    }
+        private func calculateToMinute(date: Date) -> Int {
+            let dateList = date.toString(format: "MM:dd:HH:mm").split(separator: ":").map { Int($0)! }
+            return dateList[0] * 30 * 24 * 60 * 1 + dateList[1] * 24 * 60 * 1 + dateList[2] * 60 * 1 + dateList[3]
+        }
     // swiftlint:disable line_length
     private func topicToImage(topic: NotificationTopic) -> Image {
         switch topic {
