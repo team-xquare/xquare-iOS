@@ -18,11 +18,11 @@ struct NotificationListCell: View {
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 4) {
                     Text(entity.title)
-                        .sdText(type: .caption)
+                        .sdText(type: .caption2)
 
                     Spacer()
                     Text(getTimeForSend(date: entity.sendAt))
-                        .sdText(type: .caption)
+                        .sdText(type: .caption2)
                 }
                 Text(entity.content)
                     .sdText(type: .body3, textColor: .GrayScale.gray900)

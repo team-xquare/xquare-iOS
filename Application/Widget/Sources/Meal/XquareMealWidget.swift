@@ -115,20 +115,20 @@ struct SmallXquareMealWidgetView: View {
                     .padding(.top, 3)
                 Text(entry.date.toString(format: .fullDate))
                     .sdText(
-                        type: .caption,
+                        type: .caption2,
                         textColor: colorScheme == .light ? .GrayScale.gray600 : .GrayScale.gray500
                     )
                     .padding(.bottom, 10)
                 if mealMenu?.menu ?? [] != [""] && mealMenu?.menu != nil {
                     Text("\(mealMenu?.menu?.joined(separator: ", ") ?? "") (\(mealMenu?.kcal ?? ""))")
                         .sdText(
-                            type: .caption,
+                            type: .caption2,
                             textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
                         )
                 } else {
                     Text("등록된 정보가 없습니다.")
                         .sdText(
-                            type: .caption,
+                            type: .caption2,
                             textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
                         )
                 }
@@ -162,7 +162,7 @@ struct MediumXquareMealWidgetView: View {
                     .padding(.trailing, 10)
                 Text(entry.date.toString(format: .fullDate))
                     .sdText(
-                        type: .caption,
+                        type: .caption2,
                         textColor: colorScheme == .light ? .GrayScale.gray600 : .GrayScale.gray500
                     )
                 Spacer()
@@ -171,13 +171,13 @@ struct MediumXquareMealWidgetView: View {
             if mealMenu?.menu ?? [] != [""] && mealMenu?.menu != nil {
                 Text("\(mealMenu?.menu?.joined(separator: ", ") ?? "") (\(mealMenu?.kcal ?? ""))")
                     .sdText(
-                        type: .caption,
+                        type: .caption2,
                         textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
                     )
             } else {
                 Text("등록된 정보가 없습니다.")
                     .sdText(
-                        type: .caption,
+                        type: .caption2,
                         textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
                     )
             }
