@@ -9,9 +9,9 @@ struct MyInfoIDAndBirthDay: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             Text("아이디: \(id)")
-                .sdText(type: .caption2)
+                .sdText(type: .caption2, textColor: .GrayScale.gray800)
             Text("생년월일: \(birthDay)")
-                .sdText(type: .caption2)
+                .sdText(type: .caption2, textColor: .GrayScale.gray800)
         }
         .padding([.leading, .bottom], 16)
     }
