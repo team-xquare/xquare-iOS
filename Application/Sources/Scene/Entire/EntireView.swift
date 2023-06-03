@@ -19,33 +19,27 @@ struct EntireView: View, XNavigationAndTabContent {
             LazyVStack(spacing: 27) {
                 VStack(spacing: 27) {
                     TopServiceMenuView()
-                    ServiceSectionView(
+                    ServiceSectionButtonView(
                         headerText: "학교",
                         services: [
-                            (text: "오늘의 자습감독 선생님", view: .selfStudyTeacher)
+                            (text: "오늘의 자습감독 선생님",
+                             action: { xquareRouter.navigateTo(.selfStudyTeacher) },
+                             textColor: .GrayScale.gray900)
                         ]
                     )
                     ServiceSectionButtonView(
                         headerText: "앱",
                         services: [
-                            (text: "로그아웃", action: { viewModel.showLogoutAlert = true }),
-                            (text: "업데이트 사항", action: { xquareRouter.navigateTo(.releaseNote) })
-                        ])
+                            (text: "업데이트 사항",
+                             action: { xquareRouter.navigateTo(.releaseNote) },
+                             textColor: .GrayScale.gray900)
+                        ]
+                    )
                     Spacer()
                 }
             }
             .navigationTitle("전체")
             .navigationBarTitleDisplayMode(.large)
-            .sdAlert(isPresented: $viewModel.showLogoutAlert) {
-                SDAlert(
-                    title: "정말 로그아웃 하시겠습니까?",
-                    button1: (text: "아니요", action: { }),
-                    button2: (text: "네", action: {
-                        viewModel.logout()
-                        self.xquareRouter.popToRoot()
-                    })
-                )
-            }
         }
     }
 }
