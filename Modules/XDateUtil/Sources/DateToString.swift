@@ -35,7 +35,11 @@ public extension Date {
                     }
                 }
                 if resultMinute >= 1 {
-                    return "\(toDay.month! + yearDifference - sendAt.month!)달 전"
+                    if toDay.month! + yearDifference - sendAt.month! >= 12 {
+                        return "\((toDay.month! + yearDifference - sendAt.month!) / 12)년 전"
+                    } else {
+                        return "\(toDay.month! + yearDifference - sendAt.month!)달 전"
+                    }
                 } else {
                     return "\(toDay.month! + yearDifference - sendAt.month! - 1)달 전"
                 }
