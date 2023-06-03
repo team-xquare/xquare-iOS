@@ -3,7 +3,6 @@ import UIKit
 
 import SemicolonDesign
 
-// swiftlint:disable large_tuple
 public struct XNavigationAndTabView: View {
 
     @State private var tabViewSelection: Int = 0
@@ -12,6 +11,7 @@ public struct XNavigationAndTabView: View {
     private var contents: [AnyView] = []
     private var tabInfosPerContents: [TabInformation] = []
 
+    // swiftlint:disable large_tuple
     public init<C0>(
         selection: Binding<Int>? = nil,
         _ contents: () -> C0
@@ -66,6 +66,7 @@ public struct XNavigationAndTabView: View {
         self.contents.append(contents().4.toAnyView())
         self.tabInfosPerContents.append(contents().4.tabInformation)
     }
+    // swiftlint:enable large_tuple
 
     public var body: some View {
         ZStack {
@@ -93,6 +94,7 @@ public struct XNavigationAndTabView: View {
                 Button(action: {
                     self.tabViewSelection = index
                     self.bindedTabViewSelection?.wrappedValue = index
+                    self.generateHapticImpact()
                 }, label: {
                     VStack(alignment: .center, spacing: 0) {
                         Spacer().frame(height: 6)
@@ -114,9 +116,17 @@ public struct XNavigationAndTabView: View {
         .background(tabInfosPerContents[getTabViewSelection()].backgroundColor)
     }
 
+}
+
+extension XNavigationAndTabView {
+
     private func getTabViewSelection() -> Int {
         bindedTabViewSelection?.wrappedValue ?? tabViewSelection
     }
 
+    private func generateHapticImpact() {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+    }
+
 }
-// swiftlint:enable large_tuple

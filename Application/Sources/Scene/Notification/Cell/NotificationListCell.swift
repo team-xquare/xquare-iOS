@@ -44,7 +44,7 @@ struct NotificationListCell: View {
             return Image.thumbDownNotiIcon
         case .scheduleLocal, .scheduleSocial:
             return Image.calendar
-        case .feedNotice, .feedComment, .feedLike:
+        case .feedNotice, .feedBambooLike, .feedNoticeLike, .feedBambooComment, .feedNoticeComment:
             return Image.feed
         }
     }
