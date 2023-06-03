@@ -38,13 +38,13 @@ struct NotificationListCell: View {
         switch topic {
         case .applicationWeekendMeal, .applicationStay, .applicationMoveClassRoom, .applicationPicnic, .applicationPicnicPass, .applicationWeekendPicnic, .applicationWeekendPicnicReservation:
             return Image.application
-        case .allGoodPoint:
+        case .allGoodPoint, .feedBambooLike, .feedNoticeLike:
             return Image.thumbUpNotiIcon
         case .allBadPoint, .allPenaltyLevel:
             return Image.thumbDownNotiIcon
         case .scheduleLocal, .scheduleSocial:
             return Image.calendar
-        case .feedNotice, .feedBambooLike, .feedNoticeLike, .feedBambooComment, .feedNoticeComment:
+        case .feedNotice, .feedBambooComment, .feedNoticeComment:
             return Image.feed
         }
     }
