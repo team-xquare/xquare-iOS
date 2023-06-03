@@ -28,10 +28,10 @@ public extension Date {
             } else {
                 let yearDifference = (toDay.year! - sendAt.year!) * 12
                 for time in sendAt.month!..<toDay.month! + yearDifference {
-                    if time > 12 {
-                        resultMinute -= time - yearDifference.monthToDate(date: self)
+                    if time % 12 == 0 {
+                        resultMinute -= 12.monthToDate(date: self)
                     } else {
-                        resultMinute -= time.monthToDate(date: self)
+                        resultMinute -= time%12.monthToDate(date: self)
                     }
                 }
                 if resultMinute >= 1 {
