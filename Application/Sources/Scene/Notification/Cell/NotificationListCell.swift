@@ -36,7 +36,7 @@ struct NotificationListCell: View {
 
     private func getTimeForSend(date: Date) -> String {
             let today = Date()
-            var resultMinute = calculateToMinute(date: today) - calculateToMinute(date: date)
+            let resultMinute = calculateToMinute(date: today) - calculateToMinute(date: date)
             if resultMinute / 60 == 0 && resultMinute % 60 == 0 {
                 return "방금 전"
             } else if resultMinute / 60 == 0 {
