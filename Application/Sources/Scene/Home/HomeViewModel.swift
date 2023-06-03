@@ -42,6 +42,7 @@ class HomeViewModel: ObservableObject {
     }
 
     func fetchTodaysMeal() {
+        self.menu = []
         self.fetchMealMenuPerDayUseCase.excute(date: Date())
             .subscribe(onNext: {
                 self.menu = $0.menu

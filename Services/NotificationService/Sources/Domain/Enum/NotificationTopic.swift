@@ -14,6 +14,8 @@ public enum NotificationTopic: String {
     case scheduleLocal = "SCHEDULE_LOCAL"
     case scheduleSocial = "SCHEDULE_SOCIAL"
     case feedNotice = "FEED_NOTICE"
-    case feedComment = "FEED_COMMENT"
-    case feedLike = "FEED_LIKE"
+    case feedNoticeComment = "FEED_NOTICE_COMMENT"
+    case feedNoticeLike = "FEED_NOTICE_LIKE"
+    case feedBambooComment = "FEED_BAMBOO_COMMENT"
+    case feedBambooLike = "FEED_BAMBOO_LIKE"
 }

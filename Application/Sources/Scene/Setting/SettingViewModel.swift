@@ -25,10 +25,10 @@ class SettingViewModel: ObservableObject {
 
     func activeNotificationCategory() {
         self.activeNotificationCategoryUseCase.excute(topics: [
-            .all: isAllToggle,
-            .application: isApplicationToggle,
-            .feed: isFeedToggle,
-            .schedule: isScheduleToggle
+            .all: self.isAllToggle,
+            .application: self.isApplicationToggle,
+            .feed: self.isFeedToggle,
+            .schedule: self.isScheduleToggle
         ])
         .subscribe(onCompleted: { self.isSucceed = true })
         .disposed(by: disposeBag)
