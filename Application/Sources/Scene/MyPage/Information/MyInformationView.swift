@@ -38,12 +38,3 @@ struct MyInformationView: View {
         .padding(.horizontal, 16)
     }
 }
-
-//struct MyInformationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MyInformationView(
-//            title: "이름",
-//            content: "김기영"
-//        )
-//    }
-//}
