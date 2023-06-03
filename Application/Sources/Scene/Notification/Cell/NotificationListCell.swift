@@ -21,7 +21,7 @@ struct NotificationListCell: View {
                         .sdText(type: .caption2)
 
                     Spacer()
-                    Text(getTimeForSend(date: entity.sendAt))
+                    Text(entity.sendAt.getTimeAgoAsKoreanString())
                         .sdText(type: .caption2)
                 }
                 Text(entity.content)
@@ -33,34 +33,18 @@ struct NotificationListCell: View {
         .padding(16)
         .background(entity.isRead ? .white : .GrayScale.gray50)
     }
-
-    private func getTimeForSend(date: Date) -> String {
-        let today = Date()
-
-        if Int(today.toString(format: "MM")) ?? 0 > Int(date.toString(format: "MM")) ?? 0 {
-            return "\((Int(today.toString(format: "MM")) ?? 0) - (Int(date.toString(format: "MM")) ?? 0))달 전"
-        } else if Int(today.toString(format: "dd")) ?? 0 > Int(date.toString(format: "dd")) ?? 0 {
-            return "\((Int(today.toString(format: "dd")) ?? 0) - (Int(date.toString(format: "dd")) ?? 0))일 전"
-        } else if Int(today.toString(format: "HH")) ?? 0 > Int(date.toString(format: "HH")) ?? 0 {
-            return "\((Int(today.toString(format: "HH")) ?? 0) - (Int(date.toString(format: "HH")) ?? 0))시간 전"
-        } else if Int(today.toString(format: "mm")) ?? 0 > Int(date.toString(format: "mm")) ?? 0 {
-            return "\((Int(today.toString(format: "mm")) ?? 0) - (Int(date.toString(format: "mm")) ?? 0))분 전"
-        } else {
-            return "방금 전"
-        }
-    }
     // swiftlint:disable line_length
     private func topicToImage(topic: NotificationTopic) -> Image {
         switch topic {
         case .applicationWeekendMeal, .applicationStay, .applicationMoveClassRoom, .applicationPicnic, .applicationPicnicPass, .applicationWeekendPicnic, .applicationWeekendPicnicReservation:
             return Image.application
-        case .allGoodPoint:
+        case .allGoodPoint, .feedBambooLike, .feedNoticeLike:
             return Image.thumbUpNotiIcon
         case .allBadPoint, .allPenaltyLevel:
             return Image.thumbDownNotiIcon
         case .scheduleLocal, .scheduleSocial:
             return Image.calendar
-        case .feedNotice, .feedBambooLike, .feedNoticeLike, .feedBambooComment, .feedNoticeComment:
+        case .feedNotice, .feedBambooComment, .feedNoticeComment:
             return Image.feed
         }
     }
