@@ -22,35 +22,7 @@ struct MyPageView: View {
                 uiImage: $viewModel.profileImage,
                 xPhotosIsPresented: $viewModel.xPhotosIsPresented
             )
-            ServiceSectionButtonView(
-                headerText: "계정 설정",
-                services: [
-                    (text: "로그아웃", action: { viewModel.showLogoutAlert = true }, textColor: .GrayScale.gray900),
-                    (text: "회원탈퇴", action: { viewModel.showQuitAlert = true }, textColor: .System.red600)
-                ]
-            )
-            .padding(.top, 16)
             Spacer()
-        }
-        .sdAlert(isPresented: $viewModel.showQuitAlert) {
-            SDAlert(
-                title: "정말 회원탈퇴 하시겠습니까?",
-                button1: (text: "아니요", action: { }),
-                button2: (text: "네", action: {
-                    viewModel.withdrawal()
-                    self.xquareRouter.popToRoot()
-                })
-            )
-        }
-        .sdAlert(isPresented: $viewModel.showLogoutAlert) {
-            SDAlert(
-                title: "정말 로그아웃 하시겠습니까?",
-                button1: (text: "아니요", action: { }),
-                button2: (text: "네", action: {
-                    viewModel.withdrawal()
-                    self.xquareRouter.popToRoot()
-                })
-            )
         }
         .sdPhotoPicker(
             isPresented: $viewModel.xPhotosIsPresented,
