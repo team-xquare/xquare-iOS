@@ -16,14 +16,17 @@ struct BugImageView: View {
         } else {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
-                    Spacer()
-                        .frame(width: 160, height: 160)
-                        .background(Color.GrayScale.gray100)
-                        .cornerRadius(8)
-                        .padding(.bottom, 24)
-                        .onTapGesture {
-                            xPhotosIsPresented = true
-                        }
+                    ZStack(alignment: .center) {
+                        Spacer()
+                        Image.defaultBugImage
+                    }
+                    .frame(width: 160, height: 160)
+                    .background(Color.GrayScale.gray100)
+                    .cornerRadius(8)
+                    .padding(.bottom, 24)
+                    .onTapGesture {
+                        xPhotosIsPresented = true
+                    }
                     if !isEmpty {
                         ForEach(uiimage, id: \.self) {
                             Image(uiImage: $0)
