@@ -28,7 +28,6 @@ struct BugImageView: View {
                         ForEach(uiimage, id: \.self) {
                             Image(uiImage: $0)
                                 .resizable()
-                                .scaledToFit()
                                 .frame(width: 160, height: 160)
                                 .cornerRadius(8)
                                 .padding(.bottom, 24)
