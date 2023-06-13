@@ -32,7 +32,7 @@ struct MealDetailView: View {
                 }
             }
         }
-        .navigationTitle("전체 급식")
+        .navigationTitle("전체급식")
         .onAppear(perform: viewModel.fetchMealMenuPerMonth)
         .onDisappear { viewModel.dateToShowData = nil }
         .navigationBarBackButtonHidden()
