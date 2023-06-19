@@ -2,6 +2,7 @@ import SwiftUI
 
 import SemicolonDesign
 import XNavigationAndTab
+import NotificationService
 
 struct MainView: View {
     @EnvironmentObject var xquareRouter: XquareRouter
@@ -26,26 +27,35 @@ struct MainView: View {
             entireView
         )}
         .onReceive(activeNotification, perform: {
-            let threadIdentifier: String = ($0.userInfo!["threadIdentifier"] as? String ?? "threadIdentifier")
-            if let index = threadIdentifier.stringToPage().0 {
+            let categoryIdentifier = NotificationTopic(rawValue: ($0.userInfo!["categoryIdentifier"] as? String ?? ""))
+            if let index = topicToPage(topic: categoryIdentifier!).0 {
                 self.xquareRouter.moveTabTo(index: index)
-                if let page: XquareRoute = threadIdentifier.stringToPage().1 {
+                if let page = topicToPage(topic: categoryIdentifier!).1 {
                     self.xquareRouter.navigateTo(page)
                 } else { return }
             } else { return }
         })
         .onReceive(backgroundNotification, perform: { _ in
             let userDefault = UserDefaults.standard
-            if let threadIdentifier: String = userDefault.string(forKey: "threadIdentifier") {
-                print("Back")
-                if let index = threadIdentifier.stringToPage().0 {
+            if let categoryIdentifier = NotificationTopic(rawValue: userDefault.string(forKey: "categoryIdentifier")!) {
+                if let index = topicToPage(topic: categoryIdentifier).0 {
                     self.xquareRouter.moveTabTo(index: index)
-                    if let page: XquareRoute = threadIdentifier.stringToPage().1 {
+                    if let page = topicToPage(topic: categoryIdentifier).1 {
                         self.xquareRouter.navigateTo(page)
                     } else { return }
                 } else { return }
             } else { return }
+            userDefault.setValue(nil, forKey: "categoryIdentifier")
             userDefault.setValue(nil, forKey: "threadIdentifier")
         })
+    }
+}
+
+private func topicToPage(topic: NotificationTopic) -> (Int?, XquareRoute?) {
+    switch topic {
+    case .allBadPoint, .allGoodPoint, .allPenaltyLevel:
+        return (0, .pointHistory)
+    default:
+        return (nil, nil)
     }
 }

@@ -54,15 +54,21 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void
     ) {
+        let categoryIdentifier = response.notification.request.content.categoryIdentifier
         let threadIdentifier = response.notification.request.content.threadIdentifier
         if UIApplication.shared.applicationState == .active {
             NotificationCenter.default.post(
                 name: Notification.Name("touchNotification"),
                 object: nil,
-                userInfo: ["threadIdentifier": threadIdentifier]
+                userInfo:
+                    [
+                        "categoryIdentifier": categoryIdentifier,
+                        "threadIdentifier": threadIdentifier
+                    ]
             )
         } else {
             let userDefault = UserDefaults.standard
+            userDefault.set(categoryIdentifier, forKey: "categoryIdentifier")
             userDefault.set(threadIdentifier, forKey: "threadIdentifier")
             userDefault.synchronize()
         }
