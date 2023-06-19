@@ -54,6 +54,18 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void
     ) {
+        let threadIdentifier = response.notification.request.content.threadIdentifier
+        if UIApplication.shared.applicationState == .active {
+            NotificationCenter.default.post(
+                name: Notification.Name("touchNotification"),
+                object: nil,
+                userInfo: ["threadIdentifier": threadIdentifier]
+            )
+        } else {
+            let userDefault = UserDefaults.standard
+            userDefault.set(threadIdentifier, forKey: "threadIdentifier")
+            userDefault.synchronize()
+        }
         completionHandler()
     }
 
