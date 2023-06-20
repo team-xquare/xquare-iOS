@@ -30,10 +30,10 @@ struct MainView: View {
             if xquareRouter.stack.count > 2 {
                 xquareRouter.dismissLast()
             }
-            let categoryIdentifier = NotificationTopic(rawValue: ($0.userInfo!["categoryIdentifier"] as? String ?? ""))
-            if let index = topicToPage(topic: categoryIdentifier!).0 {
+            let threadIdentifier = NotificationTopic(rawValue: ($0.userInfo!["threadIdentifier"] as? String ?? ""))
+            if let index = topicToPage(topic: threadIdentifier!).0 {
                 self.xquareRouter.moveTabTo(index: index)
-                if let page = topicToPage(topic: categoryIdentifier!).1 {
+                if let page = topicToPage(topic: threadIdentifier!).1 {
                     self.xquareRouter.navigateTo(page)
                 } else { return }
             } else { return }
@@ -43,10 +43,10 @@ struct MainView: View {
                 xquareRouter.dismissLast()
             }
             let userDefault = UserDefaults.standard
-            if let categoryIdentifier = NotificationTopic(rawValue: userDefault.string(forKey: "categoryIdentifier")!) {
-                if let index = topicToPage(topic: categoryIdentifier).0 {
+            if let threadIdentifier = userDefault.string(forKey: "threadIdentifier") {
+                if let index = topicToPage(topic: NotificationTopic(rawValue: threadIdentifier)!).0 {
                     self.xquareRouter.moveTabTo(index: index)
-                    if let page = topicToPage(topic: categoryIdentifier).1 {
+                    if let page = topicToPage(topic: NotificationTopic(rawValue: threadIdentifier)!).1 {
                         self.xquareRouter.navigateTo(page)
                     } else { return }
                 } else { return }
@@ -60,7 +60,7 @@ struct MainView: View {
 private func topicToPage(topic: NotificationTopic) -> (Int?, XquareRoute?) {
     switch topic {
     case .allGoodPoint, .allPenaltyLevel, .allBadPoint:
-        return (4, .pointHistory)
+        return (0, .pointHistory)
     case .feedNoticeLike, .feedBambooLike, .feedBambooComment, .feedNoticeComment:
         return (2, nil)
     case .applicationStay, .applicationPicnicPass, .applicationWeekendMeal,
