@@ -60,6 +60,7 @@ let project = Project(
                 .SPM.SemicolonDesign,
                 .Service.MealDataService,
                 .Service.ScheduleService,
+                .Service.TimeTableService,
                 .Module.XDateUtil
             ] + TargetDependency.universalDependencies
         )
