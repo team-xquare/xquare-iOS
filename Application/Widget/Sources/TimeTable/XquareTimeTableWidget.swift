@@ -34,32 +34,11 @@ struct XquareTimeTableWidgetProvider: TimelineProvider {
                     weekDay: timeTable.weekDay,
                     date: timeTable.date,
                     dayTimeTable: timeTable.dayTimeTable.filter {
-                        let date = Date().toString(format: .time).toDate(format: .time)
-                        return $0.period == timeForPeriod(date: date) + 1
+                        return $0.period == (TimePeriod(date: Date()).rawValue + 1)
                     }
                 )],
                 policy: .after(refreshDate))
             )
-        }
-    }
-    private func timeForPeriod(date: Date) -> Int {
-        switch date {
-        case "08:40:00".toDate(format: .time)..<"09:30:00".toDate(format: .time):
-            return 1
-        case "09:40:00".toDate(format: .time)..<"10:30:00".toDate(format: .time):
-            return 2
-        case "10:40:00".toDate(format: .time)..<"11:30:00".toDate(format: .time):
-            return 3
-        case "11:40:00".toDate(format: .time)..<"12:30:00".toDate(format: .time):
-            return 4
-        case "13:30:00".toDate(format: .time)..<"14:20:00".toDate(format: .time):
-            return 5
-        case "14:30:00".toDate(format: .time)..<"15:20:00".toDate(format: .time):
-            return 6
-        case "15:30:00".toDate(format: .time)..<"16:20:00".toDate(format: .time):
-            return 7
-        default:
-            return 0
         }
     }
 
@@ -115,12 +94,15 @@ struct RectangularXquareTimeTableWidgetView: View {
 
     var body: some View {
         if entry.dayTimeTable != [] {
-            VStack(alignment: .leading, spacing: 0) {
-                Text("\(entry.dayTimeTable.first!.period)교시")
-                    .sdText(
-                        type: .body1,
-                        textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
-                    )
+            VStack(alignment: .center, spacing: 0) {
+                HStack {
+                    Text("\(entry.dayTimeTable.first!.period)교시")
+                        .sdText(
+                            type: .body1,
+                            textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                        )
+                    Spacer()
+                }
                 Text("\(entry.dayTimeTable.first!.subjectName)")
                     .sdText(
                         type: .body2,
