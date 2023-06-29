@@ -26,7 +26,13 @@ class WriteScheduleViewModel: ObservableObject {
             .disposed(by: disposeBag)
     }
     func checkStringDatasIsEmpty() {
-        self.postButtonIsDisabled = title.isEmpty || day.isEmpty
+        self.postButtonIsDisabled = isTitleCheck() || day.isEmpty
+    }
+    func isTitleCheck() -> Bool {
+        let strRegEx = "^(?! )[\\s\\S]{2,}$"
+        let pred = NSPredicate(format: "SELF MATCHES %@", strRegEx)
+
+        return !pred.evaluate(with: self.title)
     }
     func resetData() {
         self.title = ""

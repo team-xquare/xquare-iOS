@@ -9,7 +9,7 @@ class BugReportViewModel: ObservableObject {
     @Published var isDisabled: Bool = true
     @Published var networking: Bool = false
     @Published var bugImageUrl = [""]
-    @Published var bugImage: UIImage = UIImage()
+    @Published var bugImage: [UIImage] = [UIImage()]
     @Published var xPhotosIsPresented: Bool = false
     @Published var isLoading: Bool = false
     @Published var isEmpty: Bool = false
@@ -32,7 +32,7 @@ class BugReportViewModel: ObservableObject {
     }
     func uploadImage() {
         self.uploadImageUseCase
-            .excute(files: [self.bugImage.jpegData(compressionQuality: 0.5) ?? Data()])
+            .excute(files: self.bugImage.map { $0.jpegData(compressionQuality: 0.1) ?? Data() })
             .subscribe(onSuccess: {
                 self.isLoading = false
                 self.bugImageUrl = $0
@@ -74,7 +74,7 @@ class BugReportViewModel: ObservableObject {
         case "일정":
             self.catagory = .schedule
         default:
-            self.catagory = .all
+            self.catagory = .home
         }
     }
 }

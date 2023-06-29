@@ -28,7 +28,7 @@ let dependencies = Dependencies(
                 requirement: .upToNextMajor(from: "1.13.4")),
         // XWebKit
         .remote(url: "https://github.com/team-xquare/XWebKit",
-                requirement: .upToNextMajor(from: "1.2.4"))
+                requirement: .upToNextMajor(from: "1.2.5"))
     ],
     baseSettings: Settings.settings(
         configurations: [
