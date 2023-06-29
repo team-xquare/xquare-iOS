@@ -21,23 +21,12 @@ struct SettingView: View {
                     .padding(.vertical, 8)
                 AccountSettingView(
                     services: [
-                        ("로그아웃", { viewModel.showLogoutAlert = true }, .GrayScale.gray900),
-                        ("회원탈퇴", { viewModel.showQuitAlert = true }, .System.red400)
+                        ("회원탈퇴", "XQUARE에서 계정이 영구적으로 삭제되어요.", { viewModel.showQuitAlert = true }, .System.red400)
                     ]
                 )
                 .sdAlert(isPresented: $viewModel.showQuitAlert) {
                     SDAlert(
                         title: "정말 회원탈퇴 하시겠습니까?",
-                        button1: (text: "아니요", action: { }),
-                        button2: (text: "네", action: {
-                            viewModel.logout()
-                            self.xquareRouter.popToRoot()
-                        })
-                    )
-                }
-                .sdAlert(isPresented: $viewModel.showLogoutAlert) {
-                    SDAlert(
-                        title: "정말 로그아웃 하시겠습니까?",
                         button1: (text: "아니요", action: { }),
                         button2: (text: "네", action: {
                             viewModel.logout()

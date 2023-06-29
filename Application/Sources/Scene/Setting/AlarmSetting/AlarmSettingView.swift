@@ -10,7 +10,7 @@ struct AlarmSettingView: View {
     @Binding var isScheduleToggle: Bool
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            SettingTitle(
+            SettingTitleView(
                 title: "알림",
                 subTitle: "공지사항 알림을 제외한 알림을 끌 수 있어요."
             )

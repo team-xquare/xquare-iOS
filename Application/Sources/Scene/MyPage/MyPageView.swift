@@ -22,7 +22,27 @@ struct MyPageView: View {
                 uiImage: $viewModel.profileImage,
                 xPhotosIsPresented: $viewModel.xPhotosIsPresented
             )
+            Spacer().frame(height: 24)
+            Rectangle()
+                .foregroundColor(.GrayScale.gray50)
+                .frame(height: 12)
+            Spacer().frame(height: 16)
+            AccountManagementView(
+                services: [
+                    ("로그아웃", { viewModel.showLogoutAlert = true })
+                ]
+            )
             Spacer()
+        }
+        .sdAlert(isPresented: $viewModel.showLogoutAlert) {
+            SDAlert(
+                title: "정말 로그아웃 하시겠습니까?",
+                button1: (text: "아니요", action: { }),
+                button2: (text: "네", action: {
+                    viewModel.withdrawal()
+                    self.xquareRouter.popToRoot()
+                })
+            )
         }
         .sdPhotoPicker(
             isPresented: $viewModel.xPhotosIsPresented,
