@@ -2,6 +2,7 @@ import SwiftUI
 
 import RxSwift
 import NotificationService
+import AuthService
 
 class SettingViewModel: ObservableObject {
     @Published var isFeedToggle: Bool = false
@@ -9,16 +10,21 @@ class SettingViewModel: ObservableObject {
     @Published var isAllToggle: Bool = false
     @Published var isScheduleToggle: Bool = false
     @Published var isSucceed: Bool = false
+    @Published var showQuitAlert: Bool = false
+    @Published var showLogoutAlert: Bool = false
 
     private let activeNotificationCategoryUseCase: ActiveNotificationCategoryUseCase
     private let fetchActivatedCategoryListUseCase: FetchActivatedCategoryListUseCase
+    private let logoutUseCase: LogoutUseCase
 
     init(
         activeNotificationCategoryUseCase: ActiveNotificationCategoryUseCase,
-        fetchActivatedCategoryListUseCase: FetchActivatedCategoryListUseCase
+        fetchActivatedCategoryListUseCase: FetchActivatedCategoryListUseCase,
+        logoutUseCase: LogoutUseCase
     ) {
         self.activeNotificationCategoryUseCase = activeNotificationCategoryUseCase
         self.fetchActivatedCategoryListUseCase = fetchActivatedCategoryListUseCase
+        self.logoutUseCase = logoutUseCase
     }
 
     private var disposeBag = DisposeBag()
@@ -46,6 +52,11 @@ class SettingViewModel: ObservableObject {
                     }
                 }
             })
+            .disposed(by: disposeBag)
+    }
+    func logout() {
+        self.logoutUseCase.excute()
+            .subscribe(onCompleted: { })
             .disposed(by: disposeBag)
     }
 }

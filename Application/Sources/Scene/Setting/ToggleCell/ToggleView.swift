@@ -13,7 +13,7 @@ struct ToggleView: View {
                 Text(title)
                     .sdText(type: .body1, textColor: .GrayScale.gray900)
                 Text(subTitle)
-                    .sdText(type: .caption2, textColor: .GrayScale.gray500)
+                    .sdText(type: .caption2, textColor: .GrayScale.gray700)
             }
             Spacer()
             Toggle("", isOn: $isToggle)
@@ -21,6 +21,9 @@ struct ToggleView: View {
                 .labelsHidden()
         }
         .padding(.horizontal, 16)
-        .padding(.bottom, 24)
+        .padding(.vertical, 12)
+        .background(Color.GrayScale.gray50)
+        .cornerRadius(12)
+        .padding(.horizontal, 16)
     }
 }

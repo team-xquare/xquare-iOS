@@ -92,7 +92,8 @@ class XquareRouterFactory: RouterFactory {
         )
         let settingViewModel = SettingViewModel(
             activeNotificationCategoryUseCase: notificatoinServiceDependency.activeNotificationCategoryUseCase,
-            fetchActivatedCategoryListUseCase: notificatoinServiceDependency.fetchActivitedCategoryLiseUseCase
+            fetchActivatedCategoryListUseCase: notificatoinServiceDependency.fetchActivitedCategoryLiseUseCase,
+            logoutUseCase: authServiceDependency.logoutUseCase
         )
 
         self.mainView = MainView(
