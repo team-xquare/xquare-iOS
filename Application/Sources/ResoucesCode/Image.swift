@@ -4,6 +4,9 @@ extension Image {
 
     static let logo = Image("Logo")
 
+    // default
+    static let defaultBugImage = Image("DefaultBugImage")
+
     // Onboarding
     static let onboardingDms = Image("Onboarding-DMS")
     static let onboardingDnms = Image("Onboarding-DNMS")
