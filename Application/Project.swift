@@ -48,6 +48,10 @@ let project = Project(
             platform: .iOS,
             product: .appExtension,
             bundleId: "$(APP_BUNDLE_ID).WidgetExtension",
+            deploymentTarget: .iOS(
+                targetVersion: "15.0",
+                devices: [.iphone, .ipad]
+            ),
             infoPlist: .file(path: Path("Widget/SupportingFiles/Info.plist")),
             sources: "Widget/Sources/**",
             resources: "Widget/Resources/**",
