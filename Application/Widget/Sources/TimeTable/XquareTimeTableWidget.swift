@@ -33,9 +33,7 @@ struct XquareTimeTableWidgetProvider: TimelineProvider {
                 entries: [.init(
                     weekDay: timeTable.weekDay,
                     date: timeTable.date,
-                    dayTimeTable: timeTable.dayTimeTable.filter {
-                        return $0.period == (TimePeriod(date: Date()).rawValue + 1)
-                    }
+                    dayTimeTable: timeTable.dayTimeTable
                 )],
                 policy: .after(refreshDate))
             )
@@ -75,11 +73,71 @@ struct XquareTimeTableWidgetEntryView: View {
     func widgetBody() -> some View {
         switch widgetFamily {
         case .systemSmall:
-            RectangularXquareTimeTableWidgetView(entry: entry)
+            SmallXquareTimeTableWidgetView(entry: entry, dayTimeTable: entry.dayTimeTable)
         case .accessoryRectangular:
-            RectangularXquareTimeTableWidgetView(entry: entry)
+            RectangularXquareTimeTableWidgetView(entry: entry, dayTimeTable: entry.dayTimeTable)
         default:
             EmptyView()
+        }
+    }
+}
+struct SmallXquareTimeTableWidgetView: View {
+    @Environment(\.colorScheme) var colorScheme
+    var entry: XquareTimeTableWidgetProvider.Entry
+    var dayTimeTable: [DayTimeTableEntity]
+
+    init(entry: XquareTimeTableWidgetProvider.Entry, dayTimeTable: [DayTimeTableEntity]) {
+        self.entry = entry
+        self.dayTimeTable = dayTimeTable.filter {
+            $0.period == (TimePeriod(date: Date()).rawValue + 1)
+        }
+    }
+    var body: some View {
+        ZStack {
+            if colorScheme == .light {
+                Color.white.ignoresSafeArea()
+            } else {
+                Color.GrayScale.gray900.ignoresSafeArea()
+            }
+            HStack {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text(entry.date.toString(format: "E요일"))
+                        .sdText(
+                            type: .body4,
+                            textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                        )
+                        .padding(.trailing, 10)
+                        .padding(.top, 3)
+                    Text(entry.date.toString(format: .fullDate))
+                        .sdText(
+                            type: .caption2,
+                            textColor: colorScheme == .light ? .GrayScale.gray600 : .GrayScale.gray500
+                        )
+                        .padding(.bottom, 10)
+                    if dayTimeTable != [] {
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text("\(dayTimeTable.first!.period)교시")
+                                .sdText(
+                                    type: .body1,
+                                    textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                                )
+                            Text("\(dayTimeTable.first!.subjectName)")
+                                .fontWeight(.light)
+                                .foregroundColor(colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100)
+                                .lineLimit(nil)
+                        }
+                    } else {
+                        Text("등록된 정보가 없습니다.")
+                            .sdText(
+                                type: .caption2,
+                                textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                            )
+                    }
+                    Spacer()
+                }
+                .padding([.horizontal, .top], 10)
+                Spacer()
+            }
         }
     }
 }
@@ -87,59 +145,28 @@ struct XquareTimeTableWidgetEntryView: View {
 struct RectangularXquareTimeTableWidgetView: View {
     @Environment(\.colorScheme) var colorScheme
     var entry: XquareTimeTableWidgetProvider.Entry
+    var dayTimeTable: [DayTimeTableEntity]
 
-    init(entry: XquareTimeTableWidgetProvider.Entry) {
+    init(entry: XquareTimeTableWidgetProvider.Entry, dayTimeTable: [DayTimeTableEntity]) {
         self.entry = entry
+        self.dayTimeTable = dayTimeTable.filter {
+            $0.period == (TimePeriod(date: Date()).rawValue + 1)
+        }
     }
-
     var body: some View {
-        if entry.dayTimeTable != [] {
-            VStack(alignment: .center, spacing: 0) {
+        if dayTimeTable != [] {
+            VStack(alignment: .leading, spacing: 0) {
                 HStack {
-                    Text("\(entry.dayTimeTable.first!.period)교시")
+                    Text("\(dayTimeTable.first!.period)교시")
                         .sdText(
                             type: .body1,
                             textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
                         )
                     Spacer()
                 }
-                Text("\(entry.dayTimeTable.first!.subjectName)")
-                    .sdText(
-                        type: .body2,
-                        textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
-                    )
-            }
-        } else {
-            Text("등록된 정보가 없습니다.")
-                .sdText(
-                    type: .caption2,
-                    textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
-                )
-        }
-    }
-}
-
-struct SmallXquareTimeTableWidgetView: View {
-    @Environment(\.colorScheme) var colorScheme
-    var entry: XquareTimeTableWidgetProvider.Entry
-
-    init(entry: XquareTimeTableWidgetProvider.Entry) {
-        self.entry = entry
-    }
-
-    var body: some View {
-        if entry.dayTimeTable != [] {
-            VStack(alignment: .leading, spacing: 0) {
-                Text("\(entry.dayTimeTable.first!.period)교시")
-                    .sdText(
-                        type: .body3,
-                        textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
-                    )
-                Text("\(entry.dayTimeTable.first!.subjectName)")
-                    .sdText(
-                        type: .body4,
-                        textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
-                    )
+                Text("\(dayTimeTable.first!.subjectName)")
+                    .fontWeight(.light)
+                    .foregroundColor(colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100)
             }
         } else {
             Text("등록된 정보가 없습니다.")

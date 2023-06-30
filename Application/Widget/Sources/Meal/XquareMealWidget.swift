@@ -127,6 +127,7 @@ struct SmallXquareMealWidgetView: View {
                             type: .caption2,
                             textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
                         )
+                        .lineLimit(nil)
                 } else {
                     Text("등록된 정보가 없습니다.")
                         .sdText(
@@ -201,19 +202,31 @@ struct RectangularXquareMealWidgetView: View {
     }
 
     var body: some View {
-        if mealMenu?.menu ?? [] != [""] && mealMenu?.menu != nil {
-            Text("\(entry.mealTime.rawValue): \(mealMenu?.menu?.joined(separator: ", ") ?? "")")
-                .sdText(
-                    type: .caption2,
-                    textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
-                )
-                .lineLimit(nil)
-        } else {
-            Text("등록된 정보가 없습니다.")
-                .sdText(
-                    type: .caption2,
-                    textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
-                )
+            if mealMenu?.menu ?? [] != [] {
+                ZStack(alignment: .topLeading) {
+                    Text("      \(mealMenu?.menu?.joined(separator: ", ") ?? "")")
+                        .sdText(
+                            type: .caption2,
+                            textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                        )
+                    nowToImage(mealTime: entry.mealTime)
+                }
+            } else {
+                Text("등록된 정보가 없습니다.")
+                    .sdText(
+                        type: .caption2,
+                        textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                    )
+            }
+    }
+    func nowToImage(mealTime: MealTime) -> Image {
+        switch mealTime {
+        case .breakfast:
+            return Image(systemName: "sun.max.fill")
+        case .lunch:
+            return Image(systemName: "sun.haze.fill")
+        case .dinner:
+            return Image(systemName: "moon.stars.fill")
         }
     }
 }
