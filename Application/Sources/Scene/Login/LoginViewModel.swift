@@ -36,7 +36,7 @@ class LoginViewModel: ObservableObject {
             data: .init(
                 id: id,
                 password: password,
-                deviceToken: Messaging.messaging().fcmToken ?? ""
+                deviceToken: Messaging.messaging().fcmToken ?? "mac"
             ))
         .subscribe(onCompleted: { [weak self] in
             self?.isInternetNotWorking = false
