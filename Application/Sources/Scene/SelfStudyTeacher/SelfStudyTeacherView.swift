@@ -19,6 +19,7 @@ struct SelfStudyTeacherView: View {
                         }
                     }
                 }
+                .padding(.bottom, 16)
                 .opacity(isReady ? 1 : 0)
                 .onChange(of: self.viewModel.dateToShowData) {
                     proxy.scrollTo($0, anchor: .top)
