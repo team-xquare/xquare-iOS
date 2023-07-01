@@ -155,18 +155,18 @@ struct RectangularXquareTimeTableWidgetView: View {
     }
     var body: some View {
         if dayTimeTable != [] {
-            VStack(alignment: .leading, spacing: 0) {
-                HStack {
+            HStack {
+                VStack(alignment: .leading, spacing: 0) {
                     Text("\(dayTimeTable.first!.period)교시")
                         .sdText(
                             type: .body1,
                             textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
                         )
-                    Spacer()
+                    Text("\(dayTimeTable.first!.subjectName)")
+                        .fontWeight(.light)
+                        .foregroundColor(colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100)
                 }
-                Text("\(dayTimeTable.first!.subjectName)")
-                    .fontWeight(.light)
-                    .foregroundColor(colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100)
+                Spacer()
             }
         } else {
             Text("등록된 정보가 없습니다.")
