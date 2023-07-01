@@ -14,27 +14,22 @@ struct MyInformationView: View {
 
     var body: some View {
         VStack(
-            alignment: .leading,
+            alignment: .center,
             spacing: 0
         ) {
-            Rectangle().frame(height: 0)
+            Spacer().frame(height: 20)
             MyProfileView(
                 imageUrl: imageUrl,
                 uiimage: $uiImage,
-                name: name,
-                gradeClassNum: gradeClassNum,
                 xPhotosIsPresented: $xPhotosIsPresented
             )
-            .padding([.leading, .top], 16)
-            MyInfoIDAndBirthDay(id: id, birthDay: birthDay)
+            Spacer().frame(height: 54)
+            MyInfoBundle(
+                name: name,
+                birthDay: birthDay,
+                gradeClassNum: gradeClassNum,
+                id: id
+            )
         }
-        .background(Color.GrayScale.gray50)
-        .cornerRadius(12)
-        .overlay {
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(lineWidth: 1)
-                .foregroundColor(.GrayScale.gray300)
-        }
-        .padding(.horizontal, 16)
     }
 }

@@ -81,6 +81,8 @@ struct XquareMealWidgetEntryView: View {
             SmallXquareMealWidgetView(entry: entry)
         case .systemMedium:
             MediumXquareMealWidgetView(entry: entry)
+        case .accessoryRectangular:
+            RectangularXquareMealWidgetView(entry: entry)
         default:
             EmptyView()
         }
@@ -125,6 +127,7 @@ struct SmallXquareMealWidgetView: View {
                             type: .caption2,
                             textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
                         )
+                        .lineLimit(nil)
                 } else {
                     Text("등록된 정보가 없습니다.")
                         .sdText(
@@ -187,15 +190,66 @@ struct MediumXquareMealWidgetView: View {
         .background(colorScheme == .light ? .white : .GrayScale.gray900)
     }
 }
+
+struct RectangularXquareMealWidgetView: View {
+    @Environment(\.colorScheme) var colorScheme
+    var entry: XquareMealWidgetProvider.Entry
+    var mealMenu: MealMenuEntity?
+
+    init(entry: XquareMealWidgetProvider.Entry) {
+        self.entry = entry
+        self.mealMenu = entry.meal.menu.first { $0.mealTime == entry.mealTime }
+    }
+
+    var body: some View {
+            if mealMenu?.menu ?? [] != [] {
+                ZStack(alignment: .topLeading) {
+                    Text("      \(mealMenu?.menu?.joined(separator: ", ") ?? "")")
+                        .sdText(
+                            type: .caption2,
+                            textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                        )
+                    nowToImage(mealTime: entry.mealTime)
+                }
+            } else {
+                Text("등록된 정보가 없습니다.")
+                    .sdText(
+                        type: .caption2,
+                        textColor: colorScheme == .light ? .GrayScale.gray900 : .GrayScale.gray100
+                    )
+            }
+    }
+    func nowToImage(mealTime: MealTime) -> Image {
+        switch mealTime {
+        case .breakfast:
+            return Image(systemName: "sun.max.fill")
+        case .lunch:
+            return Image(systemName: "sun.haze.fill")
+        case .dinner:
+            return Image(systemName: "moon.stars.fill")
+        }
+    }
+}
+
 struct XquareMealWidget: Widget {
     let kind: String = "XquareMealWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: XquareMealWidgetProvider()) { entry in
+        let configuration = StaticConfiguration(
+            kind: kind,
+            provider: XquareMealWidgetProvider()
+        ) { entry in
             XquareMealWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("XQuare Meal Widget")
         .description("Xquare 위젯을 통해 오늘 하루의 급식을 확인하세요.")
-        .supportedFamilies([.systemSmall, .systemMedium])
+
+        if #available(iOSApplicationExtension 16.0, *) {
+            return configuration
+                .supportedFamilies([.systemSmall, .systemMedium, .accessoryRectangular])
+        } else {
+            return configuration
+                .supportedFamilies([.systemSmall, .systemMedium])
+        }
     }
 }

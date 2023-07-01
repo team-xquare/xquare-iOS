@@ -22,6 +22,7 @@ struct MealDetailView: View {
                             }
                         }
                     }
+                    .padding(.bottom, 16)
                     .opacity(isReady ? 1 : 0)
                     .onChange(of: self.viewModel.dateToShowData) {
                         proxy.scrollTo($0, anchor: .top)
@@ -32,7 +33,7 @@ struct MealDetailView: View {
                 }
             }
         }
-        .navigationTitle("전체 급식")
+        .navigationTitle("전체급식")
         .onAppear(perform: viewModel.fetchMealMenuPerMonth)
         .onDisappear { viewModel.dateToShowData = nil }
         .navigationBarBackButtonHidden()
