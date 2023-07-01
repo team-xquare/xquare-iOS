@@ -38,7 +38,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
+        #if os(iOS)
         Messaging.messaging().apnsToken = deviceToken
+        #else
+        Messaging.messaging().apnsToken = nil
+        #endif
     }
 
     func userNotificationCenter(

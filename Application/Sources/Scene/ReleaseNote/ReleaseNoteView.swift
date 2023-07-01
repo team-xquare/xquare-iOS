@@ -16,6 +16,7 @@ struct ReleaseNoteView: View {
                     .id(index)
                 }
             }
+            .padding(.bottom, 16)
             .opacity(isReady ? 1 : 0)
             .onChange(of: self.viewModel.releaseNoteList) { _ in
                 withAnimation(Animation.easeInOut.delay(0.3)) {

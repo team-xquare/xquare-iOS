@@ -1,6 +1,7 @@
 import SwiftUI
 
 import SemicolonDesign
+import XNavigationAndTab
 import MealDataService
 
 struct MealMenuView: View {
@@ -32,13 +33,20 @@ struct MealMenuView: View {
                         }
                     }
                 }
-                .onChange(of: menu, perform: {
+                .onTabSelected(tabIndex: 0) {
+                    menu.forEach {
+                        if $0.mealTime.checkIsNow() {
+                            proxy.scrollTo($0.mealTime)
+                        }
+                    }
+                }
+                .onChange(of: menu) {
                     $0.forEach {
                         if $0.mealTime.checkIsNow() {
                             proxy.scrollTo($0.mealTime)
                         }
                     }
-                })
+                }
             }
             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
             Spacer().frame(height: 16)
