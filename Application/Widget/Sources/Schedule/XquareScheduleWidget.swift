@@ -97,7 +97,7 @@ struct XquareScheduleWidget: Widget {
         StaticConfiguration(kind: kind, provider: XquareScheduleWidgetProvider()) { entry in
             XquareScheduleWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("XQuare Schedule Widget")
+        .configurationDisplayName("일정")
         .description("Xquare 위젯을 통해 오늘 하루 일정을 확인하세요.")
         .supportedFamilies([.systemSmall])
     }
