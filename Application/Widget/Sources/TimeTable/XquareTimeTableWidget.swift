@@ -188,8 +188,8 @@ struct XquareTimeTableWidget: Widget {
         ) { entry in
             XquareTimeTableWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("XQuare timeTable Widget")
-        .description("Xquare 위젯을 통해 오늘 시간표를 확인하세요.")
+        .configurationDisplayName("시간표")
+        .description("Xquare 위젯을 통해 다음 시간표를 확인하세요.")
 
         if #available(iOSApplicationExtension 16.0, *) {
             return configuration

@@ -222,9 +222,9 @@ struct RectangularXquareMealWidgetView: View {
     func nowToImage(mealTime: MealTime) -> Image {
         switch mealTime {
         case .breakfast:
-            return Image(systemName: "sun.max.fill")
-        case .lunch:
             return Image(systemName: "sun.haze.fill")
+        case .lunch:
+            return Image(systemName: "sun.max.fill")
         case .dinner:
             return Image(systemName: "moon.stars.fill")
         }
@@ -241,7 +241,7 @@ struct XquareMealWidget: Widget {
         ) { entry in
             XquareMealWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("XQuare Meal Widget")
+        .configurationDisplayName("급식")
         .description("Xquare 위젯을 통해 오늘 하루의 급식을 확인하세요.")
 
         if #available(iOSApplicationExtension 16.0, *) {
