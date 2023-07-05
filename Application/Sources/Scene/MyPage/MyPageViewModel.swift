@@ -16,7 +16,6 @@ class MyPageViewModel: ObservableObject {
     @Published var id: String = ""
     @Published var xPhotosIsPresented: Bool = false
     @Published var profileImageString: String = ""
-    @Published var showQuitAlert: Bool = false
     @Published var showLogoutAlert: Bool = false
 
     private let fetchProfileUseCase: FetchProfileUseCase

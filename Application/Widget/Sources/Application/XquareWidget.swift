@@ -7,6 +7,7 @@ struct XquareWidget: WidgetBundle {
     var body: some Widget {
         XquareMealWidget()
         XquareScheduleWidget()
+//        XquareTimeTableWidget()
     }
 
 }

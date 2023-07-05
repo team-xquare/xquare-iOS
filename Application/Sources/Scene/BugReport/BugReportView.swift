@@ -21,15 +21,12 @@ struct BugReportView: View {
                             .frame(height: 48)
                         ImportantTextView(text: "사진을 첨부해주세요", isImportant: false)
                             .padding(.bottom, 8)
-
                         BugImageView(
                             isLoading: $viewModel.isLoading,
                             uiimage: $viewModel.bugImage,
-                            isEmpty: $viewModel.isEmpty
+                            isEmpty: $viewModel.isEmpty,
+                            xPhotosIsPresented: $viewModel.xPhotosIsPresented
                         )
-                        .onTapGesture {
-                            viewModel.xPhotosIsPresented = true
-                        }
                         ImportantTextView(text: "버그에 대해 요약해서 설명해주세요.")
                             .padding(.bottom, 8)
                         SDTextEditor(placeholder: "설명을 입력하세요.", text: $viewModel.content)

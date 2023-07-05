@@ -16,11 +16,11 @@ struct MealMenuPerMealTimeView: View {
                     Text(entity.mealTime.toString())
                         .sdText(
                             type: .body2,
-                            textColor: .GrayScale.gray800
+                            textColor: .GrayScale.gray900
                         )
                     Spacer()
                     Text(entity.kcal ?? "")
-                        .sdText(type: .body2)
+                        .sdText(type: .caption2, textColor: .GrayScale.gray700)
                 }
                 .padding(.bottom, 4)
                 Text(entity.menu?.joined(separator: ", ") ?? "")
