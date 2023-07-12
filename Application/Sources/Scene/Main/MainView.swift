@@ -51,7 +51,6 @@ struct MainView: View {
             if let page = topicToPage(topic: NotificationTopic(rawValue: threadIdentifier)!).1 {
                 xquareRouter.navigateTo(page)
             }
-            userDefault.setValue(nil, forKey: "categoryIdentifier")
             userDefault.setValue(nil, forKey: "threadIdentifier")
         })
     }
