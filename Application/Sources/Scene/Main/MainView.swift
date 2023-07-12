@@ -30,27 +30,27 @@ struct MainView: View {
             if xquareRouter.stack.count > 2 {
                 xquareRouter.dismissLast()
             }
-            let threadIdentifier = NotificationTopic(rawValue: ($0.userInfo!["threadIdentifier"] as? String ?? ""))
-            if let index = topicToPage(topic: threadIdentifier!).0 {
-                self.xquareRouter.moveTabTo(index: index)
-                if let page = topicToPage(topic: threadIdentifier!).1 {
-                    self.xquareRouter.navigateTo(page)
-                } else { return }
-            } else { return }
+            guard let threadIdentifier = NotificationTopic(
+                rawValue: (($0.userInfo!["threadIdentifier"] as? String)!)
+            ), let index = topicToPage(topic: threadIdentifier).0 else { return }
+            self.xquareRouter.moveTabTo(index: index)
+            if let page = topicToPage(topic: threadIdentifier).1 {
+                self.xquareRouter.navigateTo(page)
+            }
         })
         .onReceive(backgroundNotification, perform: { _ in
             if xquareRouter.stack.count > 2 {
                 xquareRouter.dismissLast()
             }
             let userDefault = UserDefaults.standard
-            if let threadIdentifier = userDefault.string(forKey: "threadIdentifier") {
-                if let index = topicToPage(topic: NotificationTopic(rawValue: threadIdentifier)!).0 {
-                    self.xquareRouter.moveTabTo(index: index)
-                    if let page = topicToPage(topic: NotificationTopic(rawValue: threadIdentifier)!).1 {
-                        self.xquareRouter.navigateTo(page)
-                    } else { return }
-                } else { return }
-            } else { return }
+            guard let threadIdentifier = userDefault.string(forKey: "threadIdentifier"),
+                  let index = topicToPage(topic: NotificationTopic(rawValue: threadIdentifier)!).0 else {
+                return
+            }
+            xquareRouter.moveTabTo(index: index)
+            if let page = topicToPage(topic: NotificationTopic(rawValue: threadIdentifier)!).1 {
+                xquareRouter.navigateTo(page)
+            }
             userDefault.setValue(nil, forKey: "categoryIdentifier")
             userDefault.setValue(nil, forKey: "threadIdentifier")
         })

@@ -2,7 +2,8 @@ import UIKit
 
 import Firebase
 import FirebaseMessaging
-
+import RxSwift
+import RxCocoa
 class AppDelegate: NSObject, UIApplicationDelegate {
 
     func application(
@@ -58,7 +59,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void
     ) {
-        let categoryIdentifier = response.notification.request.content.categoryIdentifier
         let threadIdentifier = response.notification.request.content.threadIdentifier
         if UIApplication.shared.applicationState == .active {
             NotificationCenter.default.post(
@@ -66,13 +66,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 object: nil,
                 userInfo:
                     [
-                        "categoryIdentifier": categoryIdentifier,
                         "threadIdentifier": threadIdentifier
                     ]
             )
         } else {
             let userDefault = UserDefaults.standard
-            userDefault.set(categoryIdentifier, forKey: "categoryIdentifier")
             userDefault.set(threadIdentifier, forKey: "threadIdentifier")
             userDefault.synchronize()
         }
