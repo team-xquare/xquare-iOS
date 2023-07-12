@@ -13,6 +13,7 @@ extension TargetDependency {
         public static let PickService = service(name: "PickService")
         public static let NotificationService = service(name: "NotificationService")
         public static let ReportService = service(name: "ReportService")
+        public static let GithubService = service(name: "GithubService")
     }
 
     private static func service(name: String) -> TargetDependency {
