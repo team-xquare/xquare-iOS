@@ -4,8 +4,13 @@ import RxSwift
 import RestApiModule
 
 class RemoteGithubDataSourceImpl: RestApiRemoteDataSource<GithubAPI>, RemoteGithubDataSource {
-    func registerGithubID(userName: String) -> RxSwift.Completable {
-        return request(.registerGithubID(userName: userName))
+    func registerGithubID(code: String) -> Completable {
+        return request(.registerGithubID(code: code))
+            .asCompletable()
+    }
+
+    func updateGithubRanking() -> Completable {
+        return request(.updateGithubRanking)
             .asCompletable()
     }
 
@@ -17,5 +22,10 @@ class RemoteGithubDataSourceImpl: RestApiRemoteDataSource<GithubAPI>, RemoteGith
     func fetchGithubInfoList() -> Single<GithubRankListResponse> {
         return request(.fetchGithubInfoList)
             .map(GithubRankListResponse.self)
+    }
+
+    func checkGithubConnecting() -> Single<GithubConnectCheckResponse> {
+        return request(.checkGithubConnecting)
+            .map(GithubConnectCheckResponse.self)
     }
 }
