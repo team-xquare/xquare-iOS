@@ -9,7 +9,7 @@ public class FetchGithubInfoListUseCase {
         self.repository = repository
     }
 
-    func execute() -> Observable<GithubRankListEntity> {
+    public func execute() -> Observable<GithubRankListEntity> {
         return repository.fetchGithubInfoList()
     }
 }

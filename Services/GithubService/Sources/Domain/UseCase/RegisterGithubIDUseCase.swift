@@ -3,13 +3,13 @@ import Foundation
 import RxSwift
 
 public class RegisterGithubIDUseCase {
-    let repository: GithubRepositoryImpl
+    let repository: GithubRepository
 
-    init(repository: GithubRepositoryImpl) {
+    init(repository: GithubRepository) {
         self.repository = repository
     }
 
-    func execute(userID: String) -> Completable {
-        return repository.registerGithubID(userID: userID)
+    public func execute(code: String) -> Completable {
+        return repository.registerGithubID(code: code)
     }
 }
