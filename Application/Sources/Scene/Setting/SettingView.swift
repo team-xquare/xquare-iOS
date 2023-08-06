@@ -30,7 +30,7 @@ struct SettingView: View {
                         button1: (text: "아니요", action: { }),
                         button2: (text: "네", action: {
                             viewModel.logout()
-                            self.xquareRouter.popToRoot()
+                            self.xquareRouter.navigateTo(.githubRanking)
                         })
                     )
                 }
