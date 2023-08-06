@@ -12,4 +12,9 @@ extension Color {
     static let entireTabTopMenuBackgroundColor = Color("EntireTabTopMenuBackground")
     static let entireTabTopMenuTextColor = Color("EntireTabTopMenuText")
 
+    // Github Ranking
+    static let firstRank = Color("FirstRank")
+    static let secondRank = Color("SecondRank")
+    static let thirdRank = Color("ThirdRank")
+
 }
