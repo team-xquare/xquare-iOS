@@ -5,9 +5,11 @@ import AuthService
 import Moya
 
 enum GithubAPI {
-    case registerGithubID(userName: String)
+    case registerGithubID(code: String)
+    case updateGithubRanking
     case fetchMyGithubInfo
     case fetchGithubInfoList
+    case checkGithubConnecting
 }
 
 extension GithubAPI: XquareAPI {
@@ -19,6 +21,8 @@ extension GithubAPI: XquareAPI {
         switch self {
         case .fetchGithubInfoList:
             return "/all"
+        case .checkGithubConnecting:
+            return "/exist"
         default:
             return ""
         }
@@ -32,11 +36,25 @@ extension GithubAPI: XquareAPI {
         ]
     }
 
+    var task: Task {
+        switch self {
+        case .registerGithubID(let code):
+            return .requestParameters(
+                parameters: ["code": code],
+                encoding: URLEncoding.queryString
+            )
+        default:
+            return .requestPlain
+        }
+    }
+
     var method: Moya.Method {
         switch self {
         case .registerGithubID:
             return .post
-        case .fetchMyGithubInfo, .fetchGithubInfoList:
+        case .updateGithubRanking:
+            return .patch
+        case .fetchMyGithubInfo, .fetchGithubInfoList, .checkGithubConnecting:
             return .get
         }
     }
