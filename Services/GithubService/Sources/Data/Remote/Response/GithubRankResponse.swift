@@ -1,7 +1,8 @@
 import Foundation
 
 struct GithubRankResponse: Decodable {
-    let userID, name, username, profileFileName: String
+    let userID, name, username: String
+    let profileFileName: String
     let contributions, ranking: Int
 
     enum CodingKeys: String, CodingKey {
