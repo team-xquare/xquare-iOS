@@ -9,8 +9,12 @@ class GithubRepositoryImpl: GithubRepository {
         self.remoteDataSource = remoteDataSource
     }
 
-    func registerGithubID(userID: String) -> Completable {
-        return remoteDataSource.registerGithubID(userName: userID)
+    func registerGithubID(code: String) -> Completable {
+        return remoteDataSource.registerGithubID(code: code)
+    }
+
+    func updateGithubRanking() -> Completable {
+        return remoteDataSource.updateGithubRanking()
     }
 
     func fetchMyGithubInfo() -> Observable<GithubRankEntity> {
@@ -21,6 +25,12 @@ class GithubRepositoryImpl: GithubRepository {
 
     func fetchGithubInfoList() -> Observable<GithubRankListEntity> {
         return remoteDataSource.fetchGithubInfoList()
+            .map { $0.toDomain() }
+            .asObservable()
+    }
+
+    func checkGithubConnecting() -> Observable<GithubConnectCheckEntity> {
+        return remoteDataSource.checkGithubConnecting()
             .map { $0.toDomain() }
             .asObservable()
     }
