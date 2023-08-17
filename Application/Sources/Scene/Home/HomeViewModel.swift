@@ -57,6 +57,8 @@ class HomeViewModel: ObservableObject {
                 self.imageUrl = $0.profileFileName
                 self.merit = $0.goodPoint
                 self.demerit = $0.badPoint
+            }, onError: {
+                print("pointErr: \($0)")
             }).disposed(by: disposeBag)
     }
 
@@ -66,8 +68,7 @@ class HomeViewModel: ObservableObject {
                 self.name = $0.name
                 self.endTime = $0.endTime
                 self.isShowOutingView = true
-            }, onError: {
-                print($0)
+            }, onError: { _ in
                 self.isShowOutingView = false
             })
             .disposed(by: disposeBag)
@@ -79,8 +80,7 @@ class HomeViewModel: ObservableObject {
                 self.name = $0.name
                 self.locationClassroom = $0.locationClassroom
                 self.isShowMovedClass = true
-            }, onError: {
-                print($0)
+            }, onError: { _ in
                 self.isShowMovedClass = false
             })
             .disposed(by: disposeBag)
