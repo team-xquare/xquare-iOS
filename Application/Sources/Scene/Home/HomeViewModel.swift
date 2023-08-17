@@ -57,8 +57,6 @@ class HomeViewModel: ObservableObject {
                 self.imageUrl = $0.profileFileName
                 self.merit = $0.goodPoint
                 self.demerit = $0.badPoint
-            }, onError: {
-                print("pointErr: \($0)")
             }).disposed(by: disposeBag)
     }
 
