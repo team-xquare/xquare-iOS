@@ -153,7 +153,7 @@ class XquareRouterFactory: RouterFactory {
             fetchGithubInfoListUseCase: githubServiceDependency.fetchGithubInfoListUseCase,
             updateGithubRankingUseCase: githubServiceDependency.updateGithubRankingUseCase
         )
-        self.githubRankingView = GithubRankingView(viewMode: githubRankingViewModel)
+        self.githubRankingView = GithubRankingView(viewModel: githubRankingViewModel)
 
         let writeScheduleViewModel = WriteScheduleViewModel(
             createScheduleUseCase: scheduleServiceDependency.createScheduleUseCase
