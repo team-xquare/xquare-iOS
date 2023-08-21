@@ -1,4 +1,4 @@
 BUNDLE_DISPLAY_NAME = XQUARE
 APP_BUNDLE_ID = com.xquare.XQUARE-iOS
 
-API_BASE_URL = https:/$()/stag-server.xquare.app
+API_BASE_URL = https:/$()/prod-server.xquare.app
