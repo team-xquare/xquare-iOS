@@ -66,8 +66,7 @@ class HomeViewModel: ObservableObject {
                 self.name = $0.name
                 self.endTime = $0.endTime
                 self.isShowOutingView = true
-            }, onError: {
-                print($0)
+            }, onError: { _ in
                 self.isShowOutingView = false
             })
             .disposed(by: disposeBag)
@@ -79,8 +78,7 @@ class HomeViewModel: ObservableObject {
                 self.name = $0.name
                 self.locationClassroom = $0.locationClassroom
                 self.isShowMovedClass = true
-            }, onError: {
-                print($0)
+            }, onError: { _ in
                 self.isShowMovedClass = false
             })
             .disposed(by: disposeBag)
