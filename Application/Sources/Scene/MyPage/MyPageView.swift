@@ -44,11 +44,14 @@ struct MyPageView: View {
                 })
             )
         }
+        .sdOkayAlert(isPresented: $viewModel.isOverStorage, sdAlert: {
+            SDOkayAlert(title: "업로드 실패", message: "파일의 용량은 10GB이하여야 합니다.")
+        })
         .sdPhotoPicker(
             isPresented: $viewModel.xPhotosIsPresented,
-            selection: $viewModel.profileImage
+            selection: $viewModel.selectProfileImage
         )
-        .onChange(of: viewModel.profileImage, perform: { _ in
+        .onChange(of: viewModel.selectProfileImage, perform: { _ in
             viewModel.uploadImage()
         })
         .setNavigationBackButton()
