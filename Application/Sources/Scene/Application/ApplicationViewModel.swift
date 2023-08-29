@@ -10,7 +10,7 @@ class ApplicationViewModel: ObservableObject {
 
     private let disposeBag = DisposeBag()
 
-    private let webviewURLString: String = "https://service.xquare.app/apply"
+    private let webviewURLString: String = "https://prod-server.xquare.app/apply"
 
     init(
         fetchAccessTokenUseCase: FetchAccessTokenUseCase,

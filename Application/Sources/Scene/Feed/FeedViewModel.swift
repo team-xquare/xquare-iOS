@@ -10,7 +10,7 @@ class FeedViewModel: ObservableObject {
 
     private let disposeBag = DisposeBag()
 
-    private let webviewURLString: String = "https://service.xquare.app/feed"
+    private let webviewURLString: String = "https://prod-server.xquare.app/feed"
 
     init(
         fetchAccessTokenUseCase: FetchAccessTokenUseCase,
