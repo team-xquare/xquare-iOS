@@ -7,6 +7,8 @@ let project = Project.framework(
     isTestable: false,
     dependencies: [
         .Module.XDateUtil,
-        .Module.RestApiMoudle
+        .Module.RestApiMoudle,
+        .Module.XOfflineCache,
+        .SPM.Boutique
     ]
 )
