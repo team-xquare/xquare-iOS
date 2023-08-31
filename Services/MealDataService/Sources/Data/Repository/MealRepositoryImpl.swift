@@ -8,11 +8,11 @@ import RxSwift
 class MealRepositoryImpl: MealRepository {
 
     let remoteDataSource: RemoteMealDataSource
-    let localDataSource: LocalDataSource
+    let localDataSource: LocalMealDataSource
 
     init(
         remoteDataSource: RemoteMealDataSource,
-        localDataSource: LocalDataSource
+        localDataSource: LocalMealDataSource
     ) {
         self.remoteDataSource = remoteDataSource
         self.localDataSource = localDataSource
@@ -54,7 +54,8 @@ class MealRepositoryImpl: MealRepository {
             }
             .doOnNeedRefresh(refreshLocalData: { remoteData in
                 do {
-                    try self.localDataSource.registerMealMenuPerMonth(menu: remoteData.map { self.toMealMenu($0) })
+                    try self.localDataSource.registerMealMenuPerMonth(menu: remoteData.map { self.toMealMenu($0)
+                    })
                 } catch {
                     print(error)
                 }
