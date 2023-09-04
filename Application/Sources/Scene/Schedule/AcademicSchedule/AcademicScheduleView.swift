@@ -68,6 +68,5 @@ struct AcademicScheduleView: View {
                 (text: "삭제하기", action: self.viewModel.deleteSchedule)
             ])
         }
-        .onAppear(perform: viewModel.fetchScheduleForMonth)
     }
 }

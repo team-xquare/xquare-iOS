@@ -24,7 +24,11 @@ struct EntireView: View, XNavigationAndTabContent {
                         services: [
                             (text: "오늘의 자습감독 선생님",
                              action: { xquareRouter.navigateTo(.selfStudyTeacher) },
-                             textColor: .GrayScale.gray900)
+                             textColor: .GrayScale.gray900),
+                            (text: "깃허브 랭킹",
+                             action: { xquareRouter.navigateTo(.githubRanking) },
+                             textColor: .GrayScale.gray900
+                            )
                         ]
                     )
                     ServiceSectionButtonView(

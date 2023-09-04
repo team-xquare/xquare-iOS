@@ -12,10 +12,11 @@ public struct ScheduleServiceDependency {
 public extension ScheduleServiceDependency {
 
     static func resolve() -> ScheduleServiceDependency {
-
+        let localDataSource: LocalScheduleDataSource = LocalScheduleDataSourceImpl()
         let remoteDataSource: RemoteScheduleDataSource = RemoteScheduleDataSourceImpl()
 
         let repository: ScheduleRepository = ScheduleRepositoryImpl(
+            localDataSource: localDataSource,
             remoteDataSource: remoteDataSource
         )
 

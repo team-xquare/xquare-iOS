@@ -12,7 +12,7 @@ public struct MealDataServiceDependency {
 extension MealDataServiceDependency {
     static func resolve() -> MealDataServiceDependency {
 
-        let localDataSource = LocalDataSourceImpl()
+        let localDataSource = LocalMealDataSourceImpl()
 
         let remoteDataSource: RemoteMealDataSource = RemoteMealDataSourceImpl()
 
