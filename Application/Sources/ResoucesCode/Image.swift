@@ -32,5 +32,6 @@ extension Image {
     static let warningTriangleIcon = Image("WarningTriangle")
     static let moreIcon = Image("More")
     static let pencilIcon = Image("Pencil")
+    static let crown = Image("Crown")
 
 }

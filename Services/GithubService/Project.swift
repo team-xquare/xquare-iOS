@@ -2,7 +2,7 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.framework(
-    name: "AttachmentService",
+    name: "GithubService",
     platform: .iOS,
     isTestable: false,
     dependencies: [

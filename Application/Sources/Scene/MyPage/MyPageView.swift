@@ -27,10 +27,10 @@ struct MyPageView: View {
                 .foregroundColor(.GrayScale.gray50)
                 .frame(height: 12)
             Spacer().frame(height: 16)
+            AccountLinkingView(isGithubLinking: viewModel.isGithubLinking)
+            Spacer().frame(height: 20)
             AccountManagementView(
-                services: [
-                    ("로그아웃", { viewModel.showLogoutAlert = true })
-                ]
+                services: [("로그아웃", { viewModel.showLogoutAlert = true })]
             )
             Spacer()
         }
@@ -44,6 +44,9 @@ struct MyPageView: View {
                 })
             )
         }
+        .sdOkayAlert(isPresented: $viewModel.showLinkingErrorAlert) {
+            SDOkayAlert(title: "오류", message: "연동에 실패하였습니다.")
+        }
         .sdPhotoPicker(
             isPresented: $viewModel.xPhotosIsPresented,
             selection: $viewModel.profileImage
@@ -55,6 +58,10 @@ struct MyPageView: View {
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("마이페이지")
-        .onAppear(perform: viewModel.fetchProfile)
+        .onAppear {
+            viewModel.fetchProfile()
+            viewModel.checkGithubConnecting()
+        }
+        .onOpenURL(perform: viewModel.registerGithubID(callbackURL:))
     }
 }

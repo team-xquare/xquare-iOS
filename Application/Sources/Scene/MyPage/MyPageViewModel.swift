@@ -6,6 +6,7 @@ import UserService
 import XDateUtil
 import RxSwift
 import AuthService
+import GithubService
 
 class MyPageViewModel: ObservableObject {
     @Published var profileImage = UIImage()
@@ -17,22 +18,30 @@ class MyPageViewModel: ObservableObject {
     @Published var xPhotosIsPresented: Bool = false
     @Published var profileImageString: String = ""
     @Published var showLogoutAlert: Bool = false
+    @Published var isGithubLinking: Bool = false
+    @Published var showLinkingErrorAlert: Bool = false
 
     private let fetchProfileUseCase: FetchProfileUseCase
     private let editProfileImageUseCase: EditProfileImageUseCase
     private let uploadImageUseCase: UploadImageUseCase
     private let logoutUseCase: LogoutUseCase
+    private let registerGithubIDUseCase: RegisterGithubIDUseCase
+    private let checkGithubConnectingUseCase: CheckGithubConnectingUseCase
 
     init(
         fetchProfileUseCase: FetchProfileUseCase,
         editProfileImageUseCase: EditProfileImageUseCase,
         uploadImageUseCase: UploadImageUseCase,
-        logoutUseCase: LogoutUseCase
+        logoutUseCase: LogoutUseCase,
+        registerGithubIDUseCase: RegisterGithubIDUseCase,
+        checkGithubConnectingUseCase: CheckGithubConnectingUseCase
     ) {
         self.fetchProfileUseCase = fetchProfileUseCase
         self.editProfileImageUseCase = editProfileImageUseCase
         self.uploadImageUseCase = uploadImageUseCase
         self.logoutUseCase = logoutUseCase
+        self.registerGithubIDUseCase = registerGithubIDUseCase
+        self.checkGithubConnectingUseCase = checkGithubConnectingUseCase
     }
 
     private var disposeBag = DisposeBag()
@@ -65,9 +74,46 @@ class MyPageViewModel: ObservableObject {
             .disposed(by: disposeBag)
     }
 
+    func checkGithubConnecting() {
+        self.checkGithubConnectingUseCase.execute()
+            .subscribe(onNext: {
+                self.isGithubLinking = $0.isConnected
+            })
+            .disposed(by: disposeBag)
+    }
+
     func withdrawal() {
         self.logoutUseCase.excute()
             .subscribe(onCompleted: { })
             .disposed(by: disposeBag)
+    }
+
+    func registerGithubID(callbackURL: URL) {
+        guard isAbleURL(url: callbackURL) else {
+            self.showLinkingErrorAlert = true
+            return
+        }
+        self.registerGithubIDUseCase.execute(code: toCallbackCode(callbackURL: callbackURL))
+            .subscribe(
+                onCompleted: { self.isGithubLinking = true },
+                onError: {
+                    self.showLinkingErrorAlert = true
+                    print($0.localizedDescription)
+                }
+            )
+            .disposed(by: disposeBag)
+    }
+
+    private func isAbleURL(url: URL) -> Bool {
+        guard url.scheme! == "xquare" && url.host! == "callback" else {
+            return false
+        }
+        return true
+    }
+
+    private func toCallbackCode(callbackURL: URL) -> String {
+        let urlString = callbackURL.absoluteString
+        let contents = urlString.components(separatedBy: "=")
+        return contents[1]
     }
 }

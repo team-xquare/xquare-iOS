@@ -28,7 +28,7 @@ struct PointHistoryView: View {
                 Spacer()
             }
             .padding([.horizontal, .vertical], 16)
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 ForEach(viewModel.pointHistories.pointHistories, id: \.id) {
                     PointHistoryListCellView(pointHistory: $0)
                 }
