@@ -3,20 +3,28 @@ import Foundation
 public struct AttachmentServiceDependency {
     public static let shared = resolve()
 
-    public let uploadImageUseCase: UploadImageUseCase
+    public let requestPresignedUrlUseCase: RequestPresignedUrlUseCase
+    public let uploadImageToS3UseCase: UploadImageToS3UseCase
 }
 
-public extension AttachmentServiceDependency {
+extension AttachmentServiceDependency {
 
     static func resolve() -> AttachmentServiceDependency {
         let remoteDataSource: RemoteAttachmentDataSource = RemoteAttachmentDataSourceImpl()
         let repository: AttachmentRepository = AttachmentRepositoryImpl(remoteDataSource: remoteDataSource)
 
-        let uploadImageUseCase = UploadImageUseCase(
+        let requestPresignedUrlUseCase = RequestPresignedUrlUseCase(
             repository: repository
         )
 
-        return .init(uploadImageUseCase: uploadImageUseCase)
+        let uploadImageToS3UseCase = UploadImageToS3UseCase(
+            repository: repository
+        )
+
+        return .init(
+            requestPresignedUrlUseCase: requestPresignedUrlUseCase,
+            uploadImageToS3UseCase: uploadImageToS3UseCase
+        )
 
     }
 

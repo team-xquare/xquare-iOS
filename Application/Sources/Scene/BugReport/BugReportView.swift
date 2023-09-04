@@ -61,8 +61,11 @@ struct BugReportView: View {
             isPresented: $viewModel.xPhotosIsPresented,
             selection: $viewModel.bugImage
         )
-        .sdOkayAlert(isPresented: $viewModel.networking, sdAlert: {
+        .sdOkayAlert(isPresented: $viewModel.isSuccess, sdAlert: {
             SDOkayAlert(title: "버그제보", message: "제보 감사합니다! 사용자님들의 제보로 더 나은 스퀘어를 만들어갑니다!")
+        })
+        .sdOkayAlert(isPresented: $viewModel.isOverStorage, sdAlert: {
+            SDOkayAlert(title: "업로드 실패", message: "파일의 용량은 10GB이하여야 합니다.")
         })
         .onAppear {viewModel.viewAppear()}
         .onChange(of: viewModel.bugImage, perform: { _ in
