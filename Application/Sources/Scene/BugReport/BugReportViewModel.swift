@@ -7,42 +7,90 @@ class BugReportViewModel: ObservableObject {
     @Published var bugPlace: String = "홈"
     @Published var content: String = ""
     @Published var isDisabled: Bool = true
-    @Published var networking: Bool = false
-    @Published var bugImageUrl = [""]
-    @Published var bugImage: [UIImage] = [UIImage()]
+    @Published var isSuccess: Bool = false
+    @Published var isOverStorage: Bool = false
+    @Published var bugImageUrl: [String] = []
+    @Published var bugImage: [UIImage] = []
     @Published var xPhotosIsPresented: Bool = false
     @Published var isLoading: Bool = false
     @Published var isEmpty: Bool = false
     var catagory: BugCategory = .home
+
     private let postBugReportUseCase: PostBugReportUseCase
-    private let uploadImageUseCase: UploadImageUseCase
+    private let requestPresignedUrlUseCase: RequestPresignedUrlUseCase
+    private let uploadImageToS3UseCase: UploadImageToS3UseCase
 
     private var disposeBag = DisposeBag()
 
     init(
         postBugReportUseCase: PostBugReportUseCase,
-        uploadImageUseCase: UploadImageUseCase
+        requestPresignedUrlUseCase: RequestPresignedUrlUseCase,
+        uploadImageToS3UseCase: UploadImageToS3UseCase
     ) {
         self.postBugReportUseCase = postBugReportUseCase
-        self.uploadImageUseCase = uploadImageUseCase
+        self.requestPresignedUrlUseCase = requestPresignedUrlUseCase
+        self.uploadImageToS3UseCase = uploadImageToS3UseCase
     }
 
     func checkBugPlaceAndContentIsEmpty() {
         isDisabled = bugPlace.isEmpty || content.isEmpty
     }
+
     func uploadImage() {
-        self.uploadImageUseCase
-            .excute(files: self.bugImage.map { $0.jpegData(compressionQuality: 0.1) ?? Data() })
-            .subscribe(onSuccess: {
-                self.isLoading = false
-                self.bugImageUrl = $0
-                self.isEmpty = false
-            }, onFailure: { _ in
+        self.bugImage.forEach {
+            print($0.imageOrientation)
+        }
+        let imageDatas = self.bugImage.map { $0.jpegData(compressionQuality: 0.3) ?? Data() }
+        for image in imageDatas {
+            guard image.count / 1048576 < 10 else {
                 self.isLoading = false
                 self.bugImageUrl = [""]
                 self.isEmpty = true
-            }).disposed(by: disposeBag)
+                self.isOverStorage = true
+                return
+            }
+        }
+        guard !imageDatas.isEmpty else {
+            self.isLoading = false
+            self.isEmpty = true
+            return
+        }
+        debugPrint("call - uploadImage()")
+        self.requestPresignedUrlUseCase
+            .excute(files: imageDatas)
+            .subscribe(
+                with: self,
+                onSuccess: { owner, datas  in
+                    owner.uploadImageToS3(presignedDatas: datas, imageDatas: imageDatas)
+                }, onFailure: { owner, error  in
+                    debugPrint("⚠️Bugreport uploadImage Error: \(error.localizedDescription)")
+                    owner.isLoading = false
+                    owner.bugImageUrl = [""]
+                    owner.isEmpty = true
+                }
+            ).disposed(by: disposeBag)
     }
+
+    private func uploadImageToS3(
+        presignedDatas: [PresigedUrlEntity],
+        imageDatas: [Data]
+    ) {
+        uploadImageToS3UseCase
+            .excute(presigedDatas: presignedDatas, imageDatas: imageDatas)
+            .subscribe(
+                with: self,
+                onCompleted: { owner in
+                    owner.isLoading = false
+                    owner.bugImageUrl = presignedDatas.map { $0.url }
+                    owner.isEmpty = false
+                }, onError: { owner, error in
+                    debugPrint("⚠️Bugreport uploadImageToS3 Error: \(error.localizedDescription)")
+                    owner.isLoading = false
+                    owner.isEmpty = true
+                }
+            ).disposed(by: disposeBag)
+    }
+
     func postBug() {
         checkBugPlace()
         postBugReportUseCase.excute(
@@ -51,9 +99,10 @@ class BugReportViewModel: ObservableObject {
             imageUrl: bugImageUrl
         ).subscribe(onCompleted: {
             self.viewAppear()
-            self.networking = true
+            self.isSuccess = true
         }).disposed(by: disposeBag)
     }
+
     func viewAppear() {
         self.content = ""
         self.isLoading = false
@@ -63,6 +112,7 @@ class BugReportViewModel: ObservableObject {
         self.isEmpty = true
         self.bugImageUrl = [""]
     }
+
     private func checkBugPlace() {
         switch bugPlace {
         case "신청":

@@ -10,7 +10,15 @@ class AttachmentRepositoryImpl: AttachmentRepository {
         self.remoteDataSource = remoteDataSource
     }
 
-    func uploadImage(files: [Data]) -> Single<[String]> {
-        return remoteDataSource.uploadFiles(files: files)
+    func requestPresignedUrl(files: [Data]) -> Single<[PresigedUrlEntity]> {
+        return remoteDataSource.requestPresignedUrl(files: files)
+    }
+
+    func uploadImageToS3(presignedURL: String, contentType: String, data: Data) -> Completable {
+        return remoteDataSource.uploadImageToS3(
+            presignedURL: presignedURL,
+            contentType: contentType,
+            data: data
+        )
     }
 }

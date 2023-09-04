@@ -3,5 +3,6 @@ import Foundation
 import RxSwift
 
 protocol AttachmentRepository {
-    func uploadImage(files: [Data]) -> Single<[String]>
+    func requestPresignedUrl(files: [Data]) -> Single<[PresigedUrlEntity]>
+    func uploadImageToS3(presignedURL: String, contentType: String, data: Data) -> Completable
 }

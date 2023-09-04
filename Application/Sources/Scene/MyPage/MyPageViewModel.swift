@@ -18,12 +18,15 @@ class MyPageViewModel: ObservableObject {
     @Published var xPhotosIsPresented: Bool = false
     @Published var profileImageString: String = ""
     @Published var showLogoutAlert: Bool = false
+    @Published var isOverStorage: Bool = false
     @Published var isGithubLinking: Bool = false
     @Published var showLinkingErrorAlert: Bool = false
+    var selectProfileImage = UIImage()
 
     private let fetchProfileUseCase: FetchProfileUseCase
     private let editProfileImageUseCase: EditProfileImageUseCase
-    private let uploadImageUseCase: UploadImageUseCase
+    private let requestPresignedUrlUseCase: RequestPresignedUrlUseCase
+    private let uploadImageToS3UseCase: UploadImageToS3UseCase
     private let logoutUseCase: LogoutUseCase
     private let registerGithubIDUseCase: RegisterGithubIDUseCase
     private let checkGithubConnectingUseCase: CheckGithubConnectingUseCase
@@ -31,14 +34,16 @@ class MyPageViewModel: ObservableObject {
     init(
         fetchProfileUseCase: FetchProfileUseCase,
         editProfileImageUseCase: EditProfileImageUseCase,
-        uploadImageUseCase: UploadImageUseCase,
+        requestPresignedUrlUseCase: RequestPresignedUrlUseCase,
+        uploadImageToS3UseCase: UploadImageToS3UseCase,
         logoutUseCase: LogoutUseCase,
         registerGithubIDUseCase: RegisterGithubIDUseCase,
         checkGithubConnectingUseCase: CheckGithubConnectingUseCase
     ) {
         self.fetchProfileUseCase = fetchProfileUseCase
         self.editProfileImageUseCase = editProfileImageUseCase
-        self.uploadImageUseCase = uploadImageUseCase
+        self.requestPresignedUrlUseCase = requestPresignedUrlUseCase
+        self.uploadImageToS3UseCase = uploadImageToS3UseCase
         self.logoutUseCase = logoutUseCase
         self.registerGithubIDUseCase = registerGithubIDUseCase
         self.checkGithubConnectingUseCase = checkGithubConnectingUseCase
@@ -59,18 +64,38 @@ class MyPageViewModel: ObservableObject {
     }
 
     func uploadImage() {
-        self.uploadImageUseCase
-            .excute(files: [self.profileImage.jpegData(compressionQuality: 0.5) ?? Data()])
-            .subscribe(onSuccess: {
-                self.editProfileImage(imageUrl: $0[0])
-            })
+        let imageData = self.selectProfileImage.jpegData(compressionQuality: 0.3) ?? Data()
+        guard imageData.count / 1048576 < 10 else {
+            self.isOverStorage = true
+            return
+        }
+        self.requestPresignedUrlUseCase
+            .excute(files: [imageData])
+            .subscribe(
+                with: self,
+                onSuccess: { owner, datas in
+                    owner.uploadImageToS3(presignedDatas: datas, imageDatas: [imageData])
+                }
+            )
+            .disposed(by: disposeBag)
+    }
+
+    private func uploadImageToS3(presignedDatas: [PresigedUrlEntity], imageDatas: [Data]) {
+        self.uploadImageToS3UseCase
+            .excute(presigedDatas: presignedDatas, imageDatas: imageDatas)
+            .subscribe(
+                with: self,
+                onCompleted: { owner in
+                    owner.editProfileImage(imageUrl: presignedDatas[0].url)
+                    owner.profileImage = owner.selectProfileImage
+                }
+            )
             .disposed(by: disposeBag)
     }
 
     private func editProfileImage(imageUrl: String) {
         self.editProfileImageUseCase.excute(profileImage: imageUrl)
-            .subscribe(onCompleted: {
-            })
+            .subscribe(onCompleted: { })
             .disposed(by: disposeBag)
     }
 

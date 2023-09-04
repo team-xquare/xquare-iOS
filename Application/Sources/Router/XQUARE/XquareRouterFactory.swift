@@ -135,7 +135,8 @@ class XquareRouterFactory: RouterFactory {
         let myPageViewModel = MyPageViewModel(
             fetchProfileUseCase: userServiceDependency.fetchProfileUseCase,
             editProfileImageUseCase: userServiceDependency.editProfileImageUseCase,
-            uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase,
+            requestPresignedUrlUseCase: attachmentServiceDependency.requestPresignedUrlUseCase,
+            uploadImageToS3UseCase: attachmentServiceDependency.uploadImageToS3UseCase,
             logoutUseCase: authServiceDependency.logoutUseCase,
             registerGithubIDUseCase: githubServiceDependency.registerGithubIDUseCase,
             checkGithubConnectingUseCase: githubServiceDependency.checkGithubConnecting
@@ -144,7 +145,8 @@ class XquareRouterFactory: RouterFactory {
 
         let bugReportViewModel = BugReportViewModel(
             postBugReportUseCase: reportServiceDependency.postBugReportUseCase,
-            uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase
+            requestPresignedUrlUseCase: attachmentServiceDependency.requestPresignedUrlUseCase,
+            uploadImageToS3UseCase: attachmentServiceDependency.uploadImageToS3UseCase
         )
         self.bugReportView = BugReportView(viewModel: bugReportViewModel)
 
