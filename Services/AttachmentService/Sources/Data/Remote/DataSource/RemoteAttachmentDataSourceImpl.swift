@@ -9,8 +9,8 @@ class RemoteAttachmentDataSourceImpl: RestApiRemoteDataSource<AttachmentAPI>, Re
 
     func requestPresignedUrl(files: [Data]) -> Single<[PresigedUrlEntity]> {
         return request(.requestPresignedUrl(files: files))
-            .map([PresigedUrlResponse].self)
-            .map { $0.map { $0.toDomain() } }
+            .map(PresigedUrlResponses.self)
+            .map { $0.toDomain() }
     }
 
     func uploadImageToS3(presignedURL: String, contentType: String, data: Data) -> Completable {

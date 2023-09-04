@@ -9,8 +9,8 @@ class BugReportViewModel: ObservableObject {
     @Published var isDisabled: Bool = true
     @Published var isSuccess: Bool = false
     @Published var isOverStorage: Bool = false
-    @Published var bugImageUrl = [""]
-    @Published var bugImage: [UIImage] = [UIImage()]
+    @Published var bugImageUrl: [String] = []
+    @Published var bugImage: [UIImage] = []
     @Published var xPhotosIsPresented: Bool = false
     @Published var isLoading: Bool = false
     @Published var isEmpty: Bool = false
@@ -37,14 +37,25 @@ class BugReportViewModel: ObservableObject {
     }
 
     func uploadImage() {
+        self.bugImage.forEach {
+            print($0.imageOrientation)
+        }
         let imageDatas = self.bugImage.map { $0.jpegData(compressionQuality: 0.3) ?? Data() }
         for image in imageDatas {
             guard image.count / 1048576 < 10 else {
                 self.isLoading = false
+                self.bugImageUrl = [""]
+                self.isEmpty = true
                 self.isOverStorage = true
                 return
             }
         }
+        guard !imageDatas.isEmpty else {
+            self.isLoading = false
+            self.isEmpty = true
+            return
+        }
+        debugPrint("call - uploadImage()")
         self.requestPresignedUrlUseCase
             .excute(files: imageDatas)
             .subscribe(
