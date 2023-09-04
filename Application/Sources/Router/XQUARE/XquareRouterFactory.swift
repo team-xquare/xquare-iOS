@@ -10,6 +10,7 @@ import MealDataService
 import ScheduleService
 import TimeTableService
 import ReportService
+import GithubService
 
 class XquareRouterFactory: RouterFactory {
 
@@ -32,6 +33,7 @@ class XquareRouterFactory: RouterFactory {
     let bugReportView: BugReportView
     let selfStudyTeacherView: SelfStudyTeacherView
     let releaseNoteView: ReleaseNoteView
+    let githubRankingView: GithubRankingView
 
     // swiftlint:disable function_body_length
     init() {
@@ -45,6 +47,7 @@ class XquareRouterFactory: RouterFactory {
         let scheduleServiceDependency = ScheduleServiceDependency.shared
         let timeTableServiceDependency = TimeTableServiceDependency.shared
         let reportServiceDependency = ReportServiceDependency.shared
+        let githubServiceDependency = GithubServiceDependency.shared
 
         let launchScreenViewModel = LaunchScreenViewModel(
             refreshTokenUseCase: authServiceDependency.refreshTokenUseCase
@@ -132,17 +135,27 @@ class XquareRouterFactory: RouterFactory {
         let myPageViewModel = MyPageViewModel(
             fetchProfileUseCase: userServiceDependency.fetchProfileUseCase,
             editProfileImageUseCase: userServiceDependency.editProfileImageUseCase,
-            uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase,
-            logoutUseCase: authServiceDependency.logoutUseCase
+            requestPresignedUrlUseCase: attachmentServiceDependency.requestPresignedUrlUseCase,
+            uploadImageToS3UseCase: attachmentServiceDependency.uploadImageToS3UseCase,
+            logoutUseCase: authServiceDependency.logoutUseCase,
+            registerGithubIDUseCase: githubServiceDependency.registerGithubIDUseCase,
+            checkGithubConnectingUseCase: githubServiceDependency.checkGithubConnecting
         )
         self.myPageView = MyPageView(viewModel: myPageViewModel)
 
         let bugReportViewModel = BugReportViewModel(
             postBugReportUseCase: reportServiceDependency.postBugReportUseCase,
-            uploadImageUseCase: attachmentServiceDependency.uploadImageUseCase
+            requestPresignedUrlUseCase: attachmentServiceDependency.requestPresignedUrlUseCase,
+            uploadImageToS3UseCase: attachmentServiceDependency.uploadImageToS3UseCase
         )
-
         self.bugReportView = BugReportView(viewModel: bugReportViewModel)
+
+        let githubRankingViewModel = GithubRankingViewModel(
+            fetchMyGithubInfoUseCase: githubServiceDependency.fetchMyGithubInfoUseCase,
+            fetchGithubInfoListUseCase: githubServiceDependency.fetchGithubInfoListUseCase,
+            updateGithubRankingUseCase: githubServiceDependency.updateGithubRankingUseCase
+        )
+        self.githubRankingView = GithubRankingView(viewModel: githubRankingViewModel)
 
         let writeScheduleViewModel = WriteScheduleViewModel(
             createScheduleUseCase: scheduleServiceDependency.createScheduleUseCase
@@ -193,6 +206,8 @@ class XquareRouterFactory: RouterFactory {
             selfStudyTeacherView
         case .releaseNote:
             releaseNoteView
+        case .githubRanking:
+            githubRankingView
         }
     }
     // swiftlint:enable cyclomatic_complexity

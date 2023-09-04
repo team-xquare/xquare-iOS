@@ -4,7 +4,7 @@ import RxSwift
 import XDateUtil
 import Boutique
 
-class LocalDataSourceImpl: LocalDataSource {
+class LocalMealDataSourceImpl: LocalMealDataSource {
 
     let store = Store<MealMenu>(
         storage: SQLiteStorageEngine(directory: .defaultStorageDirectory(appendingPath: "MealMenu"))!,

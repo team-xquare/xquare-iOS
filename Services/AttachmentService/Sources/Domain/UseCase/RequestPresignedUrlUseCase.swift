@@ -2,7 +2,7 @@ import Foundation
 
 import RxSwift
 
-public class UploadImageUseCase {
+public class RequestPresignedUrlUseCase {
 
     private let repository: AttachmentRepository
 
@@ -10,8 +10,8 @@ public class UploadImageUseCase {
         self.repository = repository
     }
 
-    public func excute(files: [Data]) -> Single<[String]> {
-        return repository.uploadImage(files: files)
+    public func excute(files: [Data]) -> Single<[PresigedUrlEntity]> {
+        return repository.requestPresignedUrl(files: files)
     }
 
 }

@@ -32,7 +32,7 @@ class AcademicScheduleViewModel: ObservableObject {
     func fetchScheduleForMonth() {
         self.fetchSchedulePerMonthUseCase.excute(month: day)
             .subscribe(onNext: {
-                self.schedule = $0
+                self.schedule = $0.sorted(by: { $0.date < $1.date })
             })
             .disposed(by: disposeBag)
     }

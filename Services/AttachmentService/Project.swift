@@ -7,4 +7,5 @@ let project = Project.framework(
     isTestable: false,
     dependencies: [
         .Module.RestApiMoudle
-    ])
+    ]
+)

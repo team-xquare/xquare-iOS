@@ -5,13 +5,13 @@ import RestApiModule
 import AuthService
 
 enum AttachmentAPI {
-    case uploadFiles(files: [Data])
+    case requestPresignedUrl(files: [Data])
 }
 
 extension AttachmentAPI: XquareAPI {
 
     var domain: String {
-        "/attachment"
+        return "/attachment"
     }
 
     var urlPath: String {
@@ -28,17 +28,20 @@ extension AttachmentAPI: XquareAPI {
 
     var task: Task {
         switch self {
-        case .uploadFiles(let files):
-            var multiformData = [MultipartFormData]()
+        case .requestPresignedUrl(let files):
+            var imageParameters: [[String: Any]] = []
             for file in files {
-                multiformData.append(.init(
-                    provider: .data(file),
-                    name: "files",
-                    fileName: "files.jpg",
-                    mimeType: "files/jpg"
-                ))
+                imageParameters.append(
+                    [
+                        "original_filename": "image.jpg",
+                        "content_type": "image/jpg",
+                        "file_size": file.count
+                    ]
+                )
             }
-            return .uploadCompositeMultipart(multiformData, urlParameters: ["bucketName": "xquare"])
+            return .requestParameters(parameters: [
+                "image_file_requests": imageParameters
+            ], encoding: JSONEncoding.default)
         }
     }
 
