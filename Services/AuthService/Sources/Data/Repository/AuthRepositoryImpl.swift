@@ -22,7 +22,7 @@ class AuthRepositoryImpl: AuthRepository {
             .do(onSuccess: { [weak self] tokenResponse in
                 self?.localTokenDataSource.registerAccessToken(tokenResponse.accessToken)
                 self?.localTokenDataSource.registerRefreshToken(tokenResponse.refreshToken)
-                self?.localTokenDataSource.registerExpiredAt(tokenResponse.expirationAt)
+                self?.localTokenDataSource.registerExpiredAt(tokenResponse.accessTokenExpireAt)
                 self?.localAuthDataSource.registerIdAndPassword(id: signinEntity.id, password: signinEntity.password)
             }).catch { error in
                 let moyaError = error as? MoyaError
@@ -55,7 +55,7 @@ class AuthRepositoryImpl: AuthRepository {
             .do(onSuccess: { [weak self] tokenResponse in
                 self?.localTokenDataSource.registerAccessToken(tokenResponse.accessToken)
                 self?.localTokenDataSource.registerRefreshToken(tokenResponse.refreshToken)
-                self?.localTokenDataSource.registerExpiredAt(tokenResponse.expirationAt)
+                self?.localTokenDataSource.registerExpiredAt(tokenResponse.accessTokenExpireAt)
             }).catch { [weak self] error in
                 let moyaError = error as? MoyaError
                 guard moyaError?.response?.statusCode != nil else { return .error(AuthServiceError.networkNotWorking) }

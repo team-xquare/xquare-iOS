@@ -2,18 +2,42 @@ import Foundation
 
 import Moya
 import RxSwift
+import XOfflineCache
+import XDateUtil
 
 class ScheduleRepositoryImpl: ScheduleRepository {
-
+    let localDataSource: LocalScheduleDataSource
     let remoteDataSource: RemoteScheduleDataSource
 
-    init(remoteDataSource: RemoteScheduleDataSource) {
+    init(
+        localDataSource: LocalScheduleDataSource,
+        remoteDataSource: RemoteScheduleDataSource
+    ) {
+        self.localDataSource = localDataSource
         self.remoteDataSource = remoteDataSource
     }
 
     func fetchScheduleForMonth(month: Int) -> Observable<[ScheduleEntity]> {
-        return remoteDataSource.fetchScheduleForMonth(month: month)
-            .asObservable()
+        OfflineCacheUtil<[ScheduleEntity]>()
+            .localData {
+                do {
+                    return self.localDataSource.fetchScheduleForMonth(month: month)
+                        .map { $0.map { $0.toDomain() } }
+                }
+            }
+            .remoteData {
+                self.remoteDataSource.fetchScheduleForMonth(month: month)
+            }
+            .doOnNeedRefresh(refreshLocalData: { remoteData in
+                do {
+                    try self.localDataSource.registerScheduleForMonth(schedules: remoteData.map {
+                        $0.toDomain()
+                    })
+                } catch {
+                    print(error)
+                }
+            })
+            .createObservable()
     }
 
     func createSchedule(name: String, date: String) -> Completable {
