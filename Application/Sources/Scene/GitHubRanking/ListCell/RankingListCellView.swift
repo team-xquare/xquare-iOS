@@ -9,8 +9,8 @@ struct RankingListCellView: View {
 
     var body: some View {
         HStack(alignment: .center) {
-            if let data = myGithubData {
-                AsyncImage(url: URL(string: myGithubData?.profileFileName ?? "")) { image in
+            if let myGithubData = myGithubData {
+                AsyncImage(url: URL(string: myGithubData.profileFileName)) { image in
                     image
                         .resizable()
                         .scaledToFill()
@@ -22,13 +22,13 @@ struct RankingListCellView: View {
                 .frame(width: 42, height: 42)
                 .cornerRadius(21)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("\(myGithubData?.ranking ?? 0)위 : \(myGithubData?.name ?? "")")
+                    Text("\(myGithubData.ranking)위 : \(myGithubData.name)")
                         .sdText(type: .caption2, textColor: .GrayScale.gray900)
-                    Text("@\(myGithubData?.username ?? "")")
+                    Text("@\(myGithubData.username)")
                         .sdText(type: .caption3, textColor: .GrayScale.gray700)
                 }
                 Spacer()
-                Text("\(myGithubData?.contributions ?? 0) 커밋")
+                Text("\(myGithubData.contributions) 커밋")
                     .sdText(type: .body1, textColor: .GrayScale.gray900)
             } else {
                 HStack {
