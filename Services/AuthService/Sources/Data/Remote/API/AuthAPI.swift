@@ -6,6 +6,7 @@ import XEnvironment
 enum AuthAPI: TargetType {
     case signin(request: SigninRequest)
     case signup(request: SignupRequest)
+    case logout(accessToken: String)
     case refreshToken(refreshToken: String)
 }
 
@@ -19,7 +20,7 @@ extension AuthAPI {
         switch self {
         case .signin, .refreshToken:
             return "/users/login"
-        case .signup:
+        case .signup, .logout:
             return "/users"
         }
     }
@@ -28,7 +29,7 @@ extension AuthAPI {
         switch self {
         case .signin, .signup:
             return .post
-        case .refreshToken:
+        case .refreshToken, .logout:
             return .put
         }
     }
@@ -52,6 +53,8 @@ extension AuthAPI {
         switch self {
         case .refreshToken(let refreshToken):
             return ["Refresh-Token": "Bearer \(refreshToken)"]
+        case .logout(let accessToken):
+            return ["Authorization": "Bearer \(accessToken)"]
         default:
             return nil
         }

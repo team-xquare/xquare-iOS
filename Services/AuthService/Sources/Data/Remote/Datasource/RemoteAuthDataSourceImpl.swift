@@ -18,6 +18,11 @@ class RemoteAuthDataSourceImpl: RemoteAuthDataSource {
             .asCompletable()
     }
 
+    func logout(accessToken: String) -> Completable {
+        self.provider.rx.request(.logout(accessToken: accessToken))
+            .asCompletable()
+    }
+
     func refreshToken(refreshToken: String) -> Single<SigninAndRefreshTokenResponse> {
         self.provider.rx.request(.refreshToken(refreshToken: refreshToken))
             .map(SigninAndRefreshTokenResponse.self)
