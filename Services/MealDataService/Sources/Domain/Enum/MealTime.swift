@@ -21,7 +21,7 @@ public extension MealTime {
     func checkIsNow() -> Bool {
         let nowTime = Date()
         var nowMeal: MealTime = .breakfast
-        if Int(nowTime.toString(format: "HH")) ?? 0 >= 14 {
+        if Int(nowTime.toString(format: "HH")) ?? 0 >= 13 {
             nowMeal = .dinner
         } else if Int(nowTime.toString(format: "HH")) ?? 0 >= 9 {
             nowMeal = .lunch
