@@ -28,7 +28,6 @@ class MealDetailViewModel: ObservableObject {
         let today = Calendar.current.startOfDay(for: Date())
         return allMenu.firstIndex {
             let day = $0.date.split(separator: "월")[1].filter { Int(String($0)) != nil }
-            print(day)
             return Int(String(day)) ?? 0 >= Int(today.toString(format: "d")) ?? 0
         } ?? 0
     }
