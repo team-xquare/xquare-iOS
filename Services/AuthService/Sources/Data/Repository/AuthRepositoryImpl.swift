@@ -90,11 +90,16 @@ class AuthRepositoryImpl: AuthRepository {
     }
 
     func logout() -> Completable {
-        Completable.create { completable in
-            self.localTokenDataSource.resetToken()
-            completable(.completed)
-            return Disposables.create()
-        }
+        guard let accessToken = try? fetchAccessToken() else { return Completable.empty() }
+        let observable = Completable.zip(
+            Completable.create { completable in
+                self.localTokenDataSource.resetToken()
+                completable(.completed)
+                return Disposables.create()
+            },
+            self.remoteAuthDataSource.logout(accessToken: accessToken)
+        )
+        return observable
     }
 }
 

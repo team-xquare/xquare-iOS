@@ -6,6 +6,7 @@ import GithubService
 struct GithubRankingView: View {
 
     @StateObject var viewModel: GithubRankingViewModel
+    @State private var isReady = false
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -29,19 +30,22 @@ struct GithubRankingView: View {
                 }
             }
             .padding(.horizontal, 16)
+            .opacity(isReady ? 1 : 0)
+            .onChange(of: viewModel.isLoading) {
+                if !$0 {
+                    withAnimation(Animation.easeOut.speed(0.6)) {
+                        self.isReady = true
+                    }
+                }
+            }
         }
         .navigationTitle("Github 랭킹")
         .navigationBarBackButtonHidden()
         .setNavigationBackButton()
         .onAppear {
-            viewModel.fetchMyGithubInfo()
-            viewModel.fetchGithubInfoList()
+            viewModel.isLoading = true
             viewModel.updateGithubRanking()
         }
-        .refreshable {
-            viewModel.fetchMyGithubInfo()
-            viewModel.fetchGithubInfoList()
-            viewModel.updateGithubRanking()
-        }
+        .refreshable { viewModel.updateGithubRanking() }
     }
 }

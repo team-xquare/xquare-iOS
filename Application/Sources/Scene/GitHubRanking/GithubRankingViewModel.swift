@@ -8,6 +8,7 @@ class GithubRankingViewModel: ObservableObject {
 
     @Published var githubRankList: [GithubRankEntity] = []
     @Published var myGithubRank: GithubRankEntity?
+    @Published var isLoading: Bool = false
 
     let fetchMyGithubInfoUseCase: FetchMyGithubInfoUseCase
     let fetchGithubInfoListUseCase: FetchGithubInfoListUseCase
@@ -23,9 +24,10 @@ class GithubRankingViewModel: ObservableObject {
         self.updateGithubRankingUseCase = updateGithubRankingUseCase
     }
 
-    func fetchGithubInfoList() {
+    private func fetchGithubInfoList() {
         self.fetchGithubInfoListUseCase.execute()
             .subscribe(onNext: {
+                self.isLoading = false
                 self.githubRankList = $0.users.sorted(by: { first, last in
                     first.ranking < last.ranking
                 })
@@ -33,9 +35,10 @@ class GithubRankingViewModel: ObservableObject {
             .disposed(by: disposeBag)
     }
 
-    func fetchMyGithubInfo() {
+    private func fetchMyGithubInfo() {
         self.fetchMyGithubInfoUseCase.execute()
             .subscribe(onNext: {
+                self.isLoading = false
                 self.myGithubRank = $0
             })
             .disposed(by: disposeBag)
@@ -43,7 +46,10 @@ class GithubRankingViewModel: ObservableObject {
 
     func updateGithubRanking() {
         self.updateGithubRankingUseCase.execute()
-            .subscribe(onCompleted: {})
+            .subscribe(onCompleted: {
+                self.fetchMyGithubInfo()
+                self.fetchGithubInfoList()
+            })
             .disposed(by: disposeBag)
     }
 }

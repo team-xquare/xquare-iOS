@@ -52,7 +52,7 @@ struct XquareMealWidgetProvider: TimelineProvider {
     private func getMealTime() -> MealTime {
         if 9 > Int(Date().toString(format: "HH"))! {
             return .breakfast
-        } else if 13 > Int(Date().toString(format: "HH"))! {
+        } else if 14 > Int(Date().toString(format: "HH"))! {
             return .lunch
         } else {
             return .dinner
