@@ -19,7 +19,7 @@ class MyPageViewModel: ObservableObject {
     @Published var profileImageString: String = ""
     @Published var showLogoutAlert: Bool = false
     @Published var isOverStorage: Bool = false
-    @Published var isGithubLinking: Bool = false
+    @Published var isGithubLinking: Bool = true
     @Published var showLinkingErrorAlert: Bool = false
     var selectProfileImage = UIImage()
 
