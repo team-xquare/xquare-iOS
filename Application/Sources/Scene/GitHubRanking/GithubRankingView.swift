@@ -11,7 +11,11 @@ struct GithubRankingView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 16) {
-                TopRankView(topRankData: viewModel.githubRankList)
+                HStack {
+                    Spacer()
+                    TopRankView(topRankData: viewModel.githubRankList)
+                    Spacer()
+                }
                 Text("나의 순위")
                     .sdText(type: .body1, textColor: .GrayScale.gray900)
                 RankingListCellView(
