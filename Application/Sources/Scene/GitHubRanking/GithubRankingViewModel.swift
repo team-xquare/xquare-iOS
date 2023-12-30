@@ -45,11 +45,7 @@ class GithubRankingViewModel: ObservableObject {
     }
 
     func updateGithubRanking() {
-        self.updateGithubRankingUseCase.execute()
-            .subscribe(onCompleted: {
-                self.fetchMyGithubInfo()
-                self.fetchGithubInfoList()
-            })
-            .disposed(by: disposeBag)
+        fetchMyGithubInfo()
+        fetchGithubInfoList()
     }
 }
