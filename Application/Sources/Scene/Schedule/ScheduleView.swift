@@ -6,7 +6,9 @@ struct ScheduleView: View, XNavigationAndTabContent {
     @State var showTimeTableView: Bool = true
     let timeTableView: TimeTableView
     let academicScheduleView: AcademicScheduleView
-
+    let scheduleNotification = NotificationCenter.default.publisher(
+        for: NSNotification.Name("schedule")
+    )
     var tabInformation: TabInformation {
         TabInformation(
             tabItemText: "일정",
@@ -39,5 +41,8 @@ struct ScheduleView: View, XNavigationAndTabContent {
                     .padding(.leading, 5)
             }
         }
+        .onReceive(scheduleNotification, perform: {
+            self.showTimeTableView = $0.userInfo?["isSchedule"] as? Bool ?? false
+        })
     }
 }

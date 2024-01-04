@@ -44,6 +44,7 @@ final public class JWTPlugin: PluginType {
               let token = getToken(type: authorizable.jwtTokenType),
               authorizable.jwtTokenType != .none
         else { return request }
+        print(token)
 
         var request = request
 
